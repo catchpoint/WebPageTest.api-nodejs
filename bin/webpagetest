@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+var webpagetest = require('../lib/webpagetest');
+
+var host = process.argv[2] || process.env.WEBPAGETEST_HOST,
+    wpt = new webpagetest(host);
+
+console.log(host);
+wpt.getLocations(function (err, data) {
+  if (err) {
+    console.log(err.message);
+  }
+  console.log(JSON.stringify(data, null, 2));
+});
