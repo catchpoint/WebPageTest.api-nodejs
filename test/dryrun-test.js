@@ -4,8 +4,7 @@
  */
 
 var vows = require('vows'),
-    assert = require('assert'),
-    url = require('url');
+    assert = require('assert');
 
 var WebPageTest = require('../lib/webpagetest');
 
