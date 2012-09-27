@@ -15,36 +15,40 @@ vows.describe('Dry Run').addBatch({
  
     'gets a test status requested': {
       topic: function (wpt) {
-        wpt.getTestStatus('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getTestStatus({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/testStatus.php?test=120816_V2_2');
       }
     },
  
     'gets a test results requested': {
       topic: function (wpt) {
-        wpt.getTestResults('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getTestResults({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/xmlResult.php?test=120816_V2_2');
       }
     },
  
     'gets the locations list requested': {
       topic: function (wpt) {
-        wpt.getLocations(this.callback, {dryRun: true});
+        wpt.getLocations({dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getLocations.php');
       }
     },
  
     'gets a simple test requested': {
       topic: function (wpt) {
-        wpt.runTest({url: 'http://foobar.com'}, this.callback, {dryRun: true});
+        wpt.runTest({url: 'http://foobar.com', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/runtest.php?url=http%3A%2F%2Ffoobar.com&f=json');
       }
     },
@@ -59,10 +63,12 @@ vows.describe('Dry Run').addBatch({
           firstViewOnly: true,
           timeline: true,
           netLog: true,
-          fullResolutionScreenshot: true
-        }, this.callback, {dryRun: true});
+          fullResolutionScreenshot: true,
+          dryRun: true
+        }, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&label=test%20123&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&pngss=1&timeline=1&netlog=1&f=json');
       }
     },
@@ -80,72 +86,80 @@ vows.describe('Dry Run').addBatch({
           'waitForComplete'
         ]);
 
-        wpt.runTest({script:script}, this.callback, {dryRun: true});
+        wpt.runTest({script:script, dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete&f=json');
       }
     },
  
     'gets page speed data requested': {
       topic: function (wpt) {
-        wpt.getPageSpeedData('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getPageSpeedData({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_pagespeed.txt');
       }
     },
  
     'gets HAR data requested': {
       topic: function (wpt) {
-        wpt.getHARData('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getHARData({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/export.php?test=120816_V2_2');
       }
     },
  
     'gets utilization data requested': {
       topic: function (wpt) {
-        wpt.getUtilizationData('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getUtilizationData({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_progress.csv');
       }
     },
  
     'gets request data requested': {
       topic: function (wpt) {
-        wpt.getRequestData('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getRequestData({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_IEWTR.txt');
       }
     },
  
     'gets timeline data requested': {
       topic: function (wpt) {
-        wpt.getTimelineData('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getTimelineData({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_timeline.json');
       }
     },
  
     'gets net log data requested': {
       topic: function (wpt) {
-        wpt.getNetLogData('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getNetLogData({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_netlog.txt');
       }
     },
  
     'gets a waterfall image requested': {
       topic: function (wpt) {
-        wpt.getWaterfallImage('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getWaterfallImage({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data, mimeType) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/waterfall.php?test=120816_V2_2&run=1&cached=0');
         assert.equal(mimeType, 'image/png');
       }
@@ -153,12 +167,14 @@ vows.describe('Dry Run').addBatch({
  
     'gets a waterfall thumbnail requested': {
       topic: function (wpt) {
-        wpt.getWaterfallImage('120816_V2_2', this.callback, {
+        wpt.getWaterfallImage({
+          id: '120816_V2_2',
           thumbnail: true,
           dryRun: true
-        });
+        }, this.callback);
       },
       'returns the API url': function (err, data, mimeType) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png');
         assert.equal(mimeType, 'image/png');
       }
@@ -166,9 +182,10 @@ vows.describe('Dry Run').addBatch({
  
     'gets a screenshot requested': {
       topic: function (wpt) {
-        wpt.getScreenshotImage('120816_V2_2', this.callback, {dryRun: true});
+        wpt.getScreenshotImage({id: '120816_V2_2', dryRun: true}, this.callback);
       },
       'returns the API url': function (err, data, mimeType) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_screen.jpg');
         assert.equal(mimeType, 'image/jpeg');
       }
@@ -176,12 +193,14 @@ vows.describe('Dry Run').addBatch({
  
     'gets a screenshot thumbnail requested': {
       topic: function (wpt) {
-        wpt.getScreenshotImage('120816_V2_2', this.callback, {
+        wpt.getScreenshotImage({
+          id: '120816_V2_2',
           thumbnail: true,
           dryRun: true
-        });
+        }, this.callback);
       },
       'returns the API url': function (err, data, mimeType) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0');
         assert.equal(mimeType, 'image/jpeg');
       }
@@ -189,12 +208,14 @@ vows.describe('Dry Run').addBatch({
  
     'gets a screenshot in full resolution requested': {
       topic: function (wpt) {
-        wpt.getScreenshotImage('120816_V2_2', this.callback, {
+        wpt.getScreenshotImage({
+          id: '120816_V2_2',
           fullResolution: true,
           dryRun: true
-        });
+        }, this.callback);
       },
       'returns the API url': function (err, data, mimeType) {
+        if (err) throw err;
         assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_screen.png');
         assert.equal(mimeType, 'image/png');
       }
