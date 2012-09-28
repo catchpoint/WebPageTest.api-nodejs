@@ -14,7 +14,7 @@ $ npm install webpagetest -g
 var WebPageTest = require('webpagetest');
 var wpt = new WebPageTest('www.webpagetest.org');
 
-wpt.runTest({url: 'http://twitter.com/marcelduran'}, function (err, data) {
+wpt.runTest('http://twitter.com/marcelduran', function (err, data) {
   if (err) throw err;
   console.log(data);
 });
