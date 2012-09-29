@@ -13,10 +13,10 @@ var WebPageTest = require('../lib/webpagetest'),
 var wptNockServer = new NockServer('http://example.com');
 
 vows.describe('Dry Run').addBatch({
-  'An Example WebPageTest Server': {
+  'An Example WebPageTest Nock Server': {
     topic: new WebPageTest('example.com'),
  
-    'gets a test status requested': {
+    'gets a test status request': {
       topic: function (wpt) {
         wpt.getTestStatus('120816_V2_2', this.callback);
       },
@@ -26,7 +26,7 @@ vows.describe('Dry Run').addBatch({
       }
     },
  
-    'gets a test results requested': {
+    'gets a test results request': {
       topic: function (wpt) {
         wpt.getTestResults('120816_V2_2', this.callback);
       },
@@ -36,30 +36,29 @@ vows.describe('Dry Run').addBatch({
       }
     },
  
-    'gets the locations list requested': {
+    'gets the locations list request': {
       topic: function (wpt) {
         wpt.getLocations(this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the location list object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.locations);
       }
     },
  
-    'gets a simple test requested': {
+    'gets a simple test request': {
       topic: function (wpt) {
-        wpt.runTest({url: 'http://foobar.com'}, this.callback);
+        wpt.runTest('http://twitter.com/marcelduran', this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the run test object': function (err, data) {
         if (err) throw err;
-        assert.deepEqual(data, ResponseObjects.runTestSimple);
+        assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
  
-    'gets a custom test requested': {
+    'gets a custom test request': {
       topic: function (wpt) {
-        wpt.runTest({
-          url: 'http://twitter.com/marcelduran',
+        wpt.runTest('http://twitter.com/marcelduran', {
           'location': 'Local_Firefox_Chrome:Chrome',
           label: 'test 123',
           runs: 3,
@@ -69,13 +68,13 @@ vows.describe('Dry Run').addBatch({
           fullResolutionScreenshot: true
         }, this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the run test object': function (err, data) {
         if (err) throw err;
-        assert.deepEqual(data, ResponseObjects.runTestCustom);
+        assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
  
-    'gets a script test requested': {
+    'gets a script test request': {
       topic: function (wpt) {
         var script = wpt.scriptToString([
           {logData:    0                           },
@@ -88,137 +87,234 @@ vows.describe('Dry Run').addBatch({
           'waitForComplete'
         ]);
 
-        wpt.runTest({script:script}, this.callback);
+        wpt.runTest(script, this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the run test object': function (err, data) {
         if (err) throw err;
-        assert.deepEqual(data, ResponseObjects.runTestScript);
+        assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
  
-    'gets page speed data requested': {
+    'gets page speed data request': {
       topic: function (wpt) {
         wpt.getPageSpeedData('120816_V2_2', this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the page speed object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.pageSpeed);
       }
     },
  
-    'gets HAR data requested': {
+    'gets HAR data request': {
       topic: function (wpt) {
         wpt.getHARData('120816_V2_2', this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the HAR object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.har);
       }
     },
  
-    'gets utilization data requested': {
+    'gets utilization data request': {
       topic: function (wpt) {
         wpt.getUtilizationData('120816_V2_2', this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the utilization object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.utilization);
       }
     },
  
-    'gets request data requested': {
+    'gets request data request': {
       topic: function (wpt) {
         wpt.getRequestData('120816_V2_2', this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the request object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.request);
       }
     },
  
-    'gets timeline data requested': {
+    'gets timeline data request': {
       topic: function (wpt) {
         wpt.getTimelineData('120816_V2_2', this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the timeline object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.timeline);
       }
     },
  
-    'gets net log data requested': {
+    'gets net log data request': {
       topic: function (wpt) {
         wpt.getNetLogData('120816_V2_2', this.callback);
       },
-      'returns the API url': function (err, data) {
+      'returns the net log object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.netLog);
       }
     },
  
-    'gets a waterfall image requested': {
+    'gets a waterfall image request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {dataURI: true}, this.callback);
       },
-      'returns the API url': function (err, data, mimeType) {
+      'returns the waterfall data URI string': function (err, data, mimeType) {
         if (err) throw err;
         assert.equal(data, ResponseObjects.waterfall);
         assert.equal(mimeType, 'image/png');
       }
     },
  
-    'gets a waterfall thumbnail requested': {
+    'gets a waterfall thumbnail request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {
           thumbnail: true,
           dataURI: true
         }, this.callback);
       },
-      'returns the API url': function (err, data, mimeType) {
-        if (err) throw err;
-        assert.equal(data, ResponseObjects.waterfallThumnail);
-        assert.equal(mimeType, 'image/png');
-      }
+      'returns the waterfall thumbnail data URI string':
+        function (err, data, mimeType) {
+          if (err) throw err;
+          assert.equal(data, ResponseObjects.waterfallThumbnail);
+          assert.equal(mimeType, 'image/png');
+        }
     },
  
-    'gets a screenshot requested': {
+    'gets a screenshot request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {dataURI: true}, this.callback);
       },
-      'returns the API url': function (err, data, mimeType) {
-        if (err) throw err;
-        assert.equal(data, ResponseObjects.screenshot);
-        assert.equal(mimeType, 'image/jpeg');
-      }
+      'returns the screenshot data URI string':
+        function (err, data, mimeType) {
+          if (err) throw err;
+          assert.equal(data, ResponseObjects.screenshot);
+          assert.equal(mimeType, 'image/jpeg');
+        }
     },
  
-    'gets a screenshot thumbnail requested': {
+    'gets a screenshot thumbnail request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {
           thumbnail: true,
           dataURI: true
         }, this.callback);
       },
-      'returns the API url': function (err, data, mimeType) {
-        if (err) throw err;
-        assert.equal(data, ResponseObjects.screenshotThumbnail);
-        assert.equal(mimeType, 'image/jpeg');
-      }
+      'returns the screenshot thumbail data URI string':
+        function (err, data, mimeType) {
+          if (err) throw err;
+          assert.equal(data, ResponseObjects.screenshotThumbnail);
+          assert.equal(mimeType, 'image/jpeg');
+        }
     },
  
-    'gets a screenshot in full resolution requested': {
+    'gets a screenshot in full resolution request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {
           fullResolution: true,
           dataURI: true
         }, this.callback);
       },
-      'returns the API url': function (err, data, mimeType) {
+      'returns the screenshot in full resolution data URI string':
+        function (err, data, mimeType) {
+          if (err) throw err;
+          assert.equal(data, ResponseObjects.screenshotFullResolution);
+          assert.equal(mimeType, 'image/png');
+        }
+    },
+
+    // not found / invalid
+
+    'gets an invalid test status request': {
+      topic: function (wpt) {
+        wpt.getTestStatus('120816_V2_3', this.callback);
+      },
+      'returns a not found test status object': function (err, data) {
         if (err) throw err;
-        assert.equal(data, ResponseObjects.screenshotFullResolution);
-        assert.equal(mimeType, 'image/png');
+        assert.deepEqual(data, ResponseObjects.testStatusNotFound);
+      }
+    },
+ 
+    'gets an invalid test results request': {
+      topic: function (wpt) {
+        wpt.getTestResults('120816_V2_3', this.callback);
+      },
+      'returns a not found test results object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.testResultsNotFound);
+      }
+    },
+ 
+    'gets an invalid test request': {
+      topic: function (wpt) {
+        wpt.runTest(undefined, this.callback);
+      },
+      'returns an invalid run test object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.runTestInvalid);
+      }
+    },
+ 
+    'gets an invalid file request': {
+      topic: function (wpt) {
+        wpt.getPageSpeedData('120816_V2_3', this.callback);
+      },
+      'returns a 404 error': function (err, data) {
+        assert.equal(err.message, 'status code: 404');
+        assert.equal(data, undefined);
+      }
+    },
+ 
+    'gets an invalid HAR data request': {
+      topic: function (wpt) {
+        wpt.getHARData('120816_V2_3', this.callback);
+      },
+      'returns an empty HAR object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.harNotFound);
+      }
+    },
+ 
+    'gets an invalid waterfall image request': {
+      topic: function (wpt) {
+        wpt.getWaterfallImage('120816_V2_3', {dataURI: true}, this.callback);
+      },
+      'returns an empty waterfall data URI string':
+        function (err, data, mimeType) {
+          if (err) throw err;
+          assert.equal(data, ResponseObjects.waterfallNotFound);
+          assert.equal(mimeType, 'image/png');
+        }
+    },
+ 
+    'gets an invalid waterfall thumbnail request': {
+      topic: function (wpt) {
+        wpt.getWaterfallImage('120816_V2_3', {
+          thumbnail: true,
+          dataURI: true
+        }, this.callback);
+      },
+      'returns an empty waterfall thumbnail data URI string':
+        function (err, data, mimeType) {
+          if (err) throw err;
+          assert.equal(data, ResponseObjects.waterfallThumbnailNotFound);
+          assert.equal(mimeType, 'image/png');
+        }
+    },
+ 
+    'gets an invalid screenshot thumbnail request': {
+      topic: function (wpt) {
+        wpt.getScreenshotImage('120816_V2_3', {
+          thumbnail: true,
+          dataURI: true
+        }, this.callback);
+      },
+      'returns a 404 error': function (err, data, mimeType) {
+        assert.equal(err.message, 'status code: 404');
+        assert.equal(data, undefined);
+        assert.equal(mimeType, 'image/jpeg');
       }
     }
-
+ 
   }
 }).export(module);

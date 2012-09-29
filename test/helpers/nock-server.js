@@ -9,12 +9,42 @@ var path = require('path'),
 var PATH_RESPONSES = path.join(__dirname, '../fixtures/responses');
 
 var reqResMap = {
-  '/testStatus.php?test=120816_V2_2': 'testStatus.json'
+  '/testStatus.php?test=120816_V2_2': 'testStatus.json',
+  '/xmlResult.php?test=120816_V2_2': 'testResults.xml',
+  '/getLocations.php': 'locations.xml',
+  '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&f=json': 'runTest.json',
+  '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&label=test%20123&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&pngss=1&timeline=1&netlog=1&f=json': 'runTest.json',
+  '/runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete&f=json': 'runTest.json',
+  '/getgzip.php?test=120816_V2_2&file=1_pagespeed.txt': 'pageSpeed.json',
+  '/export.php?test=120816_V2_2': 'har.json',
+  '/getgzip.php?test=120816_V2_2&file=1_progress.csv': 'utilization.csv',
+  '/getgzip.php?test=120816_V2_2&file=1_IEWTR.txt': 'request.txt',
+  '/getgzip.php?test=120816_V2_2&file=1_timeline.json': 'timeline.json',
+  '/getgzip.php?test=120816_V2_2&file=1_netlog.txt': 'netLog.txt',
+  '/waterfall.php?test=120816_V2_2&run=1&cached=0': 'waterfall.png',
+  '/thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png': 'waterfallThumbnail.png',
+  '/getgzip.php?test=120816_V2_2&file=1_screen.jpg': 'screenshot.jpg',
+  '/thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0': 'screenshotThumbnail.jpg',
+  '/getgzip.php?test=120816_V2_2&file=1_screen.png': 'screenshotFullResolution.png',
+
+  // not found / invalid
+  '/testStatus.php?test=120816_V2_3': 'testStatusNotFound.json',
+  '/xmlResult.php?test=120816_V2_3': 'testResultsNotFound.xml',
+  '/runtest.php?url=&f=json': 'runTestInvalid.json',
+  '/getgzip.php?test=120816_V2_3&file=1_pagespeed.txt': undefined,
+  '/export.php?test=120816_V2_3': 'harNotFound.json',
+  '/waterfall.php?test=120816_V2_3&run=1&cached=0': 'waterfallNotFound.png',
+  '/thumbnail.php?test=120816_V2_3&run=1&cached=0&file=1_waterfall.png': 'waterfallThumbnailNotFound.png',
+  '/thumbnail.php?test=120816_V2_3&file=1_screen.jpg&run=1&cached=0': undefined
 };
 
 var typeMap = {
   'json': 'application/json',
-  'xml': 'text/xml'
+  'xml': 'text/xml',
+  'txt': 'text/plain',
+  'csv': 'text/plain',
+  'png': 'image/png',
+  'jpg': 'image/jpeg'
 };
 
 
@@ -29,13 +59,18 @@ function WebPageTestMockServer(host) {
 
   // request/response mapping
   Object.keys(reqResMap).forEach(function (source) {
-    var pathname = path.join(PATH_RESPONSES, reqResMap[source]),
+    var filename = reqResMap[source],
+        pathname = path.join(PATH_RESPONSES, filename),
         ext = (path.extname(pathname) || '').slice(1),
         type = typeMap[ext];
 
-    server
-      .get(source)
-      .replyWithFile(200, pathname, {'Content-Type': type});
+    if (filename) {
+      server
+        .get(source)
+        .replyWithFile(200, pathname, {'Content-Type': type});
+    } else {
+      server.get(source).reply(404);
+    }
   });
 }
 
