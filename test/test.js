@@ -12,8 +12,8 @@ wpt.getTestStatus('120816_V2_3', {dryRun: !true}, function (err, data) {
 });
 //*/
 
-/*
-wpt.getTestResults('120816_V2_3', {dryRun: !true}, function (err, data) {
+//*
+wpt.getTestResults('120816_V2_2', {dryRun: !true, requestId: '676767676'}, function (err, data) {
   if (err) throw err;
   console.log(JSON.stringify(data, null, 4));
 });
@@ -41,7 +41,7 @@ wpt.getPageSpeedData('120815_56_6', {dryRun: !true}, function (err, data) {
 });
 //*/
 
-//*
+/*
 wpt.getHARData('120816_V2_3', {dryRun: !true}, function (err, data) {
   if (err) throw err;
   console.log(JSON.stringify(data, null, 4));
