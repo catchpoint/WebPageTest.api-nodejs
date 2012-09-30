@@ -12,7 +12,7 @@ wpt.getTestStatus('120816_V2_3', {dryRun: !true}, function (err, data) {
 });
 //*/
 
-//*
+/*
 wpt.getTestResults('120816_V2_2', {dryRun: !true, requestId: '676767676'}, function (err, data) {
   if (err) throw err;
   console.log(JSON.stringify(data, null, 4));
@@ -26,8 +26,8 @@ wpt.getLocations({dryRun: true}, function (err, data) {
 });
 //*/
 
-/*
-wpt.runTest(undefined,
+//*
+wpt.runTest('http://foo.com', {dryRun: true, location:'blah', connectivity: 'custom'},
 function (err, data) {
   if (err) throw err;
   console.log(JSON.stringify(data, null, 4));
