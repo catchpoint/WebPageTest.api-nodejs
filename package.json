@@ -36,7 +36,8 @@
   },
 
   "dependencies": {
-    "jsonml": ">=0.0.3"
+    "jsonml": ">=0.0.3",
+    "commander": ">=1.0.1"
   },
 
   "devDependencies": {
