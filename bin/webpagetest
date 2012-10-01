@@ -1,14 +1,169 @@
 #!/usr/bin/env node
 
-var webpagetest = require('../lib/webpagetest');
+/**
+ * Copyright (c) 2012, Twitter Inc. and other contributors
+ * Released under the MIT License
+ */
 
-var host = process.argv[2] || process.env.WEBPAGETEST_HOST,
-    wpt = new webpagetest(host);
+var program = require('commander');
 
-console.log(host);
-wpt.getLocations(function (err, data) {
+var WebPageTest = require('../lib/webpagetest');
+
+var command, wpt, key,
+    options = {},
+    args = [],
+    defaultServer = process.env.WEBPAGETEST_SERVER || WebPageTest.defaultServer;
+
+var testParams = {
+  label: 'label',
+  'location': 'location',
+  runs: 'runs',
+  firstView: 'firstViewOnly',
+  connectivity: 'connectivity',
+  dom: 'domElement',
+  'private': 'private',
+  connections: 'connections',
+  onload: 'stopAtDocumentComplete',
+  sensitive: 'sensitive',
+  block: 'block',
+  login: 'login',
+  authType: 'authenticationType',
+  video: 'video',
+  requestId: 'requestId',
+  notify: 'notifyEmail',
+  pingback: 'pingback',
+  bwDown: 'bandwidthDown',
+  bwUp: 'bandwidthUp',
+  latency: 'latency',
+  plr: 'packetLossRate',
+  tcpDump: 'tcpDump',
+  noOpt: 'disableOptimization',
+  noImages: 'disableScreenshot',
+  noHeaders: 'disableHTTPHeaders',
+  fullRes: 'fullResolutionScreenshot',
+  jpeg: 'jpegCompressionLevel',
+  noScript: 'disableJavaScript',
+  ignoreSsl: 'ignoreSSL',
+  standards: 'disableCompatibilityView',
+  bodies: 'saveResponseBodies',
+  keepUa: 'keepOriginalUserAgent',
+  duration: 'minimumDuration',
+  blockAds: 'blockAds',
+  aft: 'aftRenderingTime',
+  timeline: 'timeline',
+  netlog: 'netLog',
+  spof: 'spof'
+};
+
+
+function output(err, data) {
   if (err) {
-    console.log(err.message);
+    data = {error: err.message};
   }
-  console.log(JSON.stringify(data, null, 2));
-});
+  process.stdout.write(JSON.stringify(data, null, 2));
+}
+
+program
+  .version('0.0.1')
+  .option('-s --server <server>', 'the WPT server URL [' + defaultServer + ']')
+  .option('-d --dry-run', 'just return the RESTful API URL');
+
+program
+  .command('status <id>')
+  .description('check test status')
+  .action(function(id) {
+    command = 'getTestStatus';
+    args.push(id);
+  });
+
+program
+  .command('results <id>')
+  .description('get test results')
+  .action(function(id) {
+    command = 'getTestResults';
+    args.push(id);
+  });
+
+program
+  .command('locations')
+  .description('list locations and the number of pending tests')
+  .action(function() {
+    command = 'getLocations';
+  });
+
+program
+  .command('test <url|script>')
+  .description('run test')
+  .option('-k --key <api key>', 'API key (if assigned). Contact the site owner for a key if required')
+  .option('-l --location <location>', 'location to test from')
+  .option('-r --runs <number>', 'number of test runs [1]')
+  .option('-L --label <label>', 'label for the test')
+  .option('-f --first-view', 'skip the Repeat View test')
+  .option('-p --private', 'keep the test hidden from the test log')
+  .option('-y --connectivity <profile>', 'connectivity profile (DSL|FIOS|Dial|custom) [DSL]')
+  .option('-i --video', 'capture video')
+  .option('-m --dom <element>', 'DOM element to record for sub-measurement')
+  .option('-c --connections <number>', 'override the number of concurrent connections')
+  .option('-o --onload', 'force the test to stop at window.onload')
+  .option('-t --sensitive', 'discard script and http headers in the result')
+  .option('-b --block <urls>', 'space-delimited list of urls to block (substring match)')
+  .option('-g --login <username>', 'username for authenticating tests (http authentication)')
+  .option('-w --password <password>', 'password for authenticating tests (http authentication)')
+  .option('-a --auth-type <type>', 'type of authentication: 0 = Basic, 1 = SNS [0]')
+  .option('-e --request <id>', 'echo request ID, useful to track asynchronous requests')
+  .option('-n --notify <e-mail>', 'e-mail address to notify with the test results')
+  .option('-B --pingback <url>', 'URL to ping when the test is complete (the test ID will be passed as an "id" parameter)')
+  .option('-D --bwDown <bandwidth>', 'download bandwidth in Kbps (used when specifying a custom connectivity profile)')
+  .option('-U --bwUp <bandwidth>', 'uload bandwidth in Kbps (used when specifying a custom connectivity profile)')
+  .option('-Y --latency <time>', 'first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)')
+  .option('-P --plr <percentage>', 'packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)')
+  .option('-u --tcp-dump', 'enable tcpdump capture')
+  .option('-z --no-opt', 'disable optimization checks (for faster testing)')
+  .option('-I --no-images', 'disable screen shot capturing')
+  .option('-H --no-headers', 'disable saving of the http headers (as well as browser status messages and CPU utilization)')
+  .option('-F --full-res', 'save a full-resolution version of the fully loaded screen shot as a png')
+  .option('-j --jpeg <level>', 'jpeg compression level (30-100) for the screen shots and video capture')
+  .option('-S --no-script', 'disable javascript (IE, Chrome, Firefox)')
+  .option('-R --ignore-ssl', 'ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc')
+  .option('-T --standards', 'forces all pages to load in standards mode (IE only)')
+  .option('-O --bodies', 'save response bodies for text resources')
+  .option('-K --keep-ua', 'do not add PTST to the original browser User Agent string')
+  .option('-N --duration <seconds>', 'minimum test duration in seconds')
+  .option('-A --block-ads', 'block ads defined by adblockrules.org')
+  .option('-E --aft', '(experimental) measure above-the-fold rendering time')
+  .option('-M --timeline', 'capture Developer Tools Timeline (Chrome only)')
+  .option('-G --netlog', 'capture Network Log (Chrome only)')
+  .option('-Z --spof <domains>', 'space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests')
+  .action(function(what, opts) {
+    command = 'runTest';
+    args.push(decodeURIComponent(what));
+
+    // api key
+    key = opts.key;
+
+    // options
+    Object.keys(testParams).forEach(function testParamsEach(key) {
+      var value = opts[key];
+
+      if (value !== undefined) {
+        options[testParams[key]] = value;
+      }
+    });
+  });
+
+program.parse(process.argv);
+
+if (command) {
+  wpt = new WebPageTest(program.server || process.env.WEBPAGETEST_SERVER, key);
+
+  options.dryRun = program.dryRun;
+  args.push(options);
+
+  args.push(output);
+
+  wpt[command].apply(wpt, args);
+} else {
+  process.stdout.write(program.helpInformation());
+  program.emit('--help');
+  process.exit(1);
+}
