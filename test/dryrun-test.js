@@ -3,14 +3,15 @@
  * Released under the MIT License
  */
 
-var vows = require('vows'),
+var vows   = require('vows'),
     assert = require('assert');
 
-var WebPageTest = require('../lib/webpagetest');
+var WebPageTest = require('../lib/webpagetest'),
+    wptServer = 'https://www.example.com:1234/foo/bar/';
 
 vows.describe('Dry Run').addBatch({
   'An Example WebPageTest Server': {
-    topic: new WebPageTest('example.com'),
+    topic: new WebPageTest(wptServer),
  
     'gets a test status request': {
       topic: function (wpt) {
@@ -18,7 +19,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/testStatus.php?test=120816_V2_2');
+        assert.equal(data.url, wptServer + 'testStatus.php?test=120816_V2_2');
       }
     },
  
@@ -28,7 +29,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/xmlResult.php?test=120816_V2_2');
+        assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2');
       }
     },
  
@@ -38,7 +39,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getLocations.php');
+        assert.equal(data.url, wptServer + 'getLocations.php');
       }
     },
  
@@ -48,7 +49,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/runtest.php?url=http%3A%2F%2Ffoobar.com&f=json');
+        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&f=json');
       }
     },
  
@@ -67,7 +68,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&label=test%20123&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&pngss=1&timeline=1&netlog=1&f=json');
+        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&label=test%20123&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&pngss=1&timeline=1&netlog=1&f=json');
       }
     },
  
@@ -88,7 +89,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete&f=json');
+        assert.equal(data.url, wptServer + 'runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete&f=json');
       }
     },
  
@@ -98,7 +99,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_pagespeed.txt');
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_pagespeed.txt');
       }
     },
  
@@ -108,7 +109,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/export.php?test=120816_V2_2');
+        assert.equal(data.url, wptServer + 'export.php?test=120816_V2_2');
       }
     },
  
@@ -118,7 +119,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_progress.csv');
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_progress.csv');
       }
     },
  
@@ -128,7 +129,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_IEWTR.txt');
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_IEWTR.txt');
       }
     },
  
@@ -138,7 +139,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_timeline.json');
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_timeline.json');
       }
     },
  
@@ -148,7 +149,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_netlog.txt');
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_netlog.txt');
       }
     },
  
@@ -158,7 +159,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data, mimeType) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/waterfall.php?test=120816_V2_2&run=1&cached=0');
+        assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0');
         assert.equal(mimeType, 'image/png');
       }
     },
@@ -172,7 +173,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data, mimeType) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png');
+        assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png');
         assert.equal(mimeType, 'image/png');
       }
     },
@@ -183,7 +184,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data, mimeType) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_screen.jpg');
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.jpg');
         assert.equal(mimeType, 'image/jpeg');
       }
     },
@@ -197,7 +198,7 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data, mimeType) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0');
+        assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0');
         assert.equal(mimeType, 'image/jpeg');
       }
     },
@@ -211,7 +212,10 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data, mimeType) {
         if (err) throw err;
-        assert.equal(data.url, 'http://example.com/getgzip.php?test=120816_V2_2&file=1_screen.png');
+        console.log(wptServer);
+        console.log(data.url);
+        console.log(wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
         assert.equal(mimeType, 'image/png');
       }
     }
