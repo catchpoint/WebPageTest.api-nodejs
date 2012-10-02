@@ -212,9 +212,6 @@ vows.describe('Dry Run').addBatch({
       },
       'then returns the API url': function (err, data, mimeType) {
         if (err) throw err;
-        console.log(wptServer);
-        console.log(data.url);
-        console.log(wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
         assert.equal(mimeType, 'image/png');
       }
