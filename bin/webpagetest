@@ -45,7 +45,7 @@ var paramsMap = {
     noOpt: 'disableOptimization',
     noImages: 'disableScreenshot',
     noHeaders: 'disableHTTPHeaders',
-    fullRes: 'fullResolutionScreenshot',
+    full: 'fullResolutionScreenshot',
     jpeg: 'jpegCompressionLevel',
     noScript: 'disableJavaScript',
     ignoreSsl: 'ignoreSSL',
@@ -72,7 +72,19 @@ var paramsMap = {
   }
 };
 
-function output(err, data) {
+function output(data, exitStatus, preExit) {
+  if (exitStatus) {
+    process.stderr.write(data);
+  } else {
+    process.stdout.write(data);
+  }
+  if (typeof preExit === 'function') {
+    preExit();
+  }
+  process.exit(exitStatus || 0);
+}
+
+function formatData(err, data) {
   if (err) {
     data = {error: err.message};
   }
@@ -86,15 +98,15 @@ function output(err, data) {
   }
 
   if (file) {
-    fs.writeFile(file, data, encoding, function (err) {
+    fs.writeFile(file, data, encoding, function writeFile(err) {
       if (err) {
-        process.stderr.write(err.message);
+        output(err.message, 1);
       }
     });
   } else if (encoding === 'binary') {
-    process.stdout.write(new Buffer(data, encoding));
+    output(new Buffer(data, encoding));
   } else {
-    process.stdout.write(data);
+    output(data);
   }
 }
 
@@ -145,7 +157,7 @@ program
 program
   .command('status <id>')
   .description('check test status')
-  .action(function(id) {
+  .action(function actionStatus(id) {
     command = 'getTestStatus';
     args.push(id);
   });
@@ -154,7 +166,7 @@ program
 program
   .command('results <id>')
   .description('get test results')
-  .action(function(id) {
+  .action(function actionResults(id) {
     command = 'getTestResults';
     args.push(id);
   });
@@ -163,7 +175,7 @@ program
 program
   .command('locations')
   .description('list locations and the number of pending tests')
-  .action(function() {
+  .action(function actionLocations() {
     command = 'getLocations';
   });
 
@@ -213,8 +225,8 @@ program
   .option('-I --no-images', 'disable screen shot capturing')
   .option('-H --no-headers','disable saving of the http headers (as well as ' +
     'browser status messages and CPU utilization)')
-  .option('-F --full-res',
-    'save a full-resolution version of the fully loaded screen shot as a png')
+  .option('-F --full',
+    'save a full-resolution version of the fully loaded screen shot as a PNG')
   .option('-j --jpeg <level>',
     'jpeg compression level (30-100) for the screen shots and video capture')
   .option('-S --no-script', 'disable javascript (IE, Chrome, Firefox)')
@@ -233,8 +245,15 @@ program
   .option('-Z --spof <domains>', 'space-delimited list of domains to ' +
     'simulate failure by re-routing to blackhole.webpagetest.org to silently' +
     'drop all requests')
-  .action(function(what, options) {
+  .action(function actionTest(what, options) {
     command = 'runTest';
+
+    // check for script file
+    if (fs.existsSync(what) && fs.statSync(what).isFile()) {
+      what = fs.readFileSync(what, 'utf8');
+    }
+
+    // url or script
     args.push(decodeURIComponent(what));
 
     // api key
@@ -247,7 +266,7 @@ program
 program
   .command('har <test_id>')
   .description('get the HTTP Archive (HAR) from test')
-  .action(function(id) {
+  .action(function actionHAR(id) {
     command = 'getHARData';
     args.push(id);
   });
@@ -257,7 +276,7 @@ addTestRunOptions(
   program
     .command('pagespeed <test_id>')
     .description('get the page speed results (if available) from test')
-).action(function(id, options) {
+).action(function actionPageSpeed(id, options) {
     command = 'getPageSpeedData';
     args.push(id);
     setOptions('run', options);
@@ -268,7 +287,7 @@ addTestRunOptions(
   program
     .command('utilization <test_id>')
     .description('get the cpu, bandwidth and memory utilization data from test')
-).action(function(id, options) {
+).action(function actionUtilization(id, options) {
     command = 'getUtilizationData';
     args.push(id);
     setOptions('run', options);
@@ -279,7 +298,7 @@ addTestRunOptions(
   program
     .command('request <test_id>')
     .description('get the request data from test')
-).action(function(id, options) {
+).action(function actionRequest(id, options) {
     command = 'getRequestData';
     args.push(id);
     setOptions('run', options);
@@ -290,7 +309,7 @@ addTestRunOptions(
   program
     .command('timeline <test_id>')
     .description('get the Chrome Developer Tools Timeline data (if available) from test')
-).action(function(id, options) {
+).action(function actionTimeline(id, options) {
     command = 'getTimelineData';
     args.push(id);
     setOptions('run', options);
@@ -301,7 +320,7 @@ addTestRunOptions(
   program
     .command('netlog <test_id>')
     .description('get the Chrome Developer Tools Net Log data (if available) from test')
-).action(function(id, options) {
+).action(function actionNetLog(id, options) {
     command = 'getNetLogData';
     args.push(id);
     setOptions('run', options);
@@ -314,8 +333,28 @@ addTestImageOptions(
       .command('waterfall <test_id>')
       .description('get the waterfall PNG image')
   )
-).action(function(id, options) {
+).action(function actionWaterfall(id, options) {
     command = 'getWaterfallImage';
+    args.push(id);
+    setOptions(['run', 'image'], options);
+    if (!options.uri) {
+      encoding = 'binary';
+    }
+  });
+
+// screenshot
+addTestImageOptions(
+  addTestRunOptions(
+    program
+      .command('screenshot <test_id>')
+      .description('get the fully loaded page screenshot in JPG format (PNG if in full resolution)')
+  )
+)
+  .option('-f --full', 'get full resolution screenshot in PNG format if available')
+  .option('-r --render', 'get the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)')
+  .option('-c --complete', 'get the page screenshot at the Document Complete point (i.e.: when window.onload was fired)')
+  .action(function actionScreenshot(id, options) {
+    command = 'getScreenshotImage';
     args.push(id);
     setOptions(['run', 'image'], options);
     if (!options.uri) {
@@ -326,18 +365,18 @@ addTestImageOptions(
 program.parse(process.argv);
 
 if (command) {
-  wpt = new WebPageTest(program.server || process.env.WEBPAGETEST_SERVER, key);
+  wpt = new WebPageTest(program.server || defaultServer, key);
 
   options.dryRun = program.dryRun;
   args.push(options);
 
-  args.push(output);
+  args.push(formatData);
 
   file = program.out;
 
   wpt[command].apply(wpt, args);
 } else {
-  process.stdout.write(program.helpInformation());
-  program.emit('--help');
-  process.exit(1);
+  output(program.helpInformation(), 1, function defaultHelp() {
+    program.emit('--help');
+  });
 }
