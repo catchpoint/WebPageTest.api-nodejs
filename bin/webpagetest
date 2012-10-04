@@ -11,7 +11,6 @@ var program = require('commander'),
 var WebPageTest = require('../lib/webpagetest');
 
 var command, wpt, key, file,
-    encoding = 'utf8',
     options = {},
     args = [],
     defaultServer = process.env.WEBPAGETEST_SERVER ||
@@ -34,7 +33,7 @@ var paramsMap = {
     login: 'login',
     authType: 'authenticationType',
     video: 'video',
-    requestId: 'requestId',
+    request: 'requestId',
     notify: 'notifyEmail',
     pingback: 'pingback',
     bwDown: 'bandwidthDown',
@@ -84,16 +83,29 @@ function output(data, exitStatus, preExit) {
   process.exit(exitStatus || 0);
 }
 
-function formatData(err, data) {
+function formatData(err, data, info) {
+  var encoding = 'utf8';
+
   if (err) {
-    data = {error: err.message};
+    data = {error: err};
+  } else if (info) {
+    encoding = info.encoding;
+    if (encoding === 'binary') {
+      data = new Buffer(data, 'binary');
+      type = info.type;
+    } else {
+      data = {type: info.type, data: data};
+    }
   }
 
-  if (typeof data === 'object') {
+  if (!(data instanceof Buffer)) {
     try {
       data = JSON.stringify(data, null, 2);
     } catch (ex) {
-      data = {error: ex.message};
+      data = JSON.stringify({
+        data: data.toString(),
+        error: ex.message
+      }, null, 2);
     }
   }
 
@@ -103,8 +115,6 @@ function formatData(err, data) {
         output(err.message, 1);
       }
     });
-  } else if (encoding === 'binary') {
-    output(new Buffer(data, encoding));
   } else {
     output(data);
   }
@@ -147,7 +157,7 @@ function addTestImageOptions(program) {
 
 // global options
 program
-  .version('0.0.1')
+  .version(WebPageTest.version)
   .option('-s --server <server>', 'the WPT server URL [' + defaultServer + ']')
   .option('-o --out <file>',
     'place the output into <file>. Defaults to stdout')
@@ -196,7 +206,7 @@ program
   .option('-m --dom <element>', 'DOM element to record for sub-measurement')
   .option('-c --connections <number>',
     'override the number of concurrent connections')
-  .option('-z --onload', 'force the test to stop at window.onload')
+  .option('-v --onload', 'force the test to stop at window.onload')
   .option('-t --sensitive', 'discard script and http headers in the result')
   .option('-b --block <urls>',
     'space-delimited list of urls to block (substring match)')
@@ -337,9 +347,6 @@ addTestImageOptions(
     command = 'getWaterfallImage';
     args.push(id);
     setOptions(['run', 'image'], options);
-    if (!options.uri) {
-      encoding = 'binary';
-    }
   });
 
 // screenshot
@@ -357,9 +364,6 @@ addTestImageOptions(
     command = 'getScreenshotImage';
     args.push(id);
     setOptions(['run', 'image'], options);
-    if (!options.uri) {
-      encoding = 'binary';
-    }
   });
 
 program.parse(process.argv);
@@ -367,9 +371,11 @@ program.parse(process.argv);
 if (command) {
   wpt = new WebPageTest(program.server || defaultServer, key);
 
+  // options
   options.dryRun = program.dryRun;
   args.push(options);
 
+  // callback
   args.push(formatData);
 
   file = program.out;
