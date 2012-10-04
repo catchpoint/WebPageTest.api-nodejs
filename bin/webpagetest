@@ -6,7 +6,8 @@
  */
 
 var program = require('commander'),
-    fs      = require('fs');
+    fs      = require('fs'),
+    os      = require('os');
 
 var WebPageTest = require('../lib/webpagetest');
 
@@ -364,6 +365,18 @@ addTestImageOptions(
     command = 'getScreenshotImage';
     args.push(id);
     setOptions(['run', 'image'], options);
+  });
+
+// server
+program
+  .command('listen [port]')
+  .description('start webpagetest-api server on port [' +
+    WebPageTest.defaultListenPort + ']')
+  .action(function actionListen(port) {
+    console.log('server running on http://' + os.hostname() +
+      ':' + (port || WebPageTest.defaultListenPort));
+    command = 'listen';
+    args.push(port);
   });
 
 program.parse(process.argv);
