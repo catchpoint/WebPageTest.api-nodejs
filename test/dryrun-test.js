@@ -157,10 +157,9 @@ vows.describe('Dry Run').addBatch({
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {dryRun: true}, this.callback);
       },
-      'then returns the API url': function (err, data, mimeType) {
+      'then returns the API url': function (err, data) {
         if (err) throw err;
         assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0');
-        assert.equal(mimeType, 'image/png');
       }
     },
  
@@ -171,10 +170,9 @@ vows.describe('Dry Run').addBatch({
           dryRun: true
         }, this.callback);
       },
-      'then returns the API url': function (err, data, mimeType) {
+      'then returns the API url': function (err, data) {
         if (err) throw err;
         assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png');
-        assert.equal(mimeType, 'image/png');
       }
     },
  
@@ -182,10 +180,9 @@ vows.describe('Dry Run').addBatch({
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {dryRun: true}, this.callback);
       },
-      'then returns the API url': function (err, data, mimeType) {
+      'then returns the API url': function (err, data) {
         if (err) throw err;
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.jpg');
-        assert.equal(mimeType, 'image/jpeg');
       }
     },
  
@@ -196,10 +193,9 @@ vows.describe('Dry Run').addBatch({
           dryRun: true
         }, this.callback);
       },
-      'then returns the API url': function (err, data, mimeType) {
+      'then returns the API url': function (err, data) {
         if (err) throw err;
         assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0');
-        assert.equal(mimeType, 'image/jpeg');
       }
     },
  
@@ -210,10 +206,9 @@ vows.describe('Dry Run').addBatch({
           dryRun: true
         }, this.callback);
       },
-      'then returns the API url': function (err, data, mimeType) {
+      'then returns the API url': function (err, data) {
         if (err) throw err;
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
-        assert.equal(mimeType, 'image/png');
       }
     }
 

@@ -26,7 +26,7 @@ wpt.getLocations({dryRun: true}, function (err, data) {
 });
 //*/
 
-//*
+/*
 wpt.runTest('http://foo.com', {dryRun: true, location:'blah', connectivity: 'custom'},
 function (err, data) {
   if (err) throw err;
@@ -88,4 +88,8 @@ wpt.getScreenshotImage('120816_V2_2', {dryRun: !true, dataURI: true, thumbnail: 
   if (err) throw err;
   console.log(data);
 });
+//*/
+
+//*
+wpt.listen(8081);
 //*/

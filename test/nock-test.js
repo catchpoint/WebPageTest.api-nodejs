@@ -159,10 +159,10 @@ vows.describe('Dry Run').addBatch({
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {dataURI: true}, this.callback);
       },
-      'returns the waterfall data URI string': function (err, data, mimeType) {
+      'returns the waterfall data URI string': function (err, data, info) {
         if (err) throw err;
         assert.equal(data, ResponseObjects.waterfall);
-        assert.equal(mimeType, 'image/png');
+        assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
       }
     },
  
@@ -174,10 +174,10 @@ vows.describe('Dry Run').addBatch({
         }, this.callback);
       },
       'returns the waterfall thumbnail data URI string':
-        function (err, data, mimeType) {
+        function (err, data, info) {
           if (err) throw err;
           assert.equal(data, ResponseObjects.waterfallThumbnail);
-          assert.equal(mimeType, 'image/png');
+          assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
         }
     },
  
@@ -186,10 +186,10 @@ vows.describe('Dry Run').addBatch({
         wpt.getScreenshotImage('120816_V2_2', {dataURI: true}, this.callback);
       },
       'returns the screenshot data URI string':
-        function (err, data, mimeType) {
+        function (err, data, info) {
           if (err) throw err;
           assert.equal(data, ResponseObjects.screenshot);
-          assert.equal(mimeType, 'image/jpeg');
+          assert.deepEqual(info, {type: 'image/jpeg', encoding: 'utf8'});
         }
     },
  
@@ -201,10 +201,10 @@ vows.describe('Dry Run').addBatch({
         }, this.callback);
       },
       'returns the screenshot thumbail data URI string':
-        function (err, data, mimeType) {
+        function (err, data, info) {
           if (err) throw err;
           assert.equal(data, ResponseObjects.screenshotThumbnail);
-          assert.equal(mimeType, 'image/jpeg');
+          assert.deepEqual(info, {type: 'image/jpeg', encoding: 'utf8'});
         }
     },
  
@@ -216,10 +216,10 @@ vows.describe('Dry Run').addBatch({
         }, this.callback);
       },
       'returns the screenshot in full resolution data URI string':
-        function (err, data, mimeType) {
+        function (err, data, info) {
           if (err) throw err;
           assert.equal(data, ResponseObjects.screenshotFullResolution);
-          assert.equal(mimeType, 'image/png');
+          assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
         }
     },
 
@@ -260,7 +260,8 @@ vows.describe('Dry Run').addBatch({
         wpt.getPageSpeedData('120816_V2_3', this.callback);
       },
       'returns a 404 error': function (err, data) {
-        assert.equal(err.message, 'status code: 404');
+        assert.equal(err.code, 404);
+        assert.equal(err.message, 'Not Found');
         assert.equal(data, undefined);
       }
     },
@@ -280,10 +281,10 @@ vows.describe('Dry Run').addBatch({
         wpt.getWaterfallImage('120816_V2_3', {dataURI: true}, this.callback);
       },
       'returns an empty waterfall data URI string':
-        function (err, data, mimeType) {
+        function (err, data, info) {
           if (err) throw err;
           assert.equal(data, ResponseObjects.waterfallNotFound);
-          assert.equal(mimeType, 'image/png');
+          assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
         }
     },
  
@@ -295,10 +296,10 @@ vows.describe('Dry Run').addBatch({
         }, this.callback);
       },
       'returns an empty waterfall thumbnail data URI string':
-        function (err, data, mimeType) {
+        function (err, data, info) {
           if (err) throw err;
           assert.equal(data, ResponseObjects.waterfallThumbnailNotFound);
-          assert.equal(mimeType, 'image/png');
+          assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
         }
     },
  
@@ -309,10 +310,10 @@ vows.describe('Dry Run').addBatch({
           dataURI: true
         }, this.callback);
       },
-      'returns a 404 error': function (err, data, mimeType) {
-        assert.equal(err.message, 'status code: 404');
+      'returns a 404 error': function (err, data, info) {
+        assert.equal(err.code, 404);
+        assert.equal(err.message, 'Not Found');
         assert.equal(data, undefined);
-        assert.equal(mimeType, 'image/jpeg');
       }
     }
  
