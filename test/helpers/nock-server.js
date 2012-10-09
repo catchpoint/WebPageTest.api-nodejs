@@ -31,6 +31,7 @@ var reqResMap = {
   '/testStatus.php?test=120816_V2_3': 'testStatusNotFound.json',
   '/xmlResult.php?test=120816_V2_3': 'testResultsNotFound.xml',
   '/runtest.php?url=&f=json': 'runTestInvalid.json',
+  '/runtest.php?script=&f=json': 'runTestInvalid.json',
   '/getgzip.php?test=120816_V2_3&file=1_pagespeed.txt': undefined,
   '/export.php?test=120816_V2_3': 'harNotFound.json',
   '/waterfall.php?test=120816_V2_3&run=1&cached=0': 'waterfallNotFound.png',

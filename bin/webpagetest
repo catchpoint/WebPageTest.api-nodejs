@@ -6,12 +6,11 @@
  */
 
 var program = require('commander'),
-    fs      = require('fs'),
-    os      = require('os');
+    fs      = require('fs');
 
 var WebPageTest = require('../lib/webpagetest');
 
-var command, wpt, key, file,
+var command, wpt, key, file, ret,
     options = {},
     args = [],
     defaultServer = process.env.WEBPAGETEST_SERVER ||
@@ -84,7 +83,7 @@ function output(data, exitStatus, preExit) {
   process.exit(exitStatus || 0);
 }
 
-function formatData(err, data, info) {
+var formatData = function (err, data, info) {
   var encoding = 'utf8';
 
   if (err) {
@@ -373,10 +372,20 @@ program
   .description('start webpagetest-api server on port [' +
     WebPageTest.defaultListenPort + ']')
   .action(function actionListen(port) {
-    console.log('server running on http://' + os.hostname() +
-      ':' + (port || WebPageTest.defaultListenPort));
     command = 'listen';
     args.push(port);
+    options = undefined;
+    formatData = function customFormat(err, data) {
+      if (err) {
+        output(JSON.stringify({error: err}, null, 2), 1);
+      } else {
+        process.stderr.write([
+          'server listening on port ' + data.port,
+          data.url,
+          ''
+        ].join('\n'));
+      }
+    };
   });
 
 program.parse(process.argv);
@@ -385,8 +394,10 @@ if (command) {
   wpt = new WebPageTest(program.server || defaultServer, key);
 
   // options
-  options.dryRun = program.dryRun;
-  args.push(options);
+  if (options) {
+    options.dryRun = program.dryRun;
+    args.push(options);
+  }
 
   // callback
   args.push(formatData);
