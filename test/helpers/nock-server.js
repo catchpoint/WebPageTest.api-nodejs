@@ -21,6 +21,7 @@ var reqResMap = {
   '/getgzip.php?test=120816_V2_2&file=1_IEWTR.txt': 'request.txt',
   '/getgzip.php?test=120816_V2_2&file=1_timeline.json': 'timeline.json',
   '/getgzip.php?test=120816_V2_2&file=1_netlog.txt': 'netLog.txt',
+  '/getgzip.php?test=120816_V2_2&file=1_console_log.json': 'consoleLog.json',
   '/waterfall.php?test=120816_V2_2&run=1&cached=0': 'waterfall.png',
   '/thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png': 'waterfallThumbnail.png',
   '/getgzip.php?test=120816_V2_2&file=1_screen.jpg': 'screenshot.jpg',

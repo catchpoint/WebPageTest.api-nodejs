@@ -186,6 +186,17 @@ vows.describe('Command Line').addBatch({
       }
     },
  
+    'gets console log data input ': {
+      topic: function() {
+        exec(mock('console 120816_V2_2'), this.callback);
+      },
+      'then returns the API url': function(err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_console_log.json');
+      }
+    },
+ 
     'gets a waterfall image input ': {
       topic: function() {
         exec(mock('waterfall 120816_V2_2'), this.callback);

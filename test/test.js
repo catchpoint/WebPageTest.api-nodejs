@@ -79,6 +79,13 @@ wpt.getNetLogData('120920_Q7_4', {dryRun: !true}, function (err, data) {
 });
 //*/
 
+//*
+wpt.getConsoleLogData('121009_B1_4', {dryRun: !true}, function (err, data) {
+  if (err) throw err;
+  console.log(JSON.stringify(data, null, 4));
+});
+//*/
+
 /*
 wpt.getWaterfallImage('120816_V2_2', {dryRun: !true, dataURI: !true, thumbnail: true}, function (err, data) {
   if (err) throw err;

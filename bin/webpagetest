@@ -336,6 +336,17 @@ addTestRunOptions(
     setOptions('run', options);
   });
 
+// console
+addTestRunOptions(
+  program
+    .command('console <test_id>')
+    .description('get the console log data (if available) from test')
+).action(function actionConsoleLog(id, options) {
+    command = 'getConsoleLogData';
+    args.push(id);
+    setOptions('run', options);
+  });
+
 // waterfall
 addTestImageOptions(
   addTestRunOptions(

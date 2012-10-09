@@ -155,6 +155,16 @@ vows.describe('Dry Run').addBatch({
       }
     },
  
+    'gets console log data request': {
+      topic: function (wpt) {
+        wpt.getConsoleLogData('120816_V2_2', this.callback);
+      },
+      'returns the console log object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.consoleLog);
+      }
+    },
+ 
     'gets a waterfall image request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {dataURI: true}, this.callback);

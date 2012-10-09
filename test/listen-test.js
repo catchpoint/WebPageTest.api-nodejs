@@ -224,6 +224,17 @@ vows.describe('Dry Run').addBatch({
       }
     },
  
+    'when gets console log data GET request': {
+      topic: function (server) {
+        get('/console/120816_V2_2', server, this.callback);
+      },
+      'returns the console log JSON': function (err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.consoleLog);
+      }
+    },
+ 
     'when gets a waterfall image GET request': {
       topic: function (server) {
         get('/waterfall/120816_V2_2?uri=1', server, this.callback);
