@@ -8,68 +8,20 @@
 var program = require('commander'),
     fs      = require('fs');
 
-var WebPageTest = require('../lib/webpagetest');
+var WebPageTest = require('../lib/webpagetest'),
+    mapping = require('../lib/mapping');
 
-var command, wpt, key, file, ret,
+var command, wpt, file, ret,
     options = {},
     args = [],
     defaultServer = process.env.WEBPAGETEST_SERVER ||
       WebPageTest.defaultServer;
 
-// parameters mapping: command line options to wpt node module options
-var paramsMap = {
-  test: {
-    label: 'label',
-    'location': 'location',
-    runs: 'runs',
-    first: 'firstViewOnly',
-    connectivity: 'connectivity',
-    dom: 'domElement',
-    'private': 'private',
-    connections: 'connections',
-    onload: 'stopAtDocumentComplete',
-    sensitive: 'sensitive',
-    block: 'block',
-    login: 'login',
-    authType: 'authenticationType',
-    video: 'video',
-    request: 'requestId',
-    notify: 'notifyEmail',
-    pingback: 'pingback',
-    bwDown: 'bandwidthDown',
-    bwUp: 'bandwidthUp',
-    latency: 'latency',
-    plr: 'packetLossRate',
-    tcpDump: 'tcpDump',
-    noOpt: 'disableOptimization',
-    noImages: 'disableScreenshot',
-    noHeaders: 'disableHTTPHeaders',
-    full: 'fullResolutionScreenshot',
-    jpeg: 'jpegCompressionLevel',
-    noScript: 'disableJavaScript',
-    ignoreSsl: 'ignoreSSL',
-    standards: 'disableCompatibilityView',
-    bodies: 'saveResponseBodies',
-    keepUa: 'keepOriginalUserAgent',
-    duration: 'minimumDuration',
-    blockAds: 'blockAds',
-    aft: 'aftRenderingTime',
-    timeline: 'timeline',
-    netlog: 'netLog',
-    spof: 'spof'
-  },
-  run: {
-    run: 'run',
-    cached: 'repeatView'
-  },
-  image: {
-    thumbnail: 'thumbnail',
-    uri: 'dataURI',
-    full: 'fullResolution',
-    render: 'startRender',
-    complete: 'documentComplete'
-  }
-};
+// replace default values on descriptons
+mapping.commands.listen.info =
+  mapping.commands.listen.info.replace('%s', WebPageTest.defaultListenPort);
+mapping.options.common.server.info =
+  mapping.options.common.server.info.replace('%s', defaultServer);
 
 function output(data, exitStatus, preExit) {
   if (exitStatus) {
@@ -120,293 +72,103 @@ var formatData = function (err, data, info) {
   }
 }
 
-// set valid options
-function setOptions(types, opts) {
-  [].concat(types).forEach(function typesEach(type) {
-    var params = paramsMap[type];
+function addOptions(prg, options) {
+  (options || []).forEach(function eachOption(option) {
+    Object.keys(option).forEach(function eachOpt(name) {
+      var opt = option[name];
 
-    Object.keys(params).forEach(function paramsEach(key) {
-      var value = opts[key];
-
-      if (value !== undefined) {
-        options[params[key]] = value;
+      // bail shorthands
+      if (name == opt.key) {
+        return;
       }
+
+      prg.option([
+        '-', opt.key, ', --',
+        name,
+        opt.param ? (' <' + opt.param + '>') : ''
+      ].join(''), opt.info);
     });
   });
 }
 
-// common run options helper for a some commands
-function addTestRunOptions(program) {
-  program
-    .option('-r --run <number>',
-      'which run number on a multiple runs test [1]')
-    .option('-c --cached', 'get the Repeat View (cached view) instead of default First View (primed cache)')
-
-  return program;
-}
-
-// common image options helper for a some commands
-function addTestImageOptions(program) {
-  program
-    .option('-t --thumbnail', 'get the thumbnail of actual image')
-    .option('-u --uri',
-      'return the base64 string representation (inline) of actual image')
-
-  return program;
-}
-
 // global options
-program
-  .version(WebPageTest.version)
-  .option('-s --server <server>', 'the WPT server URL [' + defaultServer + ']')
-  .option('-o --out <file>',
-    'place the output into <file>. Defaults to stdout')
-  .option('-d --dry-run', 'just return the RESTful API URL');
-
-// status
-program
-  .command('status <id>')
-  .description('check test status')
-  .action(function actionStatus(id) {
-    command = 'getTestStatus';
-    args.push(id);
-  });
-
-// results
-program
-  .command('results <id>')
-  .description('get test results')
-  .action(function actionResults(id) {
-    command = 'getTestResults';
-    args.push(id);
-  });
-
-// locations
-program
-  .command('locations')
-  .description('list locations and the number of pending tests')
-  .action(function actionLocations() {
-    command = 'getLocations';
-  });
-
-// test
-program
-  .command('test <url|script>')
-  .description('run test')
-  .option('-k --key <api_key>',
-    'API key (if assigned). Contact the site owner for a key if required')
-  .option('-l --location <location>', 'location to test from')
-  .option('-r --runs <number>', 'number of test runs [1]')
-  .option('-L --label <label>', 'label for the test')
-  .option('-f --first', 'skip the Repeat View test')
-  .option('-p --private', 'keep the test hidden from the test log')
-  .option('-y --connectivity <profile>',
-    'connectivity profile (DSL|FIOS|Dial|custom) [DSL]')
-  .option('-i --video', 'capture video')
-  .option('-m --dom <element>', 'DOM element to record for sub-measurement')
-  .option('-c --connections <number>',
-    'override the number of concurrent connections')
-  .option('-v --onload', 'force the test to stop at window.onload')
-  .option('-t --sensitive', 'discard script and http headers in the result')
-  .option('-b --block <urls>',
-    'space-delimited list of urls to block (substring match)')
-  .option('-g --login <username>',
-    'username for authenticating tests (http authentication)')
-  .option('-w --password <password>',
-    'password for authenticating tests (http authentication)')
-  .option('-a --auth-type <type>',
-    'type of authentication: 0 = Basic, 1 = SNS [0]')
-  .option('-e --request <id>',
-    'echo request ID, useful to track asynchronous requests')
-  .option('-n --notify <e-mail>',
-    'e-mail address to notify with the test results')
-  .option('-B --pingback <url>', 'URL to ping when the test is complete ' +
-    '(the test ID will be passed as an "id" parameter)')
-  .option('-D --bw-down <bandwidth>', 'download bandwidth in Kbps ' +
-    '(used when specifying a custom connectivity profile)')
-  .option('-U --bw-up <bandwidth>', 'uload bandwidth in Kbps ' +
-    '(used when specifying a custom connectivity profile)')
-  .option('-Y --latency <time>', 'first-hop Round Trip Time in ms ' +
-    '(used when specifying a custom connectivity profile)')
-  .option('-P --plr <percentage>', 'packet loss rate - percent of packets ' +
-    'to drop (used when specifying a custom connectivity profile)')
-  .option('-u --tcp-dump', 'enable tcpdump capture')
-  .option('-z --no-opt', 'disable optimization checks (for faster testing)')
-  .option('-I --no-images', 'disable screen shot capturing')
-  .option('-H --no-headers','disable saving of the http headers (as well as ' +
-    'browser status messages and CPU utilization)')
-  .option('-F --full',
-    'save a full-resolution version of the fully loaded screen shot as a PNG')
-  .option('-j --jpeg <level>',
-    'jpeg compression level (30-100) for the screen shots and video capture')
-  .option('-S --no-script', 'disable javascript (IE, Chrome, Firefox)')
-  .option('-R --ignore-ssl', 'ignore SSL certificate errors, e.g. name ' +
-    'mismatch, self-signed certificates, etc')
-  .option('-T --standards',
-    'forces all pages to load in standards mode (IE only)')
-  .option('-O --bodies', 'save response bodies for text resources')
-  .option('-K --keep-ua',
-    'do not add PTST to the original browser User Agent string')
-  .option('-N --duration <seconds>', 'minimum test duration in seconds')
-  .option('-A --block-ads', 'block ads defined by adblockrules.org')
-  .option('-E --aft', '(experimental) measure above-the-fold rendering time')
-  .option('-M --timeline', 'capture Developer Tools Timeline (Chrome only)')
-  .option('-G --netlog', 'capture Network Log (Chrome only)')
-  .option('-Z --spof <domains>', 'space-delimited list of domains to ' +
-    'simulate failure by re-routing to blackhole.webpagetest.org to silently' +
-    'drop all requests')
-  .action(function actionTest(what, options) {
-    command = 'runTest';
-
-    // check for script file
-    if (fs.existsSync(what) && fs.statSync(what).isFile()) {
-      what = fs.readFileSync(what, 'utf8');
+addOptions(
+  program.version(WebPageTest.version),
+  [mapping.options.common, {
+    'out': {
+      key: 'o',
+      param: 'file',
+      info: 'place the output into <file>. Defaults to stdout'
     }
+  }]
+);
 
-    // url or script
-    args.push(decodeURIComponent(what));
+Object.keys(mapping.commands).forEach(function eachCommand(name) {
+  var cmd = mapping.commands[name];
 
-    // api key
-    key = options.key;
+  function defaultAction(param, opts) {
+    command = cmd.name;
+    if (cmd.param) {
+      args.push(param);
+    }
+    if (cmd.options) {
+      options = mapping.setOptions(name, opts);
+    }
+  }
 
-    setOptions('test', options);
-  });
-
-// har
-program
-  .command('har <test_id>')
-  .description('get the HTTP Archive (HAR) from test')
-  .action(function actionHAR(id) {
-    command = 'getHARData';
-    args.push(id);
-  });
-
-// pagespeed
-addTestRunOptions(
-  program
-    .command('pagespeed <test_id>')
-    .description('get the page speed results (if available) from test')
-).action(function actionPageSpeed(id, options) {
-    command = 'getPageSpeedData';
-    args.push(id);
-    setOptions('run', options);
-  });
-
-// utilization
-addTestRunOptions(
-  program
-    .command('utilization <test_id>')
-    .description('get the cpu, bandwidth and memory utilization data from test')
-).action(function actionUtilization(id, options) {
-    command = 'getUtilizationData';
-    args.push(id);
-    setOptions('run', options);
-  });
-
-// request
-addTestRunOptions(
-  program
-    .command('request <test_id>')
-    .description('get the request data from test')
-).action(function actionRequest(id, options) {
-    command = 'getRequestData';
-    args.push(id);
-    setOptions('run', options);
-  });
-
-// timeline
-addTestRunOptions(
-  program
-    .command('timeline <test_id>')
-    .description('get the Chrome Developer Tools Timeline data (if available) from test')
-).action(function actionTimeline(id, options) {
-    command = 'getTimelineData';
-    args.push(id);
-    setOptions('run', options);
-  });
-
-// netlog
-addTestRunOptions(
-  program
-    .command('netlog <test_id>')
-    .description('get the Chrome Developer Tools Net Log data (if available) from test')
-).action(function actionNetLog(id, options) {
-    command = 'getNetLogData';
-    args.push(id);
-    setOptions('run', options);
-  });
-
-// console
-addTestRunOptions(
-  program
-    .command('console <test_id>')
-    .description('get the console log data (if available) from test')
-).action(function actionConsoleLog(id, options) {
-    command = 'getConsoleLogData';
-    args.push(id);
-    setOptions('run', options);
-  });
-
-// waterfall
-addTestImageOptions(
-  addTestRunOptions(
-    program
-      .command('waterfall <test_id>')
-      .description('get the waterfall PNG image')
-  )
-).action(function actionWaterfall(id, options) {
-    command = 'getWaterfallImage';
-    args.push(id);
-    setOptions(['run', 'image'], options);
-  });
-
-// screenshot
-addTestImageOptions(
-  addTestRunOptions(
-    program
-      .command('screenshot <test_id>')
-      .description('get the fully loaded page screenshot in JPG format (PNG if in full resolution)')
-  )
-)
-  .option('-f --full', 'get full resolution screenshot in PNG format if available')
-  .option('-r --render', 'get the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)')
-  .option('-c --complete', 'get the page screenshot at the Document Complete point (i.e.: when window.onload was fired)')
-  .action(function actionScreenshot(id, options) {
-    command = 'getScreenshotImage';
-    args.push(id);
-    setOptions(['run', 'image'], options);
-  });
-
-// server
-program
-  .command('listen [port]')
-  .description('start webpagetest-api server on port [' +
-    WebPageTest.defaultListenPort + ']')
-  .action(function actionListen(port) {
-    command = 'listen';
-    args.push(port);
-    options = undefined;
-    formatData = function customFormat(err, data) {
-      if (err) {
-        output(JSON.stringify({error: err}, null, 2), 1);
-      } else {
-        process.stderr.write([
-          'server listening on port ' + data.port,
-          data.url,
-          ''
-        ].join('\n'));
+  var customActions = {
+    'test': function(what, opts) {
+      // check for script file
+      if (fs.existsSync(what) && fs.statSync(what).isFile()) {
+        what = fs.readFileSync(what, 'utf8');
       }
-    };
-  });
+
+      defaultAction(decodeURIComponent(what), opts);
+    },
+    'listen': function(port) {
+      defaultAction(port);
+      options = undefined;
+      formatData = function customFormat(err, data) {
+        if (err) {
+          output(JSON.stringify({error: err}, null, 2), 1);
+        } else {
+          process.stderr.write([
+            'server listening on port ' + data.port,
+            data.url,
+            ''
+          ].join('\n'));
+        }
+      };
+    }
+  };
+
+  addOptions(
+    program
+      .command(
+        cmd.param ?
+        [
+          name,
+          ' ',
+          cmd.optional ? '[' : '<',
+          cmd.param,
+          cmd.optional ? ']' : '>',
+        ].join('') :
+        name
+      )
+      .description(cmd.info)
+      .action(customActions[name] || defaultAction),
+    cmd.options
+  );
+});
 
 program.parse(process.argv);
 
 if (command) {
-  wpt = new WebPageTest(program.server || defaultServer, key);
+  wpt = new WebPageTest(program.server || defaultServer);
 
   // options
   if (options) {
-    options.dryRun = program.dryRun;
+    options.dryRun = program.dryrun;
     args.push(options);
   }
 

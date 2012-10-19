@@ -79,7 +79,7 @@ wpt.getNetLogData('120920_Q7_4', {dryRun: !true}, function (err, data) {
 });
 //*/
 
-//*
+/*
 wpt.getConsoleLogData('121009_B1_4', {dryRun: !true}, function (err, data) {
   if (err) throw err;
   console.log(JSON.stringify(data, null, 4));
@@ -100,16 +100,10 @@ wpt.getScreenshotImage('120816_V2_2', {dryRun: !true, dataURI: true, thumbnail: 
 });
 //*/
 
-/*
-var srv = wpt.listen(8081, {
-  ikey: fs.readFileSync('test/fixtures/test-key.pem'),
-  icert: fs.readFileSync('test/fixtures/test-cert.pem')
-});
-console.log(srv, srv.toString());
-//console.log(srv);
+//*
+var srv = wpt.listen(8081, function () {console.log(arguments);});
 
-setTimeout(function () {
-  var x = wpt.stopListening(function(){console.log('done');});
-  console.log(x);
-}, 5000);
+//setTimeout(function () {
+//  var x = srv.close(function(){console.log('done');});
+//}, 5000);
 //*/

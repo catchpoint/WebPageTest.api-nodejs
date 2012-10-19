@@ -120,6 +120,17 @@ vows.describe('Command Line').addBatch({
       }
     },
  
+    'gets a cancel test input': {
+      topic: function() {
+        exec(mock('cancel 120816_V2_2'), this.callback);
+      },
+      'then returns the API url': function(err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.equal(data.url, wptServer + 'cancelTest.php?test=120816_V2_2');
+      }
+    },
+ 
     'gets page speed data input ': {
       topic: function() {
         exec(mock('pagespeed 120816_V2_2'), this.callback);

@@ -158,6 +158,17 @@ vows.describe('Dry Run').addBatch({
       }
     },
  
+    'when gets a cancel test GET request': {
+      topic: function (server) {
+        get('/cancel/120816_V2_2', server, this.callback);
+      },
+      'returns the test cancelled JSON': function (err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.cancel);
+      }
+    },
+ 
     'when gets page speed data GET request': {
       topic: function (server) {
         get('/pagespeed/120816_V2_2', server, this.callback);
@@ -383,6 +394,27 @@ vows.describe('Dry Run').addBatch({
     'when gets an invalid screenshot thumbnail GET request': {
       topic: function (server) {
         get('/screenshot/120816_V2_3?uri=1&thumbnail=1', server, this.callback);
+      },
+      'returns a 404 error': function (err, data) {
+        assert.equal(err.message, '404');
+        assert.equal(data, undefined);
+      }
+    },
+
+    'when gets an already cancelled test cancel test GET request': {
+      topic: function (server) {
+        get('/cancel/120816_V2_3', server, this.callback);
+      },
+      'returns the test not cancelled JSON': function (err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.cancelNotCancelled);
+      }
+    },
+ 
+    'when gets a cancel test of an invalid test GET request': {
+      topic: function (server) {
+        get('/cancel/120816_V2_4', server, this.callback);
       },
       'returns a 404 error': function (err, data) {
         assert.equal(err.message, '404');

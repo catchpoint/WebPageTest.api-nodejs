@@ -27,6 +27,8 @@ var reqResMap = {
   '/getgzip.php?test=120816_V2_2&file=1_screen.jpg': 'screenshot.jpg',
   '/thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0': 'screenshotThumbnail.jpg',
   '/getgzip.php?test=120816_V2_2&file=1_screen.png': 'screenshotFullResolution.png',
+  '/cancelTest.php?test=120816_V2_2': 'cancel.html',
+  '/cancelTest.php?test=120816_V2_3': 'cancelNotCancelled.html',
 
   // not found / invalid
   '/testStatus.php?test=120816_V2_3': 'testStatusNotFound.json',
@@ -37,7 +39,8 @@ var reqResMap = {
   '/export.php?test=120816_V2_3': 'harNotFound.json',
   '/waterfall.php?test=120816_V2_3&run=1&cached=0': 'waterfallNotFound.png',
   '/thumbnail.php?test=120816_V2_3&run=1&cached=0&file=1_waterfall.png': 'waterfallThumbnailNotFound.png',
-  '/thumbnail.php?test=120816_V2_3&file=1_screen.jpg&run=1&cached=0': undefined
+  '/thumbnail.php?test=120816_V2_3&file=1_screen.jpg&run=1&cached=0': undefined,
+  '/cancelTest.php?test=120816_V2_4': undefined
 };
 
 var typeMap = {
@@ -46,7 +49,8 @@ var typeMap = {
   'txt': 'text/plain',
   'csv': 'text/plain',
   'png': 'image/png',
-  'jpg': 'image/jpeg'
+  'jpg': 'image/jpeg',
+  'html': 'text/html'
 };
 
 

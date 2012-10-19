@@ -95,6 +95,16 @@ vows.describe('Dry Run').addBatch({
       }
     },
  
+    'gets a cancel test request': {
+      topic: function (wpt) {
+        wpt.cancelTest('120816_V2_2', this.callback);
+      },
+      'returns the test cancelled object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.cancel);
+      }
+    },
+ 
     'gets page speed data request': {
       topic: function (wpt) {
         wpt.getPageSpeedData('120816_V2_2', this.callback);
@@ -325,7 +335,28 @@ vows.describe('Dry Run').addBatch({
         assert.equal(err.message, 'Not Found');
         assert.equal(data, undefined);
       }
-    }
+    },
  
+    'gets a cancel test of already cancelled test request': {
+      topic: function (wpt) {
+        wpt.cancelTest('120816_V2_3', this.callback);
+      },
+      'returns the test not cancelled object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.cancelNotCancelled);
+      }
+    },
+
+    'gets a cancel test of an invalid test request': {
+      topic: function (wpt) {
+        wpt.cancelTest('120816_V2_4', this.callback);
+      },
+      'returns a 404 error': function (err, data) {
+        assert.equal(err.code, 404);
+        assert.equal(err.message, 'Not Found');
+        assert.equal(data, undefined);
+      }
+    }
+
   }
 }).export(module);

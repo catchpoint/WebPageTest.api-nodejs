@@ -93,6 +93,16 @@ vows.describe('Dry Run').addBatch({
       }
     },
  
+    'gets a cancel test request': {
+      topic: function (wpt) {
+        wpt.cancelTest('120816_V2_2', {dryRun: true}, this.callback);
+      },
+      'then returns the API url': function (err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'cancelTest.php?test=120816_V2_2');
+      }
+    },
+ 
     'gets page speed data request': {
       topic: function (wpt) {
         wpt.getPageSpeedData('120816_V2_2', {dryRun: true}, this.callback);
