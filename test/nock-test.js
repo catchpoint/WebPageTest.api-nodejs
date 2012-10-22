@@ -356,6 +356,26 @@ vows.describe('Dry Run').addBatch({
         assert.equal(err.message, 'Not Found');
         assert.equal(data, undefined);
       }
+    },
+
+    'gets a test request for an api key required server': {
+      topic: function (wpt) {
+        wpt.runTest('http://apikey.com', this.callback);
+      },
+      'returns the no api key response object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.runTestNoAPIKey);
+      }
+    },
+
+    'gets a test request for an api key required server with invalid key': {
+      topic: function (wpt) {
+        wpt.runTest('http://apikey.com', {key: '12345'}, this.callback);
+      },
+      'returns the no api key response object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.runTestInvalidAPIKey);
+      }
     }
 
   }
