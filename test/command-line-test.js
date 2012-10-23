@@ -6,6 +6,7 @@
 var vows   = require('vows'),
     assert = require('assert'),
     path   = require('path'),
+    fs     = require('fs'),
     exec   = require('child_process').exec;
 
 var WebPageTest = require('../lib/webpagetest');
@@ -260,6 +261,17 @@ vows.describe('Command Line').addBatch({
         if (err) throw err;
         data = JSON.parse(data);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
+      }
+    },
+
+    'gets a help input ': {
+      topic: function() {
+        exec(mock('--help'), this.callback);
+      },
+      'then returns the help text': function(err, data) {
+        if (err) throw err;
+        assert.equal(data, fs.readFileSync(
+          path.join(__dirname, './fixtures/command-line-help.txt'), 'utf8'));
       }
     }
 
