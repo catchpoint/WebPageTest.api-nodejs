@@ -37,11 +37,11 @@ $ webpagetest --help
 * **status** _\<id\>_: check test status
 * **results** _\<id\>_: get test results
 * **locations**: list locations and the number of pending tests
-* **test** _[options] \<url|script\>_: run test
+* **test** _[options] \<url_or_script\>_: run test
 * **cancel** _\<id\>_: cancel running/pending test
 * **har** _\<id\>_: get the HTTPS Archive (HAR) from test
 * **pagespeed** _[options] \<id\>_: get the Google Page Speed results (if available) from test
-* **utilization** _[options] \<id\>_: get the CPU, bandwidth and memory utilizations data from test
+* **utilization** _[options] \<id\>_: get the CPU, bandwidth and memory utilization data from test
 * **request** _[options] <\id\>_: get the request data from test
 * **timeline** _[options] \<id\>_: get the Chrome Developer Tools Timeline data (if available) from test
 * **netlog** _[options] \<id\>_: get the Chrome Developer Tools Net log data (if available) from test
@@ -360,7 +360,7 @@ $ curl http://localhost:8080/test/twitter.com/?locations=SanJose_IE9
 
 #### Notes
 * port _8080_ is optional, default port is _7791_
-* `wpt.foo.com` is overriding the default `www.webpagetest.org` server but can still be overriden with `server` option
+* `wpt.foo.com` is overriding the default `www.webpagetest.org` server but can still be overridden with `server` option
 
 ### Module
 ```javascript

@@ -12,7 +12,7 @@
     locations 
     list locations and the number of pending tests
     
-    test [options] <url|script>
+    test [options] <url_or_script>
     run test
     
     cancel <id>
@@ -25,7 +25,7 @@
     get the Google Page Speed results (if available) from test
     
     utilization [options] <id>
-    get the CPU, bandwidth and memory utilizations data from test
+    get the CPU, bandwidth and memory utilization data from test
     
     request [options] <id>
     get the request data from test
