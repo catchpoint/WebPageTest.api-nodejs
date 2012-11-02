@@ -342,6 +342,40 @@ wpt.getWaterfallImage('121025_PT_N8K', {
 );
 ```
 
+## Server mode
+WebPageTest API Wrapper comes with a handy RESTful API proxy
+
+### Command Line
+```bash
+$ webpagetest listen 8080 --server wpt.foo.com
+```
+```bash
+server listening on port 8080
+http://localhost:8080
+```
+```bash
+$ curl http://localhost:8080/help
+$ curl http://localhost:8080/test/twitter.com/?locations=SanJose_IE9
+```
+
+#### Notes
+* port _8080_ is optional, default port is _7791_
+* `wpt.foo.com` is overriding the default `www.webpagetest.org` server but can still be overriden with `server` option
+
+### Module
+```javascript
+var server = wpt.listen(8080, function(err, data) {
+  if (err) throw err;
+  console.log('listening on ' + data.url);
+}); // listen on port 8080 (optional), default port is 7791
+
+setTimeout(function() {
+  server.close(function() {
+    console.log('listening done');
+  });
+}, 10000); // wait for 10s before stop listening
+```
+
 ## Issues
 
 Have a bug/feature request? Please create an issue here on GitHub!
