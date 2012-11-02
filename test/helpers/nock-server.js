@@ -13,7 +13,7 @@ var reqResMap = {
   '/xmlResult.php?test=120816_V2_2': 'testResults.xml',
   '/getLocations.php': 'locations.xml',
   '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&f=json': 'runTest.json',
-  '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&label=test%20123&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&pngss=1&timeline=1&netlog=1&f=json': 'runTest.json',
+  '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&label=test%20123&pngss=1&timeline=1&netlog=1&f=json': 'runTest.json',
   '/runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete&f=json': 'runTest.json',
   '/getgzip.php?test=120816_V2_2&file=1_pagespeed.txt': 'pageSpeed.json',
   '/export.php?test=120816_V2_2': 'har.json',
