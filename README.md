@@ -331,10 +331,15 @@ wpt.getTestResults('121025_PT_N8K', function (err, data) {
 
 #### 6. Get test waterfall thumbnail from repeat view as data URI
 ```javascript
-wpt.getWaterfallImage('121025_PT_N8K', {repeatView: true, dataURI: true}, function (err, data, info) {
-  if (err) throw err;
-  console.log(data, info);
-});
+wpt.getWaterfallImage('121025_PT_N8K', {
+  thumbnail: true,
+  repeatView: true,
+  dataURI: true
+}, function (err, data, info) {
+    if (err) throw err;
+    console.log(data, info);
+  }
+);
 ```
 
 ## Issues
