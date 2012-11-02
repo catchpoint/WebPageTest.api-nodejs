@@ -20,8 +20,6 @@ var command, wpt, file, ret,
 // replace default values on descriptons
 mapping.commands.listen.info =
   mapping.commands.listen.info.replace('%s', WebPageTest.defaultListenPort);
-mapping.options.common.server.info =
-  mapping.options.common.server.info.replace('%s', defaultServer);
 
 function output(data, exitStatus, preExit) {
   if (exitStatus) {
@@ -83,10 +81,12 @@ function addOptions(prg, options) {
       }
 
       prg.option([
-        '-', opt.key, ', --',
-        name,
-        opt.param ? (' <' + opt.param + '>') : ''
-      ].join(''), opt.info);
+          '-', opt.key, ', --',
+          name,
+          opt.param ? (' <' + opt.param + '>') : ''
+        ].join(''),
+        name === 'server' ? opt.info.replace('%s', defaultServer) : opt.info
+      );
     });
   });
 }
