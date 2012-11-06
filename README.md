@@ -271,21 +271,63 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 
 ### Options
 #### Common (works for all methods with `options` parameter)
-* **dryRun**: boolean, if `true`, method does not make an actual request to the API Server but rather returns an object with `url` which contains the actual URL to make the GET request to WebPageTest API Server
-* **server**: string, if specified, overrides the WebPageTest server informed in the constructor only for that method call
+* **dryRun**: _Boolean_, if `true`, method does not make an actual request to the API Server but rather returns an object with `url` which contains the actual URL to make the GET request to WebPageTest API Server
+* **server**: _String_, if specified, overrides the WebPageTest server informed in the constructor only for that method call
+
+#### Test (works for `runTest` method only)
+* **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
+* **location**: _String_, location to test from
+* **runs**: _Number_, number of test runs [1]
+* **firstViewOnly**: _Boolean_, skip the Repeat View test
+* **label**: _String_, label for the test
+* **private**: _Boolean_, keep the test hidden from the test log
+* **video**: _Boolean_, capture video
+* **connectivity**: _String_, connectivity profile (DSL|FIOS|Dial|custom) [DSL]
+* **domElement**: _String_, DOM element to record for sub-measurement
+* **connections**: _Number_, override the number of concurrent connections
+* **stopAtDocumentComplete**: _Boolean_, force the test to stop at window.onload
+* **sensitive**: _Boolean_, discard script and http headers in the result
+* **block**: _String_, space-delimited list of urls to block (substring match)
+* **login**: _String_, username for authenticating tests (http authentication)
+* **password**: _String_, password for authenticating tests (http authentication)
+* **authenticationType**: _String_, type of authentication: 0 = Basic, 1 = SNS [0]
+* **requestId**: _String_, echo request ID, useful to track asynchronous requests
+* **notifyEmail**: _String_, e-mail address to notify with the test results
+* **pingback**: _String_, URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
+* **bandwidthDown**: _String_, download bandwidth in Kbps (used when specifying a custom connectivity profile)
+* **bandwidthUp**: _String_, upload bandwidth in Kbps (used when specifying a custom connectivity profile)
+* **latency**: _String_, first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
+* **packetLossRate**: _Number_, packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
+* **tcpDump**: _Boolean_, enable tcpdump capture
+* **disableOptimization**: _Boolean_, disable optimization checks (for faster testing)
+* **disableScreenshot**: _Boolean_, disable screen shot capturing
+* **disableHTTPHeaders**: _Boolean_, disable saving of the http headers (as well as browser status messages and CPU utilization)
+* **fullResolutionScreenshot**: _Boolean_, save a full-resolution version of the fully loaded screen shot as a PNG
+* **jpegQuality**: _Number_, jpeg compression level (30-100) for the screen shots and video capture
+* **disableJavaScript**: _Boolean_, disable javascript (IE, Chrome, Firefox)
+* **ignoreSSL**: _Boolean_, ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
+* **disableCompatibilityView**: _Boolean_, forces all pages to load in standards mode (IE only)
+* **saveResponseBodies**: _Boolean_, save response bodies for text resources
+* **keepOriginalUserAgent**: _Boolean_, do not add PTST to the original browser User Agent string
+* **minimumDuration**: _String_, minimum test duration in seconds
+* **blockAds**: _Boolean_, block ads defined by adblockrules.org
+* **aftRenderingTime**: _Boolean_, (experimental) measure above-the-fold rendering time
+* **timeline**: _Boolean_, capture Developer Tools Timeline (Chrome only)
+* **netLog**: _Boolean_, capture Network Log (Chrome only)
+* **spof**: _String_, space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
 
 #### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getWaterfallImage` and `getScreenshotImage` methods)
-* **run**: number, the test run number for multiple runs tests (default: 1, first test)
-* **repeatView**: boolean, if `true` returns the repeat view (cached) data
+* **run**: _Number_, the test run number for multiple runs tests (default: 1, first test)
+* **repeatView**: _Boolean_, if `true` returns the repeat view (cached) data
 
 #### Image (works for `getWaterfallImage` and `getScreenshotImage` methods)
-* **thumbnail**: boolean, returns the thumbnail of actual image
-* **dataURI**: boolean, returns the base64 string representation (inline) of actual image
+* **thumbnail**: _Boolean_, returns the thumbnail of actual image
+* **dataURI**: _Boolean_, returns the base64 string representation (inline) of actual image
 
 #### Screenshot (works for `getScreenshotImage` method only)
-* **fullResolution**: boolean, returns the full resolution screenshot in PNG format if available
-* **startRender**: boolean, returns the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)
-* **documentComplete**: boolean, returns the page screenshot at the Document Complete point (i.e.: when `window.onload` was fired)
+* **fullResolution**: _Boolean_, returns the full resolution screenshot in PNG format if available
+* **startRender**: _Boolean_, returns the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)
+* **documentComplete**: _Boolean_, returns the page screenshot at the Document Complete point (i.e.: when `window.onload` was fired)
 
 ### Examples
 
