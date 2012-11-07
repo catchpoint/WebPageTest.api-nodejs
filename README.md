@@ -248,11 +248,11 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 * `scriptToString(script)`
 
 ### Parameters
-* **id**: test ID string \(_required_\)
-* **options**: parameters object, see below \(_optional_\)
-* **callback**: the callback function(error, data) \(_required_\)
-* **url_or_script**: decoded url or script string \(_required_\)
-* **port**: port number \[default: 7791\] \(_optional_\)
+* **id**: test ID string _required_
+* **options**: parameters object, see below _optional_
+* **callback**: the callback function(error, data) _required_
+* **url_or_script**: decoded url or script string _required_
+* **port**: port number \[default: 7791\] _optional_
 * **script**: script array in the format:
 
 ```javascript
