@@ -269,6 +269,7 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 
 * `getWaterfallImage` and `getScreenshotImage` callback function has a third parameter `info` which is an object with `{type: 'image/jpeg or png', encoding: 'utf8 or binary'}`
 * `scriptToString` script array values 1-N are optional. e.g:
+
 ```javascript
 var script = wpt.scriptToString([
   {logData: 0},
