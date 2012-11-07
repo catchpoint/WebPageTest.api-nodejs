@@ -15,7 +15,7 @@ var wptNockServer = new NockServer('http://example.com');
 vows.describe('Dry Run').addBatch({
   'An Example WebPageTest Nock Server': {
     topic: new WebPageTest('example.com'),
- 
+
     'gets a test status request': {
       topic: function (wpt) {
         wpt.getTestStatus('120816_V2_2', this.callback);
@@ -25,7 +25,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testStatus);
       }
     },
- 
+
     'gets a test results request': {
       topic: function (wpt) {
         wpt.getTestResults('120816_V2_2', this.callback);
@@ -35,7 +35,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testResults);
       }
     },
- 
+
     'gets the locations list request': {
       topic: function (wpt) {
         wpt.getLocations(this.callback);
@@ -45,7 +45,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.locations);
       }
     },
- 
+
     'gets a simple test request': {
       topic: function (wpt) {
         wpt.runTest('http://twitter.com/marcelduran', this.callback);
@@ -55,7 +55,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
- 
+
     'gets a custom test request': {
       topic: function (wpt) {
         wpt.runTest('http://twitter.com/marcelduran', {
@@ -73,7 +73,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
- 
+
     'gets a script test request': {
       topic: function (wpt) {
         var script = wpt.scriptToString([
@@ -94,7 +94,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
- 
+
     'gets a cancel test request': {
       topic: function (wpt) {
         wpt.cancelTest('120816_V2_2', this.callback);
@@ -104,7 +104,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.cancel);
       }
     },
- 
+
     'gets page speed data request': {
       topic: function (wpt) {
         wpt.getPageSpeedData('120816_V2_2', this.callback);
@@ -114,7 +114,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.pageSpeed);
       }
     },
- 
+
     'gets HAR data request': {
       topic: function (wpt) {
         wpt.getHARData('120816_V2_2', this.callback);
@@ -124,7 +124,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.har);
       }
     },
- 
+
     'gets utilization data request': {
       topic: function (wpt) {
         wpt.getUtilizationData('120816_V2_2', this.callback);
@@ -134,7 +134,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.utilization);
       }
     },
- 
+
     'gets request data request': {
       topic: function (wpt) {
         wpt.getRequestData('120816_V2_2', this.callback);
@@ -144,7 +144,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.request);
       }
     },
- 
+
     'gets timeline data request': {
       topic: function (wpt) {
         wpt.getTimelineData('120816_V2_2', this.callback);
@@ -154,7 +154,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.timeline);
       }
     },
- 
+
     'gets net log data request': {
       topic: function (wpt) {
         wpt.getNetLogData('120816_V2_2', this.callback);
@@ -164,7 +164,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.netLog);
       }
     },
- 
+
     'gets console log data request': {
       topic: function (wpt) {
         wpt.getConsoleLogData('120816_V2_2', this.callback);
@@ -174,7 +174,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.consoleLog);
       }
     },
- 
+
     'gets a waterfall image request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {dataURI: true}, this.callback);
@@ -185,7 +185,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
       }
     },
- 
+
     'gets a waterfall thumbnail request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {
@@ -200,7 +200,7 @@ vows.describe('Dry Run').addBatch({
           assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
         }
     },
- 
+
     'gets a screenshot request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {dataURI: true}, this.callback);
@@ -212,7 +212,7 @@ vows.describe('Dry Run').addBatch({
           assert.deepEqual(info, {type: 'image/jpeg', encoding: 'utf8'});
         }
     },
- 
+
     'gets a screenshot thumbnail request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {
@@ -227,7 +227,7 @@ vows.describe('Dry Run').addBatch({
           assert.deepEqual(info, {type: 'image/jpeg', encoding: 'utf8'});
         }
     },
- 
+
     'gets a screenshot in full resolution request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {
@@ -254,7 +254,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testStatusNotFound);
       }
     },
- 
+
     'gets an invalid test results request': {
       topic: function (wpt) {
         wpt.getTestResults('120816_V2_3', this.callback);
@@ -264,7 +264,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testResultsNotFound);
       }
     },
- 
+
     'gets an invalid test request': {
       topic: function (wpt) {
         wpt.runTest(undefined, this.callback);
@@ -274,7 +274,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTestInvalid);
       }
     },
- 
+
     'gets an invalid file request': {
       topic: function (wpt) {
         wpt.getPageSpeedData('120816_V2_3', this.callback);
@@ -285,7 +285,7 @@ vows.describe('Dry Run').addBatch({
         assert.equal(data, undefined);
       }
     },
- 
+
     'gets an invalid HAR data request': {
       topic: function (wpt) {
         wpt.getHARData('120816_V2_3', this.callback);
@@ -295,7 +295,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.harNotFound);
       }
     },
- 
+
     'gets an invalid waterfall image request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_3', {dataURI: true}, this.callback);
@@ -307,7 +307,7 @@ vows.describe('Dry Run').addBatch({
           assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
         }
     },
- 
+
     'gets an invalid waterfall thumbnail request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_3', {
@@ -322,7 +322,7 @@ vows.describe('Dry Run').addBatch({
           assert.deepEqual(info, {type: 'image/png', encoding: 'utf8'});
         }
     },
- 
+
     'gets an invalid screenshot thumbnail request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_3', {
@@ -336,7 +336,7 @@ vows.describe('Dry Run').addBatch({
         assert.equal(data, undefined);
       }
     },
- 
+
     'gets a cancel test of already cancelled test request': {
       topic: function (wpt) {
         wpt.cancelTest('120816_V2_3', this.callback);

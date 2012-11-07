@@ -17,7 +17,7 @@ var objects = {};
 fs.readdirSync(PATH_OBJECTS).forEach(function eachFile(file) {
   var content, name,
       ext = path.extname(file);
-  
+
   if (!reExtensions.test(ext)) {
     return;
   }

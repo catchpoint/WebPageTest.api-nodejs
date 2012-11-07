@@ -21,7 +21,7 @@ function mock(command) {
 
 vows.describe('Command Line').addBatch({
   'A WebPageTest Command Line': {
- 
+
     'gets a test status input': {
       topic: function() {
         exec(mock('status 120816_V2_2'), this.callback);
@@ -32,7 +32,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'testStatus.php?test=120816_V2_2');
       }
     },
- 
+
     'gets a test results input': {
       topic: function() {
         exec(mock('results 120816_V2_2'), this.callback);
@@ -43,7 +43,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2');
       }
     },
- 
+
     'gets the locations list input ': {
       topic: function() {
         exec(mock('locations'), this.callback);
@@ -54,7 +54,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getLocations.php');
       }
     },
- 
+
     'gets a simple test input ': {
       topic: function() {
         exec(mock('test http://foobar.com'), this.callback);
@@ -65,7 +65,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&f=json');
       }
     },
- 
+
     'gets a custom test input ': {
       topic: function() {
         exec(mock(
@@ -85,7 +85,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&label=test%20123&pngss=1&timeline=1&netlog=1&f=json');
       }
     },
- 
+
     'gets a script test input ': {
       topic: function() {
         var script = WebPageTest.scriptToString([
@@ -107,7 +107,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete&f=json');
       }
     },
- 
+
     'gets a script file test input ': {
       topic: function() {
         var filename = path.join(__dirname, './fixtures/script.txt');
@@ -120,7 +120,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete%0A&f=json');
       }
     },
- 
+
     'gets a cancel test input': {
       topic: function() {
         exec(mock('cancel 120816_V2_2'), this.callback);
@@ -131,7 +131,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'cancelTest.php?test=120816_V2_2');
       }
     },
- 
+
     'gets page speed data input ': {
       topic: function() {
         exec(mock('pagespeed 120816_V2_2'), this.callback);
@@ -142,7 +142,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_pagespeed.txt');
       }
     },
- 
+
     'gets HAR data input ': {
       topic: function() {
         exec(mock('har 120816_V2_2'), this.callback);
@@ -153,7 +153,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'export.php?test=120816_V2_2');
       }
     },
- 
+
     'gets utilization data input ': {
       topic: function() {
         exec(mock('utilization 120816_V2_2'), this.callback);
@@ -164,7 +164,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_progress.csv');
       }
     },
- 
+
     'gets request data input ': {
       topic: function() {
         exec(mock('request 120816_V2_2'), this.callback);
@@ -175,7 +175,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_IEWTR.txt');
       }
     },
- 
+
     'gets timeline data input ': {
       topic: function() {
         exec(mock('timeline 120816_V2_2'), this.callback);
@@ -186,7 +186,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_timeline.json');
       }
     },
- 
+
     'gets net log data input ': {
       topic: function() {
         exec(mock('netlog 120816_V2_2'), this.callback);
@@ -197,7 +197,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_netlog.txt');
       }
     },
- 
+
     'gets console log data input ': {
       topic: function() {
         exec(mock('console 120816_V2_2'), this.callback);
@@ -208,7 +208,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_console_log.json');
       }
     },
- 
+
     'gets a waterfall image input ': {
       topic: function() {
         exec(mock('waterfall 120816_V2_2'), this.callback);
@@ -219,7 +219,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0');
       }
     },
- 
+
     'gets a waterfall thumbnail input ': {
       topic: function() {
         exec(mock('waterfall 120816_V2_2 --thumbnail'), this.callback);
@@ -230,7 +230,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png');
       }
     },
- 
+
     'gets a screenshot input ': {
       topic: function() {
         exec(mock('screenshot 120816_V2_2'), this.callback);
@@ -241,7 +241,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.jpg');
       }
     },
- 
+
     'gets a screenshot thumbnail input ': {
       topic: function() {
         exec(mock('screenshot 120816_V2_2 --thumbnail'), this.callback);
@@ -252,7 +252,7 @@ vows.describe('Command Line').addBatch({
         assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0');
       }
     },
- 
+
     'gets a screenshot in full resolution input ': {
       topic: function() {
         exec(mock('screenshot 120816_V2_2 --full'), this.callback);

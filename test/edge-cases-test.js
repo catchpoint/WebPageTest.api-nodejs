@@ -28,7 +28,7 @@ vows.describe('Edge Cases').addBatch({
     }
 
   },
- 
+
   'An HTTP WebPageTest Server with API key': {
     topic: new WebPageTest(wptServer, '1234567890'),
 

@@ -146,7 +146,7 @@ $ webpagetest locations
 
 #### 2. Run test on http://twitter.com/marcelduran from San Jose on IE9
 ```bash
-$ webpagetest test http://twitter.com/marcelduran --key 1F2A3K4E5 --location SanJose_IE9 
+$ webpagetest test http://twitter.com/marcelduran --key 1F2A3K4E5 --location SanJose_IE9
 ```
 ```javascript
 {

@@ -78,7 +78,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testStatus);
       }
     },
- 
+
     'when gets a test results GET request': {
       topic: function (server) {
         get('/results/120816_V2_2', server, this.callback);
@@ -89,7 +89,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testResults);
       }
     },
- 
+
     'when gets the locations list GET request': {
       topic: function (server) {
         get('/locations', server, this.callback);
@@ -100,7 +100,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.locations);
       }
     },
- 
+
     'when gets a simple test GET request': {
       topic: function (server) {
         get('/test/' + encodeURIComponent('http://twitter.com/marcelduran'),
@@ -112,7 +112,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
- 
+
     'when gets a custom test GET request': {
       topic: function (server) {
         get(url.format({
@@ -135,7 +135,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
- 
+
     'when gets a script test GET request': {
       topic: function (server) {
         var script = wpt.scriptToString([
@@ -157,7 +157,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTest);
       }
     },
- 
+
     'when gets a cancel test GET request': {
       topic: function (server) {
         get('/cancel/120816_V2_2', server, this.callback);
@@ -168,7 +168,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.cancel);
       }
     },
- 
+
     'when gets page speed data GET request': {
       topic: function (server) {
         get('/pagespeed/120816_V2_2', server, this.callback);
@@ -179,7 +179,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.pageSpeed);
       }
     },
- 
+
     'when gets HAR data GET request': {
       topic: function (server) {
         get('/har/120816_V2_2', server, this.callback);
@@ -190,7 +190,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.har);
       }
     },
- 
+
     'when gets utilization data GET request': {
       topic: function (server) {
         get('/utilization/120816_V2_2', server, this.callback);
@@ -201,7 +201,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.utilization);
       }
     },
- 
+
     'when gets request data GET request': {
       topic: function (server) {
         get('/request/120816_V2_2', server, this.callback);
@@ -212,7 +212,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.request);
       }
     },
- 
+
     'when gets timeline data GET request': {
       topic: function (server) {
         get('/timeline/120816_V2_2', server, this.callback);
@@ -223,7 +223,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.timeline);
       }
     },
- 
+
     'when gets net log data GET request': {
       topic: function (server) {
         get('/netlog/120816_V2_2', server, this.callback);
@@ -234,7 +234,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.netLog);
       }
     },
- 
+
     'when gets console log data GET request': {
       topic: function (server) {
         get('/console/120816_V2_2', server, this.callback);
@@ -245,7 +245,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.consoleLog);
       }
     },
- 
+
     'when gets a waterfall image GET request': {
       topic: function (server) {
         get('/waterfall/120816_V2_2?uri=1', server, this.callback);
@@ -257,7 +257,7 @@ vows.describe('Dry Run').addBatch({
         assert.equal(data.type, 'image/png');
       }
     },
- 
+
     'when gets a waterfall thumbnail GET request': {
       topic: function (server) {
         get('/waterfall/120816_V2_2?uri=1&thumbnail=1', server, this.callback);
@@ -270,7 +270,7 @@ vows.describe('Dry Run').addBatch({
           assert.equal(data.type, 'image/png');
         }
     },
- 
+
     'when gets a screenshot GET request': {
       topic: function (server) {
         get('/screenshot/120816_V2_2?uri=1', server, this.callback);
@@ -282,7 +282,7 @@ vows.describe('Dry Run').addBatch({
         assert.equal(data.type, 'image/jpeg');
       }
     },
- 
+
     'when gets a screenshot thumbnail GET request': {
       topic: function (server) {
         get('/screenshot/120816_V2_2?uri=1&thumbnail=1', server, this.callback);
@@ -295,7 +295,7 @@ vows.describe('Dry Run').addBatch({
           assert.equal(data.type, 'image/jpeg');
         }
     },
- 
+
     'when gets a screenshot in full resolution GET request': {
       topic: function (server) {
         get('/screenshot/120816_V2_2?uri=1&full=1', server, this.callback);
@@ -321,7 +321,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testStatusNotFound);
       }
     },
- 
+
     'when gets an invalid test results GET request': {
       topic: function (server) {
         get('/results/120816_V2_3', server, this.callback);
@@ -332,7 +332,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.testResultsNotFound);
       }
     },
- 
+
     'when gets an invalid test GET request': {
       topic: function (server) {
         get('/test/', server, this.callback);
@@ -343,7 +343,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.runTestInvalid);
       }
     },
- 
+
     'when gets an invalid file GET request': {
       topic: function (server) {
         get('/pagespeed/120816_V2_3', server, this.callback);
@@ -353,7 +353,7 @@ vows.describe('Dry Run').addBatch({
         assert.equal(data, undefined);
       }
     },
- 
+
     'when gets an invalid HAR data GET request': {
       topic: function (server) {
         get('/har/120816_V2_3', server, this.callback);
@@ -364,7 +364,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.harNotFound);
       }
     },
- 
+
     'when gets an invalid waterfall image GET request': {
       topic: function (server) {
         get('/waterfall/120816_V2_3?uri=1', server, this.callback);
@@ -377,7 +377,7 @@ vows.describe('Dry Run').addBatch({
           assert.equal(data.type, 'image/png');
         }
     },
- 
+
     'when gets an invalid waterfall thumbnail GET request': {
       topic: function (server) {
         get('/waterfall/120816_V2_3?uri=1&thumbnail=1', server, this.callback);
@@ -390,7 +390,7 @@ vows.describe('Dry Run').addBatch({
           assert.equal(data.type, 'image/png');
         }
     },
- 
+
     'when gets an invalid screenshot thumbnail GET request': {
       topic: function (server) {
         get('/screenshot/120816_V2_3?uri=1&thumbnail=1', server, this.callback);
@@ -411,7 +411,7 @@ vows.describe('Dry Run').addBatch({
         assert.deepEqual(data, ResponseObjects.cancelNotCancelled);
       }
     },
- 
+
     'when gets a cancel test of an invalid test GET request': {
       topic: function (server) {
         get('/cancel/120816_V2_4', server, this.callback);
@@ -425,6 +425,6 @@ vows.describe('Dry Run').addBatch({
     teardown: function(listener) {
       listener.server.close();
     }
- 
+
   }
 }).export(module);
