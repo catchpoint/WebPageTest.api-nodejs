@@ -37,7 +37,7 @@ $ webpagetest --help
 * **status** _\<id\>_: check test status
 * **results** _\<id\>_: get test results
 * **locations**: list locations and the number of pending tests
-* **test** _[options] \<url_or_script\>_: run test
+* **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
 * **cancel** _\<id\>_: cancel running/pending test
 * **har** _\<id\>_: get the HTTPS Archive (HAR) from test
 * **pagespeed** _[options] \<id\>_: get the Google Page Speed results (if available) from test
@@ -248,26 +248,39 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 * `scriptToString(script)`
 
 ### Parameters
-* **id**: test ID string (_required_)
-* **options**: parameters object, see below (_optional_)
-* **callback**: the callback function(error, data) (_required_)
-* **url_or_script**: decoded url or script string (_required_)
-* **port**: port number \[default: 7791\] (_optional_)
-* **script**: script array in the form
+* **id**: test ID string \(_required_\)
+* **options**: parameters object, see below \(_optional_\)
+* **callback**: the callback function(error, data) \(_required_\)
+* **url_or_script**: decoded url or script string \(_required_\)
+* **port**: port number \[default: 7791\] \(_optional_\)
+* **script**: script array in the format:
 
 ```javascript
 [
-  {command1: 'value1', 'value2', ... , 'valueN'},
-  {command2: 'value1', 'value2', ... , 'valueN'},
+  {command1: 'value1'},
+  {command2: 123},
+  {command3: ['value1', 'value2', ... , 'valueN']},
   ...
-  {commandN: 'value1', 'value2', ... , 'valueN'}
+  'commandN'}
 ]
 ```
 
 #### Notes
 
 * `getWaterfallImage` and `getScreenshotImage` callback function has a third parameter `info` which is an object with `{type: 'image/jpeg or png', encoding: 'utf8 or binary'}`
-* `scriptToString` script array values 1-N are optional
+* `scriptToString` script array values 1-N are optional. e.g:
+```javascript
+var script = wpt.scriptToString([
+  {logData: 0},
+  {navigate: 'http://foo.com/login'},
+  {logData: 1},
+  {setValue: ['name=username', 'johndoe']},
+  {setValue: ['name=password', '12345']},
+  {submitForm: 'action=http://foo.com/main'},
+  'waitForComplete'
+]);
+wpt.runTest(script, function (err, data) {console.log(err || data);});
+```
 
 ### Options
 #### Common (works for all methods with `options` parameter)
