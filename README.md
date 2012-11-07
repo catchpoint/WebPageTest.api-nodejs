@@ -287,10 +287,10 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 * **connections**: _Number_, override the number of concurrent connections
 * **stopAtDocumentComplete**: _Boolean_, force the test to stop at window.onload
 * **sensitive**: _Boolean_, discard script and http headers in the result
-* **block**: _String_, space-delimited list of urls to block (substring match)
+* **block**: _[String]_, array of string of urls to block (substring match)
 * **login**: _String_, username for authenticating tests (http authentication)
 * **password**: _String_, password for authenticating tests (http authentication)
-* **authenticationType**: _String_, type of authentication: 0 = Basic, 1 = SNS [0]
+* **authenticationType**: _Number_, type of authentication: 0 = Basic, 1 = SNS [0]
 * **requestId**: _String_, echo request ID, useful to track asynchronous requests
 * **notifyEmail**: _String_, e-mail address to notify with the test results
 * **pingback**: _String_, URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
@@ -314,7 +314,7 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 * **aftRenderingTime**: _Boolean_, (experimental) measure above-the-fold rendering time
 * **timeline**: _Boolean_, capture Developer Tools Timeline (Chrome only)
 * **netLog**: _Boolean_, capture Network Log (Chrome only)
-* **spof**: _String_, space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+* **spof**: _[String]_, array of string of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
 
 #### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getWaterfallImage` and `getScreenshotImage` methods)
 * **run**: _Number_, the test run number for multiple runs tests (default: 1, first test)
