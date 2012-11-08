@@ -5,11 +5,10 @@
  * Released under the MIT License
  */
 
-var program = require('commander'),
-    fs      = require('fs');
-
-var WebPageTest = require('../lib/webpagetest'),
-    mapping = require('../lib/mapping');
+var program     = require('commander'),
+    fs          = require('fs'),
+    WebPageTest = require('../lib/webpagetest'),
+    mapping     = require('../lib/mapping');
 
 var command, wpt, file, ret,
     options = {},
@@ -104,7 +103,10 @@ addOptions(
 );
 
 Object.keys(mapping.commands).forEach(function eachCommand(name) {
-  var cmd = mapping.commands[name];
+  var param,
+      openParam = '<',
+      closeParam = '>',
+      cmd = mapping.commands[name];
 
   function defaultAction(param, opts) {
     command = cmd.name;
@@ -142,19 +144,20 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
     }
   };
 
+  // command with (optional) parameter 
+  if (cmd.param) {
+    if (cmd.optional) {
+      openParam = '[';
+      closeParam = ']';
+    }
+    param = [name, ' ', openParam, cmd.param, closeParam].join('');
+  } else {
+    param = name;
+  }
+
   addOptions(
     program
-      .command(
-        cmd.param ?
-        [
-          name,
-          ' ',
-          cmd.optional ? '[' : '<',
-          cmd.param,
-          cmd.optional ? ']' : '>',
-        ].join('') :
-        name
-      )
+      .command(param)
       .description(cmd.info)
       .action(customActions[name] || defaultAction),
     cmd.options
