@@ -3,16 +3,15 @@
  * Released under the MIT License
  */
 
-var vows   = require('vows'),
-    assert = require('assert'),
-    http   = require('http'),
-    url    = require('url'),
-    os     = require('os');
-
-var WebPageTest = require('../lib/webpagetest'),
-    NockServer = require('./helpers/nock-server'),
+var vows            = require('vows'),
+    assert          = require('assert'),
+    http            = require('http'),
+    url             = require('url'),
+    os              = require('os'),
+    WebPageTest     = require('../lib/webpagetest'),
+    NockServer      = require('./helpers/nock-server'),
     ResponseObjects = require('./helpers/response-objects'),
-    helper = require('../lib/helper');
+    helper          = require('../lib/helper');
 
 var wptNockServer = new NockServer('http://example.com'),
     wpt = new WebPageTest('example.com');

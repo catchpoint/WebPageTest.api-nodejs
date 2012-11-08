@@ -3,13 +3,12 @@
  * Released under the MIT License
  */
 
-var vows   = require('vows'),
-    assert = require('assert'),
-    path   = require('path'),
-    fs     = require('fs'),
-    exec   = require('child_process').exec;
-
-var WebPageTest = require('../lib/webpagetest');
+var vows        = require('vows'),
+    assert      = require('assert'),
+    path        = require('path'),
+    fs          = require('fs'),
+    exec        = require('child_process').exec,
+    WebPageTest = require('../lib/webpagetest');
 
 var wptServer = 'https://www.example.com:1234/foo/bar/',
     nodeCmd = process.argv[0],

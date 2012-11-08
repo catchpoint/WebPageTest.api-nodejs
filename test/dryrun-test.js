@@ -3,11 +3,11 @@
  * Released under the MIT License
  */
 
-var vows   = require('vows'),
-    assert = require('assert');
+var vows        = require('vows'),
+    assert      = require('assert'),
+    WebPageTest = require('../lib/webpagetest');
 
-var WebPageTest = require('../lib/webpagetest'),
-    wptServer = 'https://www.example.com:1234/foo/bar/';
+var wptServer = 'https://www.example.com:1234/foo/bar/';
 
 vows.describe('Dry Run').addBatch({
   'An Example WebPageTest Server': {
