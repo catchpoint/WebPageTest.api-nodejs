@@ -250,7 +250,7 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 ### Parameters
 * **id**: test ID string _required_
 * **options**: parameters object _optional_, see below
-* **callback**: the callback `function(error, data)` _required_
+* **callback**: the callback `function(error, data)` _optional_
 * **url_or_script**: decoded url or script string _required_
 * **port**: port number _optional_ \[default: 7791\]
 * **script**: script array in the format:
