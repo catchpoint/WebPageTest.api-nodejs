@@ -437,7 +437,7 @@
         info: 'get the fully loaded page screenshot in JPG format (PNG if in full resolution)'
       }
     },
-    hostname = 'http://webpagetest.nodester.com';
+    hostname = 'http://wpt.nodester.com';
 
   function getOptions() {
     var opts = {};
