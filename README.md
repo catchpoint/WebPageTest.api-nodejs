@@ -26,7 +26,7 @@ wpt.runTest('http://twitter.com/marcelduran', function (err, data) {
 });
 ```
 
-## Console API Demo
+## API Console Demo
 
 [marcelduran.com/webpagetest-api](http://marcelduran.com/webpagetest-api/console/)
 
