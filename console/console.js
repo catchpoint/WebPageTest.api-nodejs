@@ -687,7 +687,7 @@
       param = $('#param').val() || command.param;
     }
 
-    $('#output').text('loading...');
+    $('#output').text('running...');
     $('.nav-tabs a[href="#tab-output"]').click();
 
     run(name, param, getOptions(), function (image, data) {
