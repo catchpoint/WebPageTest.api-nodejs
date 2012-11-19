@@ -437,7 +437,7 @@
         info: 'get the fully loaded page screenshot in JPG format (PNG if in full resolution)'
       }
     },
-    hostname = 'http://wpt.nodester.com';
+    hostname = 'http://wpt.nodejitsu.com.jit.su';
 
   function getOptions() {
     var opts = {};
