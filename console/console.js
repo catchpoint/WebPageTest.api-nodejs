@@ -487,7 +487,7 @@
         stmt = [
           'var WebPageTest = require(\'webpagetest\');',
           '',
-          'var wpt = new WebPageTest(\'www.webpagetest.org\', \'API_key\');',
+          'var wpt = new WebPageTest(\'www.webpagetest.org\', \'your_API_key\');',
           '',
           'wpt.{method}({param}{options}function callback(err, data{info}) {',
           '  console.log(err || data);',
