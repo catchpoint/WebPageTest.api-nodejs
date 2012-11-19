@@ -469,6 +469,7 @@
         isImage = ['waterfall', 'screenshot'].indexOf(command) > -1;
 
     options = options || {};
+    isImage = isImage && !options.uri;
     if (!options.dryrun && isImage) {
       callback(true, url);
     } else {
