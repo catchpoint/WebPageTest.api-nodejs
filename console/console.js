@@ -475,9 +475,7 @@
       $.ajax({
         url: url,
         dataType: 'jsonp',
-        timeout: 2000,
-        success: callback.bind(null, false),
-        error: callback.bind(null, false, undefined)
+        success: callback.bind(null, false)
       });
     }
   }
