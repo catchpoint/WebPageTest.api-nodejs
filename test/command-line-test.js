@@ -273,9 +273,6 @@ vows.describe('Command Line').addBatch({
           path.join(__dirname, './fixtures/command-line-help.txt'), 'utf8');
         data = data.replace(/[\r\n\s]/g, '');
         output = output.replace(/[\r\n\s]/g, '');
-        console.log(data.length, output.length);
-        console.log('[' + data + ']');
-        console.log('[' + output + ']');
         assert.equal(data, output);
       }
     }
