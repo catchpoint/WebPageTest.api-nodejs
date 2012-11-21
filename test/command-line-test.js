@@ -269,8 +269,10 @@ vows.describe('Command Line').addBatch({
       },
       'then returns the help text': function(err, data) {
         if (err) throw err;
-        assert.equal(data, fs.readFileSync(
-          path.join(__dirname, './fixtures/command-line-help.txt'), 'utf8'));
+        var output = fs.readFileSync(
+          path.join(__dirname, './fixtures/command-line-help.txt'), 'utf8');
+        console.log(data.length, output.length);
+        assert.equal(data, output);
       }
     }
 
