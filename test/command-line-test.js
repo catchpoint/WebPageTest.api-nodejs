@@ -271,6 +271,8 @@ vows.describe('Command Line').addBatch({
         if (err) throw err;
         var output = fs.readFileSync(
           path.join(__dirname, './fixtures/command-line-help.txt'), 'utf8');
+        data = data.replace(/[\r\n\t]/g, '');
+        output = output.replace(/[\r\n\t]/g, '');
         console.log(data.length, output.length);
         console.log('[' + data + ']');
         console.log('[' + output + ']');
