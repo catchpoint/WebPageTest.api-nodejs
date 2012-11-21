@@ -28,7 +28,7 @@
   "bin": "bin/webpagetest",
 
   "scripts": {
-    "test": "vows test/*-test.js"
+    "test": "vows --spec test/*-test.js"
   },
 
   "engines": {
