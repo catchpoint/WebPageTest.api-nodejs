@@ -580,6 +580,9 @@
 
     if (command.param) {
       param = $('#param').val() || command.param;
+      if (name === 'test') {
+        param = encodeURIComponent(param);
+      }
     }
 
     opts = getOptions();
