@@ -437,7 +437,7 @@
         info: 'get the fully loaded page screenshot in JPG format (PNG if in full resolution)'
       }
     },
-    hostname = 'http://wpt.nodejitsu.com.jit.su';
+    hostname = 'http://wpt.rs.af.cm';
 
   function getOptions() {
     var opts = {};
