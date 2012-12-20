@@ -1,0 +1,11 @@
+{
+    "log": {
+        "version": "1.1",
+        "creator": {
+            "name": "WebPagetest",
+            "version": "1.8"
+        },
+        "pages": [],
+        "entries": []
+    }
+}
