@@ -77,6 +77,20 @@ vows.describe('Edge Cases').addBatch({
         if (err) throw err;
         assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&block=foo.com%20bar.com&spof=baz.com%20qux.com&f=json');
       }
+    },
+
+    'gets a test with dial up connectivity and location': {
+      topic: function (wpt) {
+        wpt.runTest('http://foobar.com', {
+          dryRun: true,
+          connectivity: 'Dial',
+          location: 'somelocation'
+        }, this.callback);
+      },
+      'then returns the API url with connectivity appended to location': function (err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&location=somelocation.Dial&connectivity=Dial&f=json');
+      }
     }
 
   }
