@@ -450,6 +450,6 @@ https://github.com/marcelduran/webpagetest-api/issues
 
 ## License
 
-Copyright 2012 Twitter, Inc. and other contributors
+Copyright 2013 Twitter, Inc. and other contributors
 
 Licensed under the [MIT License](http://github.com/marcelduran/webpagetest-api/raw/master/LICENSE)
