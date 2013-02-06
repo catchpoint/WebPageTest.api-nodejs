@@ -41,6 +41,7 @@ $ webpagetest --help
 * **status** _\<id\>_: check test status
 * **results** _\<id\>_: get test results
 * **locations**: list locations and the number of pending tests
+* **testers**: list testers status and details
 * **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
 * **cancel** _\<id\>_: cancel running/pending test
 * **har** _\<id\>_: get the HTTPS Archive (HAR) from test
@@ -50,6 +51,7 @@ $ webpagetest --help
 * **timeline** _[options] \<id\>_: get the Chrome Developer Tools Timeline data (if available) from test
 * **netlog** _[options] \<id\>_: get the Chrome Developer Tools Net log data (if available) from test
 * **console** _[options] \<id\>_: get the browser console log data (if available) from test
+* **testinfo** _\<id\>_: get test request info/details
 * **waterfall** _[options] \<id\>_: get the waterfall PNG image
 * **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
 * **listen** _[port]_: start webpagetest-api server on port [7791]
@@ -237,6 +239,7 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 * `getTestStatus(id, options, callback)`
 * `getTestResults(id, options, callback)`
 * `getLocations(options, callback)`
+* `getTesters(options, callback)`
 * `runTest(url_or_script, options, callback)`
 * `cancelTest(id, options, callback)`
 * `getHARData(id, options, callback)`
@@ -246,6 +249,7 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 * `getTimelineData(id, options, callback)`
 * `getNetLogData(id, options, callback)`
 * `getConsoleLogData(id, options, callback)`
+* `getTestInfo(id, options, callback)`
 * `getWaterfallImage(id, options, callback)`
 * `getScreenshotImage(id, options, callback)`
 * `listen(port, callback)`
@@ -415,7 +419,7 @@ http://localhost:8080
 ```
 ```bash
 $ curl http://localhost:8080/help
-$ curl http://localhost:8080/test/twitter.com/?locations=SanJose_IE9
+$ curl http://localhost:8080/test/twitter.com/?location=SanJose_IE9
 ```
 
 #### Notes
