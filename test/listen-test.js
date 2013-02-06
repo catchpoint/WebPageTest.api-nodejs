@@ -245,6 +245,17 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'when gets test info GET request': {
+      topic: function (server) {
+        get('/testinfo/120816_V2_2', server, this.callback);
+      },
+      'returns the test info JSON': function (err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.testInfo);
+      }
+    },
+
     'when gets a waterfall image GET request': {
       topic: function (server) {
         get('/waterfall/120816_V2_2?uri=1', server, this.callback);

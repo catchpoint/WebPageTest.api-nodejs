@@ -173,6 +173,16 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'gets test info request': {
+      topic: function (wpt) {
+        wpt.getTestInfo('120816_V2_2', {dryRun: true}, this.callback);
+      },
+      'then returns the API url': function (err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=testinfo.json');
+      }
+    },
+
     'gets a waterfall image request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {dryRun: true}, this.callback);

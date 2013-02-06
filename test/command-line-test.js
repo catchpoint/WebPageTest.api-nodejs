@@ -208,6 +208,17 @@ vows.describe('Command Line').addBatch({
       }
     },
 
+    'gets test info input ': {
+      topic: function() {
+        exec(mock('testinfo 120816_V2_2'), this.callback);
+      },
+      'then returns the API url': function(err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=testinfo.json');
+      }
+    },
+
     'gets a waterfall image input ': {
       topic: function() {
         exec(mock('waterfall 120816_V2_2'), this.callback);

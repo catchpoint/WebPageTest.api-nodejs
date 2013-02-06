@@ -175,6 +175,16 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'gets test info request': {
+      topic: function (wpt) {
+        wpt.getTestInfo('120816_V2_2', this.callback);
+      },
+      'returns the test info object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.testInfo);
+      }
+    },
+
     'gets a waterfall image request': {
       topic: function (wpt) {
         wpt.getWaterfallImage('120816_V2_2', {dataURI: true}, this.callback);
