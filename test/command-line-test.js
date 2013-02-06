@@ -54,6 +54,17 @@ vows.describe('Command Line').addBatch({
       }
     },
 
+    'gets the testers list input ': {
+      topic: function() {
+        exec(mock('testers'), this.callback);
+      },
+      'then returns the API url': function(err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.equal(data.url, wptServer + 'getTesters.php');
+      }
+    },
+
     'gets a simple test input ': {
       topic: function() {
         exec(mock('test http://foobar.com'), this.callback);

@@ -40,9 +40,19 @@ vows.describe('Dry Run').addBatch({
       topic: function (wpt) {
         wpt.getLocations(this.callback);
       },
-      'returns the location list object': function (err, data) {
+      'returns the locations list object': function (err, data) {
         if (err) throw err;
         assert.deepEqual(data, ResponseObjects.locations);
+      }
+    },
+
+    'gets the testers list request': {
+      topic: function (wpt) {
+        wpt.getTesters(this.callback);
+      },
+      'returns the testers list object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.testers);
       }
     },
 

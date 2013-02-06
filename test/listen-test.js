@@ -93,10 +93,21 @@ vows.describe('Dry Run').addBatch({
       topic: function (server) {
         get('/locations', server, this.callback);
       },
-      'returns the location list JSON': function (err, data) {
+      'returns the locations list JSON': function (err, data) {
         if (err) throw err;
         data = JSON.parse(data);
         assert.deepEqual(data, ResponseObjects.locations);
+      }
+    },
+
+    'when gets the testers list GET request': {
+      topic: function (server) {
+        get('/testers', server, this.callback);
+      },
+      'returns the testers list JSON': function (err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.testers);
       }
     },
 

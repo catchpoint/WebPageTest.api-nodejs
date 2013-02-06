@@ -43,6 +43,16 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'gets the testers list request': {
+      topic: function (wpt) {
+        wpt.getTesters({dryRun: true}, this.callback);
+      },
+      'then returns the API url': function (err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'getTesters.php');
+      }
+    },
+
     'gets a simple test request': {
       topic: function (wpt) {
         wpt.runTest('http://foobar.com', {dryRun: true}, this.callback);

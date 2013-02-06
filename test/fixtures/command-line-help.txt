@@ -12,6 +12,9 @@
     locations 
     list locations and the number of pending tests
     
+    testers 
+    list testers status and details
+    
     test [options] <url_or_script>
     run test
     
