@@ -1,11 +1,11 @@
 {
  "name": "wpt",
- "version": "0.0.1",
+ "version": "0.0.2",
  "scripts": {
   "start": "node app.js"
  },
  "dependencies": {
-  "webpagetest": "0.0.1"
+  "webpagetest": "0.0.2"
  },
  "engines": {
   "node": ">=0.8.1"

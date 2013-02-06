@@ -1,12 +1,12 @@
 {
   "name": "wpt",
-  "version": "0.0.1-1",
+  "version": "0.0.2",
   "dependencies": {
     "webpagetest": {
-      "version": "0.0.1",
+      "version": "0.0.2",
       "dependencies": {
         "jsonml": {
-          "version": "0.0.3",
+          "version": "0.0.4",
           "dependencies": {
             "node-expat": {
               "version": "2.0.0"
@@ -14,7 +14,7 @@
           }
         },
         "commander": {
-          "version": "1.1.0",
+          "version": "1.0.5",
           "dependencies": {
             "keypress": {
               "version": "0.1.0"
