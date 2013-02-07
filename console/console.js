@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012, Twitter Inc. and other contributors
+ * Copyright (c) 2013, Twitter Inc. and other contributors
  * Released under the MIT License
  */
 
@@ -372,6 +372,10 @@
         name: 'getLocations',
         info: 'list locations and the number of pending tests'
       },
+      'testers': {
+        name: 'getTesters',
+        info: 'list testers status and details'
+      },
       'test': {
         name: 'runTest',
         param: 'url_or_script',
@@ -423,6 +427,11 @@
         param: 'id',
         options: ['run'],
         info: 'get the browser console log data (if available) from test'
+      },
+      'testinfo': {
+        name: 'getTestInfo',
+        param: 'id',
+        info: 'get test request info/details'
       },
       'waterfall': {
         name: 'getWaterfallImage',
