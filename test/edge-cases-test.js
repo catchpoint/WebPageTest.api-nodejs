@@ -5,7 +5,8 @@
 
 var vows        = require('vows'),
     assert      = require('assert'),
-    WebPageTest = require('../lib/webpagetest');
+    WebPageTest = require('../lib/webpagetest'),
+    packageJson = require('../package.json');
 
 var wptServer = 'https://www.example.com:1234/foo/bar/';
 
@@ -90,6 +91,15 @@ vows.describe('Edge Cases').addBatch({
       'then returns the API url with connectivity appended to location': function (err, data) {
         if (err) throw err;
         assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&location=somelocation.Dial&connectivity=Dial&f=json');
+      }
+    },
+
+    'get current version': {
+      topic: function (wpt) {
+        return wpt.version;
+      },
+      'then compares to package.json version': function (version) {
+        assert.equal(version, packageJson.version);
       }
     }
 
