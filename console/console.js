@@ -446,7 +446,7 @@
         info: 'get the fully loaded page screenshot in JPG format (PNG if in full resolution)'
       }
     },
-    hostname = 'http://wpt.rs.af.cm';
+    hostname = 'http://webpagetest.aws.af.cm';
 
   function getOptions() {
     var opts = {};
