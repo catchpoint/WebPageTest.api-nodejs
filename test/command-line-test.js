@@ -43,6 +43,18 @@ vows.describe('Command Line').addBatch({
       }
     },
 
+    'gets a test results for multi runs with custom median metric input': {
+      topic: function() {
+        exec(mock('results 120816_V2_2 -m TTFB'), this.callback);
+      },
+      'then returns the API url': function(err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.equal(data.url, wptServer +
+          'xmlResult.php?test=120816_V2_2&medianMetric=TTFB');
+      }
+    },
+
     'gets the locations list input ': {
       topic: function() {
         exec(mock('locations'), this.callback);

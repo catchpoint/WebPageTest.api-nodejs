@@ -33,6 +33,20 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'gets a test results for multi runs with custom median metric request': {
+      topic: function (wpt) {
+        wpt.getTestResults('120816_V2_2', {
+          dryRun: true,
+          medianMetric: 'TTFB'
+        }, this.callback);
+      },
+      'then returns the API url': function (err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer +
+          'xmlResult.php?test=120816_V2_2&medianMetric=TTFB');
+      }
+    },
+
     'gets the locations list request': {
       topic: function (wpt) {
         wpt.getLocations({dryRun: true}, this.callback);

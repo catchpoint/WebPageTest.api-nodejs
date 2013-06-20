@@ -89,6 +89,28 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'when gets a test results for multi runs with default median metric GET request': {
+      topic: function (server) {
+        get('/results/130619_KK_6A2', server, this.callback);
+      },
+      'returns the test results JSON': function (err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.testResultsMultiRunsDefaultMedianMetric);
+      }
+    },
+
+    'when gets a test results for multi runs with custom median metric GET request': {
+      topic: function (server) {
+        get('/results/130619_KK_6A2?median=TTFB', server, this.callback);
+      },
+      'returns the test results JSON': function (err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.testResultsMultiRunsTTFBMedianMetric);
+      }
+    },
+
     'when gets the locations list GET request': {
       topic: function (server) {
         get('/locations', server, this.callback);

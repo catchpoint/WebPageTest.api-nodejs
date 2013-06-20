@@ -36,6 +36,26 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'gets a test results for multi runs with default median metric request': {
+      topic: function (wpt) {
+        wpt.getTestResults('130619_KK_6A2', this.callback);
+      },
+      'returns the test results object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.testResultsMultiRunsDefaultMedianMetric);
+      }
+    },
+
+    'gets a test results for multi runs with custom median metric request': {
+      topic: function (wpt) {
+        wpt.getTestResults('130619_KK_6A2', {medianMetric: 'TTFB'}, this.callback);
+      },
+      'returns the test results object': function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.testResultsMultiRunsTTFBMedianMetric);
+      }
+    },
+
     'gets the locations list request': {
       topic: function (wpt) {
         wpt.getLocations(this.callback);

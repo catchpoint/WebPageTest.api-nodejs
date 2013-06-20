@@ -6,7 +6,7 @@
     status <id>
     check test status
     
-    results <id>
+    results [options] <id>
     get test results
     
     locations 

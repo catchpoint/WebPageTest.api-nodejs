@@ -32,6 +32,10 @@ var reqResMap = {
   '/cancelTest.php?test=120816_V2_2': 'cancel.html',
   '/cancelTest.php?test=120816_V2_3': 'cancelNotCancelled.html',
 
+  // test results for multi runs with/without custom median metric
+  '/xmlResult.php?test=130619_KK_6A2': 'testResultsMultiRunsDefaultMedianMetric.xml',
+  '/xmlResult.php?test=130619_KK_6A2&medianMetric=TTFB': 'testResultsMultiRunsTTFBMedianMetric.xml',
+
   // not found / invalid
   '/testStatus.php?test=120816_V2_3': 'testStatusNotFound.json',
   '/xmlResult.php?test=120816_V2_3': 'testResultsNotFound.xml',
@@ -56,7 +60,6 @@ var typeMap = {
   'jpg': 'image/jpeg',
   'html': 'text/html'
 };
-
 
 function WebPageTestMockServer(host) {
   var server;
