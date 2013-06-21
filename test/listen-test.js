@@ -59,7 +59,6 @@ vows.describe('Dry Run').addBatch({
       var hostname = os.hostname(),
           port = WebPageTest.defaultListenPort;
 
-      console.log(data.url);
       assert.equal(data.protocol, 'http');
       assert.equal(data.hostname, hostname);
       assert.equal(data.port, port);
