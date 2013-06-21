@@ -24,6 +24,7 @@ function get(pathname, server, callback) {
         port: server.port
       };
 
+  options.host = '127.0.0.1';
   http.get(options, function getResponse(res) {
     var data = '',
         type = (res.headers['content-type'] || '').split(';'),
