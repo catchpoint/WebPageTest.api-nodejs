@@ -107,6 +107,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-G, --netlog**: capture Network Log (Chrome only)
 * **-Z, --spof** _\<domains\>_: space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
 
+#### Results (works for **results** only)
+* **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
+
 #### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **waterfall** and **screenshot** commands)
 * **-r, --run** _\<number\>_: which run number on a multiple runs test [1]
 * **-c, --cached**: get the Repeat View (cached view) instead of default First View (primed cache)
@@ -337,6 +340,9 @@ wpt.runTest(script, function (err, data) {console.log(err || data);});
 * **timeline**: _Boolean_, capture Developer Tools Timeline (Chrome only)
 * **netLog**: _Boolean_, capture Network Log (Chrome only)
 * **spof**: _[String]_, array of string of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+
+#### Results (works for **getResults** only)
+* **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
 
 #### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getWaterfallImage` and `getScreenshotImage` methods)
 * **run**: _Number_, the test run number for multiple runs tests (default: 1, first test)
