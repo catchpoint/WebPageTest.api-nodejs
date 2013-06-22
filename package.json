@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "jsonml": "~0.0.4",
-    "commander": "~1.0.1"
+    "commander": "~1.2.0"
   },
   "devDependencies": {
     "vows": "~0.7.0",
