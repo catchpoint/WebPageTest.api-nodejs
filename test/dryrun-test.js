@@ -238,10 +238,10 @@ vows.describe('Dry Run').addBatch({
           chartWidth: 640,
           maxTime: 9,
           requests: '1,2,4,6-8',
-          hideCPU: true,
-          hideBandwidth: true,
-          hideEllipsis: true,
-          hideLabels: true,
+          noCPU: true,
+          noBandwidth: true,
+          noEllipsis: true,
+          noLabels: true,
           dryRun: true
         }, this.callback);
       },
