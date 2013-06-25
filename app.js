@@ -1,3 +1,3 @@
 var WebPageTest = require('webpagetest');
 var wpt = new WebPageTest();
-wpt.listen(3000);
+wpt.listen(process.env.VCAP_APP_PORT || 3000);
