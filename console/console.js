@@ -285,6 +285,21 @@
           bool: true,
           info: '(experimental) measure above-the-fold rendering time'
         },
+        'spof': {
+          name: 'spof',
+          key: 'Z',
+          api: 'spof',
+          param: 'domains',
+          array: true,
+          info: 'space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests'
+        },
+        'mobile': {
+          name: 'emulateMobile',
+          key: 'W',
+          api: 'mobile',
+          bool: true,
+          info: '(experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)'
+        },
         'timeline': {
           name: 'timeline',
           key: 'M',
@@ -299,13 +314,26 @@
           bool: true,
           info: 'capture Network Log (Chrome only)'
         },
-        'spof': {
-          name: 'spof',
-          key: 'Z',
-          api: 'spof',
-          param: 'domains',
-          array: true,
-          info: 'space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests'
+        'spdy3': {
+          name: 'forceSpdy3',
+          key: 'C',
+          api: 'spdy3',
+          bool: true,
+          info: 'force SPDY version 3 (Chrome only)'
+        },
+        'swrender': {
+          name: 'forceSoftwareRendering',
+          key: 'J',
+          api: 'swrender',
+          bool: true,
+          info: 'force software rendering, disable GPU acceleration (Chrome only)'
+        },
+        'noparser': {
+          name: 'disableThreadedParser',
+          key: 'Q',
+          api: 'disableThreadedParser',
+          bool: true,
+          info: 'disable threaded HTML parser (Chrome only)'
         }
       },
       run: {
@@ -355,6 +383,82 @@
           bool: true,
           info: 'get the page screenshot at the Document Complete point (i.e.: when window.onload was fired)'
         }
+      },
+      results: {
+        'median': {
+          name: 'medianMetric',
+          key: 'm',
+          param: 'metric',
+          info: 'set the metric used to calculate median for multiple runs tests [loadtTime]'
+        }
+      },
+      waterfall: {
+        'type': {
+          name: 'chartType',
+          api: 'type',
+          key: 'T',
+          param: 'chart',
+          info: 'set the chart type: waterfall or connection [waterfall]'
+        },
+        'mime': {
+          name: 'colorByMime',
+          api: 'mime',
+          key: 'M',
+          bool: true,
+          info: 'set chart coloring by MIME type [false]'
+        },
+        'width': {
+          name: 'chartWidth',
+          api: 'width',
+          key: 'w',
+          param: 'px',
+          info: 'chart image width in px (300-2000) [930]'
+        },
+        'max': {
+          name: 'maxTime',
+          api: 'max',
+          key: 'm',
+          param: 'seconds',
+          info: 'set maximum time in seconds [automatic]'
+        },
+        'requests': {
+          name: 'requests',
+          key: 'R',
+          param: 'items',
+          info: 'filter requests (e.g.:1,2,3,4-9,8) [all]'
+        },
+        'nocpu': {
+          name: 'noCPU',
+          api: 'cpu',
+          key: 'C',
+          bool: true,
+          invert: true,
+          info: 'hide CPU utilization [false]'
+        },
+        'nobandwidth': {
+          name: 'noBandwidth',
+          api: 'bw',
+          key: 'b',
+          bool: true,
+          invert: true,
+          info: 'hide bandwidth utilization [false]'
+        },
+        'noellipsis': {
+          name: 'noEllipsis',
+          api: 'dots',
+          key: 'e',
+          bool: true,
+          invert: true,
+          info: 'hide ellipsis (...) for missing items [false]'
+        },
+        'nolabels': {
+          name: 'noLabels',
+          api: 'labels',
+          key: 'l',
+          bool: true,
+          invert: true,
+          info: 'hide labels for requests (URL) [false]'
+        }
       }
     },
     commands = {
@@ -366,6 +470,7 @@
       'results': {
         name: 'getTestResults',
         param: 'id',
+        options: ['results'],
         info: 'get test results'
       },
       'locations': {
@@ -436,7 +541,7 @@
       'waterfall': {
         name: 'getWaterfallImage',
         param: 'id',
-        options: ['run', 'image'],
+        options: ['run', 'image', 'waterfall'],
         info: 'get the waterfall PNG image'
       },
       'screenshot': {
