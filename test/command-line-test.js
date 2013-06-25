@@ -18,7 +18,14 @@ function mock(command) {
   return nodeCmd + ' ' + executable + ' -s ' + wptServer +  ' -d ' + command;
 }
 
-vows.describe('Command Line').addBatch({
+function getHelp(command) {
+  command = command ? '-' + command : '';
+
+  return fs.readFileSync(path.join(__dirname, './fixtures/command-line/help' +
+    command + '.txt'), 'utf8');
+}
+
+var batch = {
   'A WebPageTest Command Line': {
 
     'gets a test status input': {
@@ -306,21 +313,30 @@ vows.describe('Command Line').addBatch({
         data = JSON.parse(data);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
       }
-    },
-
-    'gets a help input ': {
-      topic: function() {
-        exec(mock('--help'), this.callback);
-      },
-      'then returns the help text': function(err, data) {
-        if (err) throw err;
-        var output = fs.readFileSync(
-          path.join(__dirname, './fixtures/command-line-help.txt'), 'utf8');
-        data = data.replace(/[\r\n\s]/g, '');
-        output = output.replace(/[\r\n\s]/g, '');
-        assert.equal(data, output);
-      }
     }
 
   }
-}).export(module);
+};
+
+// loop all commands help
+[
+  '', 'status', 'results', 'locations', 'testers', 'test', 'cancel', 'har',
+  'pagespeed', 'utilization', 'request', 'timeline', 'netlog', 'console',
+  'testinfo', 'waterfall', 'screenshot', 'listen'
+].forEach(function eachCmd(command) {
+  batch['A WebPageTest Command Line']
+    ['gets a ' + command + ' help input'] = {
+      topic: function() {
+        exec(mock(command + ' --help'), this.callback);
+      },
+      'then returns the help text': function(err, data) {
+        if (err) throw err;
+        data = data.replace(/[\r\n\s]/g, '');
+        var output = getHelp(command);
+        output = output.replace(/[\r\n\s]/g, '');
+        assert.equal(data, output);
+      }
+    };
+});
+
+vows.describe('Command Line').addBatch(batch).export(module);

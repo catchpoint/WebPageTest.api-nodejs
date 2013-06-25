@@ -1,0 +1,8 @@
+
+  Usage: results [options] <id>
+
+  Options:
+
+    -h, --help             output usage information
+    -m, --median <metric>  set the metric used to calculate median for multiple runs tests [loadtTime]
+

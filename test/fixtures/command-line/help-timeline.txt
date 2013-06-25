@@ -1,0 +1,9 @@
+
+  Usage: timeline [options] <id>
+
+  Options:
+
+    -h, --help          output usage information
+    -r, --run <number>  which run number on a multiple runs test [1]
+    -c, --cached        get the Repeat View (cached view) instead of default First View (primed cache)
+

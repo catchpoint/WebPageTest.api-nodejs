@@ -1,0 +1,7 @@
+
+  Usage: cancel [options] <id>
+
+  Options:
+
+    -h, --help  output usage information
+

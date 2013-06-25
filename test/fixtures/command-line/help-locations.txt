@@ -1,0 +1,7 @@
+
+  Usage: locations [options]
+
+  Options:
+
+    -h, --help  output usage information
+

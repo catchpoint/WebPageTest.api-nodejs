@@ -1,0 +1,7 @@
+
+  Usage: status [options] <id>
+
+  Options:
+
+    -h, --help  output usage information
+

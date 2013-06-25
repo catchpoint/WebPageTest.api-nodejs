@@ -1,0 +1,14 @@
+
+  Usage: screenshot [options] <id>
+
+  Options:
+
+    -h, --help          output usage information
+    -r, --run <number>  which run number on a multiple runs test [1]
+    -c, --cached        get the Repeat View (cached view) instead of default First View (primed cache)
+    -t, --thumbnail     get the thumbnail of actual image
+    -u, --uri           return the base64 string representation (inline) of actual image
+    -f, --full          get full resolution screenshot in PNG format if available
+    -n, --render        get the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)
+    -p, --complete      get the page screenshot at the Document Complete point (i.e.: when window.onload was fired)
+

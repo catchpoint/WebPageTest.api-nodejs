@@ -1,0 +1,7 @@
+
+  Usage: testinfo [options] <id>
+
+  Options:
+
+    -h, --help  output usage information
+
