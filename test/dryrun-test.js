@@ -230,6 +230,27 @@ vows.describe('Dry Run').addBatch({
       }
     },
 
+    'gets a customized waterfall image request': {
+      topic: function (wpt) {
+        wpt.getWaterfallImage('120816_V2_2', {
+          chartType: 'connection',
+          colorByMime: true,
+          chartWidth: 640,
+          maxTime: 9,
+          requests: '1,2,4,6-8',
+          hideCPU: true,
+          hideBandwidth: true,
+          hideEllipsis: true,
+          hideLabels: true,
+          dryRun: true
+        }, this.callback);
+      },
+      'then returns the API url': function (err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0&type=connection&mime=1&width=640&max=9&requests=1%2C2%2C4%2C6-8&cpu=0&bw=0&dots=0&labels=0');
+      }
+    },
+
     'gets a screenshot request': {
       topic: function (wpt) {
         wpt.getScreenshotImage('120816_V2_2', {dryRun: true}, this.callback);

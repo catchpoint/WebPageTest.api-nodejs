@@ -264,6 +264,17 @@ vows.describe('Command Line').addBatch({
       }
     },
 
+    'gets a customized waterfall image input ': {
+      topic: function() {
+        exec(mock('waterfall 120816_V2_2 --type connection --mime --width 640 --max 9 --requests 1,2,4,6-8 --nocpu --nobandwidth --noellipsis --nolabels'), this.callback);
+      },
+      'then returns the API url': function(err, data) {
+        if (err) throw err;
+        data = JSON.parse(data);
+        assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0&type=connection&mime=1&width=640&max=9&requests=1%2C2%2C4%2C6-8&cpu=0&bw=0&dots=0&labels=0');
+      }
+    },
+
     'gets a screenshot input ': {
       topic: function() {
         exec(mock('screenshot 120816_V2_2'), this.callback);
