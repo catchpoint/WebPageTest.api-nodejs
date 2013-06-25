@@ -103,9 +103,13 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-N, --duration** _\<seconds\>_: minimum test duration in seconds
 * **-A, --noads**: block ads defined by adblockrules.org
 * **-E, --aft**: (experimental) measure above-the-fold rendering time
+* **-Z, --spof** _\<domains\>_: space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+* **-W, --mobile**: (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
 * **-M, --timeline**: capture Developer Tools Timeline (Chrome only)
 * **-G, --netlog**: capture Network Log (Chrome only)
-* **-Z, --spof** _\<domains\>_: space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+* **-C, --spdy3**: force SPDY version 3 (Chrome only)
+* **-J, --swrender**: force software rendering, disable GPU acceleration (Chrome only)
+* **-Q, --noparser**: disable threaded HTML parser (Chrome only)
 
 #### Results (works for **results** only)
 * **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
@@ -122,6 +126,17 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-f, --full**: get full resolution screenshot in PNG format if available
 * **-n, --render**: get the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)
 * **-p, --complete**: get the page screenshot at the Document Complete point (i.e.: when window.onload was fired)
+
+#### Waterfall (works for **waterfall** command only)
+* **-T, --type** _\<chart\>_: set the chart type: waterfall or connection [waterfall]
+* **-M, --mime**: set chart coloring by MIME type [false]
+* **-w, --width** _\<px\>_: chart image width in px (300-2000) [930]
+* **-m, --max** _\<seconds\>_: set maximum time in seconds [automatic]
+* **-R, --requests** _\<items\>_: filter requests (e.g.:1,2,3,4-9,8) [all]
+* **-C, --nocpu**: hide CPU utilization [false]
+* **-b, --nobandwidth**: hide bandwidth utilization [false]
+* **-e, --noellipsis**: hide ellipsis (...) for missing items [false]
+* **-l, --nolabels**: hide labels for requests (URL) [false]
 
 ### Examples
 #### 1. Get available locations
@@ -337,9 +352,13 @@ wpt.runTest(script, function (err, data) {console.log(err || data);});
 * **minimumDuration**: _String_, minimum test duration in seconds
 * **blockAds**: _Boolean_, block ads defined by adblockrules.org
 * **aftRenderingTime**: _Boolean_, (experimental) measure above-the-fold rendering time
+* **spof**: _[String]_, array of string of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+* **emulateMobile**: _Boolean_, (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
 * **timeline**: _Boolean_, capture Developer Tools Timeline (Chrome only)
 * **netLog**: _Boolean_, capture Network Log (Chrome only)
-* **spof**: _[String]_, array of string of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+* **forceSpdy3**: _Boolean_, force SPDY version 3 (Chrome only)
+* **forceSoftwareRendering**: _Boolean_, force software rendering, disable GPU acceleration (Chrome only)
+* **disableThreadedParser**: _Boolean_, disable threaded HTML parser (Chrome only)
 
 #### Results (works for **getResults** only)
 * **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
@@ -356,6 +375,17 @@ wpt.runTest(script, function (err, data) {console.log(err || data);});
 * **fullResolution**: _Boolean_, returns the full resolution screenshot in PNG format if available
 * **startRender**: _Boolean_, returns the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)
 * **documentComplete**: _Boolean_, returns the page screenshot at the Document Complete point (i.e.: when `window.onload` was fired)
+
+#### Waterfall (works for `getWaterfallImage` method only)
+* **chartType**: _String_, set the chart type: waterfall or connection [waterfall]
+* **colorByMime**: _Boolean_, set chart coloring by MIME type [false]
+* **chartWidth** _Number_: chart image width in px (300-2000) [930]
+* **maxTime** _Number_: set maximum time in seconds [automatic]
+* **requests** _String_: filter requests (e.g.:1,2,3,4-9,8) [all]
+* **noCPU**: _Boolean_, hide CPU utilization [false]
+* **noBandwidth**: _Boolean_, hide bandwidth utilization [false]
+* **noEllipsis**: _Boolean_, hide ellipsis (...) for missing items [false]
+* **noLabels**: _Boolean_, hide labels for requests (URL) [false]
 
 ### Examples
 
@@ -445,6 +475,12 @@ setTimeout(function() {
   });
 }, 10000); // wait for 10s before stop listening
 ```
+
+## Changelog
+
+* 0.0.3: Custom test results median metric; Custom waterfall; new Chrome test options
+* 0.0.2: Minor bugs; 2 new commands: testers and testinfo
+* 0.0.1: Initial release
 
 ## Issues
 
