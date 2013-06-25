@@ -1,0 +1,32 @@
+{
+  "name": "wpt",
+  "version": "0.0.3",
+  "dependencies": {
+    "webpagetest": {
+      "version": "0.0.3",
+      "from": "webpagetest@0.0.3",
+      "dependencies": {
+        "jsonml": {
+          "version": "0.0.4",
+          "from": "jsonml@~0.0.4",
+          "dependencies": {
+            "node-expat": {
+              "version": "2.0.0",
+              "from": "node-expat@~2.0.0"
+            }
+          }
+        },
+        "commander": {
+          "version": "1.2.0",
+          "from": "commander@~1.2.0",
+          "dependencies": {
+            "keypress": {
+              "version": "0.1.0",
+              "from": "keypress@0.1.x"
+            }
+          }
+        }
+      }
+    }
+  }
+}
