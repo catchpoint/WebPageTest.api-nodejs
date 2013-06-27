@@ -72,17 +72,24 @@ var formatData = function (err, data, info) {
 function addOptions(prg, options) {
   (options || []).forEach(function eachOption(option) {
     Object.keys(option).forEach(function eachOpt(name) {
-      var opt = option[name];
+      var opt = option[name],
+          openParam = '<',
+          closeParam = '>';
 
       // bail shorthands
       if (name == opt.key) {
         return;
       }
 
+      if (opt.optional) {
+        openParam = '[';
+        closeParam = ']';
+      }
+
       prg.option([
-          '-', opt.key, ', --',
-          name,
-          opt.param ? (' <' + opt.param + '>') : ''
+          opt.key ? ('-' + opt.key + ', ') : '    ',
+          '--' + name,
+          opt.param ? (' ' + openParam + opt.param + closeParam) : ''
         ].join(''),
         name === 'server' ? opt.info.replace('%s', defaultServer) : opt.info
       );
@@ -134,11 +141,7 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
         if (err) {
           output(JSON.stringify({error: err}, null, 2), 1);
         } else {
-          process.stderr.write([
-            'server listening on port ' + data.port,
-            data.url,
-            ''
-          ].join('\n'));
+          process.stderr.write('server listening on ' + data.url);
         }
       };
     }
