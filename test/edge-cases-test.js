@@ -5,7 +5,9 @@
 
 var vows        = require('vows'),
     assert      = require('assert'),
+    os          = require('os'),
     WebPageTest = require('../lib/webpagetest'),
+    helper      = require('../lib/helper'),
     packageJson = require('../package.json');
 
 var wptServer = 'https://www.example.com:1234/foo/bar/';
@@ -102,6 +104,137 @@ vows.describe('Edge Cases').addBatch({
         assert.equal(version, packageJson.version);
       }
     }
+
+  },
+
+  'WebPageTest localhost helper': {
+    topic: helper,
+
+    'when getting a valid hostname with port': {
+      topic: function(helper) {
+        return helper.localhost('localhost:8000', 3000);
+      },
+      'returns a localhost object with hostname and port': function(localhost) {
+        assert.equal(localhost.hostname, 'localhost');
+        assert.equal(localhost.port, 8000);
+      }
+    },
+
+    'when getting a valid hostname only': {
+      topic: function(helper) {
+        return helper.localhost('localhost', 3000);
+      },
+      'returns a localhost object with hostname and default port': function(localhost) {
+        assert.equal(localhost.hostname, 'localhost');
+        assert.equal(localhost.port, 3000);
+      }
+    },
+
+    'when getting a valid port only': {
+      topic: function(helper) {
+        return helper.localhost('8000', 3000);
+      },
+      'returns a localhost object with default hostname': function(localhost) {
+        assert.equal(localhost.hostname, os.hostname());
+        assert.equal(localhost.port, 8000);
+      }
+    },
+
+    'when getting an ip only': {
+      topic: function(helper) {
+        return helper.localhost('127.0.0.1', 3000);
+      },
+      'returns a localhost object with hostname and default port': function(localhost) {
+        assert.equal(localhost.hostname, '127.0.0.1');
+        assert.equal(localhost.port, 3000);
+      }
+    },
+
+    'when getting a valid hostname with invalid port ': {
+      topic: function(helper) {
+        return helper.localhost('localhost:foo', 3000);
+      },
+      'returns a localhost object with hostname and default port': function(localhost) {
+        assert.equal(localhost.hostname, 'localhost');
+        assert.equal(localhost.port, 3000);
+      }
+    },
+
+    'when getting an invalid hostname with valid port ': {
+      topic: function(helper) {
+        return helper.localhost('123:8000', 3000);
+      },
+      'returns a localhost object with hostname and default port': function(localhost) {
+        assert.equal(localhost.hostname, os.hostname());
+        assert.equal(localhost.port, 8000);
+      }
+    },
+
+    'when getting a valid hostname with no port ': {
+      topic: function(helper) {
+        return helper.localhost('localhost:', 3000);
+      },
+      'returns a localhost object with hostname and default port': function(localhost) {
+        assert.equal(localhost.hostname, 'localhost');
+        assert.equal(localhost.port, 3000);
+      }
+    },
+
+    'when getting no hostname with valid port ': {
+      topic: function(helper) {
+        return helper.localhost(':8000', 3000);
+      },
+      'returns a localhost object with hostname and default port': function(localhost) {
+        assert.equal(localhost.hostname, os.hostname());
+        assert.equal(localhost.port, 8000);
+      }
+    }
+  },
+
+  'WebPageTest normalizeServer helper': {
+    topic: helper,
+
+    'when getting a valid standard server uri': {
+      topic: function(helper) {
+        return helper.normalizeServer('example.com');
+      },
+      'returns server info object': function(server) {
+        assert.deepEqual(server, {
+          protocol: 'http:',
+          hostname: 'example.com',
+          pathname: '/',
+          port: 80
+        });
+      }
+    },
+
+    'when getting a valid full server uri': {
+      topic: function(helper) {
+        return helper.normalizeServer('http://example.com:8000/foo');
+      },
+      'returns server info object': function(server) {
+        assert.deepEqual(server, {
+          protocol: 'http:',
+          hostname: 'example.com',
+          pathname: '/foo',
+          port: 8000
+        });
+      }
+    },
+
+    'when getting a https server uri': {
+      topic: function(helper) {
+        return helper.normalizeServer('https://example.com');
+      },
+      'returns server info object': function(server) {
+        assert.deepEqual(server, {
+          protocol: 'https:',
+          hostname: 'example.com',
+          pathname: '/',
+          port: 443
+        });
+      }
+    },
 
   }
 }).export(module);
