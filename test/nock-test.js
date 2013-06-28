@@ -12,7 +12,7 @@ var WebPageTest = require('../lib/webpagetest'),
 
 var wptNockServer = new NockServer('http://example.com');
 
-vows.describe('Dry Run').addBatch({
+vows.describe('Mock WPT Server').addBatch({
   'An Example WebPageTest Nock Server': {
     topic: new WebPageTest('example.com'),
 
