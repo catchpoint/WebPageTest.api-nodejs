@@ -79,6 +79,7 @@ function WebPageTestMockServer(host) {
 
     if (filename) {
       server
+        .persist()
         .get(source)
         .replyWithFile(200, pathname, {'Content-Type': type});
     } else {
