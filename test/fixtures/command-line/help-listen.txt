@@ -1,5 +1,5 @@
 
-  Usage: listen [options] [port]
+  Usage: listen [options] [hostname:port]
 
   Options:
 

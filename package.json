@@ -27,7 +27,7 @@
   "main": "lib/webpagetest.js",
   "bin": "bin/webpagetest",
   "scripts": {
-    "test": "vows --spec test/*-test.js"
+    "test": "./node_modules/mocha/bin/mocha -R spec test/*-test-mocha.js"
   },
   "engines": {
     "node": ">=0.8.1"
@@ -37,7 +37,7 @@
     "commander": "~1.2.0"
   },
   "devDependencies": {
-    "vows": "~0.7.0",
-    "nock": "~0.18.2"
+    "nock": "~0.18.2",
+    "mocha": "~1.11.0"
   }
 }

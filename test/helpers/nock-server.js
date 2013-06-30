@@ -36,6 +36,9 @@ var reqResMap = {
   '/xmlResult.php?test=130619_KK_6A2': 'testResultsMultiRunsDefaultMedianMetric.xml',
   '/xmlResult.php?test=130619_KK_6A2&medianMetric=TTFB': 'testResultsMultiRunsTTFBMedianMetric.xml',
 
+  // sync
+  '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&f=json&pingback=http%3A%2F%2F127.0.0.1%3A8000%2Ftestdone': 'runTest.json',
+
   // not found / invalid
   '/testStatus.php?test=120816_V2_3': 'testStatusNotFound.json',
   '/xmlResult.php?test=120816_V2_3': 'testResultsNotFound.xml',

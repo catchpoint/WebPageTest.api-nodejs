@@ -3,83 +3,69 @@
  * Released under the MIT License
  */
 
-var vows        = require('vows'),
-    assert      = require('assert'),
+var assert      = require('assert'),
     WebPageTest = require('../lib/webpagetest');
 
-var wptServer = 'https://www.example.com:1234/foo/bar/';
+var wptServer = 'https://www.example.com:1234/foo/bar/',
+    wpt = new WebPageTest(wptServer);
 
-vows.describe('Dry Run').addBatch({
-  'An Example WebPageTest Server': {
-    topic: new WebPageTest(wptServer),
+describe('Dry Run', function() {
+  describe('An Example WebPageTest Server', function() {
 
-    'gets a test status request': {
-      topic: function (wpt) {
-        wpt.getTestStatus('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a test status request', function(done) {
+      wpt.getTestStatus('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'testStatus.php?test=120816_V2_2');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a test results request': {
-      topic: function (wpt) {
-        wpt.getTestResults('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a test results request', function(done) {
+      wpt.getTestResults('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a test results for multi runs with custom median metric request': {
-      topic: function (wpt) {
-        wpt.getTestResults('120816_V2_2', {
+    it('gets a test results for multi runs with custom median metric request', function(done) {
+      wpt.getTestResults('120816_V2_2', {
           dryRun: true,
           medianMetric: 'TTFB'
-        }, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+        }, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer +
           'xmlResult.php?test=120816_V2_2&medianMetric=TTFB');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets the locations list request': {
-      topic: function (wpt) {
-        wpt.getLocations({dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets the locations list request', function(done) {
+      wpt.getLocations({dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getLocations.php');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets the testers list request': {
-      topic: function (wpt) {
-        wpt.getTesters({dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets the testers list request', function(done) {
+      wpt.getTesters({dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getTesters.php');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a simple test request': {
-      topic: function (wpt) {
-        wpt.runTest('http://foobar.com', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a simple test request', function(done) {
+      wpt.runTest('http://foobar.com', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&f=json');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a custom test request': {
-      topic: function (wpt) {
-        wpt.runTest('http://twitter.com/marcelduran', {
+    it('gets a custom test request', function(done) {
+      wpt.runTest('http://twitter.com/marcelduran', {
           'location': 'Local_Firefox_Chrome:Chrome',
           label: 'test 123',
           runs: 3,
@@ -88,17 +74,15 @@ vows.describe('Dry Run').addBatch({
           netLog: true,
           fullResolutionScreenshot: true,
           dryRun: true
-        }, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+        }, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&label=test%20123&pngss=1&timeline=1&netlog=1&f=json');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a script test request': {
-      topic: function (wpt) {
-        var script = wpt.scriptToString([
+    it('gets a script test request', function(done) {
+      var script = wpt.scriptToString([
           {logData:    0                           },
           {navigate:   'http://foo.com/login'      },
           '// log some data',
@@ -109,183 +93,152 @@ vows.describe('Dry Run').addBatch({
           'waitForComplete'
         ]);
 
-        wpt.runTest(script, {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+        wpt.runTest(script, {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'runtest.php?script=logData%090%0Anavigate%09http%3A%2F%2Ffoo.com%2Flogin%0A%2F%2F%20log%20some%20data%0AlogData%091%0AsetValue%09name%3Dusername%09johndoe%0AsetValue%09name%3Dpassword%0912345%0AsubmitForm%09action%3Dhttp%3A%2F%2Ffoo.com%2Fmain%0AwaitForComplete&f=json');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a cancel test request': {
-      topic: function (wpt) {
-        wpt.cancelTest('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a cancel test request', function(done) {
+      wpt.cancelTest('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'cancelTest.php?test=120816_V2_2');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets page speed data request': {
-      topic: function (wpt) {
-        wpt.getPageSpeedData('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets page speed data request', function(done) {
+      wpt.getPageSpeedData('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_pagespeed.txt');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets HAR data request': {
-      topic: function (wpt) {
-        wpt.getHARData('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets HAR data request', function(done) {
+      wpt.getHARData('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'export.php?test=120816_V2_2');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets utilization data request': {
-      topic: function (wpt) {
-        wpt.getUtilizationData('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets utilization data request', function(done) {
+      wpt.getUtilizationData('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_progress.csv');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets request data request': {
-      topic: function (wpt) {
-        wpt.getRequestData('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets request data request', function(done) {
+      wpt.getRequestData('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_IEWTR.txt');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets timeline data request': {
-      topic: function (wpt) {
-        wpt.getTimelineData('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets timeline data request', function(done) {
+      wpt.getTimelineData('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_timeline.json');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets net log data request': {
-      topic: function (wpt) {
-        wpt.getNetLogData('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets net log data request', function(done) {
+      wpt.getNetLogData('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_netlog.txt');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets console log data request': {
-      topic: function (wpt) {
-        wpt.getConsoleLogData('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets console log data request', function(done) {
+      wpt.getConsoleLogData('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_console_log.json');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets test info request': {
-      topic: function (wpt) {
-        wpt.getTestInfo('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets test info request', function(done) {
+      wpt.getTestInfo('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=testinfo.json');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a waterfall image request': {
-      topic: function (wpt) {
-        wpt.getWaterfallImage('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a waterfall image request', function(done) {
+      wpt.getWaterfallImage('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a waterfall thumbnail request': {
-      topic: function (wpt) {
-        wpt.getWaterfallImage('120816_V2_2', {
-          thumbnail: true,
-          dryRun: true
-        }, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a waterfall thumbnail request', function(done) {
+      wpt.getWaterfallImage('120816_V2_2', {
+        thumbnail: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&run=1&cached=0&file=1_waterfall.png');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a customized waterfall image request': {
-      topic: function (wpt) {
-        wpt.getWaterfallImage('120816_V2_2', {
-          chartType: 'connection',
-          colorByMime: true,
-          chartWidth: 640,
-          maxTime: 9,
-          requests: '1,2,4,6-8',
-          noCPU: true,
-          noBandwidth: true,
-          noEllipsis: true,
-          noLabels: true,
-          dryRun: true
-        }, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a customized waterfall image request', function(done) {
+      wpt.getWaterfallImage('120816_V2_2', {
+        chartType: 'connection',
+        colorByMime: true,
+        chartWidth: 640,
+        maxTime: 9,
+        requests: '1,2,4,6-8',
+        noCPU: true,
+        noBandwidth: true,
+        noEllipsis: true,
+        noLabels: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0&type=connection&mime=1&width=640&max=9&requests=1%2C2%2C4%2C6-8&cpu=0&bw=0&dots=0&labels=0');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a screenshot request': {
-      topic: function (wpt) {
-        wpt.getScreenshotImage('120816_V2_2', {dryRun: true}, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a screenshot request', function(done) {
+      wpt.getScreenshotImage('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.jpg');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a screenshot thumbnail request': {
-      topic: function (wpt) {
-        wpt.getScreenshotImage('120816_V2_2', {
-          thumbnail: true,
-          dryRun: true
-        }, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a screenshot thumbnail request', function(done) {
+      wpt.getScreenshotImage('120816_V2_2', {
+        thumbnail: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&file=1_screen.jpg&run=1&cached=0');
-      }
-    },
+        done();
+      });
+    });
 
-    'gets a screenshot in full resolution request': {
-      topic: function (wpt) {
-        wpt.getScreenshotImage('120816_V2_2', {
-          fullResolution: true,
-          dryRun: true
-        }, this.callback);
-      },
-      'then returns the API url': function (err, data) {
-        if (err) throw err;
+    it('gets a screenshot in full resolution request', function(done) {
+      wpt.getScreenshotImage('120816_V2_2', {
+        fullResolution: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
-      }
-    }
+        done();
+      });
+    });
 
-  }
-}).export(module);
+  });
+});

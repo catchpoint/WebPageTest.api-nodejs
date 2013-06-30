@@ -3,49 +3,52 @@
 
   Options:
 
-    -h, --help                    output usage information
-    -k, --key <api_key>           API key (if assigned). Contact the WebPageTest server administrator for a key if required
-    -l, --location <location>     location to test from
-    -r, --runs <number>           number of test runs [1]
-    -f, --first                   skip the Repeat View test
-    -L, --label <label>           label for the test
-    -p, --private                 keep the test hidden from the test log
-    -v, --video                   capture video
-    -y, --connectivity <profile>  connectivity profile (DSL|FIOS|Dial|custom) [DSL]
-    -m, --dom <element>           DOM element to record for sub-measurement
-    -c, --connections <number>    override the number of concurrent connections
-    -i, --onload                  force the test to stop at window.onload
-    -t, --sensitive               discard script and http headers in the result
-    -b, --block <urls>            space-delimited list of urls to block (substring match)
-    -g, --login <username>        username for authenticating tests (http authentication)
-    -w, --password <password>     password for authenticating tests (http authentication)
-    -a, --authtype <type>         type of authentication: 0 = Basic, 1 = SNS [0]
-    -e, --request <id>            echo request ID, useful to track asynchronous requests
-    -n, --notify <e-mail>         e-mail address to notify with the test results
-    -B, --pingback <url>          URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
-    -D, --bwdown <bandwidth>      download bandwidth in Kbps (used when specifying a custom connectivity profile)
-    -U, --bwup <bandwidth>        upload bandwidth in Kbps (used when specifying a custom connectivity profile)
-    -Y, --latency <time>          first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
-    -P, --plr <percentage>        packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
-    -u, --tcpdump                 enable tcpdump capture
-    -z, --noopt                   disable optimization checks (for faster testing)
-    -I, --noimages                disable screen shot capturing
-    -H, --noheaders               disable saving of the http headers (as well as browser status messages and CPU utilization)
-    -F, --full                    save a full-resolution version of the fully loaded screen shot as a PNG
-    -j, --jpeg <level>            jpeg compression level (30-100) for the screen shots and video capture
-    -S, --noscript                disable javascript (IE, Chrome, Firefox)
-    -R, --ignoressl               ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
-    -T, --standards               forces all pages to load in standards mode (IE only)
-    -O, --bodies                  save response bodies for text resources
-    -K, --keepua                  do not add PTST to the original browser User Agent string
-    -N, --duration <seconds>      minimum test duration in seconds
-    -A, --noads                   block ads defined by adblockrules.org
-    -E, --aft                     (experimental) measure above-the-fold rendering time
-    -Z, --spof <domains>          space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
-    -W, --mobile                  (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
-    -M, --timeline                capture Developer Tools Timeline (Chrome only)
-    -G, --netlog                  capture Network Log (Chrome only)
-    -C, --spdy3                   force SPDY version 3 (Chrome only)
-    -J, --swrender                force software rendering, disable GPU acceleration (Chrome only)
-    -Q, --noparser                disable threaded HTML parser (Chrome only)
+    -h, --help                         output usage information
+    -k, --key <api_key>                API key (if assigned). Contact the WebPageTest server administrator for a key if required
+    -l, --location <location>          location to test from
+    -r, --runs <number>                number of test runs [1]
+    -f, --first                        skip the Repeat View test
+    -L, --label <label>                label for the test
+    -p, --private                      keep the test hidden from the test log
+    -v, --video                        capture video
+    -y, --connectivity <profile>       connectivity profile (DSL|FIOS|Dial|custom) [DSL]
+    -m, --dom <element>                DOM element to record for sub-measurement
+    -c, --connections <number>         override the number of concurrent connections
+    -i, --onload                       force the test to stop at window.onload
+    -t, --sensitive                    discard script and http headers in the result
+    -b, --block <urls>                 space-delimited list of urls to block (substring match)
+    -g, --login <username>             username for authenticating tests (http authentication)
+    -w, --password <password>          password for authenticating tests (http authentication)
+    -a, --authtype <type>              type of authentication: 0 = Basic, 1 = SNS [0]
+    -e, --request <id>                 echo request ID, useful to track asynchronous requests
+    -n, --notify <e-mail>              e-mail address to notify with the test results
+    -B, --pingback <url>               URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
+    -D, --bwdown <bandwidth>           download bandwidth in Kbps (used when specifying a custom connectivity profile)
+    -U, --bwup <bandwidth>             upload bandwidth in Kbps (used when specifying a custom connectivity profile)
+    -Y, --latency <time>               first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
+    -P, --plr <percentage>             packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
+    -u, --tcpdump                      enable tcpdump capture
+    -z, --noopt                        disable optimization checks (for faster testing)
+    -I, --noimages                     disable screen shot capturing
+    -H, --noheaders                    disable saving of the http headers (as well as browser status messages and CPU utilization)
+    -F, --full                         save a full-resolution version of the fully loaded screen shot as a PNG
+    -j, --jpeg <level>                 jpeg compression level (30-100) for the screen shots and video capture
+    -S, --noscript                     disable javascript (IE, Chrome, Firefox)
+    -R, --ignoressl                    ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
+    -T, --standards                    forces all pages to load in standards mode (IE only)
+    -O, --bodies                       save response bodies for text resources
+    -K, --keepua                       do not add PTST to the original browser User Agent string
+    -N, --duration <seconds>           minimum test duration in seconds
+    -A, --noads                        block ads defined by adblockrules.org
+    -E, --aft                          (experimental) measure above-the-fold rendering time
+    -Z, --spof <domains>               space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+    -W, --mobile                       (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
+    -M, --timeline                     capture Developer Tools Timeline (Chrome only)
+    -G, --netlog                       capture Network Log (Chrome only)
+    -C, --spdy3                        force SPDY version 3 (Chrome only)
+    -J, --swrender                     force software rendering, disable GPU acceleration (Chrome only)
+    -Q, --noparser                     disable threaded HTML parser (Chrome only)
+        --pollresults [interval]       poll for results after test is scheduled at every <interval> seconds [5]
+        --waitresults [hostname:port]  wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
+        --timeout <seconds>            timeout for pollresults and waitresults [no timeout]
 
