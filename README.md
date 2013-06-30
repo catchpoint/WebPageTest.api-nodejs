@@ -20,9 +20,8 @@ $ webpagetest test http://twitter.com/marcelduran
 var WebPageTest = require('webpagetest');
 var wpt = new WebPageTest('www.webpagetest.org');
 
-wpt.runTest('http://twitter.com/marcelduran', function (err, data) {
-  if (err) throw err;
-  console.log(data);
+wpt.runTest('http://twitter.com/marcelduran', function(err, data) {
+  console.log(err || data);
 });
 ```
 
@@ -110,6 +109,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-C, --spdy3**: force SPDY version 3 (Chrome only)
 * **-J, --swrender**: force software rendering, disable GPU acceleration (Chrome only)
 * **-Q, --noparser**: disable threaded HTML parser (Chrome only)
+* **    --pollresults** _[interval]_: poll for results after test is scheduled at every <interval> seconds [5]
+* **    --waitresults** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
+* **    --timeout** _\<seconds\>_: timeout for pollresults and waitresults [no timeout]
 
 #### Results (works for **results** only)
 * **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
@@ -251,6 +253,36 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 }
 ```
 
+#### Run test on http://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
+```bash
+$ webpagetest test http://twitter.com/marcelduran --pollresults 5 --timeout 60
+```
+#### Or run test on http://twitter.com/marcelduran and wait results listening on local port 8000\*
+```bash
+$ webpagetest test http://twitter.com/marcelduran --waitresults 8000
+```
+```javascript
+{
+  "response": {
+    "statusCode": 200, "statusText": "Ok",
+    "data": {
+      "testId": "121025_PT_N8K",
+      "testUrl": "http://twitter.com/marcelduran",
+      ...
+      "median": {
+        "firstView": {
+          "loadTime": 3942, "TTFB": 1518,
+          "render": 2509, "fullyLoaded": 7765,
+          ...
+        }
+      },
+      ...
+    }
+  }
+}
+```
+_\* localhost must be reacheable from WebPageTest server_
+
 ## Module
 
 ### Methods
@@ -306,7 +338,9 @@ var script = wpt.scriptToString([
   {submitForm: 'action=http://foo.com/main'},
   'waitForComplete'
 ]);
-wpt.runTest(script, function (err, data) {console.log(err || data);});
+wpt.runTest(script, function(err, data) {
+  console.log(err || data);
+});
 ```
 
 ### Options
@@ -359,6 +393,9 @@ wpt.runTest(script, function (err, data) {console.log(err || data);});
 * **forceSpdy3**: _Boolean_, force SPDY version 3 (Chrome only)
 * **forceSoftwareRendering**: _Boolean_, force software rendering, disable GPU acceleration (Chrome only)
 * **disableThreadedParser**: _Boolean_, disable threaded HTML parser (Chrome only)
+* **pollResults**: _Number_, poll for results after test is scheduled at every <interval> seconds [5]
+* **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
+* **timeout**: _Number_, timeout (in seconds) for pollResults and waitResults [no timeout]
 
 #### Results (works for **getResults** only)
 * **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
@@ -399,33 +436,29 @@ var wptPublic = new WebPageTest('www.webpagetest.org', 'MY_API_KEY');
 
 #### 2. Get available locations
 ```javascript
-wpt.getLocations(function (err, data) {
-  if (err) throw err;
-  console.log(data);
+wpt.getLocations(function(err, data) {
+  console.log(err || data);
 });
 ```
 
 #### 3. Run test on http://twitter.com/marcelduran from San Jose on IE9
 ```javascript
-wpt.runTest('http://twitter.com/marcelduran', {location: 'SanJose_IE9'}, function (err, data) {
-  if (err) throw err;
-  console.log(data);
+wpt.runTest('http://twitter.com/marcelduran', {location: 'SanJose_IE9'}, function(err, data) {
+  console.log(err || data);
 });
 ```
 
 #### 4. Check current test status
 ```javascript
-wpt.getTestStatus('121025_PT_N8K', function (err, data) {
-  if (err) throw err;
-  console.log(data);
+wpt.getTestStatus('121025_PT_N8K', function(err, data) {
+  console.log(err || data);
 });
 ```
 
 #### 5. Get test results
 ```javascript
-wpt.getTestResults('121025_PT_N8K', function (err, data) {
-  if (err) throw err;
-  console.log(data);
+wpt.getTestResults('121025_PT_N8K', function(err, data) {
+  console.log(err || data);
 });
 ```
 
@@ -435,12 +468,26 @@ wpt.getWaterfallImage('121025_PT_N8K', {
   thumbnail: true,
   repeatView: true,
   dataURI: true
-}, function (err, data, info) {
-    if (err) throw err;
-    console.log(data, info);
-  }
-);
+}, function(err, data, info) {
+  console.log(err || data, info);
+});
 ```
+
+#### Run test on http://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
+```javascript
+wpt.runTest('http://twitter.com/marcelduran', {pollResults: 5, timeout: 60}, function(err, data) {
+  console.log(err || data);
+});
+```
+
+#### Or run test on http://twitter.com/marcelduran and wait results listening on localhost\* port 8000\*\*
+```javascript
+wpt.runTest('http://twitter.com/marcelduran', {waitResults: 'localhost:8000'}, function(err, data) {
+  console.log(err || data);
+});
+```
+_\* hostname and port are optional, defaults to <system hostname>:<8000>_
+_\** localhost:8000 must be reacheable from WebPageTest server_
 
 ## Server mode
 WebPageTest API Wrapper comes with a handy RESTful API proxy
@@ -471,13 +518,19 @@ var server = wpt.listen(8080, function(err, data) {
 
 setTimeout(function() {
   server.close(function() {
-    console.log('listening done');
+    console.log('server closed');
   });
 }, 10000); // wait for 10s before stop listening
 ```
 
+## Tests
+```bash
+$ npm test
+```
+
 ## Changelog
 
+* 0.0.4: Sync test with results via `--pollresults` or `--waitresults`
 * 0.0.3: Custom test results median metric; Custom waterfall; new Chrome test options
 * 0.0.2: Minor bugs; 2 new commands: testers and testinfo
 * 0.0.1: Initial release
