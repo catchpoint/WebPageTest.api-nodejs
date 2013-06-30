@@ -1,6 +1,6 @@
 {
   "name": "webpagetest",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "WebPageTest API wrapper for NodeJS",
   "author": "Marcel Duran <github@marcelduran.com> (http://github.com/marcelduran)",
   "homepage": "http://github.com/marcelduran/webpagetest-api",
@@ -27,7 +27,7 @@
   "main": "lib/webpagetest.js",
   "bin": "bin/webpagetest",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -R spec test/*-test-mocha.js"
+    "test": "./node_modules/mocha/bin/mocha -R spec test/*-test.js"
   },
   "engines": {
     "node": ">=0.8.1"
