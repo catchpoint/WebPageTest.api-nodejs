@@ -109,9 +109,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-C, --spdy3**: force SPDY version 3 (Chrome only)
 * **-J, --swrender**: force software rendering, disable GPU acceleration (Chrome only)
 * **-Q, --noparser**: disable threaded HTML parser (Chrome only)
-* **    --pollresults** _[interval]_: poll for results after test is scheduled at every <interval> seconds [5]
-* **    --waitresults** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
-* **    --timeout** _\<seconds\>_: timeout for pollresults and waitresults [no timeout]
+* **--pollresults** _[interval]_: poll for results after test is scheduled at every <interval> seconds [5]
+* **--waitresults** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
+* **--timeout** _\<seconds\>_: timeout for pollresults and waitresults [no timeout]
 
 #### Results (works for **results** only)
 * **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
@@ -257,7 +257,7 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 ```bash
 $ webpagetest test http://twitter.com/marcelduran --pollresults 5 --timeout 60
 ```
-#### Or run test on http://twitter.com/marcelduran and wait results listening on local port 8000\*
+#### Or run test on http://twitter.com/marcelduran and wait for results listening on localhost\* port 8000\**
 ```bash
 $ webpagetest test http://twitter.com/marcelduran --waitresults 8000
 ```
@@ -281,7 +281,8 @@ $ webpagetest test http://twitter.com/marcelduran --waitresults 8000
   }
 }
 ```
-_\* localhost must be reacheable from WebPageTest server_
+_\* hostname and port are optional, defaults to \<system hostname\>:\<8000\>_
+_\** localhost and port must be reacheable from WebPageTest server_
 
 ## Module
 
@@ -486,7 +487,8 @@ wpt.runTest('http://twitter.com/marcelduran', {waitResults: 'localhost:8000'}, f
   console.log(err || data);
 });
 ```
-_\* hostname and port are optional, defaults to <system hostname>:<8000>_
+_\* hostname and port are optional, defaults to \<system hostname\>:\<8000\>_
+
 _\** localhost:8000 must be reacheable from WebPageTest server_
 
 ## Server mode
