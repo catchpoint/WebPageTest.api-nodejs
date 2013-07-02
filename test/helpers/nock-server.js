@@ -38,6 +38,7 @@ var reqResMap = {
 
   // sync
   '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&f=json&pingback=http%3A%2F%2F127.0.0.1%3A8000%2Ftestdone': 'runTest.json',
+  '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&runs=3&fvonly=1&f=json&pingback=http%3A%2F%2F127.0.0.1%3A8000%2Ftestdone': 'runTestMultiRuns.json',
 
   // not found / invalid
   '/testStatus.php?test=120816_V2_3': 'testStatusNotFound.json',

@@ -47,5 +47,28 @@ describe('Example WebPageTest', function() {
       }, 500);
     });
 
+    it('gets a sync test with results with custom median metric request then waits for test results object', function(done) {
+      var server = wpt.runTest('http://twitter.com/marcelduran', {
+        firstViewOnly: true,
+        runs: 3,
+        waitResults: '127.0.0.1:8000',
+        resultsOptions: {
+          medianMetric: 'TTFB'
+        }
+      }, function(err, data) {
+        if (err) return done(err);
+        assert.equal(data.response.data.median.firstView.run, 2);
+        wpt.getTestResults('130619_KK_6A2', function(err, data) {
+          if (err) return done(err);
+          assert.equal(data.response.data.median.firstView.run, 3);
+          done();
+        });
+      });
+      setTimeout(function() {
+        http.get('http://' + server.hostname + ':' + server.port +
+          '/testdone?id=130619_KK_6A2');
+      }, 500);
+    });
+
   });
 });
