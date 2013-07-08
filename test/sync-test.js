@@ -52,9 +52,7 @@ describe('Example WebPageTest', function() {
         firstViewOnly: true,
         runs: 3,
         waitResults: '127.0.0.1:8000',
-        resultsOptions: {
-          medianMetric: 'TTFB'
-        }
+        medianMetric: 'TTFB'
       }, function(err, data) {
         if (err) return done(err);
         assert.equal(data.response.data.median.firstView.run, 2);

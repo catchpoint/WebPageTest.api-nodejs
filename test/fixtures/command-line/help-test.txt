@@ -51,5 +51,7 @@
         --pollresults [interval]       poll for results after test is scheduled at every <interval> seconds [5]
         --waitresults [hostname:port]  wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
         --timeout <seconds>            timeout for pollresults and waitresults [no timeout]
-        --resultsoptions <options>     specify results options when polling|waiting test with results, e.g.: "median render"
+        --median <metric>              set the metric used to calculate median for multiple runs tests [loadtTime]
+        --specs <json_or_file>         set the specs for performance test suite
+        --reporter <name>              set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 

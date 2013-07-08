@@ -65,12 +65,14 @@ var formatData = function (err, data, info) {
       }
     });
   } else {
-    output(data);
+    output(data, err ? 1 : 0);
   }
 }
 
-function addOptions(prg, options) {
+function addOptions(prg, options, nokeyList) {
   (options || []).forEach(function eachOption(option) {
+    var nokey = nokeyList && nokeyList.indexOf(option) > -1;
+
     Object.keys(option).forEach(function eachOpt(name) {
       var opt = option[name],
           openParam = '<',
@@ -87,7 +89,7 @@ function addOptions(prg, options) {
       }
 
       prg.option([
-          opt.key ? ('-' + opt.key + ', ') : '    ',
+          !nokey && opt.key ? ('-' + opt.key + ', ') : '    ',
           '--' + name,
           opt.param ? (' ' + openParam + opt.param + closeParam) : ''
         ].join(''),
@@ -133,6 +135,15 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
       }
 
       defaultAction(decodeURIComponent(what), opts);
+      if (options.specs) {
+        options.exitOnResults = true;
+      }
+    },
+    'results': function(id, opts) {
+      defaultAction(id, opts);
+      if (opts.specs) {
+        formatData = null;
+      }
     },
     'listen': function(port) {
       defaultAction(port);
@@ -163,7 +174,8 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
       .command(param)
       .description(cmd.info)
       .action(customActions[name] || defaultAction),
-    cmd.options
+    cmd.options,
+    cmd.nokey
   );
 });
 
@@ -179,7 +191,9 @@ if (command) {
   }
 
   // callback
-  args.push(formatData);
+  if (formatData) {
+    args.push(formatData);
+  }
 
   file = program.out;
 

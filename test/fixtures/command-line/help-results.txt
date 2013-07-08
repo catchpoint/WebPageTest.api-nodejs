@@ -3,6 +3,8 @@
 
   Options:
 
-    -h, --help             output usage information
-    -m, --median <metric>  set the metric used to calculate median for multiple runs tests [loadtTime]
+    -h, --help                  output usage information
+    -m, --median <metric>       set the metric used to calculate median for multiple runs tests [loadtTime]
+    -S, --specs <json_or_file>  set the specs for performance test suite
+    -r, --reporter <name>       set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 

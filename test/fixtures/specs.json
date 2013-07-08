@@ -1,0 +1,27 @@
+{
+  "defaults": {
+    "suiteName": "WPT test of test (not really errors)",
+    "operation": "<"
+  },
+  "median": {
+    "firstView": {
+      "requests": {
+        "min": 30,
+        "max": 50
+      },
+      "render": 200,
+      "loadTime": {
+        "text": "page load time: {actual} should be less than {expected}",
+        "max": 15000
+      },
+      "foo": {
+        "bar": {
+          "max": 100
+        }
+      },
+      "score_keep-alive": {
+        "min": 90
+      }
+    }
+  }
+}
