@@ -83,10 +83,6 @@ describe('Edge Cases of', function() {
       });
     });
 
-    it('gets current version then compares to package.json version', function() {
-      assert.equal(wpt.version, packageJson.version);
-    });
-
   });
 
   describe('WebPageTest localhost helper', function() {
