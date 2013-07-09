@@ -3,10 +3,10 @@
 
   Commands:
 
-    status <id>            check test status
+    status [options] <id>  check test status
     results [options] <id> get test results
-    locations              list locations and the number of pending tests
-    testers                list testers status and details
+    locations [options]    list locations and the number of pending tests
+    testers [options]      list testers status and details
     test [options] <url_or_script> run test
     cancel <id>            cancel running/pending test
     har <id>               get the HTTPS Archive (HAR) from test

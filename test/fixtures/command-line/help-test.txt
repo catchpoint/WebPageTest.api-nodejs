@@ -20,7 +20,6 @@
     -g, --login <username>        username for authenticating tests (http authentication)
     -w, --password <password>     password for authenticating tests (http authentication)
     -a, --authtype <type>         type of authentication: 0 = Basic, 1 = SNS [0]
-    -e, --request <id>            echo request ID, useful to track asynchronous requests
     -n, --notify <e-mail>         e-mail address to notify with the test results
     -B, --pingback <url>          URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
     -D, --bwdown <bandwidth>      download bandwidth in Kbps (used when specifying a custom connectivity profile)
@@ -51,7 +50,8 @@
         --poll [interval]         poll for results after test is scheduled at every <interval> seconds [5]
         --wait [hostname:port]    wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
         --timeout <seconds>       timeout for polling and waiting results [no timeout]
-        --median <metric>         set the metric used to calculate median for multiple runs tests [loadtTime]
+    -e, --request <id>            echo request ID, useful to track asynchronous requests
+        --median <metric>         set the metric used to calculate median for multiple runs tests [loadTime]
         --specs <json_or_file>    set the specs for performance test suite
         --reporter <name>         set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 

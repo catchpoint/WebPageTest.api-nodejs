@@ -123,7 +123,7 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
       args.push(param);
     }
     if (cmd.options) {
-      options = mapping.setOptions(name, opts);
+      options = mapping.setOptions(name, opts || param);
     }
   }
 
@@ -141,7 +141,7 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
     },
     'results': function(id, opts) {
       defaultAction(id, opts);
-      if (opts.specs) {
+      if (opts.specs && !program.dryrun) {
         formatData = null;
       }
     },

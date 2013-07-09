@@ -20,10 +20,32 @@ describe('Dry Run', function() {
       });
     });
 
+    it('gets a test status request with requestId', function(done) {
+      wpt.getTestStatus('120816_V2_2', {
+        request: '12345',
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'testStatus.php?test=120816_V2_2&r=12345');
+        done();
+      });
+    });
+
     it('gets a test results request', function(done) {
       wpt.getTestResults('120816_V2_2', {dryRun: true}, function (err, data) {
         if (err) return done(err);
         assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2');
+        done();
+      });
+    });
+
+    it('gets a test results request with requestId', function(done) {
+      wpt.getTestResults('120816_V2_2', {
+        request: '12345',
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2&r=12345');
         done();
       });
     });
@@ -48,10 +70,26 @@ describe('Dry Run', function() {
       });
     });
 
+    it('gets the locations list request with requestId', function(done) {
+      wpt.getLocations({dryRun: true, request: '12345'}, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'getLocations.php?r=12345');
+        done();
+      });
+    });
+
     it('gets the testers list request', function(done) {
       wpt.getTesters({dryRun: true}, function (err, data) {
         if (err) return done(err);
         assert.equal(data.url, wptServer + 'getTesters.php');
+        done();
+      });
+    });
+
+    it('gets the testers list request with requestId', function(done) {
+      wpt.getTesters({dryRun: true, request: '12345'}, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'getTesters.php?r=12345');
         done();
       });
     });
@@ -73,10 +111,11 @@ describe('Dry Run', function() {
           timeline: true,
           netLog: true,
           fullResolutionScreenshot: true,
+          request: '12345',
           dryRun: true
         }, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&label=test%20123&pngss=1&timeline=1&netlog=1&f=json');
+        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&location=Local_Firefox_Chrome%3AChrome&runs=3&fvonly=1&label=test%20123&pngss=1&timeline=1&netlog=1&r=12345&f=json');
         done();
       });
     });
@@ -236,6 +275,26 @@ describe('Dry Run', function() {
       }, function (err, data) {
         if (err) return done(err);
         assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.png');
+        done();
+      });
+    });
+
+    // alias
+
+    it('gets a custom test request using aliases', function(done) {
+      wpt.test('http://twitter.com/marcelduran', {
+          l: 'Local_Firefox_Chrome:Chrome',
+          L: 'test 123',
+          r: 3,
+          first: true,
+          M: true,
+          netlog: true,
+          full: true,
+          e: '12345',
+          dryRun: true
+        }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&fvonly=1&pngss=1&netlog=1&location=Local_Firefox_Chrome%3AChrome&runs=3&label=test%20123&timeline=1&r=12345&f=json');
         done();
       });
     });
