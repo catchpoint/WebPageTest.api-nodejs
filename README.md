@@ -109,9 +109,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-C, --spdy3**: force SPDY version 3 (Chrome only)
 * **-J, --swrender**: force software rendering, disable GPU acceleration (Chrome only)
 * **-Q, --noparser**: disable threaded HTML parser (Chrome only)
-* **--pollresults** _[interval]_: poll for results after test is scheduled at every <interval> seconds [5]
-* **--waitresults** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
-* **--timeout** _\<seconds\>_: timeout for pollresults and waitresults [no timeout]
+* **--poll** _[interval]_: poll for results after test is scheduled at every <interval> seconds [5]
+* **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
+* **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 
 #### Results (works for **results** only)
 * **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
@@ -255,11 +255,11 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 
 #### Run test on http://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
 ```bash
-$ webpagetest test http://twitter.com/marcelduran --pollresults 5 --timeout 60
+$ webpagetest test http://twitter.com/marcelduran --poll 5 --timeout 60
 ```
 #### Or run test on http://twitter.com/marcelduran and wait for results listening on localhost\* port 8000\**
 ```bash
-$ webpagetest test http://twitter.com/marcelduran --waitresults 8000
+$ webpagetest test http://twitter.com/marcelduran --wait 8000
 ```
 ```javascript
 {
@@ -532,7 +532,7 @@ $ npm test
 
 ## Changelog
 
-* 0.0.4: Sync test with results via `--pollresults` or `--waitresults`
+* 0.0.4: Sync test with results via `--poll` or `--wait`
 * 0.0.3: Custom test results median metric; Custom waterfall; new Chrome test options
 * 0.0.2: Minor bugs; 2 new commands: testers and testinfo
 * 0.0.1: Initial release
