@@ -299,5 +299,38 @@ describe('Dry Run', function() {
       });
     });
 
+    it('gets a customized waterfall image request with aliases', function(done) {
+      wpt.waterfall('120816_V2_2', {
+        type: 'connection',
+        mime: true,
+        width: 640,
+        max: 9,
+        R: '1,2,4,6-8',
+        C: true,
+        b: true,
+        noellipsis: true,
+        l: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'waterfall.php?test=120816_V2_2&run=1&cached=0&type=connection&mime=1&width=640&max=9&dots=0&requests=1%2C2%2C4%2C6-8&cpu=0&bw=0&labels=0');
+        done();
+      });
+    });
+
+    it('gets a screenshot thumbnail request with aliases', function(done) {
+      wpt.screenshot('120816_V2_2', {
+        cached: true,
+        r: 2,
+        t: true,
+        complete: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'thumbnail.php?test=120816_V2_2&file=2_Cached_screen_doc.jpg&run=2&cached=1');
+        done();
+      });
+    });
+
   });
 });
