@@ -37,10 +37,10 @@ $ webpagetest --help
 ```
 
 ### Commands
-* **status** _\<id\>_: check test status
-* **results** _\<id\>_: get test results
-* **locations**: list locations and the number of pending tests
-* **testers**: list testers status and details
+* **status** _[options] \<id\>_: check test status
+* **results** _[options] \<id\>_: get test results
+* **locations** _[options]_: list locations and the number of pending tests
+* **testers** _[options]_: list testers status and details
 * **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
 * **cancel** _\<id\>_: cancel running/pending test
 * **har** _\<id\>_: get the HTTPS Archive (HAR) from test
@@ -81,7 +81,6 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-g, --login** _\<username\>_: username for authenticating tests (http authentication)
 * **-w, --password** _\<password\>_: password for authenticating tests (http authentication)
 * **-a, --authtype** _\<type\>_: type of authentication: 0 = Basic, 1 = SNS [0]
-* **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
 * **-n, --notify** _\<e-mail\>_: e-mail address to notify with the test results
 * **-B, --pingback** _\<url\>_: URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
 * **-D, --bwdown** _\<bandwidth\>_: download bandwidth in Kbps (used when specifying a custom connectivity profile)
@@ -113,7 +112,10 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 
-#### Results (works for **results** only)
+#### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
+* **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
+
+#### Results (works for **results** and **test** commands)
 * **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
 
 #### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **waterfall** and **screenshot** commands)
@@ -285,6 +287,7 @@ _\* hostname and port are optional, defaults to \<system hostname\>:\<8000\>_
 _\** localhost and port must be reacheable from WebPageTest server_
 
 ## Module
+Methods and options (including the one letter shorthands) are the same when using as a Node module, however a more verbose version of both commands (methods) and options (parameters) are available and encouraged to use for code clarity.
 
 ### Methods
 * `getTestStatus(id, options, callback)`
@@ -366,7 +369,6 @@ wpt.runTest(script, function(err, data) {
 * **login**: _String_, username for authenticating tests (http authentication)
 * **password**: _String_, password for authenticating tests (http authentication)
 * **authenticationType**: _Number_, type of authentication: 0 = Basic, 1 = SNS [0]
-* **requestId**: _String_, echo request ID, useful to track asynchronous requests
 * **notifyEmail**: _String_, e-mail address to notify with the test results
 * **pingback**: _String_, URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
 * **bandwidthDown**: _String_, download bandwidth in Kbps (used when specifying a custom connectivity profile)
@@ -398,7 +400,10 @@ wpt.runTest(script, function(err, data) {
 * **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **timeout**: _Number_, timeout (in seconds) for pollResults and waitResults [no timeout]
 
-#### Results (works for **getResults** only)
+#### Request (works for **getTestStatus**, **getResults**, **getLocations**, **getTesters** and **runTest** methods)
+* **requestId**: _String_, echo request ID, useful to track asynchronous requests
+
+#### Results (works for **getResults** and **runTest** methods)
 * **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
 
 #### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getWaterfallImage` and `getScreenshotImage` methods)
