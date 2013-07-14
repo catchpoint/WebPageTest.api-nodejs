@@ -283,4 +283,14 @@ describe('WebPageTest Command Line', function() {
       });
   });
 
+  it('gets a batch input returns the batch commands output in order', function(done) {
+    exec(mock('batch ' + path.join(__dirname, 'fixtures/batch.txt')), function(err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+      assert.equal(data[0].url, wptServer + 'testStatus.php?test=120816_V2_2');
+      assert.equal(data[1].url, wptServer + 'xmlResult.php?test=120816_V2_2');
+      done();
+    });
+  });
+
 });

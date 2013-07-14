@@ -10,9 +10,10 @@ var program     = require('commander'),
     WebPageTest = require('../lib/webpagetest'),
     mapping     = require('../lib/mapping');
 
-var command, wpt, file, ret,
+var command, file, ret,
     options = {},
     args = [],
+    results = [],
     defaultServer = process.env.WEBPAGETEST_SERVER ||
       WebPageTest.defaultServer;
 
@@ -20,20 +21,17 @@ var command, wpt, file, ret,
 mapping.commands.listen.info =
   mapping.commands.listen.info.replace('%s', WebPageTest.defaultListenPort);
 
-function output(data, exitStatus, preExit) {
-  if (exitStatus) {
-    process.stderr.write(data);
-  } else {
-    process.stdout.write(data);
-  }
+var output = function(data, exitStatus, preExit) {
+  process.stdout.write(data);
   if (typeof preExit === 'function') {
     preExit();
   }
   process.exit(exitStatus || 0);
-}
+};
 
-var formatData = function (err, data, info) {
-  var encoding = 'utf8';
+var formatData = function(err, data, info) {
+  var dataStr,
+      encoding = 'utf8';
 
   if (err) {
     data = {error: err};
@@ -49,9 +47,9 @@ var formatData = function (err, data, info) {
 
   if (!(data instanceof Buffer)) {
     try {
-      data = JSON.stringify(data, null, 2);
+      dataStr = JSON.stringify(data, null, 2);
     } catch (ex) {
-      data = JSON.stringify({
+      dataStr = JSON.stringify({
         data: data.toString(),
         error: ex.message
       }, null, 2);
@@ -59,14 +57,16 @@ var formatData = function (err, data, info) {
   }
 
   if (file) {
-    fs.writeFile(file, data, encoding, function writeFile(err) {
+    fs.writeFile(file, dataStr, encoding, function writeFile(err) {
       if (err) {
         output(err.message, 1);
       }
     });
   } else {
-    output(data, err ? 1 : 0);
+    output(dataStr, err ? 1 : 0);
   }
+
+  return data;
 }
 
 function addOptions(prg, options, nokeyList) {
@@ -135,13 +135,13 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
       }
 
       defaultAction(decodeURIComponent(what), opts);
-      if (options.specs) {
+      if (options.specs && !program.batch) {
         options.exitOnResults = true;
       }
     },
     'results': function(id, opts) {
       defaultAction(id, opts);
-      if (opts.specs && !program.dryrun) {
+      if (opts.specs && !program.dryrun && !program.batch) {
         formatData = null;
       }
     },
@@ -158,7 +158,7 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
     }
   };
 
-  // command with (optional) parameter 
+  // command with (optional) parameter
   if (cmd.param) {
     if (cmd.optional) {
       openParam = '[';
@@ -179,10 +179,98 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
   );
 });
 
-program.parse(process.argv);
+function parseBatch(filename) {
+  var lines;
 
-if (command) {
-  wpt = new WebPageTest(program.server || defaultServer);
+  try {
+    lines = (fs.readFileSync(filename, 'utf8') || '')
+      .split('\n')
+      .filter(function(line) {return line;})
+      .map(function(line) {return line.split(' ');})
+      .map(function(line) {
+        var tmp = [];
+        return line.reduce(function(prev, curr, index) {
+          if (/^[^\\]?['"]/.test(curr)) {
+            tmp.push(curr.slice(1));
+          } else if (tmp.length) {
+            if (/[^\\]['"]$/.test(curr)) {
+              tmp.push(curr.slice(0, curr.length - 1));
+              prev.push(tmp.join(' '));
+              tmp = [];
+            } else {
+              tmp.push(curr);
+            }
+          } else {
+            prev.push(curr);
+          }
+          return prev;
+        }, ['', '']);
+      });
+  } catch (err) {
+    output(err.message + '\n', 1);
+  }
+
+  return lines;
+}
+//return console.log(parseBatch('batch.txt'));
+
+function batch(file) {
+  var accErr,
+      count = 2,
+      originalFormatData = formatData,
+      originalOutput = output;
+
+  function checkDone() {
+    count--;
+    if (!count) {
+      originalOutput(
+        results.length ? JSON.stringify(results, null, 2) : '',
+        accErr ? 1 : 0
+      );
+    }
+  };
+
+  function checkError(err) {
+    accErr = accErr || err;
+    checkDone();
+  }
+
+  function aggregate(index, err, data, info) {
+    results[index] = originalFormatData(err, data, info);
+    checkError(err);
+  }
+
+  program.batch = true;
+  var cmds = parseBatch(file);
+  if (!cmds) {
+    return;
+  }
+  output = function(){};
+
+  cmds.forEach(function(cmd, index) {
+    program.parse(cmd);
+    formatData = options.specs ? checkError : aggregate.bind(null, index);
+    execCommand();
+    cleanupProgram();
+  });
+}
+
+function cleanupProgram() {
+  command = null;
+  options = {};
+  args = [];
+  program.commands.forEach(function(c) {
+    c.options.forEach(function(o) {
+      delete c[o.long.slice(2)];
+    });
+  });
+  delete program.server;
+  delete program.dryrun;
+  delete program.out;
+}
+
+function execCommand() {
+  var wpt = new WebPageTest(program.server || defaultServer);
 
   // options
   if (options) {
@@ -198,7 +286,19 @@ if (command) {
   file = program.out;
 
   wpt[command].apply(wpt, args);
-} else {
+}
+
+program
+  .command('batch <file>')
+  .description(
+    'run commands in batch, i.e. one command per line from <file> in parallel')
+  .action(batch);
+
+program.parse(process.argv);
+
+if (command) {
+  execCommand();
+} else if (!program.batch) {
   output(program.helpInformation(), 1, function defaultHelp() {
     program.emit('--help');
   });

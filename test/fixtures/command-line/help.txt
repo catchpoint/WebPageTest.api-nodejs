@@ -20,6 +20,7 @@
     waterfall [options] <id> get the waterfall PNG image
     screenshot [options] <id> get the fully loaded page screenshot in JPG format (PNG if in full resolution)
     listen [hostname:port] start webpagetest-api server on <hostname>:<port> [hostname:7791]
+    batch <file>           run commands in batch, i.e. one command per line from <file> in parallel
 
   Options:
 
