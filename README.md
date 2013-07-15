@@ -109,6 +109,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-J, --swrender**: force software rendering, disable GPU acceleration (Chrome only)
 * **-Q, --noparser**: disable threaded HTML parser (Chrome only)
 * **-q, --spdynossl**: use SPDY without SSL (Chrome only)
+* **--cmdline** _\<switches\>_: use a list of custom command line switches (Chrome only)
 * **--poll** _[interval]_: poll for results after test is scheduled at every <interval> seconds [5]
 * **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
@@ -398,6 +399,7 @@ wpt.runTest(script, function(err, data) {
 * **forceSoftwareRendering**: _Boolean_, force software rendering, disable GPU acceleration (Chrome only)
 * **disableThreadedParser**: _Boolean_, disable threaded HTML parser (Chrome only)
 * **spdyNoSSL**: _Boolean_, use SPDY without SSL (Chrome only)
+* **commandLine**: _[String]_, use a list of custom command line switches (Chrome only)
 * **pollResults**: _Number_, poll for results after test is scheduled at every <interval> seconds [5]
 * **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **timeout**: _Number_, timeout (in seconds) for pollResults and waitResults [no timeout]
