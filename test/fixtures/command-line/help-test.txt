@@ -48,6 +48,7 @@
     -J, --swrender                force software rendering, disable GPU acceleration (Chrome only)
     -Q, --noparser                disable threaded HTML parser (Chrome only)
     -q, --spdynossl               use SPDY without SSL (Chrome only)
+        --cmdline <switches>      use a list of custom command line switches (Chrome only)
         --poll [interval]         poll for results after test is scheduled at every <interval> seconds [5]
         --wait [hostname:port]    wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
         --timeout <seconds>       timeout for polling and waiting results [no timeout]
