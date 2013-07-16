@@ -53,7 +53,8 @@ $ webpagetest --help
 * **testinfo** _\<id\>_: get test request info/details
 * **waterfall** _[options] \<id\>_: get the waterfall PNG image
 * **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
-* **listen** _[port]_: start webpagetest-api server on port [7791]
+* **listen** _[port]_: start webpagetest-api server on port _[7791_]
+* **batch** _\<file\>_: run commands in batch, i.e. one command per line from _\<file\>_ in parallel
 
 ### Options
 
@@ -110,15 +111,17 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-Q, --noparser**: disable threaded HTML parser (Chrome only)
 * **-q, --spdynossl**: use SPDY without SSL (Chrome only)
 * **--cmdline** _\<switches\>_: use a list of custom command line switches (Chrome only)
-* **--poll** _[interval]_: poll for results after test is scheduled at every <interval> seconds [5]
-* **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
+* **--poll** _[interval]_: poll for results after test is scheduled at every \<interva\l> seconds [5]
+* **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on \<hostname\>:\<port\> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 
 #### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
 * **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
 
 #### Results (works for **results** and **test** commands)
-* **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
+* **--median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
+* **--specs** _\<json_or_file\>_: set the specs for performance test suite
+* **--reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
 #### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **waterfall** and **screenshot** commands)
 * **-r, --run** _\<number\>_: which run number on a multiple runs test [1]
@@ -409,6 +412,8 @@ wpt.runTest(script, function(err, data) {
 
 #### Results (works for **getResults** and **runTest** methods)
 * **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
+* **specs**: _String_, set the specs for performance test suite
+* **reporter**: _String_, set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
 #### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getWaterfallImage` and `getScreenshotImage` methods)
 * **run**: _Number_, the test run number for multiple runs tests (default: 1, first test)
@@ -534,6 +539,57 @@ setTimeout(function() {
 }, 10000); // wait for 10s before stop listening
 ```
 
+## Batch
+Batch command is available as command line only and loads a batch file containing one WebPageTest CLI command with options per line. It runs all commands in paralell but returns and array of results in order as they appear in the batch file once all results are ready. The exit status code is the sum of all individual commands exit status code.
+
+By running
+```bash
+$ webpagetest batch commands.txt
+```
+where `commands.txt` contains:
+```
+test twitter.com/marcelduran --first --location foo
+test twitter.com/marcelduran --first --location bar
+```
+It schedules the 2 tests above returning an array of size 2 in the same order as in `commands.txt` file:
+```javascript
+[
+  {
+    "statusCode": 200, "statusText": "Ok",
+    "data": {
+      "testId": "130715_AB_C1D",
+      ...
+    }
+  },
+  {
+    "statusCode": 200, "statusText": "Ok",
+    "data": {
+      "testId": "130715_CD_E2F",
+      ...
+    }
+  }
+]
+```
+With exit status 0 in case none of commands returns an error:
+```bash
+$ echo $?
+0
+````
+
+By running multiple sync tests, i.e. with either `--poll` or `--wait`, all tests are schedule and results are pulled or wait in paralell, it means if tests are set to run in different locations of same location with multiple agents, the final result might come together but the result array will only return once all tests are done. e.g.:
+
+`commands.txt`:
+```
+test twitter.com/marcelduran --first --location foo --poll --timeout 60
+test twitter.com/marcelduran --first --location bar --poll --timeout 60
+```
+
+## Test Specs (Continuous Integration)
+
+WebPageTest API Wrapper provides a simple seamless way to integrate WebPageTest with Continuous Integration tools.
+
+[See dedicated page](https://github.com/marcelduran/webpagetest-api/wiki/Test-Specs)
+
 ## Tests
 ```bash
 $ npm test
@@ -541,6 +597,7 @@ $ npm test
 
 ## Changelog
 
+* 0.1.0: Specs (CI); Run in batch; Node methods/options as command aliases; new Chrome test options
 * 0.0.4: Sync test with results via `--poll` or `--wait`
 * 0.0.3: Custom test results median metric; Custom waterfall; new Chrome test options
 * 0.0.2: Minor bugs; 2 new commands: testers and testinfo
