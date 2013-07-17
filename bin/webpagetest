@@ -215,7 +215,7 @@ function parseBatch(filename) {
 //return console.log(parseBatch('batch.txt'));
 
 function batch(file) {
-  var accErr,
+  var accErr = 0,
       count = 2,
       originalFormatData = formatData,
       originalOutput = output;
@@ -225,13 +225,13 @@ function batch(file) {
     if (!count) {
       originalOutput(
         results.length ? JSON.stringify(results, null, 2) : '',
-        accErr ? 1 : 0
+        accErr
       );
     }
   };
 
   function checkError(err) {
-    accErr = accErr || err;
+    accErr += err ? 1 : 0;
     checkDone();
   }
 
