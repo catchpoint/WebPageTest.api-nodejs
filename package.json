@@ -1,6 +1,6 @@
 {
   "name": "webpagetest",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "WebPageTest API wrapper for NodeJS",
   "author": "Marcel Duran <github@marcelduran.com> (http://github.com/marcelduran)",
   "homepage": "http://github.com/marcelduran/webpagetest-api",
@@ -34,10 +34,10 @@
   },
   "dependencies": {
     "jsonml": "~0.0.4",
-    "commander": "~1.2.0"
+    "commander": "~1.3.0",
+    "mocha": "~1.11.0"
   },
   "devDependencies": {
-    "nock": "~0.18.2",
-    "mocha": "~1.11.0"
+    "nock": "~0.18.2"
   }
 }
