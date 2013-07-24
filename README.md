@@ -66,7 +66,6 @@ $ webpagetest --help
 _The default WPT server can also be specified via environment variable `WEBPAGETEST_SERVER`_
 
 #### Test (works for **test** command only)
-* **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required
 * **-l, --location** _\<location\>_: location to test from
 * **-r, --runs** _\<number\>_: number of test runs [1]
 * **-f, --first**: skip the Repeat View test
@@ -114,6 +113,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--poll** _[interval]_: poll for results after test is scheduled at every \<interva\l> seconds [5]
 * **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on \<hostname\>:\<port\> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
+
+#### API Key (works for **test** and **cancel** commands)
+* **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required
 
 #### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
 * **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
@@ -362,7 +364,6 @@ wpt.runTest(script, function(err, data) {
 * **server**: _String_, if specified, overrides the WebPageTest server informed in the constructor only for that method call
 
 #### Test (works for `runTest` method only)
-* **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
 * **location**: _String_, location to test from
 * **runs**: _Number_, number of test runs [1]
 * **firstViewOnly**: _Boolean_, skip the Repeat View test
@@ -410,6 +411,9 @@ wpt.runTest(script, function(err, data) {
 * **pollResults**: _Number_, poll for results after test is scheduled at every <interval> seconds [5]
 * **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **timeout**: _Number_, timeout (in seconds) for pollResults and waitResults [no timeout]
+
+#### API Key (works for **runTest** and **cancelTest** methods)
+* **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
 
 #### Request (works for **getTestStatus**, **getResults**, **getLocations**, **getTesters** and **runTest** methods)
 * **requestId**: _String_, echo request ID, useful to track asynchronous requests
