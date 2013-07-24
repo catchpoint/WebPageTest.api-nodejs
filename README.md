@@ -119,9 +119,13 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
 
 #### Results (works for **results** and **test** commands)
-* **--median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
-* **--specs** _\<json_or_file\>_: set the specs for performance test suite
-* **--reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
+* **-b, --breakdown**: include the breakdown of requests and bytes by mime type
+* **-D, --domains**: include the breakdown of requests and bytes by domain
+* **-p, --pagespeed**: include the PageSpeed score in the response (may be slower)
+* **-R, --requests**: include the request data in the response (slower and results in much larger responses)
+* **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
+* **-S, --specs** _\<json_or_file\>_: set the specs for performance test suite
+* **-r, --reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
 #### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **waterfall** and **screenshot** commands)
 * **-r, --run** _\<number\>_: which run number on a multiple runs test [1]
@@ -411,6 +415,10 @@ wpt.runTest(script, function(err, data) {
 * **requestId**: _String_, echo request ID, useful to track asynchronous requests
 
 #### Results (works for **getResults** and **runTest** methods)
+* **breakDown**: _Boolean_, include the breakdown of requests and bytes by mime type
+* **domains**: _Boolean_, include the breakdown of requests and bytes by domain
+* **pageSpeed**: _Boolean_, include the PageSpeed score in the response (may be slower)
+* **requests**: _Boolean_, include the request data in the response (slower and results in much larger responses)
 * **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
 * **specs**: _String_, set the specs for performance test suite
 * **reporter**: _String_, set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
@@ -597,6 +605,7 @@ $ npm test
 
 ## Changelog
 
+* 0.1.3: Test results extra data (breakdown, domains, requests, pagespeed)
 * 0.1.0: Specs (CI); Run in batch; Node methods/options as command aliases; new Chrome test options
 * 0.0.4: Sync test with results via `--poll` or `--wait`
 * 0.0.3: Custom test results median metric; Custom waterfall; new Chrome test options
