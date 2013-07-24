@@ -149,6 +149,15 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
+  it('gets a cancel test with api key input returns the API url', function(done) {
+    exec(mock('cancel -k 12345 120816_V2_2'), function(err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+      assert.equal(data.url, wptServer + 'cancelTest.php?test=120816_V2_2&k=12345');
+      done();
+    });
+  });
+
   it('gets a page speed data input returns the API url', function(done) {
     exec(mock('pagespeed 120816_V2_2'), function(err, data) {
       if (err) return done(err);

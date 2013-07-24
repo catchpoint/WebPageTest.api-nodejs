@@ -8,7 +8,7 @@
     locations [options]    list locations and the number of pending tests
     testers [options]      list testers status and details
     test [options] <url_or_script> run test
-    cancel <id>            cancel running/pending test
+    cancel [options] <id>  cancel running/pending test
     har <id>               get the HTTPS Archive (HAR) from test
     pagespeed [options] <id> get the Google Page Speed results (if available) from test
     utilization [options] <id> get the CPU, bandwidth and memory utilization data from test
