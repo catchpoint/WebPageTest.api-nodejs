@@ -53,6 +53,10 @@
         --wait [hostname:port]    wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
         --timeout <seconds>       timeout for polling and waiting results [no timeout]
     -e, --request <id>            echo request ID, useful to track asynchronous requests
+        --breakdown               include the breakdown of requests and bytes by mime type
+        --domains                 include the breakdown of requests and bytes by domain
+        --pagespeed               include the PageSpeed score in the response (may be slower)
+        --requests                include the request data in the response (slower and results in much larger responses)
         --median <metric>         set the metric used to calculate median for multiple runs tests [loadTime]
         --specs <json_or_file>    set the specs for performance test suite
         --reporter <name>         set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity

@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+<statusCode>200</statusCode>
+<statusText>Ok</statusText>
+<data>
+<testId>130724_YD_8JX</testId>
+<summary>http://www.webpagetest.org/result/130724_YD_8JX/</summary>
+<testUrl>http://t.co</testUrl>
+<location>Dulles:Chrome</location>
+<from>Dulles, VA - &lt;b&gt;Chrome&lt;/b&gt; - &lt;b&gt;Cable&lt;/b&gt;</from>
+<connectivity>Cable</connectivity>
+<bwDown>5000</bwDown>
+<bwUp>1000</bwUp>
+<latency>28</latency>
+<plr>0</plr>
+<completed>Wed, 24 Jul 2013 01:02:57 +0000</completed>
+<testerDNS>192.168.103.1,192.168.0.1</testerDNS>
+<runs>1</runs>
+<successfulFVRuns>1</successfulFVRuns>
+<average>
+<firstView>
+<URL>0</URL>
+<loadTime>401</loadTime>
+<TTFB>243</TTFB>
+<bytesOut>927</bytesOut>
+<bytesOutDoc>642</bytesOutDoc>
+<bytesIn>3731</bytesIn>
+<bytesInDoc>2127</bytesInDoc>
+<connections>0</connections>
+<requests>3</requests>
+<requestsDoc>2</requestsDoc>
+<responses_200>0</responses_200>
+<responses_404>0</responses_404>
+<responses_other>0</responses_other>
+<result>0</result>
+<render>390</render>
+<fullyLoaded>826</fullyLoaded>
+<cached>0</cached>
+<docTime>401</docTime>
+<domTime>0</domTime>
+<score_cache>0</score_cache>
+<score_cdn>50</score_cdn>
+<score_gzip>100</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>100</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<gzip_total>1407</gzip_total>
+<gzip_savings>0</gzip_savings>
+<minify_total>0</minify_total>
+<minify_savings>0</minify_savings>
+<image_total>0</image_total>
+<image_savings>0</image_savings>
+<optimization_checked>1</optimization_checked>
+<aft>0</aft>
+<domElements>25</domElements>
+<pageSpeedVersion>2</pageSpeedVersion>
+<title>0</title>
+<titleTime>386</titleTime>
+<loadEventStart>371</loadEventStart>
+<loadEventEnd>372</loadEventEnd>
+<domContentLoadedEventStart>268</domContentLoadedEventStart>
+<domContentLoadedEventEnd>268</domContentLoadedEventEnd>
+<lastVisualChange>392</lastVisualChange>
+<browser_name>0</browser_name>
+<browser_version>28</browser_version>
+<server_count>2</server_count>
+<server_rtt>95</server_rtt>
+<base_page_cdn>0</base_page_cdn>
+<adult_site>0</adult_site>
+<fixed_viewport>0</fixed_viewport>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<date>1374627758</date>
+<SpeedIndexDT>392</SpeedIndexDT>
+<SpeedIndex>392</SpeedIndex>
+<VisuallyCompleteDT>392</VisuallyCompleteDT>
+<visualComplete>392</visualComplete>
+<avgRun>1</avgRun>
+</firstView>
+</average>
+<standardDeviation>
+<firstView>
+<URL>0</URL>
+<loadTime>0</loadTime>
+<TTFB>0</TTFB>
+<bytesOut>0</bytesOut>
+<bytesOutDoc>0</bytesOutDoc>
+<bytesIn>0</bytesIn>
+<bytesInDoc>0</bytesInDoc>
+<connections>0</connections>
+<requests>0</requests>
+<requestsDoc>0</requestsDoc>
+<responses_200>0</responses_200>
+<responses_404>0</responses_404>
+<responses_other>0</responses_other>
+<result>0</result>
+<render>0</render>
+<fullyLoaded>0</fullyLoaded>
+<cached>0</cached>
+<docTime>0</docTime>
+<domTime>0</domTime>
+<score_cache>0</score_cache>
+<score_cdn>0</score_cdn>
+<score_gzip>0</score_gzip>
+<score_cookies>0</score_cookies>
+<score_keep-alive>0</score_keep-alive>
+<score_minify>0</score_minify>
+<score_combine>0</score_combine>
+<score_compress>0</score_compress>
+<score_etags>0</score_etags>
+<gzip_total>0</gzip_total>
+<gzip_savings>0</gzip_savings>
+<minify_total>0</minify_total>
+<minify_savings>0</minify_savings>
+<image_total>0</image_total>
+<image_savings>0</image_savings>
+<optimization_checked>0</optimization_checked>
+<aft>0</aft>
+<domElements>0</domElements>
+<pageSpeedVersion>0</pageSpeedVersion>
+<title>0</title>
+<titleTime>0</titleTime>
+<loadEventStart>0</loadEventStart>
+<loadEventEnd>0</loadEventEnd>
+<domContentLoadedEventStart>0</domContentLoadedEventStart>
+<domContentLoadedEventEnd>0</domContentLoadedEventEnd>
+<lastVisualChange>0</lastVisualChange>
+<browser_name>0</browser_name>
+<browser_version>0</browser_version>
+<server_count>0</server_count>
+<server_rtt>0</server_rtt>
+<base_page_cdn>0</base_page_cdn>
+<adult_site>0</adult_site>
+<fixed_viewport>0</fixed_viewport>
+<score_progressive_jpeg>0</score_progressive_jpeg>
+<date>0</date>
+<SpeedIndexDT>0</SpeedIndexDT>
+<SpeedIndex>0</SpeedIndex>
+<VisuallyCompleteDT>0</VisuallyCompleteDT>
+<visualComplete>0</visualComplete>
+<avgRun></avgRun>
+</firstView>
+</standardDeviation>
+<median>
+<firstView>
+<run>1</run>
+<URL></URL>
+<loadTime>401</loadTime>
+<TTFB>243</TTFB>
+<bytesOut>927</bytesOut>
+<bytesOutDoc>642</bytesOutDoc>
+<bytesIn>3731</bytesIn>
+<bytesInDoc>2127</bytesInDoc>
+<connections>0</connections>
+<requests>3</requests>
+<requestsDoc>2</requestsDoc>
+<responses_200>0</responses_200>
+<responses_404>0</responses_404>
+<responses_other>0</responses_other>
+<result>0</result>
+<render>390</render>
+<fullyLoaded>826</fullyLoaded>
+<cached>0</cached>
+<docTime>401</docTime>
+<domTime>0</domTime>
+<score_cache>0</score_cache>
+<score_cdn>50</score_cdn>
+<score_gzip>100</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>100</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<gzip_total>1407</gzip_total>
+<gzip_savings>0</gzip_savings>
+<minify_total>0</minify_total>
+<minify_savings>0</minify_savings>
+<image_total>0</image_total>
+<image_savings>0</image_savings>
+<optimization_checked>1</optimization_checked>
+<aft>0</aft>
+<domElements>25</domElements>
+<pageSpeedVersion>1.9</pageSpeedVersion>
+<title>t.co / Twitter</title>
+<titleTime>386</titleTime>
+<loadEventStart>371</loadEventStart>
+<loadEventEnd>372</loadEventEnd>
+<domContentLoadedEventStart>268</domContentLoadedEventStart>
+<domContentLoadedEventEnd>268</domContentLoadedEventEnd>
+<lastVisualChange>392</lastVisualChange>
+<browser_name>Google Chrome</browser_name>
+<browser_version>28.0.1500.72</browser_version>
+<server_count>2</server_count>
+<server_rtt>95</server_rtt>
+<base_page_cdn></base_page_cdn>
+<adult_site>0</adult_site>
+<fixed_viewport>0</fixed_viewport>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<date>1374627758</date>
+<SpeedIndexDT>392</SpeedIndexDT>
+<SpeedIndex>392</SpeedIndex>
+<VisuallyCompleteDT>392</VisuallyCompleteDT>
+<visualComplete>392</visualComplete>
+<PageSpeedData>http://www.webpagetest.org/result/130724_YD_8JX/1_pagespeed.txt</PageSpeedData>
+<domains>
+<domain host="t.co">
+<requests>2</requests>
+<bytes>2127</bytes>
+<connections>1</connections>
+</domain>
+</domains>
+<breakdown>
+<html>
+<requests>1</requests>
+<bytes>1407</bytes>
+</html>
+<js>
+<requests>0</requests>
+<bytes>0</bytes>
+</js>
+<css>
+<requests>0</requests>
+<bytes>0</bytes>
+</css>
+<text>
+<requests>0</requests>
+<bytes>0</bytes>
+</text>
+<image>
+<requests>1</requests>
+<bytes>720</bytes>
+</image>
+<flash>
+<requests>0</requests>
+<bytes>0</bytes>
+</flash>
+<other>
+<requests>0</requests>
+<bytes>0</bytes>
+</other>
+</breakdown>
+<requests>
+<request number="1">
+<ip_addr>199.16.156.75</ip_addr>
+<method>GET</method>
+<host>t.co</host>
+<url>/</url>
+<responseCode>200</responseCode>
+<load_ms>116</load_ms>
+<ttfb_ms>106</ttfb_ms>
+<load_start>137</load_start>
+<bytesOut>320</bytesOut>
+<bytesIn>1407</bytesIn>
+<objectSize>1196</objectSize>
+<contentType>text/html</contentType>
+<contentEncoding>gzip</contentEncoding>
+<type>3</type>
+<socket>13</socket>
+<score_cache>0</score_cache>
+<score_cdn>-1</score_cdn>
+<score_gzip>100</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>-1</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<is_secure>0</is_secure>
+<dns_ms>-1</dns_ms>
+<connect_ms>96</connect_ms>
+<ssl_ms>-1</ssl_ms>
+<gzip_total>1407</gzip_total>
+<gzip_save>0</gzip_save>
+<minify_total>0</minify_total>
+<minify_save>0</minify_save>
+<image_total>0</image_total>
+<image_save>0</image_save>
+<cache_time>0</cache_time>
+<dns_start>0</dns_start>
+<dns_end>41</dns_end>
+<connect_start>41</connect_start>
+<connect_end>137</connect_end>
+<ssl_start>0</ssl_start>
+<ssl_end>0</ssl_end>
+<server_count>2</server_count>
+<server_rtt>95</server_rtt>
+<client_port>52257</client_port>
+<jpeg_scan_count>0</jpeg_scan_count>
+<full_url>http://t.co/</full_url>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<load_end>253</load_end>
+<ttfb_start>137</ttfb_start>
+<ttfb_end>243</ttfb_end>
+<download_start>243</download_start>
+<download_end>253</download_end>
+<download_ms>10</download_ms>
+<all_start>41</all_start>
+<all_end>253</all_end>
+<all_ms>212</all_ms>
+<index>0</index>
+<number>1</number>
+<headers>
+<request>
+<header>GET / HTTP/1.1</header>
+<header>Host: t.co</header>
+<header>Connection: keep-alive</header>
+<header>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</header>
+<header>User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36 PTST/125</header>
+<header>Accept-Encoding: gzip,deflate,sdch</header>
+<header>Accept-Language: en-US,en;q=0.8</header>
+</request>
+<response>
+<header>HTTP/1.1 200 OK</header>
+<header>content-type: text/html; charset=utf-8</header>
+<header>date: Wed, 24 Jul 2013 01:02:53 GMT</header>
+<header>server: tfe</header>
+<header>x-xss-protection: 1; mode=block</header>
+<header>Content-Encoding: gzip</header>
+<header>Transfer-Encoding: chunked</header>
+</response>
+</headers>
+</request>
+<request number="2">
+<ip_addr>199.16.156.75</ip_addr>
+<method>GET</method>
+<host>t.co</host>
+<url>/static/images/bird.png</url>
+<responseCode>200</responseCode>
+<load_ms>101</load_ms>
+<ttfb_ms>100</ttfb_ms>
+<load_start>266</load_start>
+<bytesOut>322</bytesOut>
+<bytesIn>720</bytesIn>
+<objectSize>519</objectSize>
+<contentType>image/png</contentType>
+<type>3</type>
+<socket>13</socket>
+<score_cache>0</score_cache>
+<score_cdn>0</score_cdn>
+<score_gzip>-1</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>-1</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<is_secure>0</is_secure>
+<dns_ms>-1</dns_ms>
+<connect_ms>-1</connect_ms>
+<ssl_ms>-1</ssl_ms>
+<gzip_total>0</gzip_total>
+<gzip_save>0</gzip_save>
+<minify_total>0</minify_total>
+<minify_save>0</minify_save>
+<image_total>0</image_total>
+<image_save>0</image_save>
+<cache_time>0</cache_time>
+<dns_start>0</dns_start>
+<dns_end>0</dns_end>
+<connect_start>0</connect_start>
+<connect_end>0</connect_end>
+<ssl_start>0</ssl_start>
+<ssl_end>0</ssl_end>
+<initiator>http://t.co/</initiator>
+<initiator_line>28</initiator_line>
+<server_count>2</server_count>
+<server_rtt>95</server_rtt>
+<client_port>52257</client_port>
+<jpeg_scan_count>0</jpeg_scan_count>
+<full_url>http://t.co/static/images/bird.png</full_url>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<load_end>367</load_end>
+<ttfb_start>266</ttfb_start>
+<ttfb_end>366</ttfb_end>
+<download_start>366</download_start>
+<download_end>367</download_end>
+<download_ms>1</download_ms>
+<all_start>266</all_start>
+<all_end>367</all_end>
+<all_ms>101</all_ms>
+<index>1</index>
+<number>2</number>
+<headers>
+<request>
+<header>GET /static/images/bird.png HTTP/1.1</header>
+<header>Host: t.co</header>
+<header>Connection: keep-alive</header>
+<header>Accept: image/webp,*/*;q=0.8</header>
+<header>User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36 PTST/125</header>
+<header>Referer: http://t.co/</header>
+<header>Accept-Encoding: gzip,deflate,sdch</header>
+<header>Accept-Language: en-US,en;q=0.8</header>
+</request>
+<response>
+<header>HTTP/1.1 200 OK</header>
+<header>content-length: 519</header>
+<header>content-type: image/png</header>
+<header>date: Wed, 24 Jul 2013 01:02:54 GMT</header>
+<header>last-modified: Fri, 14 Dec 2012 11:03:06 GMT</header>
+<header>server: tfe</header>
+<header>Transfer-Encoding: chunked</header>
+</response>
+</headers>
+</request>
+<request number="3">
+<ip_addr>54.230.39.73</ip_addr>
+<method>GET</method>
+<host>s.twimg.com</host>
+<url>/images/favicon.ico</url>
+<responseCode>200</responseCode>
+<load_ms>115</load_ms>
+<ttfb_ms>115</ttfb_ms>
+<load_start>711</load_start>
+<bytesOut>285</bytesOut>
+<bytesIn>1604</bytesIn>
+<objectSize>1150</objectSize>
+<contentType>image/vnd.microsoft.icon</contentType>
+<type>3</type>
+<socket>27</socket>
+<score_cache>0</score_cache>
+<score_cdn>100</score_cdn>
+<score_gzip>-1</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>-1</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<is_secure>0</is_secure>
+<dns_ms>207</dns_ms>
+<connect_ms>109</connect_ms>
+<ssl_ms>-1</ssl_ms>
+<gzip_total>0</gzip_total>
+<gzip_save>0</gzip_save>
+<minify_total>0</minify_total>
+<minify_save>0</minify_save>
+<image_total>0</image_total>
+<image_save>0</image_save>
+<cache_time>0</cache_time>
+<cdn_provider>Amazon CloudFront</cdn_provider>
+<dns_start>395</dns_start>
+<dns_end>602</dns_end>
+<connect_start>602</connect_start>
+<connect_end>711</connect_end>
+<ssl_start>0</ssl_start>
+<ssl_end>0</ssl_end>
+<server_count>8</server_count>
+<server_rtt>108</server_rtt>
+<client_port>52265</client_port>
+<jpeg_scan_count>0</jpeg_scan_count>
+<full_url>http://s.twimg.com/images/favicon.ico</full_url>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<load_end>826</load_end>
+<ttfb_start>711</ttfb_start>
+<ttfb_end>826</ttfb_end>
+<download_start>826</download_start>
+<download_end>826</download_end>
+<download_ms>0</download_ms>
+<all_start>395</all_start>
+<all_end>826</all_end>
+<all_ms>431</all_ms>
+<index>2</index>
+<number>3</number>
+<headers>
+<request>
+<header>GET /images/favicon.ico HTTP/1.1</header>
+<header>Host: s.twimg.com</header>
+<header>Connection: keep-alive</header>
+<header>Accept: */*</header>
+<header>User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36 PTST/125</header>
+<header>Accept-Encoding: gzip,deflate,sdch</header>
+<header>Accept-Language: en-US,en;q=0.8</header>
+</request>
+<response>
+<header>HTTP/1.0 200 OK</header>
+<header>Content-Type: image/vnd.microsoft.icon</header>
+<header>Content-Length: 1150</header>
+<header>Connection: keep-alive</header>
+<header>Date: Fri, 08 Feb 2013 15:56:17 GMT</header>
+<header>Last-Modified: Wed, 23 May 2012 19:57:36 GMT</header>
+<header>ETag: &amp;quot;7204470a5e48c0a592e34c097dbc0b87&amp;quot;</header>
+<header>Accept-Ranges: bytes</header>
+<header>Server: AmazonS3</header>
+<header>Age: 24876</header>
+<header>Via: 1.0 0c4077fdaa890a4bb3e32f61ce212877.cloudfront.net (CloudFront)</header>
+<header>X-Cache: Hit from cloudfront</header>
+<header>X-Amz-Cf-Id: eMFeWw9vDn1Bgg8neCE0eva0ZSkNd_0axmCFy5otUoLIsH5PEBwiQA==</header>
+</response>
+</headers>
+</request>
+</requests>
+</firstView>
+</median>
+<run>
+<id>1</id>
+<firstView>
+<results>
+<URL></URL>
+<loadTime>401</loadTime>
+<TTFB>243</TTFB>
+<bytesOut>927</bytesOut>
+<bytesOutDoc>642</bytesOutDoc>
+<bytesIn>3731</bytesIn>
+<bytesInDoc>2127</bytesInDoc>
+<connections>0</connections>
+<requests>3</requests>
+<requestsDoc>2</requestsDoc>
+<responses_200>0</responses_200>
+<responses_404>0</responses_404>
+<responses_other>0</responses_other>
+<result>0</result>
+<render>390</render>
+<fullyLoaded>826</fullyLoaded>
+<cached>0</cached>
+<docTime>401</docTime>
+<domTime>0</domTime>
+<score_cache>0</score_cache>
+<score_cdn>50</score_cdn>
+<score_gzip>100</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>100</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<gzip_total>1407</gzip_total>
+<gzip_savings>0</gzip_savings>
+<minify_total>0</minify_total>
+<minify_savings>0</minify_savings>
+<image_total>0</image_total>
+<image_savings>0</image_savings>
+<optimization_checked>1</optimization_checked>
+<aft>0</aft>
+<domElements>25</domElements>
+<pageSpeedVersion>1.9</pageSpeedVersion>
+<title>t.co / Twitter</title>
+<titleTime>386</titleTime>
+<loadEventStart>371</loadEventStart>
+<loadEventEnd>372</loadEventEnd>
+<domContentLoadedEventStart>268</domContentLoadedEventStart>
+<domContentLoadedEventEnd>268</domContentLoadedEventEnd>
+<lastVisualChange>392</lastVisualChange>
+<browser_name>Google Chrome</browser_name>
+<browser_version>28.0.1500.72</browser_version>
+<server_count>2</server_count>
+<server_rtt>95</server_rtt>
+<base_page_cdn></base_page_cdn>
+<adult_site>0</adult_site>
+<fixed_viewport>0</fixed_viewport>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<date>1374627758</date>
+<SpeedIndexDT>392</SpeedIndexDT>
+<SpeedIndex>392</SpeedIndex>
+<VisuallyCompleteDT>392</VisuallyCompleteDT>
+<visualComplete>392</visualComplete>
+</results>
+<pages>
+<details>http://www.webpagetest.org/result/130724_YD_8JX/1/details/</details>
+<checklist>http://www.webpagetest.org/result/130724_YD_8JX/1/performance_optimization/</checklist>
+<breakdown>http://www.webpagetest.org/result/130724_YD_8JX/1/breakdown/</breakdown>
+<domains>http://www.webpagetest.org/result/130724_YD_8JX/1/domains/</domains>
+<screenShot>http://www.webpagetest.org/result/130724_YD_8JX/1/screen_shot/</screenShot>
+</pages>
+<thumbnails>
+<waterfall>http://www.webpagetest.org/result/130724_YD_8JX/1_waterfall_thumb.png</waterfall>
+<checklist>http://www.webpagetest.org/result/130724_YD_8JX/1_optimization_thumb.png</checklist>
+<screenShot>http://www.webpagetest.org/result/130724_YD_8JX/1_screen_thumb.jpg</screenShot>
+</thumbnails>
+<images>
+<waterfall>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_waterfall.png</waterfall>
+<connectionView>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_connection.png</connectionView>
+<checklist>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_optimization.png</checklist>
+<screenShot>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_screen.jpg</screenShot>
+</images>
+<rawData><headers>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_report.txt</headers>
+<pageData>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_IEWPG.txt</pageData>
+<requestsData>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_IEWTR.txt</requestsData>
+<utilization>http://www.webpagetest.org/results/13/07/24/YD/8JX/1_progress.csv</utilization>
+<PageSpeedData>http://www.webpagetest.org/result/130724_YD_8JX/1_pagespeed.txt</PageSpeedData>
+</rawData>
+<domains>
+<domain host="t.co">
+<requests>2</requests>
+<bytes>2127</bytes>
+<connections>1</connections>
+</domain>
+</domains>
+<breakdown>
+<html>
+<requests>1</requests>
+<bytes>1407</bytes>
+</html>
+<js>
+<requests>0</requests>
+<bytes>0</bytes>
+</js>
+<css>
+<requests>0</requests>
+<bytes>0</bytes>
+</css>
+<text>
+<requests>0</requests>
+<bytes>0</bytes>
+</text>
+<image>
+<requests>1</requests>
+<bytes>720</bytes>
+</image>
+<flash>
+<requests>0</requests>
+<bytes>0</bytes>
+</flash>
+<other>
+<requests>0</requests>
+<bytes>0</bytes>
+</other>
+</breakdown>
+<requests>
+<request number="1">
+<ip_addr>199.16.156.75</ip_addr>
+<method>GET</method>
+<host>t.co</host>
+<url>/</url>
+<responseCode>200</responseCode>
+<load_ms>116</load_ms>
+<ttfb_ms>106</ttfb_ms>
+<load_start>137</load_start>
+<bytesOut>320</bytesOut>
+<bytesIn>1407</bytesIn>
+<objectSize>1196</objectSize>
+<contentType>text/html</contentType>
+<contentEncoding>gzip</contentEncoding>
+<type>3</type>
+<socket>13</socket>
+<score_cache>0</score_cache>
+<score_cdn>-1</score_cdn>
+<score_gzip>100</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>-1</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<is_secure>0</is_secure>
+<dns_ms>-1</dns_ms>
+<connect_ms>96</connect_ms>
+<ssl_ms>-1</ssl_ms>
+<gzip_total>1407</gzip_total>
+<gzip_save>0</gzip_save>
+<minify_total>0</minify_total>
+<minify_save>0</minify_save>
+<image_total>0</image_total>
+<image_save>0</image_save>
+<cache_time>0</cache_time>
+<dns_start>0</dns_start>
+<dns_end>41</dns_end>
+<connect_start>41</connect_start>
+<connect_end>137</connect_end>
+<ssl_start>0</ssl_start>
+<ssl_end>0</ssl_end>
+<server_count>2</server_count>
+<server_rtt>95</server_rtt>
+<client_port>52257</client_port>
+<jpeg_scan_count>0</jpeg_scan_count>
+<full_url>http://t.co/</full_url>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<load_end>253</load_end>
+<ttfb_start>137</ttfb_start>
+<ttfb_end>243</ttfb_end>
+<download_start>243</download_start>
+<download_end>253</download_end>
+<download_ms>10</download_ms>
+<all_start>41</all_start>
+<all_end>253</all_end>
+<all_ms>212</all_ms>
+<index>0</index>
+<number>1</number>
+<headers>
+<request>
+<header>GET / HTTP/1.1</header>
+<header>Host: t.co</header>
+<header>Connection: keep-alive</header>
+<header>Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8</header>
+<header>User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36 PTST/125</header>
+<header>Accept-Encoding: gzip,deflate,sdch</header>
+<header>Accept-Language: en-US,en;q=0.8</header>
+</request>
+<response>
+<header>HTTP/1.1 200 OK</header>
+<header>content-type: text/html; charset=utf-8</header>
+<header>date: Wed, 24 Jul 2013 01:02:53 GMT</header>
+<header>server: tfe</header>
+<header>x-xss-protection: 1; mode=block</header>
+<header>Content-Encoding: gzip</header>
+<header>Transfer-Encoding: chunked</header>
+</response>
+</headers>
+</request>
+<request number="2">
+<ip_addr>199.16.156.75</ip_addr>
+<method>GET</method>
+<host>t.co</host>
+<url>/static/images/bird.png</url>
+<responseCode>200</responseCode>
+<load_ms>101</load_ms>
+<ttfb_ms>100</ttfb_ms>
+<load_start>266</load_start>
+<bytesOut>322</bytesOut>
+<bytesIn>720</bytesIn>
+<objectSize>519</objectSize>
+<contentType>image/png</contentType>
+<type>3</type>
+<socket>13</socket>
+<score_cache>0</score_cache>
+<score_cdn>0</score_cdn>
+<score_gzip>-1</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>-1</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<is_secure>0</is_secure>
+<dns_ms>-1</dns_ms>
+<connect_ms>-1</connect_ms>
+<ssl_ms>-1</ssl_ms>
+<gzip_total>0</gzip_total>
+<gzip_save>0</gzip_save>
+<minify_total>0</minify_total>
+<minify_save>0</minify_save>
+<image_total>0</image_total>
+<image_save>0</image_save>
+<cache_time>0</cache_time>
+<dns_start>0</dns_start>
+<dns_end>0</dns_end>
+<connect_start>0</connect_start>
+<connect_end>0</connect_end>
+<ssl_start>0</ssl_start>
+<ssl_end>0</ssl_end>
+<initiator>http://t.co/</initiator>
+<initiator_line>28</initiator_line>
+<server_count>2</server_count>
+<server_rtt>95</server_rtt>
+<client_port>52257</client_port>
+<jpeg_scan_count>0</jpeg_scan_count>
+<full_url>http://t.co/static/images/bird.png</full_url>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<load_end>367</load_end>
+<ttfb_start>266</ttfb_start>
+<ttfb_end>366</ttfb_end>
+<download_start>366</download_start>
+<download_end>367</download_end>
+<download_ms>1</download_ms>
+<all_start>266</all_start>
+<all_end>367</all_end>
+<all_ms>101</all_ms>
+<index>1</index>
+<number>2</number>
+<headers>
+<request>
+<header>GET /static/images/bird.png HTTP/1.1</header>
+<header>Host: t.co</header>
+<header>Connection: keep-alive</header>
+<header>Accept: image/webp,*/*;q=0.8</header>
+<header>User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36 PTST/125</header>
+<header>Referer: http://t.co/</header>
+<header>Accept-Encoding: gzip,deflate,sdch</header>
+<header>Accept-Language: en-US,en;q=0.8</header>
+</request>
+<response>
+<header>HTTP/1.1 200 OK</header>
+<header>content-length: 519</header>
+<header>content-type: image/png</header>
+<header>date: Wed, 24 Jul 2013 01:02:54 GMT</header>
+<header>last-modified: Fri, 14 Dec 2012 11:03:06 GMT</header>
+<header>server: tfe</header>
+<header>Transfer-Encoding: chunked</header>
+</response>
+</headers>
+</request>
+<request number="3">
+<ip_addr>54.230.39.73</ip_addr>
+<method>GET</method>
+<host>s.twimg.com</host>
+<url>/images/favicon.ico</url>
+<responseCode>200</responseCode>
+<load_ms>115</load_ms>
+<ttfb_ms>115</ttfb_ms>
+<load_start>711</load_start>
+<bytesOut>285</bytesOut>
+<bytesIn>1604</bytesIn>
+<objectSize>1150</objectSize>
+<contentType>image/vnd.microsoft.icon</contentType>
+<type>3</type>
+<socket>27</socket>
+<score_cache>0</score_cache>
+<score_cdn>100</score_cdn>
+<score_gzip>-1</score_gzip>
+<score_cookies>-1</score_cookies>
+<score_keep-alive>100</score_keep-alive>
+<score_minify>-1</score_minify>
+<score_combine>-1</score_combine>
+<score_compress>-1</score_compress>
+<score_etags>-1</score_etags>
+<is_secure>0</is_secure>
+<dns_ms>207</dns_ms>
+<connect_ms>109</connect_ms>
+<ssl_ms>-1</ssl_ms>
+<gzip_total>0</gzip_total>
+<gzip_save>0</gzip_save>
+<minify_total>0</minify_total>
+<minify_save>0</minify_save>
+<image_total>0</image_total>
+<image_save>0</image_save>
+<cache_time>0</cache_time>
+<cdn_provider>Amazon CloudFront</cdn_provider>
+<dns_start>395</dns_start>
+<dns_end>602</dns_end>
+<connect_start>602</connect_start>
+<connect_end>711</connect_end>
+<ssl_start>0</ssl_start>
+<ssl_end>0</ssl_end>
+<server_count>8</server_count>
+<server_rtt>108</server_rtt>
+<client_port>52265</client_port>
+<jpeg_scan_count>0</jpeg_scan_count>
+<full_url>http://s.twimg.com/images/favicon.ico</full_url>
+<score_progressive_jpeg>-1</score_progressive_jpeg>
+<load_end>826</load_end>
+<ttfb_start>711</ttfb_start>
+<ttfb_end>826</ttfb_end>
+<download_start>826</download_start>
+<download_end>826</download_end>
+<download_ms>0</download_ms>
+<all_start>395</all_start>
+<all_end>826</all_end>
+<all_ms>431</all_ms>
+<index>2</index>
+<number>3</number>
+<headers>
+<request>
+<header>GET /images/favicon.ico HTTP/1.1</header>
+<header>Host: s.twimg.com</header>
+<header>Connection: keep-alive</header>
+<header>Accept: */*</header>
+<header>User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36 PTST/125</header>
+<header>Accept-Encoding: gzip,deflate,sdch</header>
+<header>Accept-Language: en-US,en;q=0.8</header>
+</request>
+<response>
+<header>HTTP/1.0 200 OK</header>
+<header>Content-Type: image/vnd.microsoft.icon</header>
+<header>Content-Length: 1150</header>
+<header>Connection: keep-alive</header>
+<header>Date: Fri, 08 Feb 2013 15:56:17 GMT</header>
+<header>Last-Modified: Wed, 23 May 2012 19:57:36 GMT</header>
+<header>ETag: &amp;quot;7204470a5e48c0a592e34c097dbc0b87&amp;quot;</header>
+<header>Accept-Ranges: bytes</header>
+<header>Server: AmazonS3</header>
+<header>Age: 24876</header>
+<header>Via: 1.0 0c4077fdaa890a4bb3e32f61ce212877.cloudfront.net (CloudFront)</header>
+<header>X-Cache: Hit from cloudfront</header>
+<header>X-Amz-Cf-Id: eMFeWw9vDn1Bgg8neCE0eva0ZSkNd_0axmCFy5otUoLIsH5PEBwiQA==</header>
+</response>
+</headers>
+</request>
+</requests>
+</firstView>
+</run>
+</data>
+</response>

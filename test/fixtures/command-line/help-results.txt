@@ -4,6 +4,10 @@
   Options:
 
     -h, --help                  output usage information
+    -b, --breakdown             include the breakdown of requests and bytes by mime type
+    -D, --domains               include the breakdown of requests and bytes by domain
+    -p, --pagespeed             include the PageSpeed score in the response (may be slower)
+    -R, --requests              include the request data in the response (slower and results in much larger responses)
     -m, --median <metric>       set the metric used to calculate median for multiple runs tests [loadTime]
     -S, --specs <json_or_file>  set the specs for performance test suite
     -r, --reporter <name>       set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity

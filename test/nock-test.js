@@ -47,6 +47,19 @@ describe('Example WebPageTest', function() {
       });
     });
 
+    it('gets a test results with extra data request then returns the test results object', function(done) {
+      wpt.getTestResults('130724_YD_8JX', {
+        breakDown: true,
+        domains: true,
+        pageSpeed: true,
+        requests: true
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.deepEqual(data, ResponseObjects.testResultsExtraData);
+        done();
+      });
+    });
+
     it('gets the locations list request then returns the locations list object', function(done) {
       wpt.getLocations(function (err, data) {
         if (err) return done(err);

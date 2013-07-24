@@ -54,6 +54,16 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
+  it('gets a test results with extra data input returns the API url', function(done) {
+    exec(mock('results 130724_YD_8JX -bDpR'), function(err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+        assert.equal(data.url, wptServer +
+          'xmlResult.php?test=130724_YD_8JX&breakdown=1&domains=1&pagespeed=1&requests=1');
+      done();
+    });
+  });
+
   it('gets the locations list input returns the API url', function(done) {
     exec(mock('locations'), function(err, data) {
       if (err) return done(err);

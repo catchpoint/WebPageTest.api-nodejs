@@ -62,6 +62,21 @@ describe('Dry Run', function() {
       });
     });
 
+    it('gets a test results with extra data request', function(done) {
+      wpt.getTestResults('130724_YD_8JX', {
+        breakDown: true,
+        domains: true,
+        pageSpeed: true,
+        requests: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer +
+          'xmlResult.php?test=130724_YD_8JX&breakdown=1&domains=1&pagespeed=1&requests=1');
+        done();
+      });
+    });
+
     it('gets the locations list request', function(done) {
       wpt.getLocations({dryRun: true}, function (err, data) {
         if (err) return done(err);
