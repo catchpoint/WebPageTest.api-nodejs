@@ -15,7 +15,7 @@
           name: 'server',
           key: 's',
           param: 'server',
-          info: 'the WPT server URL [www.webpagetest.org]'
+          info: 'the WPT server URL [%s]'
         },
         'dryrun': {
           name: 'dryRun',
@@ -25,13 +25,6 @@
         }
       },
       test: {
-        'key': {
-          name: 'key',
-          key: 'k',
-          api: 'k',
-          param: 'api_key',
-          info: 'API key (if assigned). Contact the WebPageTest server administrator for a key if required'
-        },
         'location': {
           name: 'location',
           key: 'l',
@@ -137,13 +130,6 @@
           api: 'authType',
           param: 'type',
           info: 'type of authentication: 0 = Basic, 1 = SNS [0]'
-        },
-        'request': {
-          name: 'requestId',
-          key: 'e',
-          api: 'r',
-          param: 'id',
-          info: 'echo request ID, useful to track asynchronous requests'
         },
         'notify': {
           name: 'notifyEmail',
@@ -334,6 +320,51 @@
           api: 'disableThreadedParser',
           bool: true,
           info: 'disable threaded HTML parser (Chrome only)'
+        },
+        'spdynossl': {
+          name: 'spdyNoSSL',
+          key: 'q',
+          api: 'spdyNoSSL',
+          bool: true,
+          info: 'use SPDY without SSL (Chrome only)'
+        },
+        'cmdline': {
+          name: 'commnadLine',
+          api: 'cmdline',
+          param: 'switches',
+          info: 'use a list of custom command line switches (Chrome only)'
+        },
+        'htmlbody': {
+          name: 'htmlBody',
+          api: 'htmlbody',
+          bool: true,
+          info: 'save the content of only the base HTML response'
+        },
+        'poll': {
+          name: 'pollResults',
+          param: 'interval',
+          optional: true,
+          info: 'poll for results after test is scheduled at every <interval> seconds [5]'
+        },
+        'wait': {
+          name: 'waitResults',
+          param: 'hostname:port',
+          optional: true,
+          info: 'wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]'
+        },
+        'timeout': {
+          name: 'timeout',
+          param: 'seconds',
+          info: 'timeout for polling and waiting results [no timeout]'
+        }
+      },
+      request: {
+        'request': {
+          name: 'requestId',
+          key: 'e',
+          api: 'r',
+          param: 'id',
+          info: 'echo request ID, useful to track asynchronous requests'
         }
       },
       run: {
@@ -385,11 +416,53 @@
         }
       },
       results: {
+        'breakdown': {
+          name: 'breakDown',
+          key: 'b',
+          api: 'breakdown',
+          bool: true,
+          info: 'include the breakdown of requests and bytes by mime type'
+        },
+        'domains': {
+          name: 'domains',
+          key: 'D',
+          api: 'domains',
+          bool: true,
+          info: 'include the breakdown of requests and bytes by domain'
+        },
+        'pagespeed': {
+          name: 'pageSpeed',
+          key: 'p',
+          api: 'pagespeed',
+          bool: true,
+          info: 'include the PageSpeed score in the response (may be slower)'
+        },
+        'requests': {
+          name: 'requests',
+          key: 'R',
+          api: 'requests',
+          bool: true,
+          info: 'include the request data in the response (slower and results in much larger responses)'
+        },
         'median': {
           name: 'medianMetric',
           key: 'm',
+          api: 'medianMetric',
           param: 'metric',
-          info: 'set the metric used to calculate median for multiple runs tests [loadtTime]'
+          info: 'set the metric used to calculate median for multiple runs tests [loadTime]'
+        },
+        'specs': {
+          name: 'specs',
+          key: 'S',
+          param: 'json_or_file',
+          info: 'set the specs for performance test suite'
+        },
+        'reporter': {
+          name: 'reporter',
+          key: 'r',
+          param: 'name',
+          info: 'set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity',
+          valid: /^(?:dot|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity)$/
         }
       },
       waterfall: {
@@ -423,6 +496,7 @@
         },
         'requests': {
           name: 'requests',
+          api: 'requests',
           key: 'R',
           param: 'items',
           info: 'filter requests (e.g.:1,2,3,4-9,8) [all]'
@@ -446,7 +520,7 @@
         'noellipsis': {
           name: 'noEllipsis',
           api: 'dots',
-          key: 'e',
+          key: 'i',
           bool: true,
           invert: true,
           info: 'hide ellipsis (...) for missing items [false]'
@@ -459,37 +533,51 @@
           invert: true,
           info: 'hide labels for requests (URL) [false]'
         }
+      },
+      'apikey': {
+        'key': {
+          name: 'key',
+          key: 'k',
+          api: 'k',
+          param: 'api_key',
+          info: 'API key (if assigned). Contact the WebPageTest server administrator for a key if required'
+        }
       }
     },
     commands = {
       'status': {
         name: 'getTestStatus',
         param: 'id',
+        options: ['request'],
         info: 'check test status'
       },
       'results': {
         name: 'getTestResults',
         param: 'id',
-        options: ['results'],
+        options: ['results', 'request'],
         info: 'get test results'
       },
       'locations': {
         name: 'getLocations',
+        options: ['request'],
         info: 'list locations and the number of pending tests'
       },
       'testers': {
         name: 'getTesters',
+        options: ['request'],
         info: 'list testers status and details'
       },
       'test': {
         name: 'runTest',
         param: 'url_or_script',
-        options: ['test'],
-        info: 'run test'
+        options: ['apikey', 'test', 'request', 'results'],
+        info: 'run test',
+        nokey: ['results']
       },
       'cancel': {
         name: 'cancelTest',
         param: 'id',
+        options: ['apikey'],
         info: 'cancel running/pending test'
       },
       'har': {
@@ -558,6 +646,10 @@
 
     $('.options.active input:text[value!=""]').each(function (i, e) {
       var opt = $(e);
+      
+      if (!opt.val()) {
+        return;
+      }
 
       opts[opt.attr('data-key')] = opt.val();
     });
