@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2013, Twitter Inc. and other contributors
+ * Copyright (c) 2013, Twitter Inc.
+ * Copyright (c) 2013, Marcel Duran and other contributors
  * Released under the MIT License
  */
 
