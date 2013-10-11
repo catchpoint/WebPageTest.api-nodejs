@@ -609,6 +609,7 @@ $ npm test
 
 ## Changelog
 
+* 0.2.0: Replaced jsonml by xml2js dependency
 * 0.1.3: Test results extra data (breakdown, domains, requests, pagespeed)
 * 0.1.0: Specs (CI); Run in batch; Node methods/options as command aliases; new Chrome test options
 * 0.0.4: Sync test with results via `--poll` or `--wait`
