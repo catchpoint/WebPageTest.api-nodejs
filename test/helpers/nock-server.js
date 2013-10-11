@@ -48,12 +48,12 @@ var reqResMap = {
   '/xmlResult.php?test=120816_V2_3': 'testResultsNotFound.xml',
   '/runtest.php?url=&f=json': 'runTestInvalid.json',
   '/runtest.php?script=&f=json': 'runTestInvalid.json',
-  '/getgzip.php?test=120816_V2_3&file=1_pagespeed.txt': undefined,
+  '/getgzip.php?test=120816_V2_3&file=1_pagespeed.txt': '',
   '/export.php?test=120816_V2_3': 'harNotFound.json',
   '/waterfall.php?test=120816_V2_3&run=1&cached=0': 'waterfallNotFound.png',
   '/thumbnail.php?test=120816_V2_3&run=1&cached=0&file=1_waterfall.png': 'waterfallThumbnailNotFound.png',
-  '/thumbnail.php?test=120816_V2_3&file=1_screen.jpg&run=1&cached=0': undefined,
-  '/cancelTest.php?test=120816_V2_4': undefined,
+  '/thumbnail.php?test=120816_V2_3&file=1_screen.jpg&run=1&cached=0': '',
+  '/cancelTest.php?test=120816_V2_4': '',
   '/runtest.php?url=http%3A%2F%2Fapikey.com&f=json': 'runTestNoAPIKey.json',
   '/runtest.php?url=http%3A%2F%2Fapikey.com&k=12345&f=json': 'runTestInvalidAPIKey.json'
 };
