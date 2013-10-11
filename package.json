@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "commander": "~2.0.0",
-    "mocha": "~1.12.1",
+    "mocha": "~1.13.0",
     "xml2js": "~0.2.8"
   },
   "devDependencies": {
