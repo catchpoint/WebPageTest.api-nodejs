@@ -1,0 +1,9 @@
+{
+   "statusCode":200,
+   "statusText":"Ok",
+   "data":{
+      "videoId":"130416_36ed6e37013655a14b2b857cdccec99db72adcaa",
+      "jsonUrl":"http:\/\/www.webpagetest.org\/video\/view.php?f=json&id=130416_36ed6e37013655a14b2b857cdccec99db72adcaa",
+      "userUrl":"http:\/\/www.webpagetest.org\/video\/view.php?id=130416_36ed6e37013655a14b2b857cdccec99db72adcaa"
+   }
+}
