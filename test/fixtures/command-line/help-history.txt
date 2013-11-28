@@ -1,0 +1,7 @@
+
+  Usage: history [options] [days]
+
+  Options:
+
+    -h, --help          output usage information
+

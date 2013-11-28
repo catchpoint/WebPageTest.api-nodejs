@@ -17,6 +17,7 @@
     netlog [options] <id>  get the Chrome Developer Tools Net log data (if available) from test
     console [options] <id> get the browser console log data (if available) from test
     testinfo <id>          get test request info/details
+    history [days]         get history of previously run tests
     waterfall [options] <id> get the waterfall PNG image
     screenshot [options] <id> get the fully loaded page screenshot in JPG format (PNG if in full resolution)
     listen [hostname:port] start webpagetest-api server on <hostname>:<port> [hostname:7791]

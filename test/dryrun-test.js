@@ -235,6 +235,14 @@ describe('Dry Run', function() {
       });
     });
 
+    it('gets history request', function(done) {
+      wpt.getHistory(2, {dryRun: true}, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'testlog.php?all=on&f=csv&days=2');
+        done();
+      });
+    });
+
     it('gets a waterfall image request', function(done) {
       wpt.getWaterfallImage('120816_V2_2', {dryRun: true}, function (err, data) {
         if (err) return done(err);
