@@ -231,6 +231,15 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
+  it('gets a history input returns the API url', function(done) {
+    exec(mock('history 2'), function(err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+      assert.equal(data.url, wptServer + 'testlog.php?all=on&f=csv&days=2');
+      done();
+    });
+  });
+
   it('gets a waterfall image input returns the API url', function(done) {
     exec(mock('waterfall 120816_V2_2'), function(err, data) {
       if (err) return done(err);
@@ -289,7 +298,7 @@ describe('WebPageTest Command Line', function() {
   [
     '', 'status', 'results', 'locations', 'testers', 'test', 'cancel', 'har',
     'pagespeed', 'utilization', 'request', 'timeline', 'netlog', 'console',
-    'testinfo', 'waterfall', 'screenshot', 'listen'
+    'testinfo', 'history', 'waterfall', 'screenshot', 'listen'
   ].forEach(function eachCmd(command) {
       it('gets a ' + command + ' help input and returns the help text', function(done) {
         exec(mock(command + ' --help'), function(err, data) {

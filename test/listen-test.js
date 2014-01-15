@@ -246,6 +246,15 @@ describe('Local WebPageTest-API Proxy', function() {
       });
     });
 
+    it('gets history GET request then returns the history JSON', function(done) {
+      get('/history/2', server, function (err, data) {
+        if (err) return done(err);
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.history);
+        done();
+      });
+    });
+
     it('gets a waterfall image GET request then returns the waterfall data URI string', function(done) {
       get('/waterfall/120816_V2_2?uri=1', server, function (err, data) {
         if (err) return done(err);

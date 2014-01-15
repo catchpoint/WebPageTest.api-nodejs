@@ -192,6 +192,14 @@ describe('Example WebPageTest', function() {
       });
     });
 
+    it('gets history request then returns the history object', function(done) {
+      wpt.getHistory(2, function (err, data) {
+        if (err) return done(err);
+        assert.deepEqual(data, ResponseObjects.history);
+        done();
+      });
+    });
+
     it('gets a waterfall image request then returns the waterfall data URI string', function(done) {
       wpt.getWaterfallImage('120816_V2_2', {dataURI: true}, function (err, data, info) {
         if (err) return done(err);
