@@ -254,6 +254,22 @@ describe('Example WebPageTest', function() {
       });
     });
 
+    it('creates a video', function (done) {
+      wpt.createVideo('130416_YS_KD4-r:3-c:1,130416_W6_KEE-r:8-c:1', {}, function (err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.createVideo);
+        done();
+      });
+    });
+
+    it('get the url of an embedded video', function (done){
+      wpt.getEmbedVideoPlayer('130416_36ed6e37013655a14b2b857cdccec99db72adcaa', {}, function (err, data) {
+        if (err) throw err;
+        assert.equal(data, ResponseObjects.embeddedVideoPlayer + "\n");
+        done();
+      });
+    });
+
     // not found / invalid
 
     it('gets an invalid test status request then returns a not found test status object', function(done) {
