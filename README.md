@@ -51,8 +51,11 @@ $ webpagetest --help
 * **netlog** _[options] \<id\>_: get the Chrome Developer Tools Net log data (if available) from test
 * **console** _[options] \<id\>_: get the browser console log data (if available) from test
 * **testinfo** _\<id\>_: get test request info/details
+* **history** _[days]_: get history of previously run tests
 * **waterfall** _[options] \<id\>_: get the waterfall PNG image
 * **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
+* **video** _[options] \<tests\>_: create a video from _\<tests\>_ (comma separated test ids)
+* **player _\<id\>_: get a html5 player for a video _\<id\>_
 * **listen** _[port]_: start webpagetest-api server on port _[7791_]
 * **batch** _\<file\>_: run commands in batch, i.e. one command per line from _\<file\>_ in parallel
 
@@ -152,6 +155,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-b, --nobandwidth**: hide bandwidth utilization [false]
 * **-e, --noellipsis**: hide ellipsis (...) for missing items [false]
 * **-l, --nolabels**: hide labels for requests (URL) [false]
+
+#### Video (works for **video** command only)
+* **-e, --end** _\<end_point\>_: frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded
 
 ### Examples
 #### 1. Get available locations
@@ -315,8 +321,11 @@ Methods and options (including the one letter shorthands) are the same when usin
 * `getNetLogData(id, options, callback)`
 * `getConsoleLogData(id, options, callback)`
 * `getTestInfo(id, options, callback)`
+* `getHistory(days, options, callback)`
 * `getWaterfallImage(id, options, callback)`
 * `getScreenshotImage(id, options, callback)`
+* `createVideo(tests, options, callback)`
+* `getEmbedVideoPlayer(id, options, callback)`
 * `listen(port, callback)`
 * `scriptToString(script)`
 
@@ -450,6 +459,9 @@ wpt.runTest(script, function(err, data) {
 * **noBandwidth**: _Boolean_, hide bandwidth utilization [false]
 * **noEllipsis**: _Boolean_, hide ellipsis (...) for missing items [false]
 * **noLabels**: _Boolean_, hide labels for requests (URL) [false]
+
+#### Video (works for `createVideo` method only)
+* **comparisonEndPoint** _String_: frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded
 
 ### Examples
 
