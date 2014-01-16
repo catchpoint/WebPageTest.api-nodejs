@@ -20,6 +20,8 @@
     history [days]         get history of previously run tests
     waterfall [options] <id> get the waterfall PNG image
     screenshot [options] <id> get the fully loaded page screenshot in JPG format (PNG if in full resolution)
+    video [options] <tests> create a video from <tests> (comma separated test ids)
+    player <id>            get a html5 player for a video <id>
     listen [hostname:port] start webpagetest-api server on <hostname>:<port> [hostname:7791]
     batch <file>           run commands in batch, i.e. one command per line from <file> in parallel
 

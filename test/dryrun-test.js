@@ -372,6 +372,14 @@ describe('Dry Run', function() {
       });
     });
 
+    it('create a video with document complete comparison end point', function (done) {
+      wpt.createVideo('130416_YS_KD4-r:3-c:1,130416_W6_KEE-r:8-c:1', {dryRun: true, comparisonEndPoint: 'doc'}, function (err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'video/create.php?tests=130416_YS_KD4-r%3A3-c%3A1%2C130416_W6_KEE-r%3A8-c%3A1&f=json&end=doc');
+        done();
+      });
+    });
+
     it('get the url of an embedded video', function (done) {
       wpt.getEmbedVideoPlayer('130416_36ed6e37013655a14b2b857cdccec99db72adcaa', {dryRun: true}, function (err, data) {
         if (err) throw err;
