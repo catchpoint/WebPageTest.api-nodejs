@@ -388,5 +388,26 @@ describe('Dry Run', function() {
         done();
       });
     });
+
+    it('get google csi', function(done) {
+      wpt.getGoogleCsiData('140101_AB_12', {dryRun: true}, function(err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'google/google_csi.php?test=140101_AB_12');
+        done();
+      });
+    });
+
+    it('get google csi run 3 cached', function(done) {
+      wpt.getGoogleCsiData('140101_AB_12', {
+        dryRun: true,
+        repeatView: true,
+        run: 3
+      }, function(err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'google/google_csi.php?test=140101_AB_12&run=3&cached=1');
+        done();
+      });
+    });
+
   });
 });

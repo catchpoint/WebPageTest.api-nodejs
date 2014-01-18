@@ -263,10 +263,26 @@ describe('Example WebPageTest', function() {
       });
     });
 
-    it('get the url of an embedded video', function (done){
+    it('gets the url of an embedded video', function (done) {
       wpt.getEmbedVideoPlayer('130416_36ed6e37013655a14b2b857cdccec99db72adcaa', {}, function (err, data) {
         if (err) throw err;
         assert.equal(data, ResponseObjects.embeddedVideoPlayer + "\n");
+        done();
+      });
+    });
+
+    it('gets Google csi data', function(done) {
+      wpt.getGoogleCsiData('140101_AB_12', function(err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.googleCsiData);
+        done();
+      });
+    });
+
+    it('gets Google csi data from run 2 only', function(done) {
+      wpt.getGoogleCsiData('140101_AB_12', {run: 2}, function(err, data) {
+        if (err) throw err;
+        assert.deepEqual(data, ResponseObjects.googleCsiDataRun2);
         done();
       });
     });

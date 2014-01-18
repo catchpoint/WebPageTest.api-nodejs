@@ -1,0 +1,83 @@
+[
+  {
+    "id": "140101_AB_12",
+    "run": "1",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "foo",
+    "value": "123"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "1",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "bar",
+    "value": "456"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "1",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "baz",
+    "value": "789"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "2",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "foo",
+    "value": "234"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "2",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "bar",
+    "value": "567"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "2",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "baz",
+    "value": "890"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "3",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "foo",
+    "value": "345"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "3",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "bar",
+    "value": "678"
+  },
+  {
+    "id": "140101_AB_12",
+    "run": "3",
+    "cached": "false",
+    "service": "myservice",
+    "action": "var1,var2",
+    "variable": "baz",
+    "value": "901"
+  }
+]
