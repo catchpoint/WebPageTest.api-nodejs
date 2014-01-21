@@ -52,6 +52,7 @@ $ webpagetest --help
 * **console** _[options] \<id\>_: get the browser console log data (if available) from test
 * **testinfo** _\<id\>_: get test request info/details
 * **history** _[days]_: get history of previously run tests
+* **googlecsi** _[options] \<id\>_: get Google CSI data (Client Side Instrumentation)
 * **waterfall** _[options] \<id\>_: get the waterfall PNG image
 * **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
 * **video** _[options] \<tests\>_: create a video from _\<tests\>_ (comma separated test ids)
@@ -132,7 +133,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-S, --specs** _\<json_or_file\>_: set the specs for performance test suite
 * **-r, --reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
-#### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **waterfall** and **screenshot** commands)
+#### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **googlecsi**, **waterfall** and **screenshot** commands)
 * **-r, --run** _\<number\>_: which run number on a multiple runs test [1]
 * **-c, --cached**: get the Repeat View (cached view) instead of default First View (primed cache)
 
@@ -322,6 +323,7 @@ Methods and options (including the one letter shorthands) are the same when usin
 * `getConsoleLogData(id, options, callback)`
 * `getTestInfo(id, options, callback)`
 * `getHistory(days, options, callback)`
+* `getGoogleCsiData(id, options, callback)`
 * `getWaterfallImage(id, options, callback)`
 * `getScreenshotImage(id, options, callback)`
 * `createVideo(tests, options, callback)`
@@ -436,7 +438,7 @@ wpt.runTest(script, function(err, data) {
 * **specs**: _String_, set the specs for performance test suite
 * **reporter**: _String_, set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
-#### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getWaterfallImage` and `getScreenshotImage` methods)
+#### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getGoogleCsiData`, `getWaterfallImage` and `getScreenshotImage` methods)
 * **run**: _Number_, the test run number for multiple runs tests (default: 1, first test)
 * **repeatView**: _Boolean_, if `true` returns the repeat view (cached) data
 
