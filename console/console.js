@@ -1,10 +1,9 @@
 /**
- * Copyright (c) 2013, Twitter Inc. and other contributors
+ * Copyright (c) 2013, Twitter Inc.
+ * Copyright (c) 2014, Google Inc.
+ * Copyright (c) 2014, Marcel Duran and other contributors
  * Released under the MIT License
  */
-
-/*global $*/
-/*jslint browser: true, indent: 2, white: true*/
 
 (function () {
   'use strict';
@@ -329,7 +328,7 @@
           info: 'use SPDY without SSL (Chrome only)'
         },
         'cmdline': {
-          name: 'commnadLine',
+          name: 'commandLine',
           api: 'cmdline',
           param: 'switches',
           info: 'use a list of custom command line switches (Chrome only)'
@@ -339,6 +338,12 @@
           api: 'htmlbody',
           bool: true,
           info: 'save the content of only the base HTML response'
+        },
+        'continuous': {
+          name: 'continuousVideoCapture',
+          api: 'continuousVideo',
+          bool: true,
+          info: 'capture video continuously (unstable/experimental, may cause tests to fail)'
         },
         'poll': {
           name: 'pollResults',
@@ -542,42 +547,52 @@
           param: 'api_key',
           info: 'API key (if assigned). Contact the WebPageTest server administrator for a key if required'
         }
+      },
+      'video': {
+        'end': {
+          name: 'comparisonEndPoint',
+          key: 'e',
+          api: 'end',
+          param: 'end_point',
+          info: 'frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded',
+          valid: /^(?:visual|all|doc|full)$/
+        }
       }
     },
     commands = {
       'status': {
         name: 'getTestStatus',
         param: 'id',
-        options: ['request'],
+        options: [options.request],
         info: 'check test status'
       },
       'results': {
         name: 'getTestResults',
         param: 'id',
-        options: ['results', 'request'],
+        options: [options.results, options.request],
         info: 'get test results'
       },
       'locations': {
         name: 'getLocations',
-        options: ['request'],
+        options: [options.request],
         info: 'list locations and the number of pending tests'
       },
       'testers': {
         name: 'getTesters',
-        options: ['request'],
+        options: [options.request],
         info: 'list testers status and details'
       },
       'test': {
         name: 'runTest',
         param: 'url_or_script',
-        options: ['apikey', 'test', 'request', 'results'],
+        options: [options.apikey, options.test, options.request, options.results],
         info: 'run test',
-        nokey: ['results']
+        nokey: [options.results]
       },
       'cancel': {
         name: 'cancelTest',
         param: 'id',
-        options: ['apikey'],
+        options: [options.apikey],
         info: 'cancel running/pending test'
       },
       'har': {
@@ -588,37 +603,37 @@
       'pagespeed': {
         name: 'getPageSpeedData',
         param: 'id',
-        options: ['run'],
+        options: [options.run],
         info: 'get the Google Page Speed results (if available) from test'
       },
       'utilization': {
         name: 'getUtilizationData',
         param: 'id',
-        options: ['run'],
+        options: [options.run],
         info: 'get the CPU, bandwidth and memory utilization data from test'
       },
       'request': {
         name: 'getRequestData',
         param: 'id',
-        options: ['run'],
+        options: [options.run],
         info: 'get the request data from test'
       },
       'timeline': {
         name: 'getTimelineData',
         param: 'id',
-        options: ['run'],
+        options: [options.run],
         info: 'get the Chrome Developer Tools Timeline data (if available) from test'
       },
       'netlog': {
         name: 'getNetLogData',
         param: 'id',
-        options: ['run'],
+        options: [options.run],
         info: 'get the Chrome Developer Tools Net log data (if available) from test'
       },
       'console': {
         name: 'getConsoleLogData',
         param: 'id',
-        options: ['run'],
+        options: [options.run],
         info: 'get the browser console log data (if available) from test'
       },
       'testinfo': {
@@ -626,17 +641,40 @@
         param: 'id',
         info: 'get test request info/details'
       },
+      'history': {
+        name: 'getHistory',
+        param: 'days',
+        optional: true,
+        info: 'get history of previously run tests'
+      },
+      'googlecsi': {
+        name: 'getGoogleCsiData',
+        param: 'id',
+        options: [options.run],
+        info: 'get Google CSI data (Client Side Instrumentation)'
+      },
       'waterfall': {
         name: 'getWaterfallImage',
         param: 'id',
-        options: ['run', 'image', 'waterfall'],
+        options: [options.run, options.image, options.waterfall],
         info: 'get the waterfall PNG image'
       },
       'screenshot': {
         name: 'getScreenshotImage',
         param: 'id',
-        options: ['run', 'image', 'screenshot'],
+        options: [options.run, options.image, options.screenshot],
         info: 'get the fully loaded page screenshot in JPG format (PNG if in full resolution)'
+      },
+      'video': {
+        name: 'createVideo',
+        param: 'tests',
+        options: [options.video],
+        info: 'create a video from <tests> (comma separated test ids)'
+      },
+      'player': {
+        name: 'getEmbedVideoPlayer',
+        param: 'id',
+        info: 'get a html5 player for a video <id>'
       }
     },
     hostname = 'http://webpagetest.aws.af.cm';
