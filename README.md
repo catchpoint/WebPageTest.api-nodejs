@@ -114,6 +114,8 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-Q, --noparser**: disable threaded HTML parser (Chrome only)
 * **-q, --spdynossl**: use SPDY without SSL (Chrome only)
 * **--cmdline** _\<switches\>_: use a list of custom command line switches (Chrome only)
+* **--htmlbody**: save the content of only the base HTML response
+* **--continuous**: capture video continuously (unstable/experimental, may cause tests to fail)
 * **--poll** _[interval]_: poll for results after test is scheduled at every \<interva\l> seconds [5]
 * **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on \<hostname\>:\<port\> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
