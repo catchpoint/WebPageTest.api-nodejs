@@ -38,6 +38,7 @@ var reqResMap = {
   '/video/view.php?embed=1&id=130416_36ed6e37013655a14b2b857cdccec99db72adcaa': 'embeddedVideoPlayer.html',
   '/google/google_csi.php?test=140101_AB_12': 'googleCsiData.csv',
   '/google/google_csi.php?test=140101_AB_12&run=2': 'googleCsiDataRun2.csv',
+  '/response_body.php?test=140101_AB_12&run=1&cached=0&request=1': 'response.txt',
 
   // test results for multi runs with/without custom median metric
   '/xmlResult.php?test=130619_KK_6A2': 'testResultsMultiRunsDefaultMedianMetric.xml',

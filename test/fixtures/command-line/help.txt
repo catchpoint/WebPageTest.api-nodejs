@@ -19,6 +19,7 @@
     testinfo <id>          get test request info/details
     history [days]         get history of previously run tests
     googlecsi [options] <id> get Google CSI data (Client Side Instrumentation)
+    response [options] <id> get response body for text resources
     waterfall [options] <id> get the waterfall PNG image
     screenshot [options] <id> get the fully loaded page screenshot in JPG format (PNG if in full resolution)
     video [options] <tests> create a video from <tests> (comma separated test ids)

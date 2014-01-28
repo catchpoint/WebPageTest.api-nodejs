@@ -287,6 +287,14 @@ describe('Example WebPageTest', function() {
       });
     });
 
+    it('gets response body', function(done) {
+      wpt.getResponseBody('140101_AB_12', function(err, data) {
+        if (err) throw err;
+        assert.deepEqual(data.result.trim(), ResponseObjects.response.data.result);
+        done();
+      });
+    });
+
     // not found / invalid
 
     it('gets an invalid test status request then returns a not found test status object', function(done) {

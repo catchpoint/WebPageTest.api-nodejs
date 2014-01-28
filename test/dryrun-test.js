@@ -409,5 +409,26 @@ describe('Dry Run', function() {
       });
     });
 
+    it('get response body for first run first request', function(done) {
+      wpt.getResponseBody('140101_AB_12', {dryRun: true}, function(err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'response_body.php?test=140101_AB_12&run=1&cached=0&request=1');
+        done();
+      });
+    });
+
+    it('get response body for cached 3rd run 5th request', function(done) {
+      wpt.getResponseBody('140101_AB_12', {
+        dryRun: true,
+        repeatView: true,
+        run: 3,
+        request: 5
+      }, function(err, data) {
+        if (err) throw err;
+        assert.equal(data.url, wptServer + 'response_body.php?test=140101_AB_12&run=3&cached=1&request=5');
+        done();
+      });
+    });
+
   });
 });

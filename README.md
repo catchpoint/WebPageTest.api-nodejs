@@ -53,6 +53,7 @@ $ webpagetest --help
 * **testinfo** _\<id\>_: get test request info/details
 * **history** _[days]_: get history of previously run tests
 * **googlecsi** _[options] \<id\>_: get Google CSI data (Client Side Instrumentation)
+* **response** _[options] \<id\>_: get response body for text resources
 * **waterfall** _[options] \<id\>_: get the waterfall PNG image
 * **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
 * **video** _[options] \<tests\>_: create a video from _\<tests\>_ (comma separated test ids)
@@ -135,7 +136,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-S, --specs** _\<json_or_file\>_: set the specs for performance test suite
 * **-r, --reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
-#### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **googlecsi**, **waterfall** and **screenshot** commands)
+#### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **console**, **googlecsi**, **response**, **waterfall** and **screenshot** commands)
 * **-r, --run** _\<number\>_: which run number on a multiple runs test [1]
 * **-c, --cached**: get the Repeat View (cached view) instead of default First View (primed cache)
 
@@ -161,6 +162,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 
 #### Video (works for **video** command only)
 * **-e, --end** _\<end_point\>_: frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded
+
+#### Response (works for **response** command only)
+* **-R, --request** _\<number\>_: the request number [1]
 
 ### Examples
 #### 1. Get available locations
@@ -326,6 +330,7 @@ Methods and options (including the one letter shorthands) are the same when usin
 * `getTestInfo(id, options, callback)`
 * `getHistory(days, options, callback)`
 * `getGoogleCsiData(id, options, callback)`
+* `getResponseBody(id, options, callback)`
 * `getWaterfallImage(id, options, callback)`
 * `getScreenshotImage(id, options, callback)`
 * `createVideo(tests, options, callback)`
@@ -440,7 +445,7 @@ wpt.runTest(script, function(err, data) {
 * **specs**: _String_, set the specs for performance test suite
 * **reporter**: _String_, set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
-#### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getGoogleCsiData`, `getWaterfallImage` and `getScreenshotImage` methods)
+#### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getConsoleLogData`, `getGoogleCsiData`, `getResponseBody`, `getWaterfallImage` and `getScreenshotImage` methods)
 * **run**: _Number_, the test run number for multiple runs tests (default: 1, first test)
 * **repeatView**: _Boolean_, if `true` returns the repeat view (cached) data
 
@@ -466,6 +471,9 @@ wpt.runTest(script, function(err, data) {
 
 #### Video (works for `createVideo` method only)
 * **comparisonEndPoint** _String_: frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded
+
+#### Response (works for `getResponseBody` method only)
+* **request** _Number_: the request number [1]
 
 ### Examples
 
@@ -625,6 +633,7 @@ $ npm test
 
 ## Changelog
 
+* 0.2.2: Added response body command/method
 * 0.2.1: Added history, video, player, googleCsi commands and continuous option 
 * 0.2.0: Replaced jsonml by xml2js dependency
 * 0.1.3: Test results extra data (breakdown, domains, requests, pagespeed)
