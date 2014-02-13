@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>WebPageTest API Wrapper</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="WebPageTest API Wrapper Console">
+    <meta name="author" content="Marcel Duran">
+
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <!-- favicon.ico Copyright (C) 2010 Yusuke Kamiyamane. All rights reserved.
+    The icons are licensed under a Creative Commons Attribution 3.0 license.
+    http://p.yusukekamiyamane.com/ -->
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      #controls {
+        margin: 60px 0;
+      }
+      .input-prepend.inline {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .sample {
+        margin: 5px;
+      }
+      .options {
+        display: none;
+      }
+      .options.active {
+        display: block;
+      }
+      .checkbox.inline + .checkbox.inline {
+        margin-left: 30px;
+      }
+      #command-info {
+        margin-top: 10px;
+      }
+      .container .credit {
+        margin: 20px 0;
+      }
+      #wrap {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+        margin: 0 auto -60px;
+      }
+      #footer {
+        height: 60px;
+      }
+      #footer {
+        background-color: #f5f5f5;
+      }
+      @media (max-width: 767px) {
+        #footer {
+          margin-left: -20px;
+          margin-right: -20px;
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div id="wrap">
+
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="../">WebPageTest API Wrapper</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li><a href="../">Home</a></li>
+                <li class="active"><a href="#">Console</a></li>
+                <li><a href="https://github.com/marcelduran/webpagetest-api">Source</a></li>
+                <li><a href="https://github.com/marcelduran/webpagetest-api/issues">Issues</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div>
+        </div>
+      </div>
+
+      <div class="container main">
+
+        <div id="controls">
+
+          <h1>API Console</h1>
+
+          <span class="pull-right sample">
+            <span class="label label-info">sample id</span>
+            <span class="text-info">121119_DJ_J0R</span>
+          </span>
+          <div class="navbar">
+            <div class="navbar-inner">
+              <form id="form" class="navbar-form pull-left">
+                <select id="commands" class="span2">
+                  <option>Command</option>
+                  <option value="status">status</option>
+                  <option value="results">results</option>
+                  <option value="locations">locations</option>
+                  <option value="testers">testers</option>
+                  <option value="test">test</option>
+                  <option value="cancel">cancel</option>
+                  <option value="har">har</option>
+                  <option value="pagespeed">pagespeed</option>
+                  <option value="utilization">utilization</option>
+                  <option value="request">request</option>
+                  <option value="timeline">timeline</option>
+                  <option value="netlog">netlog</option>
+                  <option value="console">console</option>
+                  <option value="testinfo">testinfo</option>
+                  <option value="history">history</option>
+                  <option value="googlecsi">googlecsi</option>
+                  <option value="waterfall">waterfall</option>
+                  <option value="screenshot">screenshot</option>
+                  <option value="video">video</option>
+                  <option value="player">player</option>
+                </select>
+                <input id="param" type="text" class="span2" placeholder="Parameter">
+                <button type="submit" class="btn">Run</button>
+                <span id="command-info" class="help-block">Select a command above</span>
+              </form>
+            </div>
+          </div>
+
+          <div class="tabbable"> <!-- Only required for left/right tabs -->
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab-options" data-toggle="tab">Options</a></li>
+              <li><a href="#tab-output" data-toggle="tab">Output</a></li>
+              <li><a href="#tab-module" data-toggle="tab">Module</a></li>
+              <li><a href="#tab-command" data-toggle="tab">Command Line</a></li>
+              <li><a href="#tab-url" data-toggle="tab">WPT URL</a></li>
+              <li><a href="#tab-proxy" data-toggle="tab">Proxy URL</a></li>
+            </ul>
+            <div class="tab-content">
+              <div class="tab-pane active" id="tab-options">
+                <div class="options" id="opt-common"></div>
+                <div class="options" id="opt-apikey"></div>
+                <div class="options" id="opt-test"></div>
+                <div class="options" id="opt-request"></div>
+                <div class="options" id="opt-results"></div>
+                <div class="options" id="opt-run"></div>
+                <div class="options" id="opt-image"></div>
+                <div class="options" id="opt-screenshot"></div>
+                <div class="options" id="opt-waterfall"></div>
+              </div>
+              <div class="tab-pane" id="tab-output">
+                <pre id="output"></pre>
+                <img id="image">
+              </div>
+              <div class="tab-pane" id="tab-module">
+                <pre id="module"></pre>
+              </div>
+              <div class="tab-pane" id="tab-command">
+                <pre id="command-line"></pre>
+              </div>
+              <div class="tab-pane" id="tab-url">
+                <pre id="url"></pre>
+              </div>
+              <div class="tab-pane" id="tab-proxy">
+                <pre id="proxy"></pre>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- /controls -->
+
+      </div> <!-- /container -->
+
+    </div><!-- /wrap -->
+
+    <div id="footer">
+      <div class="container">
+        <p class="muted credit">Copyright &copy; 2013, Twitter Inc; Copyright &copy; 2014 Google Inc; Copyright &copy; Marcel Duran and other contributors</p>
+      </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="console.min.js"></script>
+
+    <script>
+      (function (d, s) {
+        var g = d.createElement(s),
+            h = d.getElementsByTagName(s)[0];
+        g.async = true;
+        g.src = '//www.google-analytics.com/ga.js';
+        _gaq = [['_setAccount', 'UA-3587044-1'], ['_trackPageview'], ['_trackPageLoadTime']];
+        setTimeout(function () {
+          h.parentNode.insertBefore(g, h);
+        }, 0);
+      }(document, 'script'));
+    </script>
+  </body>
+</html>
