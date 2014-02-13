@@ -563,36 +563,36 @@
       'status': {
         name: 'getTestStatus',
         param: 'id',
-        options: [options.request],
+        options: ['request'],
         info: 'check test status'
       },
       'results': {
         name: 'getTestResults',
         param: 'id',
-        options: [options.results, options.request],
+        options: ['results', 'request'],
         info: 'get test results'
       },
       'locations': {
         name: 'getLocations',
-        options: [options.request],
+        options: ['request'],
         info: 'list locations and the number of pending tests'
       },
       'testers': {
         name: 'getTesters',
-        options: [options.request],
+        options: ['request'],
         info: 'list testers status and details'
       },
       'test': {
         name: 'runTest',
         param: 'url_or_script',
-        options: [options.apikey, options.test, options.request, options.results],
+        options: ['apikey', 'test', 'request', 'results'],
         info: 'run test',
-        nokey: [options.results]
+        nokey: ['results']
       },
       'cancel': {
         name: 'cancelTest',
         param: 'id',
-        options: [options.apikey],
+        options: ['apikey'],
         info: 'cancel running/pending test'
       },
       'har': {
@@ -603,37 +603,37 @@
       'pagespeed': {
         name: 'getPageSpeedData',
         param: 'id',
-        options: [options.run],
+        options: ['run'],
         info: 'get the Google Page Speed results (if available) from test'
       },
       'utilization': {
         name: 'getUtilizationData',
         param: 'id',
-        options: [options.run],
+        options: ['run'],
         info: 'get the CPU, bandwidth and memory utilization data from test'
       },
       'request': {
         name: 'getRequestData',
         param: 'id',
-        options: [options.run],
+        options: ['run'],
         info: 'get the request data from test'
       },
       'timeline': {
         name: 'getTimelineData',
         param: 'id',
-        options: [options.run],
+        options: ['run'],
         info: 'get the Chrome Developer Tools Timeline data (if available) from test'
       },
       'netlog': {
         name: 'getNetLogData',
         param: 'id',
-        options: [options.run],
+        options: ['run'],
         info: 'get the Chrome Developer Tools Net log data (if available) from test'
       },
       'console': {
         name: 'getConsoleLogData',
         param: 'id',
-        options: [options.run],
+        options: ['run'],
         info: 'get the browser console log data (if available) from test'
       },
       'testinfo': {
@@ -650,25 +650,25 @@
       'googlecsi': {
         name: 'getGoogleCsiData',
         param: 'id',
-        options: [options.run],
+        options: ['run'],
         info: 'get Google CSI data (Client Side Instrumentation)'
       },
       'waterfall': {
         name: 'getWaterfallImage',
         param: 'id',
-        options: [options.run, options.image, options.waterfall],
+        options: ['run', 'image', 'waterfall'],
         info: 'get the waterfall PNG image'
       },
       'screenshot': {
         name: 'getScreenshotImage',
         param: 'id',
-        options: [options.run, options.image, options.screenshot],
+        options: ['run', 'image', 'screenshot'],
         info: 'get the fully loaded page screenshot in JPG format (PNG if in full resolution)'
       },
       'video': {
         name: 'createVideo',
         param: 'tests',
-        options: [options.video],
+        options: ['video'],
         info: 'create a video from <tests> (comma separated test ids)'
       },
       'player': {
