@@ -633,6 +633,7 @@ $ npm test
 
 ## Changelog
 
+* 0.2.3: Updated DevTools Timeline API url endpoint for timeline command
 * 0.2.2: Added response body command/method
 * 0.2.1: Added history, video, player, googleCsi commands and continuous option 
 * 0.2.0: Replaced jsonml by xml2js dependency
