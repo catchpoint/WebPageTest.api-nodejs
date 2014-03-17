@@ -204,10 +204,22 @@ describe('Dry Run', function() {
       });
     });
 
-    it('gets timeline data request', function(done) {
+    it('gets default timeline data request', function(done) {
       wpt.getTimelineData('120816_V2_2', {dryRun: true}, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_timeline.json');
+        assert.equal(data.url, wptServer + 'getTimeline.php?test=120816_V2_2');
+        done();
+      });
+    });
+
+    it('gets custom timeline data request', function(done) {
+      wpt.getTimelineData('120816_V2_2', {
+        run: 2,
+        cached: true,
+        dryRun: true
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'getTimeline.php?test=120816_V2_2&run=2&cached=1');
         done();
       });
     });

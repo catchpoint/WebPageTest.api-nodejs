@@ -22,7 +22,7 @@ var reqResMap = {
   '/export.php?test=120816_V2_2': 'har.json',
   '/getgzip.php?test=120816_V2_2&file=1_progress.csv': 'utilization.csv',
   '/getgzip.php?test=120816_V2_2&file=1_IEWTR.txt': 'request.txt',
-  '/getgzip.php?test=120816_V2_2&file=1_timeline.json': 'timeline.json',
+  '/getTimeline.php?test=120816_V2_2': 'timeline.json',
   '/getgzip.php?test=120816_V2_2&file=1_netlog.txt': 'netLog.txt',
   '/getgzip.php?test=120816_V2_2&file=1_console_log.json': 'consoleLog.json',
   '/getgzip.php?test=120816_V2_2&file=testinfo.json': 'testInfo.json',

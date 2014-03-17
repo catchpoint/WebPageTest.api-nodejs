@@ -196,11 +196,20 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
-  it('gets a timeline data input returns the API url', function(done) {
+  it('gets a timeline data input returns the default API url', function(done) {
     exec(mock('timeline 120816_V2_2'), function(err, data) {
       if (err) return done(err);
       data = JSON.parse(data);
-      assert.equal(data.url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_timeline.json');
+      assert.equal(data.url, wptServer + 'getTimeline.php?test=120816_V2_2');
+      done();
+    });
+  });
+
+  it('gets a custom timeline data input returns the API url', function(done) {
+    exec(mock('timeline 120816_V2_2 -r 2 --cached'), function(err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+      assert.equal(data.url, wptServer + 'getTimeline.php?test=120816_V2_2&run=2&cached=1');
       done();
     });
   });
