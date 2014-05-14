@@ -41,6 +41,11 @@
     -A, --noads                   block ads defined by adblockrules.org
     -E, --aft                     (experimental) measure above-the-fold rendering time
     -Z, --spof <domains>          space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+        --htmlbody                save the content of only the base HTML response
+        --continuous              capture video continuously (unstable/experimental, may cause tests to fail)
+        --clearcerts              clear the OS certificate caches (causes IE to do OCSP/CRL checks during SSL negotiation if the certificates are not already cached)
+        --medianvideo             store the video from the median run when capturing video is enabled
+        --tsview <id>             test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
     -W, --mobile                  (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
     -M, --timeline                capture Developer Tools Timeline (Chrome only)
     -G, --netlog                  capture Network Log (Chrome only)
@@ -48,9 +53,9 @@
     -J, --swrender                force software rendering, disable GPU acceleration (Chrome only)
     -Q, --noparser                disable threaded HTML parser (Chrome only)
     -q, --spdynossl               use SPDY without SSL (Chrome only)
+        --datareduction           enable data reduction on Chrome 34+ Android (Chrome only)
+        --useragent <string>      custom user agent string (Chrome only)
         --cmdline <switches>      use a list of custom command line switches (Chrome only)
-        --htmlbody                save the content of only the base HTML response
-        --continuous              capture video continuously (unstable/experimental, may cause tests to fail)
         --poll [interval]         poll for results after test is scheduled at every <interval> seconds [5]
         --wait [hostname:port]    wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
         --timeout <seconds>       timeout for polling and waiting results [no timeout]
