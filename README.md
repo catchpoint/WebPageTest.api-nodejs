@@ -58,7 +58,7 @@ $ webpagetest --help
 * **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
 * **video** _[options] \<tests\>_: create a video from _\<tests\>_ (comma separated test ids)
 * **player _\<id\>_: get a html5 player for a video _\<id\>_
-* **listen** _[port]_: start webpagetest-api server on port _[7791_]
+* **listen** _[options]_ _[port]_: start webpagetest-api server on port _[7791_]
 * **batch** _\<file\>_: run commands in batch, i.e. one command per line from _\<file\>_ in parallel
 
 ### Options
@@ -107,6 +107,11 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-A, --noads**: block ads defined by adblockrules.org
 * **-E, --aft**: (experimental) measure above-the-fold rendering time
 * **-Z, --spof** _\<domains\>_: space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+* **--htmlbody**: save the content of only the base HTML response
+* **--continuous**: capture video continuously (unstable/experimental, may cause tests to fail)
+* **--clearcerts**: clear the OS certificate caches (causes IE to do OCSP/CRL checks during SSL negotiation if the certificates are not already cached)
+* **--medianvideo**: store the video from the median run when capturing video is enabled
+* **--tsview** _\<id\>_: test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
 * **-W, --mobile**: (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
 * **-M, --timeline**: capture Developer Tools Timeline (Chrome only)
 * **-G, --netlog**: capture Network Log (Chrome only)
@@ -114,9 +119,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-J, --swrender**: force software rendering, disable GPU acceleration (Chrome only)
 * **-Q, --noparser**: disable threaded HTML parser (Chrome only)
 * **-q, --spdynossl**: use SPDY without SSL (Chrome only)
+* **--datareduction**: enable data reduction on Chrome 34+ Android (Chrome only)
+* **--useragent** _\<string\>_: custom user agent string (Chrome only)
 * **--cmdline** _\<switches\>_: use a list of custom command line switches (Chrome only)
-* **--htmlbody**: save the content of only the base HTML response
-* **--continuous**: capture video continuously (unstable/experimental, may cause tests to fail)
 * **--poll** _[interval]_: poll for results after test is scheduled at every \<interva\l> seconds [5]
 * **--wait** _[hostname:port]_: wait for test results informed by agent once complete listening on \<hostname\>:\<port\> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
@@ -165,6 +170,11 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 
 #### Response (works for **response** command only)
 * **-R, --request** _\<number\>_: the request number [1]
+
+#### Listen (works for **listen** command only)
+* **-k, --key** _\<file\>_: private key file to use for SSL
+* **-c, --cert** _\<file\>_: public x509 certificate file to use for SSL
+
 
 ### Examples
 #### 1. Get available locations
@@ -335,7 +345,7 @@ Methods and options (including the one letter shorthands) are the same when usin
 * `getScreenshotImage(id, options, callback)`
 * `createVideo(tests, options, callback)`
 * `getEmbedVideoPlayer(id, options, callback)`
-* `listen(port, callback)`
+* `listen(port, options, callback)`
 * `scriptToString(script)`
 
 ### Parameters
@@ -418,6 +428,11 @@ wpt.runTest(script, function(err, data) {
 * **blockAds**: _Boolean_, block ads defined by adblockrules.org
 * **aftRenderingTime**: _Boolean_, (experimental) measure above-the-fold rendering time
 * **spof**: _[String]_, array of string of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+* **htmlBody**: _Boolean_, save the content of only the base HTML response
+* **continuous**: _Boolean_, capture video continuously (unstable/experimental, may cause tests to fail)
+* **clearCerts**: _Boolean_, clear the OS certificate caches (causes IE to do OCSP/CRL checks during SSL negotiation if the certificates are not already cached)
+* **medianVideo**: _Boolean_, store the video from the median run when capturing video is enabled
+* **tsView**: _String_, test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
 * **emulateMobile**: _Boolean_, (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
 * **timeline**: _Boolean_, capture Developer Tools Timeline (Chrome only)
 * **netLog**: _Boolean_, capture Network Log (Chrome only)
@@ -425,6 +440,8 @@ wpt.runTest(script, function(err, data) {
 * **forceSoftwareRendering**: _Boolean_, force software rendering, disable GPU acceleration (Chrome only)
 * **disableThreadedParser**: _Boolean_, disable threaded HTML parser (Chrome only)
 * **spdyNoSSL**: _Boolean_, use SPDY without SSL (Chrome only)
+* **dataReduction**: _Boolean_, enable data reduction on Chrome 34+ Android (Chrome only)
+* **userAgent**: _String_, custom user agent string (Chrome only)
 * **commandLine**: _[String]_, use a list of custom command line switches (Chrome only)
 * **pollResults**: _Number_, poll for results after test is scheduled at every <interval> seconds [5]
 * **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
@@ -474,6 +491,10 @@ wpt.runTest(script, function(err, data) {
 
 #### Response (works for `getResponseBody` method only)
 * **request** _Number_: the request number [1]
+
+#### Listen (works for `listen` method only)
+* **key** _String_: private key file path to use for SSL
+* **cert** _String_: public x509 certificate file path to use for SSL
 
 ### Examples
 
@@ -556,10 +577,18 @@ http://localhost:8080
 $ curl http://localhost:8080/help
 $ curl http://localhost:8080/test/twitter.com/?location=SanJose_IE9
 ```
+```bash
+$ webpagetest listen 8443 --key key.pem --cert cert.pem --server wpt.foo.com
+```
+```bash
+server listening on port 8443
+https://localhost:8443
+```
 
 #### Notes
 * port _8080_ is optional, default port is _7791_
 * `wpt.foo.com` is overriding the default `www.webpagetest.org` server but can still be overridden with `server` option
+* when _--key_ and _--cert_ are provided, HTTPS is used instead of default HTTP server
 
 ### Module
 ```javascript
@@ -633,7 +662,7 @@ $ npm test
 
 ## Changelog
 
-* 0.2.4: Added test options: clearcerts, medianvideo, datareduction, useragent and tsview
+* 0.2.4: Added test options: clearcerts, medianvideo, datareduction, useragent and tsview; HTTPS support to listen/proxy server
 * 0.2.3: Updated DevTools Timeline API url endpoint for timeline command
 * 0.2.2: Added response body command/method
 * 0.2.1: Added history, video, player, googleCsi commands and continuous option 
