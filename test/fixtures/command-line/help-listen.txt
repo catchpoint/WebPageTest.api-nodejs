@@ -3,5 +3,7 @@
 
   Options:
 
-    -h, --help  output usage information
+    -h, --help         output usage information
+    -k, --key <file>   private key file to use for SSL
+    -c, --cert <file>  public x509 certificate file to use for SSL
 

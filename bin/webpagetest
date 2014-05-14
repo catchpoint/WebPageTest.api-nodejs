@@ -147,9 +147,8 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
         formatData = null;
       }
     },
-    'listen': function(port) {
-      defaultAction(port);
-      options = undefined;
+    'listen': function(port, opts) {
+      defaultAction(port, opts);
       formatData = function customFormat(err, data) {
         if (err) {
           output(JSON.stringify({error: err}, null, 2), 1);
