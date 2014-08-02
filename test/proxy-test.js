@@ -5,13 +5,11 @@
  * Released under the MIT License
  */
 
-var assert      = require('assert'),
-	http        = require('http'),
-	httpProxy = require('http-proxy'),
-	url  = require('url'),
-    WebPageTest = require('../lib/webpagetest');
-
-var wpt = new WebPageTest();
+var assert = require('assert'),
+	http = require('http'),
+	url = require('url'),
+  WebPageTest = require('../lib/webpagetest'),
+  wpt = new WebPageTest();
 
 // proxy for test on 5432 port
 http.createServer(function(req, res) {
@@ -44,7 +42,6 @@ http.createServer(function(req, res) {
     orgreq.end();
   });
 }).listen(5432);
-
 
 describe('Run via proxy', function() {
   describe('An Example WebPageTest Server', function() {
