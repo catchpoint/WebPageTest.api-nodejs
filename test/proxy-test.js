@@ -11,7 +11,7 @@ var assert = require('assert'),
   WebPageTest = require('../lib/webpagetest'),
   wpt = new WebPageTest();
 
-// proxy for test on 5432 port
+// proxy for test on 9001 port
 http.createServer(function(req, res) {
   var requestUrl = url.parse(req.url);
   var body = [];
@@ -41,14 +41,14 @@ http.createServer(function(req, res) {
     }
     orgreq.end();
   });
-}).listen(5432);
+}).listen(9001);
 
 describe('Run via proxy', function() {
   describe('An Example WebPageTest Server', function() {
 
     it('gets a test status request', function(done) {
       wpt.getTestStatus('120816_V2_2', {
-      	proxy: 'localhost:5432'
+      	proxy: 'localhost:9001'
       }, function (err, data) {
         if (err) return done(err);
         assert.equal(data.data.id, '120816_V2_2');
