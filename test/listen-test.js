@@ -10,8 +10,7 @@ var assert          = require('assert'),
     url             = require('url'),
     WebPageTest     = require('../lib/webpagetest'),
     NockServer      = require('./helpers/nock-server'),
-    ResponseObjects = require('./helpers/response-objects'),
-    helper          = require('../lib/helper');
+    ResponseObjects = require('./helpers/response-objects');
 
 var wptNockServer = new NockServer('http://wpt.com'),
     wpt = new WebPageTest('wpt.com');

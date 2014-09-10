@@ -5,11 +5,15 @@
  * Released under the MIT License
  */
 
-var assert = require('assert'),
-    http = require('http'),
-    url = require('url'),
-    WebPageTest = require('../lib/webpagetest'),
-    wpt = new WebPageTest();
+var assert          = require('assert'),
+    http            = require('http'),
+    url             = require('url'),
+    WebPageTest     = require('../lib/webpagetest'),
+    NockServer      = require('./helpers/nock-server'),
+    ResponseObjects = require('./helpers/response-objects');
+
+var wptNockServer = new NockServer('http://wpt.com'),
+    wpt = new WebPageTest('wpt.com');
 
 // proxy for test on 5432 port
 http.createServer(function(req, res) {
@@ -51,7 +55,7 @@ describe('Run via proxy', function() {
         proxy: '127.0.0.1:5432'
       }, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.data.id, '120816_V2_2');
+        assert.deepEqual(data, ResponseObjects.testStatus);
         done();
       });
     });
