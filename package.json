@@ -30,16 +30,16 @@
     "test": "./node_modules/mocha/bin/mocha -R spec test/*-test.js"
   },
   "engines": {
-    "node": ">=0.8.1"
+    "node": ">=0.10.1"
   },
   "dependencies": {
-    "commander": "~2.1.0",
-    "csv": "~0.3.6",
-    "entities": "~0.3.0",
-    "mocha": "~1.17.0",
-    "xml2js": "~0.4.1"
+    "commander": "~2.3.0",
+    "csv": "~0.4.0",
+    "entities": "~1.1.1",
+    "mocha": "~1.21.4",
+    "xml2js": "~0.4.4"
   },
   "devDependencies": {
-    "nock": "~0.27.1"
+    "nock": "~0.46.1"
   }
 }
