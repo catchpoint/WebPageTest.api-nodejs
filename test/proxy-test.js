@@ -6,10 +6,10 @@
  */
 
 var assert = require('assert'),
-	http = require('http'),
-	url = require('url'),
-  WebPageTest = require('../lib/webpagetest'),
-  wpt = new WebPageTest();
+    http = require('http'),
+    url = require('url'),
+    WebPageTest = require('../lib/webpagetest'),
+    wpt = new WebPageTest();
 
 // proxy for test on 5432 port
 http.createServer(function(req, res) {
@@ -27,7 +27,7 @@ http.createServer(function(req, res) {
       method:  req.method,
       headers: req.headers
     },
-    function(orgres) {
+    function (orgres) {
       res.writeHead(orgres.statusCode, orgres.headers);
       orgres.on('data', function(chunk) {
         res.write(chunk);
@@ -36,7 +36,7 @@ http.createServer(function(req, res) {
         res.end();
       });
     });
-    if(body.length > 0) {
+    if (body.length > 0) {
       orgreq.write(body.join(''));
     }
     orgreq.end();
@@ -48,7 +48,7 @@ describe('Run via proxy', function() {
 
     it('gets a test status request', function(done) {
       wpt.getTestStatus('120816_V2_2', {
-      	proxy: 'localhost:5432'
+        proxy: '127.0.0.1:5432'
       }, function (err, data) {
         if (err) return done(err);
         assert.equal(data.data.id, '120816_V2_2');
