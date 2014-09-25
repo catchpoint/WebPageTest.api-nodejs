@@ -11,7 +11,7 @@
     -L, --label <label>           label for the test
     -p, --private                 keep the test hidden from the test log
     -v, --video                   capture video
-    -y, --connectivity <profile>  connectivity profile (DSL|FIOS|Dial|custom) [DSL]
+    -y, --connectivity <profile>  connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
     -m, --dom <element>           DOM element to record for sub-measurement
     -c, --connections <number>    override the number of concurrent connections
     -i, --onload                  force the test to stop at window.onload

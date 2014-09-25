@@ -77,7 +77,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-L, --label** _\<label\>_: label for the test
 * **-p, --private**: keep the test hidden from the test log
 * **-v, --video**: capture video
-* **-y, --connectivity** _\<profile\>_: connectivity profile (DSL|FIOS|Dial|custom) [DSL]
+* **-y, --connectivity** _\<profile\>_: connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
 * **-m, --dom** _\<element\>_: DOM element to record for sub-measurement
 * **-c, --connections** _\<number\>_: override the number of concurrent connections
 * **-i, --onload**: force the test to stop at window.onload
@@ -398,7 +398,7 @@ wpt.runTest(script, function(err, data) {
 * **label**: _String_, label for the test
 * **private**: _Boolean_, keep the test hidden from the test log
 * **video**: _Boolean_, capture video
-* **connectivity**: _String_, connectivity profile (DSL|FIOS|Dial|custom) [DSL]
+* **connectivity**: _String_, connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
 * **domElement**: _String_, DOM element to record for sub-measurement
 * **connections**: _Number_, override the number of concurrent connections
 * **stopAtDocumentComplete**: _Boolean_, force the test to stop at window.onload
