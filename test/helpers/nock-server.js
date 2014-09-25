@@ -94,6 +94,8 @@ function WebPageTestMockServer(host) {
 
     if (filename) {
       server
+        .filteringPath(/http%3A%2F%2F127.0.0.1%3A\d+%2F/g,
+          'http%3A%2F%2F127.0.0.1%3A8000%2F')
         .persist()
         .get(source)
         .replyWithFile(200, pathname, {'Content-Type': type});

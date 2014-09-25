@@ -40,6 +40,6 @@
     "xml2js": "~0.4.4"
   },
   "devDependencies": {
-    "nock": "~0.46.1"
+    "nock": "~0.48.0"
   }
 }
