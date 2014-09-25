@@ -6,19 +6,38 @@
     -h, --help                    output usage information
     -k, --key <api_key>           API key (if assigned). Contact the WebPageTest server administrator for a key if required
     -l, --location <location>     location to test from
+    -y, --connectivity <profile>  connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
     -r, --runs <number>           number of test runs [1]
     -f, --first                   skip the Repeat View test
-    -L, --label <label>           label for the test
-    -p, --private                 keep the test hidden from the test log
     -v, --video                   capture video
-    -y, --connectivity <profile>  connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
+    -p, --private                 keep the test hidden from the test log
+    -L, --label <label>           label for the test
+    -i, --onload                  stop test at document complete. typically, tests run until all activity stops
+    -S, --noscript                disable javascript (IE, Chrome, Firefox)
+    -C, --clearcerts              clear SSL cetificate caches
+    -R, --ignoressl               ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
+    -T, --standards               forces all pages to load in standards mode (IE only)
+    -u, --tcpdump                 capture network packet trace (tcpdump)
+    -O, --bodies                  save response bodies for text resources
+    -K, --keepua                  do not add PTST to the original browser User Agent string
     -m, --dom <element>           DOM element to record for sub-measurement
-    -c, --connections <number>    override the number of concurrent connections
-    -i, --onload                  force the test to stop at window.onload
-    -t, --sensitive               discard script and http headers in the result
-    -b, --block <urls>            space-delimited list of urls to block (substring match)
+    -N, --duration <seconds>      minimum test duration in seconds
+    -E, --tester <name>           run the test on a specific PC (name must match exactly or the test will not run)
+    -W, --mobile                  (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
+    -M, --timeline                capture Developer Tools Timeline (Chrome only)
+    -J, --callstack               set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
+    -q, --chrometrace             capture chrome trace (about://tracing) (Chrome only)
+    -G, --netlog                  capture Network Log (Chrome only)
+    -Q, --datareduction           enable data reduction on Chrome 34+ Android (Chrome only)
+    -x, --useragent <string>      custom user agent string (Chrome only)
+    -X, --cmdline <switches>      use a list of custom command line switches (Chrome only)
     -g, --login <username>        username for authenticating tests (http authentication)
     -w, --password <password>     password for authenticating tests (http authentication)
+    -t, --sensitive               discard script and http headers in the result
+    -H, --noheaders               disable saving of the http headers (as well as browser status messages and CPU utilization)
+    -b, --block <urls>            space-delimited list of urls to block (substring match)
+    -Z, --spof <domains>          space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+    -c, --custom <script>         execute arbitrary javascript at the end of a test to collect custom metrics
     -a, --authtype <type>         type of authentication: 0 = Basic, 1 = SNS [0]
     -n, --notify <e-mail>         e-mail address to notify with the test results
     -B, --pingback <url>          URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
@@ -26,36 +45,18 @@
     -U, --bwup <bandwidth>        upload bandwidth in Kbps (used when specifying a custom connectivity profile)
     -Y, --latency <time>          first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
     -P, --plr <percentage>        packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
-    -u, --tcpdump                 enable tcpdump capture
     -z, --noopt                   disable optimization checks (for faster testing)
     -I, --noimages                disable screen shot capturing
-    -H, --noheaders               disable saving of the http headers (as well as browser status messages and CPU utilization)
     -F, --full                    save a full-resolution version of the fully loaded screen shot as a PNG
     -j, --jpeg <level>            jpeg compression level (30-100) for the screen shots and video capture
-    -S, --noscript                disable javascript (IE, Chrome, Firefox)
-    -R, --ignoressl               ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
-    -T, --standards               forces all pages to load in standards mode (IE only)
-    -O, --bodies                  save response bodies for text resources
-    -K, --keepua                  do not add PTST to the original browser User Agent string
-    -N, --duration <seconds>      minimum test duration in seconds
-    -A, --noads                   block ads defined by adblockrules.org
-    -E, --aft                     (experimental) measure above-the-fold rendering time
-    -Z, --spof <domains>          space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
+    -A, --medianvideo             store the video from the median run when capturing video is enabled
         --htmlbody                save the content of only the base HTML response
-        --continuous              capture video continuously (unstable/experimental, may cause tests to fail)
-        --clearcerts              clear the OS certificate caches (causes IE to do OCSP/CRL checks during SSL negotiation if the certificates are not already cached)
-        --medianvideo             store the video from the median run when capturing video is enabled
         --tsview <id>             test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
-    -W, --mobile                  (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
-    -M, --timeline                capture Developer Tools Timeline (Chrome only)
-    -G, --netlog                  capture Network Log (Chrome only)
-    -C, --spdy3                   force SPDY version 3 (Chrome only)
-    -J, --swrender                force software rendering, disable GPU acceleration (Chrome only)
-    -Q, --noparser                disable threaded HTML parser (Chrome only)
-    -q, --spdynossl               use SPDY without SSL (Chrome only)
-        --datareduction           enable data reduction on Chrome 34+ Android (Chrome only)
-        --useragent <string>      custom user agent string (Chrome only)
-        --cmdline <switches>      use a list of custom command line switches (Chrome only)
+        --affinity <string>       string to hash test to a specific test agent. tester will be picked by index among available testers
+        --noads                   block ads defined by adblockrules.org
+        --continuous              capture video continuously (unstable/experimental, may cause tests to fail)
+        --spdy3                   force SPDY version 3 (Chrome only)
+        --swrender                force software rendering, disable GPU acceleration (Chrome only)
         --poll [interval]         poll for results after test is scheduled at every <interval> seconds [5]
         --wait [hostname:port]    wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
         --timeout <seconds>       timeout for polling and waiting results [no timeout]
