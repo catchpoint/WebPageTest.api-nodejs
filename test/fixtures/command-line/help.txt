@@ -3,29 +3,78 @@
 
   Commands:
 
-    status [options] <id>  check test status
-    results [options] <id> get test results
-    locations [options]    list locations and the number of pending tests
-    testers [options]      list testers status and details
-    test [options] <url_or_script> run test
-    cancel [options] <id>  cancel running/pending test
-    har <id>               get the HTTPS Archive (HAR) from test
-    pagespeed [options] <id> get the Google Page Speed results (if available) from test
-    utilization [options] <id> get the CPU, bandwidth and memory utilization data from test
-    request [options] <id> get the request data from test
-    timeline [options] <id> get the Chrome Developer Tools Timeline data (if available) from test
-    netlog [options] <id>  get the Chrome Developer Tools Net log data (if available) from test
-    console [options] <id> get the browser console log data (if available) from test
-    testinfo <id>          get test request info/details
-    history [days]         get history of previously run tests
-    googlecsi [options] <id> get Google CSI data (Client Side Instrumentation)
-    response [options] <id> get response body for text resources
-    waterfall [options] <id> get the waterfall PNG image
-    screenshot [options] <id> get the fully loaded page screenshot in JPG format (PNG if in full resolution)
-    video [options] <tests> create a video from <tests> (comma separated test ids)
-    player <id>            get a html5 player for a video <id>
-    listen [options] [hostname:port] start webpagetest-api proxy server on <hostname>:<port> [hostname:7791]
-    batch <file>           run commands in batch, i.e. one command per line from <file> in parallel
+    status [options] <id>
+       check test status
+    
+    results [options] <id>
+       get test results
+    
+    locations [options] 
+       list locations and the number of pending tests
+    
+    testers [options] 
+       list testers status and details
+    
+    test [options] <url_or_script>
+       run test
+    
+    cancel [options] <id>
+       cancel running/pending test
+    
+    har <id>
+       get the HTTPS Archive (HAR) from test
+    
+    pagespeed [options] <id>
+       get the Google Page Speed results (if available) from test
+    
+    utilization [options] <id>
+       get the CPU, bandwidth and memory utilization data from test
+    
+    request [options] <id>
+       get the request data from test
+    
+    timeline [options] <id>
+       get the Chrome Developer Tools Timeline data (if available) from test
+    
+    netlog [options] <id>
+       get the Chrome Developer Tools Net log data (if available) from test
+    
+    chrometrace [options] <id>
+       get the Chrome Trace data (if available) from test
+    
+    console [options] <id>
+       get the browser console log data (if available) from test
+    
+    testinfo <id>
+       get test request info/details
+    
+    history [days]
+       get history of previously run tests
+    
+    googlecsi [options] <id>
+       get Google CSI data (Client Side Instrumentation)
+    
+    response [options] <id>
+       get response body for text resources
+    
+    waterfall [options] <id>
+       get the waterfall PNG image
+    
+    screenshot [options] <id>
+       get the fully loaded page screenshot in JPG format (PNG if in full resolution)
+    
+    video [options] <tests>
+       create a video from <tests> (comma separated test ids)
+    
+    player <id>
+       get a html5 player for a video <id>
+    
+    listen [options] [hostname:port]
+       start webpagetest-api proxy server on <hostname>:<port> [hostname:7791]
+    
+    batch <file>
+       run commands in batch, i.e. one command per line from <file> in parallel
+    
 
   Options:
 

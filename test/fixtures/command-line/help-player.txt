@@ -1,0 +1,7 @@
+
+  Usage: player [options] <id>
+
+  Options:
+
+    -h, --help  output usage information
+

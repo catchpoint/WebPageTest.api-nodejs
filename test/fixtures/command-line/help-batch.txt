@@ -1,0 +1,7 @@
+
+  Usage: batch [options] <file>
+
+  Options:
+
+    -h, --help  output usage information
+
