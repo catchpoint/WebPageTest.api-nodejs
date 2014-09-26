@@ -670,6 +670,7 @@ $ npm test
 
 ## Changelog
 
+* 0.2.5: Added test options: custom, chrometrace, callstack, tester; Added chrometrace command (`getChromeTraceData` method)
 * 0.2.4: Added test options: clearcerts, medianvideo, datareduction, useragent and tsview; HTTPS support to listen/proxy server
 * 0.2.3: Updated DevTools Timeline API url endpoint for timeline command
 * 0.2.2: Added response body command/method
