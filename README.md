@@ -47,7 +47,7 @@ $ webpagetest --help
 * **testers** _[options]_: list testers status and details
 * **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
 * **cancel** _\<id\>_: cancel running/pending test
-* **har** _\<id\>_: get the HTTPS Archive (HAR) from test
+* **har** _\<id\>_: get the HTTP Archive (HAR) from test
 * **pagespeed** _[options] \<id\>_: get the Google Page Speed results (if available) from test
 * **utilization** _[options] \<id\>_: get the CPU, bandwidth and memory utilization data from test
 * **request** _[options] <\id\>_: get the request data from test
@@ -62,7 +62,7 @@ $ webpagetest --help
 * **waterfall** _[options] \<id\>_: get the waterfall PNG image
 * **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
 * **video** _[options] \<tests\>_: create a video from _\<tests\>_ (comma separated test ids)
-* **player _\<id\>_: get a html5 player for a video _\<id\>_
+* **player** _\<id\>_: get a html5 player for a video _\<id\>_
 * **listen** _[options]_ _[port]_: start webpagetest-api server on port _[7791_]
 * **batch** _\<file\>_: run commands in batch, i.e. one command per line from _\<file\>_ in parallel
 
@@ -85,7 +85,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-L, --label** _\<label\>_: label for the test
 * **-i, --onload**: stop test at document complete. typically, tests run until all activity stops
 * **-S, --noscript**: disable javascript (IE, Chrome, Firefox)
-* **-C, --clearcerts**: clear SSL cetificate caches
+* **-C, --clearcerts**: clear SSL certificate caches
 * **-R, --ignoressl**: ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
 * **-T, --standards**: forces all pages to load in standards mode (IE only)
 * **-u, --tcpdump**: capture network packet trace (tcpdump)
@@ -408,7 +408,7 @@ wpt.runTest(script, function(err, data) {
 * **label**: _String_, label for the test
 * **stopAtDocumentComplete**: _Boolean_, stop test at document complete. typically, tests run until all activity stops
 * **disableJavaScript**: _Boolean_, disable javascript (IE, Chrome, Firefox)
-* **clearCerts**: _Boolean_, clear SSL cetificate caches
+* **clearCerts**: _Boolean_, clear SSL certificate caches
 * **ignoreSSL**: _Boolean_, ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
 * **disableCompatibilityView**: _Boolean_, forces all pages to load in standards mode (IE only)
 * **tcpDump**: _Boolean_, capture network packet trace (tcpdump)
