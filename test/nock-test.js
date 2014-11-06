@@ -34,7 +34,7 @@ describe('Example WebPageTest', function() {
     });
 
     it('gets a test results for multi runs with default median metric request then returns the test results object', function(done) {
-      wpt.getTestResults('130619_KK_6A2', function (err, data) {
+      wpt.getTestResults('141106_TM_ZFM', function (err, data) {
         if (err) return done(err);
         assert.deepEqual(data, ResponseObjects.testResultsMultiRunsDefaultMedianMetric);
         done();
@@ -42,7 +42,7 @@ describe('Example WebPageTest', function() {
     });
 
     it('gets a test results for multi runs with custom median metric request then returns the test results object', function(done) {
-      wpt.getTestResults('130619_KK_6A2', {medianMetric: 'TTFB'}, function (err, data) {
+      wpt.getTestResults('141106_TM_ZFM', {medianMetric: 'TTFB'}, function (err, data) {
         if (err) return done(err);
         assert.deepEqual(data, ResponseObjects.testResultsMultiRunsTTFBMedianMetric);
         done();
@@ -50,7 +50,7 @@ describe('Example WebPageTest', function() {
     });
 
     it('gets a test results with extra data request then returns the test results object', function(done) {
-      wpt.getTestResults('130724_YD_8JX', {
+      wpt.getTestResults('141106_8N_ZRC', {
         breakDown: true,
         domains: true,
         pageSpeed: true,

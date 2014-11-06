@@ -36,7 +36,7 @@ describe('Dry Run', function() {
     it('gets a test results request', function(done) {
       wpt.getTestResults('120816_V2_2', {dryRun: true}, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2');
+        assert.equal(data.url, wptServer + 'jsonResult.php?test=120816_V2_2');
         done();
       });
     });
@@ -47,7 +47,7 @@ describe('Dry Run', function() {
         dryRun: true
       }, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2&r=12345');
+        assert.equal(data.url, wptServer + 'jsonResult.php?test=120816_V2_2&r=12345');
         done();
       });
     });
@@ -59,13 +59,13 @@ describe('Dry Run', function() {
         }, function (err, data) {
         if (err) return done(err);
         assert.equal(data.url, wptServer +
-          'xmlResult.php?test=120816_V2_2&medianMetric=TTFB');
+          'jsonResult.php?test=120816_V2_2&medianMetric=TTFB');
         done();
       });
     });
 
     it('gets a test results with extra data request', function(done) {
-      wpt.getTestResults('130724_YD_8JX', {
+      wpt.getTestResults('141106_8N_ZRC', {
         breakDown: true,
         domains: true,
         pageSpeed: true,
@@ -74,7 +74,7 @@ describe('Dry Run', function() {
       }, function (err, data) {
         if (err) return done(err);
         assert.equal(data.url, wptServer +
-          'xmlResult.php?test=130724_YD_8JX&breakdown=1&domains=1&pagespeed=1&requests=1');
+          'jsonResult.php?test=141106_8N_ZRC&breakdown=1&domains=1&pagespeed=1&requests=1');
         done();
       });
     });

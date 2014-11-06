@@ -1,6 +1,9 @@
 {
-    "response": {
-        "statusCode": 404,
-        "statusText": "Invalid Test ID: 120816_V2_3"
-    }
+  "data": {
+    "statusCode": 400,
+    "statusText": "Test not found",
+    "id": "120816_V2_3"
+  },
+  "statusCode": 400,
+  "statusText": "Test not found"
 }

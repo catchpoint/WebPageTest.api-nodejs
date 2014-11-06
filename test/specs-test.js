@@ -13,7 +13,7 @@ var WebPageTest = require('../lib/webpagetest'),
     NockServer = require('./helpers/nock-server'),
     ResponseObjects = require('./helpers/response-objects');
 
-describe('Example WebPageTest', function() {
+describe('Example WebPageTest for Specs', function() {
   describe('Hits a Nock Server', function() {
 
     var wptNockServer, wpt,
@@ -40,8 +40,8 @@ describe('Example WebPageTest', function() {
       });
       setTimeout(function() {
         http.get('http://' + server.hostname + ':' + server.port +
-          '/testdone?id=130619_KK_6A2');
-      }, 500);
+          '/testdone?id=141106_TM_ZFM');
+      }, 100);
     });
 
     it('gets a test results with perf test specs request then test results object', function(done) {

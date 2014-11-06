@@ -41,7 +41,7 @@ describe('WebPageTest Command Line', function() {
     exec(mock('results 120816_V2_2'), function(err, data) {
       if (err) return done(err);
       data = JSON.parse(data);
-      assert.equal(data.url, wptServer + 'xmlResult.php?test=120816_V2_2');
+      assert.equal(data.url, wptServer + 'jsonResult.php?test=120816_V2_2');
       done();
     });
   });
@@ -51,17 +51,17 @@ describe('WebPageTest Command Line', function() {
       if (err) return done(err);
       data = JSON.parse(data);
       assert.equal(data.url, wptServer +
-        'xmlResult.php?test=120816_V2_2&medianMetric=TTFB');
+        'jsonResult.php?test=120816_V2_2&medianMetric=TTFB');
       done();
     });
   });
 
   it('gets a test results with extra data input returns the API url', function(done) {
-    exec(mock('results 130724_YD_8JX -bDpR'), function(err, data) {
+    exec(mock('results 141106_8N_ZRC -bDpR'), function(err, data) {
       if (err) return done(err);
       data = JSON.parse(data);
         assert.equal(data.url, wptServer +
-          'xmlResult.php?test=130724_YD_8JX&breakdown=1&domains=1&pagespeed=1&requests=1');
+          'jsonResult.php?test=141106_8N_ZRC&breakdown=1&domains=1&pagespeed=1&requests=1');
       done();
     });
   });
@@ -328,7 +328,7 @@ describe('WebPageTest Command Line', function() {
       if (err) return done(err);
       data = JSON.parse(data);
       assert.equal(data[0].url, wptServer + 'testStatus.php?test=120816_V2_2');
-      assert.equal(data[1].url, wptServer + 'xmlResult.php?test=120816_V2_2');
+      assert.equal(data[1].url, wptServer + 'jsonResult.php?test=120816_V2_2');
       done();
     });
   });

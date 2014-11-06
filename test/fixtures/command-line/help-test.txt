@@ -14,7 +14,7 @@
     -L, --label <label>           label for the test
     -i, --onload                  stop test at document complete. typically, tests run until all activity stops
     -S, --noscript                disable javascript (IE, Chrome, Firefox)
-    -C, --clearcerts              clear SSL cetificate caches
+    -C, --clearcerts              clear SSL certificate caches
     -R, --ignoressl               ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
     -T, --standards               forces all pages to load in standards mode (IE only)
     -u, --tcpdump                 capture network packet trace (tcpdump)

@@ -22,7 +22,7 @@
        cancel running/pending test
     
     har <id>
-       get the HTTPS Archive (HAR) from test
+       get the HTTP Archive (HAR) from test
     
     pagespeed [options] <id>
        get the Google Page Speed results (if available) from test

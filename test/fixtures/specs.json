@@ -5,14 +5,14 @@
   },
   "median": {
     "firstView": {
-      "requests": {
-        "min": 30,
-        "max": 50
+      "connections": {
+        "min": 3,
+        "max": 8
       },
-      "render": 200,
+      "render": 800,
       "loadTime": {
         "text": "page load time: {actual} should be less than {expected}",
-        "max": 15000
+        "max": 5000
       },
       "foo": {
         "bar": {

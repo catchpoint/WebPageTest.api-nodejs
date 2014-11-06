@@ -12,7 +12,7 @@ var PATH_RESPONSES = path.join(__dirname, '../fixtures/responses');
 
 var reqResMap = {
   '/testStatus.php?test=120816_V2_2': 'testStatus.json',
-  '/xmlResult.php?test=120816_V2_2': 'testResults.xml',
+  '/jsonResult.php?test=120816_V2_2': 'testResults.json',
   '/getLocations.php': 'locations.xml',
   '/getTesters.php': 'testers.xml',
   '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&f=json': 'runTest.json',
@@ -41,11 +41,11 @@ var reqResMap = {
   '/response_body.php?test=140101_AB_12&run=1&cached=0&request=1': 'response.txt',
 
   // test results for multi runs with/without custom median metric
-  '/xmlResult.php?test=130619_KK_6A2': 'testResultsMultiRunsDefaultMedianMetric.xml',
-  '/xmlResult.php?test=130619_KK_6A2&medianMetric=TTFB': 'testResultsMultiRunsTTFBMedianMetric.xml',
+  '/jsonResult.php?test=141106_TM_ZFM': 'testResultsMultiRunsDefaultMedianMetric.json',
+  '/jsonResult.php?test=141106_TM_ZFM&medianMetric=TTFB': 'testResultsMultiRunsTTFBMedianMetric.json',
 
   // test results with extra data
-  '/xmlResult.php?test=130724_YD_8JX&breakdown=1&domains=1&pagespeed=1&requests=1': 'testResultsExtraData.xml',
+  '/jsonResult.php?test=141106_8N_ZRC&breakdown=1&domains=1&pagespeed=1&requests=1': 'testResultsExtraData.json',
 
   // sync
   '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&f=json&pingback=http%3A%2F%2F127.0.0.1%3A8000%2Ftestdone': 'runTest.json',
@@ -53,7 +53,7 @@ var reqResMap = {
 
   // not found / invalid
   '/testStatus.php?test=120816_V2_3': 'testStatusNotFound.json',
-  '/xmlResult.php?test=120816_V2_3': 'testResultsNotFound.xml',
+  '/jsonResult.php?test=120816_V2_3': 'testResultsNotFound.json',
   '/runtest.php?url=&f=json': 'runTestInvalid.json',
   '/runtest.php?script=&f=json': 'runTestInvalid.json',
   '/getgzip.php?test=120816_V2_3&file=1_pagespeed.txt': '',

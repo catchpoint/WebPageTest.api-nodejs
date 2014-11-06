@@ -80,7 +80,7 @@ describe('Local WebPageTest-API Proxy', function() {
     });
 
     it('gets a test results for multi runs with default median metric GET request then returns the test results JSON', function(done) {
-      get('/results/130619_KK_6A2', server, function (err, data) {
+      get('/results/141106_TM_ZFM', server, function (err, data) {
         if (err) return done(err);
         data = JSON.parse(data);
         assert.deepEqual(data, ResponseObjects.testResultsMultiRunsDefaultMedianMetric);
@@ -89,7 +89,7 @@ describe('Local WebPageTest-API Proxy', function() {
     });
 
     it('gets a test results for multi runs with custom median metric GET request then returns the test results JSON', function(done) {
-      get('/results/130619_KK_6A2?median=TTFB', server, function (err, data) {
+      get('/results/141106_TM_ZFM?median=TTFB', server, function (err, data) {
         if (err) return done(err);
         data = JSON.parse(data);
         assert.deepEqual(data, ResponseObjects.testResultsMultiRunsTTFBMedianMetric);
