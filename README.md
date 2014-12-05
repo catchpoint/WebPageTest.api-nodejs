@@ -670,6 +670,7 @@ $ npm test
 
 ## Changelog
 
+* 0.3.1: Added dummy url when scripting, needed for webdriver scripting on mobbile agents
 * 0.3.0: Replaced xmlResult.php by jsonResult.php WPT API endpoint for fetching test results
 * 0.2.5: Added test options: custom, chrometrace, callstack, tester; Added chrometrace command (`getChromeTraceData` method)
 * 0.2.4: Added test options: clearcerts, medianvideo, datareduction, useragent and tsview; HTTPS support to listen/proxy server
