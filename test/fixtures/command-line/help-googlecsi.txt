@@ -1,6 +1,8 @@
 
   Usage: googlecsi [options] <id>
 
+  get Google CSI data (Client Side Instrumentation)
+
   Options:
 
     -h, --help          output usage information

@@ -1,6 +1,8 @@
 
   Usage: cancel [options] <id>
 
+  cancel running/pending test
+
   Options:
 
     -h, --help           output usage information

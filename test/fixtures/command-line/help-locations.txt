@@ -1,6 +1,8 @@
 
   Usage: locations [options]
 
+  list locations and the number of pending tests
+
   Options:
 
     -h, --help          output usage information

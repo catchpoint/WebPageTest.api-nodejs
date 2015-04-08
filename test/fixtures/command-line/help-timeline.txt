@@ -1,6 +1,8 @@
 
   Usage: timeline [options] <id>
 
+  get the Chrome Developer Tools Timeline data (if available) from test
+
   Options:
 
     -h, --help          output usage information

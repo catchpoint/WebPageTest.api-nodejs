@@ -1,6 +1,8 @@
 
   Usage: waterfall [options] <id>
 
+  get the waterfall PNG image
+
   Options:
 
     -h, --help              output usage information

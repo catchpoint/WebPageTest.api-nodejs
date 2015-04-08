@@ -1,6 +1,8 @@
 
   Usage: video [options] <tests>
 
+  create a video from <tests> (comma separated test ids)
+
   Options:
 
     -h, --help             output usage information

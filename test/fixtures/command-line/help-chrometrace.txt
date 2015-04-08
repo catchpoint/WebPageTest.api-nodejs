@@ -1,6 +1,8 @@
 
   Usage: chrometrace [options] <id>
 
+  get the Chrome Trace data (if available) from test
+
   Options:
 
     -h, --help          output usage information

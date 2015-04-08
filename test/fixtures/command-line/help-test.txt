@@ -1,6 +1,8 @@
 
   Usage: test [options] <url_or_script>
 
+  run test
+
   Options:
 
     -h, --help                    output usage information

@@ -1,6 +1,8 @@
 
   Usage: results [options] <id>
 
+  get test results
+
   Options:
 
     -h, --help                  output usage information

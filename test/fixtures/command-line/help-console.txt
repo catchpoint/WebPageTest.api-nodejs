@@ -1,6 +1,8 @@
 
   Usage: console [options] <id>
 
+  get the browser console log data (if available) from test
+
   Options:
 
     -h, --help          output usage information

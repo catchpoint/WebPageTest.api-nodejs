@@ -1,6 +1,8 @@
 
   Usage: netlog [options] <id>
 
+  get the Chrome Developer Tools Net log data (if available) from test
+
   Options:
 
     -h, --help          output usage information

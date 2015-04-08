@@ -1,6 +1,8 @@
 
   Usage: request [options] <id>
 
+  get the request data from test
+
   Options:
 
     -h, --help          output usage information
