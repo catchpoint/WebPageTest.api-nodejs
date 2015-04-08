@@ -123,6 +123,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-A, --medianvideo**: store the video from the median run when capturing video is enabled
 * **--htmlbody**: save the content of only the base HTML response
 * **--tsview** _\<id\>_: test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
+* **--tsviewconfigs** _\<string\>_: configs to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
 * **--affinity** _\<string\>_: string to hash test to a specific test agent. tester will be picked by index among available testers
 * **--noads**: block ads defined by adblockrules.org
 * **--continuous**: capture video continuously (unstable/experimental, may cause tests to fail)
