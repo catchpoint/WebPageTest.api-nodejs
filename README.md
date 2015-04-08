@@ -134,7 +134,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 
 #### API Key (works for **test** and **cancel** commands)
-* **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required
+* **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](http://www.webpagetest.org/getkey.php)
 
 #### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
 * **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
