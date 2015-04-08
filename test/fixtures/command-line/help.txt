@@ -33,7 +33,7 @@
 
     -h, --help             output usage information
     -V, --version          output the version number
-    -s, --server <server>  the WPT server URL [latencylab.corp.google.com]
+    -s, --server <server>  the WPT server URL [http://www.webpagetest.org]
     -d, --dryrun           just return the RESTful API URL
     -o, --out <file>       place the output into <file>. Defaults to stdout
 
