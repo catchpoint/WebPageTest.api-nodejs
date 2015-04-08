@@ -84,6 +84,7 @@ function WebPageTestMockServer(host) {
   }
 
   server = nock(host || 'http://www.webpagetest.org');
+  nock.enableNetConnect();
 
   // request/response mapping
   Object.keys(reqResMap).forEach(function (source) {

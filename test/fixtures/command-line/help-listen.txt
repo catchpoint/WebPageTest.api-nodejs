@@ -1,6 +1,8 @@
 
   Usage: listen [options] [hostname:port]
 
+  start webpagetest-api proxy server on <hostname>:<port> [hostname:7791]
+
   Options:
 
     -h, --help         output usage information

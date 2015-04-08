@@ -1,7 +1,9 @@
 
   Usage: history [options] [days]
 
+  get history of previously run tests
+
   Options:
 
-    -h, --help          output usage information
+    -h, --help  output usage information
 

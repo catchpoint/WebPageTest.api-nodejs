@@ -1,6 +1,8 @@
 
   Usage: pagespeed [options] <id>
 
+  get the Google Page Speed results (if available) from test
+
   Options:
 
     -h, --help          output usage information

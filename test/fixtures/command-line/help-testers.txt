@@ -1,6 +1,8 @@
 
   Usage: testers [options]
 
+  list testers status and details
+
   Options:
 
     -h, --help          output usage information

@@ -1,6 +1,8 @@
 
   Usage: status [options] <id>
 
+  check test status
+
   Options:
 
     -h, --help          output usage information

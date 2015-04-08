@@ -1,10 +1,11 @@
 ## WebPageTest API Wrapper for NodeJS
 
-[![NPM](https://nodei.co/npm/webpagetest.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/webpagetest/)
-[![Build Status](https://secure.travis-ci.org/marcelduran/webpagetest-api.png?branch=master)](http://travis-ci.org/marcelduran/webpagetest-api)
+[![Build Status](https://secure.travis-ci.org/marcelduran/webpagetest-api.png?branch=master)](https://travis-ci.org/marcelduran/webpagetest-api)
+[![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
+[![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![Dependencies Status](https://david-dm.org/marcelduran/webpagetest-api.png)](https://david-dm.org/marcelduran/webpagetest-api)
 
-[WebPageTest API Wrapper](http://marcelduran.com/webpagetest-api) is a [NPM](http://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](http://nodejs.org) as a module and a command-line tool.
+[WebPageTest API Wrapper](https://marcelduran.com/webpagetest-api) is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
 
 ## Getting started
 
@@ -16,7 +17,7 @@ $ npm install webpagetest -g
 
 ### Command line
 ```bash
-$ webpagetest test http://twitter.com/marcelduran
+$ webpagetest test https://twitter.com/marcelduran
 ```
 
 ### Module
@@ -24,7 +25,7 @@ $ webpagetest test http://twitter.com/marcelduran
 var WebPageTest = require('webpagetest');
 var wpt = new WebPageTest('www.webpagetest.org');
 
-wpt.runTest('http://twitter.com/marcelduran', function(err, data) {
+wpt.runTest('https://twitter.com/marcelduran', function(err, data) {
   console.log(err || data);
 });
 ```
@@ -123,7 +124,9 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-A, --medianvideo**: store the video from the median run when capturing video is enabled
 * **--htmlbody**: save the content of only the base HTML response
 * **--tsview** _\<id\>_: test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
+* **--tsviewconfigs** _\<string\>_: configs to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
 * **--affinity** _\<string\>_: string to hash test to a specific test agent. tester will be picked by index among available testers
+* **--priority** _\<number\>_: change test priority (0-9) [enforced by API key, otherwise 5]
 * **--noads**: block ads defined by adblockrules.org
 * **--continuous**: capture video continuously (unstable/experimental, may cause tests to fail)
 * **--spdy3**: force SPDY version 3 (Chrome only)
@@ -133,7 +136,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 
 #### API Key (works for **test** and **cancel** commands)
-* **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required
+* **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](https://www.webpagetest.org/getkey.php)
 
 #### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
 * **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
@@ -212,9 +215,9 @@ $ webpagetest locations
 }
 ```
 
-#### 2. Run test on http://twitter.com/marcelduran from San Jose on IE9
+#### 2. Run test on https://twitter.com/marcelduran from San Jose on IE9
 ```bash
-$ webpagetest test http://twitter.com/marcelduran --key 1F2A3K4E5 --location SanJose_IE9
+$ webpagetest test https://twitter.com/marcelduran --key 1F2A3K4E5 --location SanJose_IE9
 ```
 ```javascript
 {
@@ -223,11 +226,11 @@ $ webpagetest test http://twitter.com/marcelduran --key 1F2A3K4E5 --location San
   "data": {
     "testId": "121025_PT_N8K",
     "ownerKey": "868cb2813a0f376a977dd1a24ab041b4f12361b3",
-    "jsonUrl": "http://localhost/results.php?test=121025_PT_N8K&f=json",
-    "xmlUrl": "http://localhost/xmlResult.php?test=121025_PT_N8K",
-    "userUrl": "http://localhost/results.php?test=121025_PT_N8K",
-    "summaryCSV": "http://localhost/csv.php?test=121025_PT_N8K",
-    "detailCSV": "http://localhost/csv.php?test=121025_PT_N8K&amp;requests=1"
+    "jsonUrl": "https://www.webpagetest.org/results.php?test=121025_PT_N8K&f=json",
+    "xmlUrl": "https://www.webpagetest.org/xmlResult.php?test=121025_PT_N8K",
+    "userUrl": "https://www.webpagetest.org/results.php?test=121025_PT_N8K",
+    "summaryCSV": "https://www.webpagetest.org/csv.php?test=121025_PT_N8K",
+    "detailCSV": "https://www.webpagetest.org/csv.php?test=121025_PT_N8K&amp;requests=1"
   }
 }
 ```
@@ -261,8 +264,8 @@ $ webpagetest results 121025_PT_N8K
     "statusCode": 200, "statusText": "Ok",
     "data": {
       "testId": "121025_PT_N8K",
-      "summary": "http://www.webpagetest.org/result/121025_PT_N8K/",
-      "testUrl": "http://twitter.com/marcelduran",
+      "summary": "https://www.webpagetest.org/result/121025_PT_N8K/",
+      "testUrl": "https://twitter.com/marcelduran",
       "location": "SanJose_IE9",
       "connectivity": "DSL",
       "bwDown": 1500, "bwUp": 384, "latency": 50, "plr": 0,
@@ -295,13 +298,13 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 }
 ```
 
-#### Run test on http://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
+#### Run test on https://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
 ```bash
-$ webpagetest test http://twitter.com/marcelduran --poll 5 --timeout 60
+$ webpagetest test https://twitter.com/marcelduran --poll 5 --timeout 60
 ```
-#### Or run test on http://twitter.com/marcelduran and wait for results listening on localhost\* port 8000\**
+#### Or run test on https://twitter.com/marcelduran and wait for results listening on localhost\* port 8000\**
 ```bash
-$ webpagetest test http://twitter.com/marcelduran --wait 8000
+$ webpagetest test https://twitter.com/marcelduran --wait 8000
 ```
 ```javascript
 {
@@ -309,7 +312,7 @@ $ webpagetest test http://twitter.com/marcelduran --wait 8000
     "statusCode": 200, "statusText": "Ok",
     "data": {
       "testId": "121025_PT_N8K",
-      "testUrl": "http://twitter.com/marcelduran",
+      "testUrl": "https://twitter.com/marcelduran",
       ...
       "median": {
         "firstView": {
@@ -446,7 +449,9 @@ wpt.runTest(script, function(err, data) {
 * **medianVideo**: _Boolean_, store the video from the median run when capturing video is enabled
 * **htmlBody**: _Boolean_, save the content of only the base HTML response
 * **tsView**: _String_, test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
+* **tsViewConfigs**: _String_, configs to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
 * **affinity**: _String_, string to hash test to a specific test agent. tester will be picked by index among available testers
+* **priority**: _Number_, change test priority (0-9) [enforced by API key, otherwise 5]
 * **blockAds**: _Boolean_, block ads defined by adblockrules.org
 * **continuousVideoCapture**: _Boolean_, capture video continuously (unstable/experimental, may cause tests to fail)
 * **forceSpdy3**: _Boolean_, force SPDY version 3 (Chrome only)
@@ -521,9 +526,9 @@ wpt.getLocations(function(err, data) {
 });
 ```
 
-#### 3. Run test on http://twitter.com/marcelduran from San Jose on IE9
+#### 3. Run test on https://twitter.com/marcelduran from San Jose on IE9
 ```javascript
-wpt.runTest('http://twitter.com/marcelduran', {location: 'SanJose_IE9'}, function(err, data) {
+wpt.runTest('https://twitter.com/marcelduran', {location: 'SanJose_IE9'}, function(err, data) {
   console.log(err || data);
 });
 ```
@@ -553,16 +558,16 @@ wpt.getWaterfallImage('121025_PT_N8K', {
 });
 ```
 
-#### Run test on http://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
+#### Run test on https://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
 ```javascript
-wpt.runTest('http://twitter.com/marcelduran', {pollResults: 5, timeout: 60}, function(err, data) {
+wpt.runTest('https://twitter.com/marcelduran', {pollResults: 5, timeout: 60}, function(err, data) {
   console.log(err || data);
 });
 ```
 
-#### Or run test on http://twitter.com/marcelduran and wait results listening on localhost\* port 8000\*\*
+#### Or run test on https://twitter.com/marcelduran and wait results listening on localhost\* port 8000\*\*
 ```javascript
-wpt.runTest('http://twitter.com/marcelduran', {waitResults: 'localhost:8000'}, function(err, data) {
+wpt.runTest('https://twitter.com/marcelduran', {waitResults: 'localhost:8000'}, function(err, data) {
   console.log(err || data);
 });
 ```
@@ -670,13 +675,14 @@ $ npm test
 
 ## Changelog
 
+* 0.3.2: Updated deps and fixed test runs with specs
 * 0.3.1: Added dummy url when scripting, needed for webdriver scripting on mobbile agents
 * 0.3.0: Replaced xmlResult.php by jsonResult.php WPT API endpoint for fetching test results
 * 0.2.5: Added test options: custom, chrometrace, callstack, tester; Added chrometrace command (`getChromeTraceData` method)
 * 0.2.4: Added test options: clearcerts, medianvideo, datareduction, useragent and tsview; HTTPS support to listen/proxy server
 * 0.2.3: Updated DevTools Timeline API url endpoint for timeline command
 * 0.2.2: Added response body command/method
-* 0.2.1: Added history, video, player, googleCsi commands and continuous option 
+* 0.2.1: Added history, video, player, googleCsi commands and continuous option
 * 0.2.0: Replaced jsonml by xml2js dependency
 * 0.1.3: Test results extra data (breakdown, domains, requests, pagespeed)
 * 0.1.0: Specs (CI); Run in batch; Node methods/options as command aliases; new Chrome test options
@@ -695,16 +701,15 @@ https://github.com/marcelduran/webpagetest-api/issues
 
 **Marcel Duran**
 
-+ http://github.com/marcelduran
++ https://github.com/marcelduran
 
 ## License
 
-Copyright 2013 Twitter Inc.  
-Copyright 2014 Google Inc.  
-Copyright 2014 Marcel Duran and other contributors
+Copyright 2013 Twitter Inc.
+Copyright 2015 Google Inc.
+Copyright 2015 Marcel Duran and other contributors
 
-Licensed under the [MIT License](http://github.com/marcelduran/webpagetest-api/raw/master/LICENSE)
+Licensed under the [MIT License](https://github.com/marcelduran/webpagetest-api/raw/master/LICENSE)
 
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/marcelduran/webpagetest-api/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

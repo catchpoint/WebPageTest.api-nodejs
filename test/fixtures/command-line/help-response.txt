@@ -1,6 +1,8 @@
 
   Usage: response [options] <id>
 
+  get response body for text resources
+
   Options:
 
     -h, --help              output usage information
