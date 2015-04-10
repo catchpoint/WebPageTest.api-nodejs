@@ -14,11 +14,6 @@
         "text": "page load time: {actual} should be less than {expected}",
         "max": 5000
       },
-      "foo": {
-        "bar": {
-          "max": 100
-        }
-      },
       "score_keep-alive": {
         "min": 90
       }
