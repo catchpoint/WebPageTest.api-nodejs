@@ -127,7 +127,6 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--tsviewconfigs** _\<string\>_: configs to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
 * **--affinity** _\<string\>_: string to hash test to a specific test agent. tester will be picked by index among available testers
 * **--priority** _\<number\>_: change test priority (0-9) [enforced by API key, otherwise 5]
-* **--noads**: block ads defined by adblockrules.org
 * **--continuous**: capture video continuously (unstable/experimental, may cause tests to fail)
 * **--spdy3**: force SPDY version 3 (Chrome only)
 * **--swrender**: force software rendering, disable GPU acceleration (Chrome only)
