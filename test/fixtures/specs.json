@@ -16,6 +16,11 @@
       },
       "score_keep-alive": {
         "min": 90
+      },
+      "breakdown": {
+        "css": {
+          "requests": 2
+        }
       }
     }
   }
