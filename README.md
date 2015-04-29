@@ -675,6 +675,7 @@ $ npm test
 
 ## Changelog
 
+* 0.3.3: Fixed bug when specs check for zeroed metric
 * 0.3.2: Updated deps and fixed test runs with specs
 * 0.3.1: Added dummy url when scripting, needed for webdriver scripting on mobbile agents
 * 0.3.0: Replaced xmlResult.php by jsonResult.php WPT API endpoint for fetching test results
