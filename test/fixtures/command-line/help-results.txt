@@ -11,7 +11,7 @@
     -p, --pagespeed             include the PageSpeed score in the response (may be slower)
     -R, --requests              include the request data in the response (slower and results in much larger responses)
     -m, --median <metric>       set the metric used to calculate median for multiple runs tests [loadTime]
+    --medianrun <metric>        set the run used for median for multiple runs tests [median]
     -S, --specs <json_or_file>  set the specs for performance test suite
     -r, --reporter <name>       set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
     -e, --request <id>          echo request ID, useful to track asynchronous requests
-

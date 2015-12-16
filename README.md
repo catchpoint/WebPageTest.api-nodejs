@@ -147,6 +147,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-p, --pagespeed**: include the PageSpeed score in the response (may be slower)
 * **-R, --requests**: include the request data in the response (slower and results in much larger responses)
 * **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
+* **--medianrun** _\<metric>_: set the run used for median for multiple runs tests [median]
 * **-S, --specs** _\<json_or_file\>_: set the specs for performance test suite
 * **-r, --reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
