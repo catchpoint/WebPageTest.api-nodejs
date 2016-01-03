@@ -32,10 +32,10 @@ describe('Example WebPageTest for Specs', function() {
         runs: 3,
         waitResults: '127.0.0.1:8000',
         medianMetric: 'TTFB',
-        specs: '{"defaults":{"suiteName":"WPT test of test (not really an error)"},"median":{"firstView":{"render":800,"TTFB":600,"loadTime":4000}}}',
+        specs: '{"defaults":{"suiteName":"WPT test of test (not really an error)"},"median":{"firstView":{"render":300,"TTFB":100,"loadTime":4000}}}',
         reporter: 'min'
       }, function(err) {
-        assert.equal(err, 0);
+        assert.equal(err, 2);
         done();
       });
       setTimeout(function() {
@@ -49,7 +49,7 @@ describe('Example WebPageTest for Specs', function() {
         specs: path.join(__dirname, './fixtures/specs.json'),
         reporter: 'spec'
       }, function(err) {
-        assert.equal(err, 0);
+        assert.equal(err, 1);
         done();
       });
     });
