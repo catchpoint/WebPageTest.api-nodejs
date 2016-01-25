@@ -78,7 +78,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 
 #### Test (works for **test** command only)
 * **-l, --location** _\<location\>_: location to test from
-* **-y, --connectivity** _\<profile\>_: connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
+* **-y, --connectivity** _\<profile\>_: connectivity profile -- requires location to be specified -- (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
 * **-r, --runs** _\<number\>_: number of test runs [1]
 * **-f, --first**: skip the Repeat View test
 * **-v, --video**: capture video
@@ -404,7 +404,7 @@ wpt.runTest(script, function(err, data) {
 
 #### Test (works for `runTest` method only)
 * **location**: _String_, location to test from
-* **connectivity**: _String_, connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
+* **connectivity**: _String_, connectivity profile -- requires location to be specified -- (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
 * **runs**: _Number_, number of test runs [1]
 * **firstViewOnly**: _Boolean_, skip the Repeat View test
 * **video**: _Boolean_, capture video
