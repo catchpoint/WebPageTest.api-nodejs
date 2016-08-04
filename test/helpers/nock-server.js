@@ -83,7 +83,7 @@ function WebPageTestMockServer(host) {
     return new WebPageTestMockServer(host);
   }
 
-  server = nock(host || 'http://www.webpagetest.org');
+  server = nock(host || 'https://www.webpagetest.org');
   nock.enableNetConnect();
 
   // request/response mapping
