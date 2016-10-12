@@ -70,7 +70,7 @@ $ webpagetest --help
 ### Options
 
 #### Common (works for all commands)
-* **-s, --server** _\<server\>_: the WPT server URL [http://www.webpagetest.org]
+* **-s, --server** _\<server\>_: the WPT server URL [https://www.webpagetest.org]
 * **-d, --dryrun**: just return the RESTful API URL
 * **-o, --out** _\<file\>_: place the output into \<file\>. Defaults to stdout
 
