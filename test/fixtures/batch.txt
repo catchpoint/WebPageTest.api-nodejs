@@ -1,2 +1,3 @@
-status 120816_V2_2 -s https://www.example.com:1234/foo/bar/ -d
-results 120816_V2_2 -s https://www.example.com:1234/foo/bar/ -d
+status 120816_V2_2 -d -s https://www.example.com:1234/foo/bar/
+results 120816_V2_2 -d -s https://www.example.com:1234/foo/bar/
+screenshot 120816_V2_2 -d -s https://www.example.com:1234/foo/bar/
