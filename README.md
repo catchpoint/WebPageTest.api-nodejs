@@ -20,6 +20,16 @@ $ npm install webpagetest -g
 $ webpagetest test https://twitter.com/marcelduran
 ```
 
+### Docker
+#### Build
+```bash
+$ docker build -t webpagetest-api . 
+```
+#### Run
+```bash
+$ docker run -it --rm webpagetest-api -k YOURAPIKEY test https://twitter.com/marcelduran
+```
+
 ### Module
 ```javascript
 var WebPageTest = require('webpagetest');
