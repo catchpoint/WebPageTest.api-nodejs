@@ -329,6 +329,7 @@ describe('WebPageTest Command Line', function() {
       data = JSON.parse(data);
       assert.equal(data[0].url, wptServer + 'testStatus.php?test=120816_V2_2');
       assert.equal(data[1].url, wptServer + 'jsonResult.php?test=120816_V2_2');
+      assert.equal(data[2].url, wptServer + 'getgzip.php?test=120816_V2_2&file=1_screen.jpg');
       done();
     });
   });
