@@ -29,6 +29,7 @@
     -M, --timeline                capture Developer Tools Timeline (Chrome only)
     -J, --callstack               set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
     -q, --chrometrace             capture chrome trace (about://tracing) (Chrome only)
+        --tracecategories <categories>  trace categories (when chrometrace enabled) (Chrome only)
     -G, --netlog                  capture Network Log (Chrome only)
     -Q, --datareduction           enable data reduction on Chrome 34+ Android (Chrome only)
     -x, --useragent <string>      custom user agent string (Chrome only)

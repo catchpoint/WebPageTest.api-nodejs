@@ -23,7 +23,7 @@ $ webpagetest test https://twitter.com/marcelduran
 ### Docker
 #### Build
 ```bash
-$ docker build -t webpagetest-api . 
+$ docker build -t webpagetest-api .
 ```
 #### Run
 ```bash
@@ -109,6 +109,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-M, --timeline**: capture Developer Tools Timeline (Chrome only)
 * **-J, --callstack**: set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
 * **-q, --chrometrace**: capture chrome trace (about://tracing) (Chrome only)
+* **--tracecategories** _\<categories>\>_:  trace categories (when chrometrace enabled) (Chrome only)
 * **-G, --netlog**: capture Network Log (Chrome only)
 * **-Q, --datareduction**: enable data reduction on Chrome 34+ Android (Chrome only)
 * **-x, --useragent** _\<string\>_: custom user agent string (Chrome only)
