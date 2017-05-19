@@ -106,6 +106,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-N, --duration** _\<seconds\>_: minimum test duration in seconds
 * **-E, --tester** _\<name\>_: run the test on a specific PC (name must match exactly or the test will not run)
 * **-W, --mobile**: (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
+* **--device** _\<string\>_: device name from mobile_devices.ini to use for mobile emulation (only when mobile=1 is specified to enable emulation and only for Chrome)
 * **-M, --timeline**: capture Developer Tools Timeline (Chrome only)
 * **-J, --callstack**: set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
 * **-q, --chrometrace**: capture chrome trace (about://tracing) (Chrome only)
