@@ -31,7 +31,7 @@
     "commander": "^2.7.1",
     "csv": "^0.4.1",
     "entities": "^1.1.1",
-    "mocha": "^2.2.4",
+    "mocha": "^3.0.2",
     "xml2js": "^0.4.6"
   },
   "devDependencies": {
