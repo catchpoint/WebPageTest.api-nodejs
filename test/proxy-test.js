@@ -7,13 +7,14 @@
 
 var assert          = require('assert'),
     http            = require('http'),
+    https            = require('https'),
     url             = require('url'),
     WebPageTest     = require('../lib/webpagetest'),
     NockServer      = require('./helpers/nock-server'),
     ResponseObjects = require('./helpers/response-objects');
 
-var wptNockServer = new NockServer('http://wpt.com'),
-    wpt = new WebPageTest('wpt.com');
+var wptNockServer = new NockServer('https://wpt.com'),
+    wpt = new WebPageTest('https://wpt.com');
 
 // proxy for test on 9001 port
 http.createServer(function(req, res) {
@@ -24,7 +25,7 @@ http.createServer(function(req, res) {
     body.push(data);
   });
   req.on('end', function() {
-    var orgreq = http.request({
+    var orgreq = https.request({
       host:    req.headers.host,
       port:    requestUrl.port || 80,
       path:    requestUrl.path,
@@ -52,7 +53,7 @@ describe('Run via proxy', function() {
 
     it('gets a test status request', function(done) {
       wpt.getTestStatus('120816_V2_2', {
-        proxy: '127.0.0.1:9001'
+        proxy: 'http://127.0.0.1:9001'
       }, function (err, data) {
         if (err) return done(err);
         assert.deepEqual(data, ResponseObjects.testStatus);
