@@ -15,7 +15,7 @@
     -p, --private                 keep the test hidden from the test log
     -L, --label <label>           label for the test
     -i, --onload                  stop test at document complete. typically, tests run until all activity stops
-    -S, --noscript                disable javascript (IE, Chrome, Firefox)
+    -S, --noscript                disable JavaScript (IE, Chrome, Firefox)
     -C, --clearcerts              clear SSL certificate caches
     -R, --ignoressl               ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
     -T, --standards               forces all pages to load in standards mode (IE only)
@@ -41,7 +41,7 @@
     -H, --noheaders               disable saving of the http headers (as well as browser status messages and CPU utilization)
     -b, --block <urls>            space-delimited list of urls to block (substring match)
     -Z, --spof <domains>          space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
-    -c, --custom <script>         execute arbitrary javascript at the end of a test to collect custom metrics
+    -c, --custom <script>         execute arbitrary JavaScript at the end of a test to collect custom metrics
     -a, --authtype <type>         type of authentication: 0 = Basic, 1 = SNS [0]
     -n, --notify <e-mail>         e-mail address to notify with the test results
     -B, --pingback <url>          URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
