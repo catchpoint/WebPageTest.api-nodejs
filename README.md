@@ -423,7 +423,7 @@ wpt.runTest(script, (err, data) => {
 * **private**: _Boolean_, keep the test hidden from the test log
 * **label**: _String_, label for the test
 * **stopAtDocumentComplete**: _Boolean_, stop test at document complete. typically, tests run until all activity stops
-* **disableJavaScript**: _Boolean_, disable javascript (IE, Chrome, Firefox)
+* **disableJavaScript**: _Boolean_, disable JavaScript (IE, Chrome, Firefox)
 * **clearCerts**: _Boolean_, clear SSL certificate caches
 * **ignoreSSL**: _Boolean_, ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
 * **disableCompatibilityView**: _Boolean_, forces all pages to load in standards mode (IE only)
@@ -447,7 +447,7 @@ wpt.runTest(script, (err, data) => {
 * **disableHTTPHeaders**: _Boolean_, disable saving of the http headers (as well as browser status messages and CPU utilization)
 * **block**: _String_, space-delimited list of urls to block (substring match)
 * **spof**: _String_, space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
-* **customMetrics**: _String_, execute arbitrary javascript at the end of a test to collect custom metrics
+* **customMetrics**: _String_, execute arbitrary JavaScript at the end of a test to collect custom metrics
 * **authenticationType**: _Number_, type of authentication: 0 = Basic, 1 = SNS [0]
 * **notifyEmail**: _String_, e-mail address to notify with the test results
 * **pingback**: _String_, URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
@@ -631,7 +631,7 @@ setTimeout(() => {
 ```
 
 ## Batch
-Batch command is available as command line only and loads a batch file containing one WebPageTest CLI command with options per line. It runs all commands in paralell but returns and array of results in order as they appear in the batch file once all results are ready. The exit status code is the sum of all individual commands exit status code.
+Batch command is available as command line only and loads a batch file containing one WebPageTest CLI command with options per line. It runs all commands in parallel, but returns an array of results in order as they appear in the batch file once all results are ready. The exit status code is the sum of all individual commands' exit status code.
 
 By running
 ```bash
@@ -667,7 +667,7 @@ $ echo $?
 0
 ````
 
-By running multiple sync tests, i.e. with either `--poll` or `--wait`, all tests are schedule and results are pulled or wait in paralell, it means if tests are set to run in different locations of same location with multiple agents, the final result might come together but the result array will only return once all tests are done. e.g.:
+By running multiple sync tests, i.e. with either `--poll` or `--wait`, all tests are scheduled and results are polled or wait in parallel; meaning, if tests are set to run in different locations or same location with multiple agents, the final result might come together, but the result array will only return once *all* tests are done. e.g.:
 
 `commands.txt`:
 ```
