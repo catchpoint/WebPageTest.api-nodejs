@@ -11,4 +11,4 @@ RUN npm install
 # Bundle app source
 COPY . /usr/src/app
 
-ENTRYPOINT [ "bin/webpagetest" ]
+ENTRYPOINT [ "/usr/src/app/bin/webpagetest" ]
