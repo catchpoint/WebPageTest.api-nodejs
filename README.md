@@ -145,6 +145,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--poll** _\<interval\>_: poll for results after test is scheduled at every <interval> seconds [5]
 * **--wait** _\<hostname:port\>_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
+* **--lighthouse**: run lighthouse test (Chrome only, Linux agent only)
 
 #### API Key (works for **test** and **cancel** commands)
 * **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](https://www.webpagetest.org/getkey.php)
