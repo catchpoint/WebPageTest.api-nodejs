@@ -145,7 +145,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--poll** _\<interval\>_: poll for results after test is scheduled at every <interval> seconds [5]
 * **--wait** _\<hostname:port\>_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
-* **--lighthouse**: run lighthouse test (Chrome only, Linux agent only)
+* **--lighthouse**: perform lighthouse test (Chrome only, Linux agent only)
 
 #### API Key (works for **test** and **cancel** commands)
 * **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](https://www.webpagetest.org/getkey.php)
@@ -473,6 +473,7 @@ wpt.runTest(script, (err, data) => {
 * **pollResults**: _Number_, poll for results after test is scheduled at every <interval> seconds [5]
 * **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 * **timeout**: _String_, timeout for polling and waiting results [no timeout]
+* **lighthouse**: _Boolean_, perform lighthouse test (Chrome only, Linux agent only)
 
 #### API Key (works for `runTest` and `cancelTest` methods)
 * **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
@@ -687,25 +688,6 @@ WebPageTest API Wrapper provides a simple seamless way to integrate WebPageTest 
 $ npm test
 ```
 
-## Changelog
-
-* 0.3.3: Fixed bug when specs check for zeroed metric
-* 0.3.2: Updated deps and fixed test runs with specs
-* 0.3.1: Added dummy url when scripting, needed for webdriver scripting on mobbile agents
-* 0.3.0: Replaced xmlResult.php by jsonResult.php WPT API endpoint for fetching test results
-* 0.2.5: Added test options: custom, chrometrace, callstack, tester; Added chrometrace command (`getChromeTraceData` method)
-* 0.2.4: Added test options: clearcerts, medianvideo, datareduction, useragent and tsview; HTTPS support to listen/proxy server
-* 0.2.3: Updated DevTools Timeline API url endpoint for timeline command
-* 0.2.2: Added response body command/method
-* 0.2.1: Added history, video, player, googleCsi commands and continuous option
-* 0.2.0: Replaced jsonml by xml2js dependency
-* 0.1.3: Test results extra data (breakdown, domains, requests, pagespeed)
-* 0.1.0: Specs (CI); Run in batch; Node methods/options as command aliases; new Chrome test options
-* 0.0.4: Sync test with results via `--poll` or `--wait`
-* 0.0.3: Custom test results median metric; Custom waterfall; new Chrome test options
-* 0.0.2: Minor bugs; 2 new commands: testers and testinfo
-* 0.0.1: Initial release
-
 ## Issues
 
 Have a bug/feature request? Please create an issue here on GitHub!
@@ -721,10 +703,7 @@ https://github.com/marcelduran/webpagetest-api/issues
 ## License
 
 Copyright 2013 Twitter Inc.
-Copyright 2015 Google Inc.
-Copyright 2015 Marcel Duran and other contributors
+Copyright 2017 Google Inc.
+Copyright 2017 Marcel Duran and other contributors
 
 Licensed under the [MIT License](https://github.com/marcelduran/webpagetest-api/raw/master/LICENSE)
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/marcelduran/webpagetest-api/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

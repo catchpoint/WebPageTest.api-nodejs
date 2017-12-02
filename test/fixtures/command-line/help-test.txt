@@ -35,6 +35,7 @@
     -Q, --datareduction           enable data reduction on Chrome 34+ Android (Chrome only)
     -x, --useragent <string>      custom user agent string (Chrome only)
     -X, --cmdline <switches>      use a list of custom command line switches (Chrome only)
+        --lighthouse              perform lighthouse test (Chrome only, Linux agent only)
     -g, --login <username>        username for authenticating tests (http authentication)
     -w, --password <password>     password for authenticating tests (http authentication)
     -t, --sensitive               discard script and http headers in the result
@@ -75,4 +76,3 @@
         --medianrun <metric>      set the run used for median for multiple runs tests [median]
         --specs <json_or_file>    set the specs for performance test suite
         --reporter <name>         set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
-        --lighthouse              run lighthouse test (Chrome only, Linux agent only)

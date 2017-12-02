@@ -1,6 +1,6 @@
 {
   "name": "webpagetest",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "WebPageTest API wrapper for NodeJS",
   "author": "Marcel Duran <github@marcelduran.com> (http://github.com/marcelduran)",
   "homepage": "http://github.com/marcelduran/webpagetest-api",
