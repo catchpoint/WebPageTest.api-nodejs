@@ -75,3 +75,4 @@
         --medianrun <metric>      set the run used for median for multiple runs tests [median]
         --specs <json_or_file>    set the specs for performance test suite
         --reporter <name>         set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
+        --lighthouse              run lighthouse test (Chrome only, Linux agent only)
