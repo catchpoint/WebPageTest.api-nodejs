@@ -121,6 +121,14 @@ describe('Example WebPageTest', function() {
       });
     });
 
+    it('gets a restart test request then returns the new test object', function(done) {
+      wpt.restartTest('120816_V2_2', function (err, data) {
+        if (err) return done(err);
+        assert.deepEqual(data, ResponseObjects.restart);
+        done();
+      });
+    });
+
     it('gets a cancel test request then returns the test cancelled object', function(done) {
       wpt.cancelTest('120816_V2_2', function (err, data) {
         if (err) return done(err);

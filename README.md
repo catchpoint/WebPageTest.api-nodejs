@@ -57,6 +57,7 @@ $ webpagetest --help
 * **locations** _[options]_: list locations and the number of pending tests
 * **testers** _[options]_: list testers status and details
 * **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
+* **restart** _\<id\>_: restart test
 * **cancel** _\<id\>_: cancel running/pending test
 * **har** _\<id\>_: get the HTTP Archive (HAR) from test
 * **pagespeed** _[options] \<id\>_: get the Google Page Speed results (if available) from test
@@ -147,7 +148,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 * **--lighthouse**: perform lighthouse test (Chrome only, Linux agent only)
 
-#### API Key (works for **test** and **cancel** commands)
+#### API Key (works for **test**, **restart** and **cancel** commands)
 * **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](https://www.webpagetest.org/getkey.php)
 
 #### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
@@ -351,6 +352,7 @@ Methods and options (including the one letter shorthands) are the same when usin
 * `getLocations(options, callback)`
 * `getTesters(options, callback)`
 * `runTest(url_or_script, options, callback)`
+* `restartTest(id, options, callback)`
 * `cancelTest(id, options, callback)`
 * `getHARData(id, options, callback)`
 * `getPageSpeedData(id, options, callback)`
@@ -475,7 +477,7 @@ wpt.runTest(script, (err, data) => {
 * **timeout**: _String_, timeout for polling and waiting results [no timeout]
 * **lighthouse**: _Boolean_, perform lighthouse test (Chrome only, Linux agent only)
 
-#### API Key (works for `runTest` and `cancelTest` methods)
+#### API Key (works for `runTest`, `restartTest` and `cancelTest` methods)
 * **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
 
 #### Request (works for `getTestStatus` `getResults` `getLocations` `getTesters` and `runTest` methods)

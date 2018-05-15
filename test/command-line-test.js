@@ -142,6 +142,24 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
+  it('gets a restart test input returns the API url', function(done) {
+    exec(mock('restart 120816_V2_2'), function(err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+      assert.equal(data.url, wptServer + 'runtest.php?resubmit=120816_V2_2');
+      done();
+    });
+  });
+
+  it('gets a restart test with api key input returns the API url', function(done) {
+    exec(mock('restart -k 12345 120816_V2_2'), function(err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+      assert.equal(data.url, wptServer + 'runtest.php?resubmit=120816_V2_2&k=12345');
+      done();
+    });
+  });
+
   it('gets a cancel test input returns the API url', function(done) {
     exec(mock('cancel 120816_V2_2'), function(err, data) {
       if (err) return done(err);
@@ -306,7 +324,7 @@ describe('WebPageTest Command Line', function() {
 
   // loop all commands help
   [
-    '', 'status', 'results', 'locations', 'testers', 'test', 'cancel', 'har',
+    '', 'status', 'results', 'locations', 'testers', 'test', 'restart', 'cancel', 'har',
     'pagespeed', 'utilization', 'request', 'timeline', 'netlog', 'chrometrace',
     'console', 'testinfo', 'history', 'googlecsi', 'response', 'waterfall',
     'screenshot', 'video', 'player', 'listen', 'batch'
