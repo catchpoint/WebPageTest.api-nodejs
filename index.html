@@ -98,18 +98,14 @@
         <p class="muted credit">Copyright &copy; 2013, Twitter Inc; Copyright &copy; 2014 Google Inc; Copyright &copy; 2014 Marcel Duran and other contributors</p>
       </div>
     </div>
-
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3587044-1"></script>
     <script>
-      (function (d, s) {
-        var g = d.createElement(s),
-            h = d.getElementsByTagName(s)[0];
-        g.async = true;
-        g.src = '//www.google-analytics.com/ga.js';
-        _gaq = [['_setAccount', 'UA-3587044-1'], ['_trackPageview'], ['_trackPageLoadTime']];
-        setTimeout(function () {
-          h.parentNode.insertBefore(g, h);
-        }, 0);
-      }(document, 'script'));
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-3587044-1');
     </script>
   </body>
 </html>
