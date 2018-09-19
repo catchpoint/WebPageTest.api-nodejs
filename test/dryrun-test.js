@@ -156,6 +156,22 @@ describe('Dry Run', function() {
       });
     });
 
+    it('gets a restart test request', function(done) {
+      wpt.restartTest('120816_V2_2', {dryRun: true}, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'runtest.php?resubmit=120816_V2_2');
+        done();
+      });
+    });
+
+    it('gets a restart test with api key request', function(done) {
+      wpt.restartTest('120816_V2_2', {key: '12345', dryRun: true}, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'runtest.php?resubmit=120816_V2_2&k=12345');
+        done();
+      });
+    });
+
     it('gets a cancel test request', function(done) {
       wpt.cancelTest('120816_V2_2', {dryRun: true}, function (err, data) {
         if (err) return done(err);
