@@ -8,7 +8,7 @@
     -h, --help                    output usage information
     -k, --key <api_key>           API key (if assigned). Contact the WebPageTest server administrator for a key if required
     -l, --location <location>     location to test from
-    -y, --connectivity <profile>  connectivity profile (Cable|DSL|FIOS|Dial|3G|3GFast|Native|custom) [Cable]
+    -y, --connectivity <profile>  connectivity profile (Cable|DSL|3GSlow|3G|3GFast|4G|LTE|Edge|2G|Dial|FIOS|Native|custom) [Cable]
     -r, --runs <number>           number of test runs [1]
     -f, --first                   skip the Repeat View test
     -v, --video                   capture video
