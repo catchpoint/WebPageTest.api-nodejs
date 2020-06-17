@@ -1,11 +1,9 @@
+Usage: webpagetest netlog [options] <id>
 
-  Usage: netlog [options] <id>
+get the Chrome Developer Tools Net log data (if available) from test
 
-  get the Chrome Developer Tools Net log data (if available) from test
-
-  Options:
-
-    -h, --help          output usage information
-    -r, --run <number>  which run number on a multiple runs test [1]
-    -c, --cached        get the Repeat View (cached view) instead of default First View (primed cache)
-
+Options:
+  -r, --run <number>  which run number on a multiple runs test [1]
+  -c, --cached        get the Repeat View (cached view) instead of default
+                      First View (primed cache)
+  -h, --help          display help for command

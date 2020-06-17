@@ -1,11 +1,9 @@
+Usage: webpagetest googlecsi [options] <id>
 
-  Usage: googlecsi [options] <id>
+get Google CSI data (Client Side Instrumentation)
 
-  get Google CSI data (Client Side Instrumentation)
-
-  Options:
-
-    -h, --help          output usage information
-    -r, --run <number>  which run number on a multiple runs test [1]
-    -c, --cached        get the Repeat View (cached view) instead of default First View (primed cache)
-
+Options:
+  -r, --run <number>  which run number on a multiple runs test [1]
+  -c, --cached        get the Repeat View (cached view) instead of default
+                      First View (primed cache)
+  -h, --help          display help for command

@@ -1,10 +1,8 @@
+Usage: webpagetest restart [options] <id>
 
-  Usage: restart [options] <id>
+restart test
 
-  restart test
-
-  Options:
-
-    -h, --help           output usage information
-    -k, --key <api_key>  API key (if assigned). Contact the WebPageTest server administrator for a key if required
-
+Options:
+  -k, --key <api_key>  API key (if assigned). Contact the WebPageTest server
+                       administrator for a key if required
+  -h, --help           display help for command

@@ -17,7 +17,7 @@ $ npm install webpagetest -g
 
 ### Command line
 ```bash
-$ webpagetest test https://twitter.com/marcelduran
+$ webpagetest test http://marcelduran.com/webpagetest-api
 ```
 
 ### Docker
@@ -27,7 +27,7 @@ $ docker build -t webpagetest-api .
 ```
 #### Run
 ```bash
-$ docker run -it --rm webpagetest-api -k YOURAPIKEY test https://twitter.com/marcelduran
+$ docker run -it --rm webpagetest-api -k YOURAPIKEY test http://marcelduran.com/webpagetest-api
 ```
 
 ### Module
@@ -35,7 +35,7 @@ $ docker run -it --rm webpagetest-api -k YOURAPIKEY test https://twitter.com/mar
 const WebPageTest = require('webpagetest');
 const wpt = new WebPageTest('www.webpagetest.org');
 
-wpt.runTest('https://twitter.com/marcelduran', (err, data) => {
+wpt.runTest('http://marcelduran.com/webpagetest-api', (err, data) => {
   console.log(err || data);
 });
 ```
@@ -229,9 +229,9 @@ $ webpagetest locations
 }
 ```
 
-#### 2. Run test on https://twitter.com/marcelduran from San Jose on IE9
+#### 2. Run test on http://marcelduran.com/webpagetest-api from San Jose on IE9
 ```bash
-$ webpagetest test https://twitter.com/marcelduran --key 1F2A3K4E5 --location SanJose_IE9
+$ webpagetest test http://marcelduran.com/webpagetest-api --key 1F2A3K4E5 --location SanJose_IE9
 ```
 ```javascript
 {
@@ -279,7 +279,7 @@ $ webpagetest results 121025_PT_N8K
     "data": {
       "testId": "121025_PT_N8K",
       "summary": "https://www.webpagetest.org/result/121025_PT_N8K/",
-      "testUrl": "https://twitter.com/marcelduran",
+      "testUrl": "http://marcelduran.com/webpagetest-api",
       "location": "SanJose_IE9",
       "connectivity": "DSL",
       "bwDown": 1500, "bwUp": 384, "latency": 50, "plr": 0,
@@ -312,13 +312,13 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 }
 ```
 
-#### Run test on https://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
+#### Run test on http://marcelduran.com/webpagetest-api and poll results every 5 seconds timing out in 60 seconds
 ```bash
-$ webpagetest test https://twitter.com/marcelduran --poll 5 --timeout 60
+$ webpagetest test http://marcelduran.com/webpagetest-api --poll 5 --timeout 60
 ```
-#### Or run test on https://twitter.com/marcelduran and wait for results listening on localhost\* port 8000\**
+#### Or run test on http://marcelduran.com/webpagetest-api and wait for results listening on localhost\* port 8000\**
 ```bash
-$ webpagetest test https://twitter.com/marcelduran --wait 8000
+$ webpagetest test http://marcelduran.com/webpagetest-api --wait 8000
 ```
 ```javascript
 {
@@ -326,7 +326,7 @@ $ webpagetest test https://twitter.com/marcelduran --wait 8000
     "statusCode": 200, "statusText": "Ok",
     "data": {
       "testId": "121025_PT_N8K",
-      "testUrl": "https://twitter.com/marcelduran",
+      "testUrl": "http://marcelduran.com/webpagetest-api",
       ...
       "median": {
         "firstView": {
@@ -543,9 +543,9 @@ wpt.getLocations((err, data) => {
 });
 ```
 
-#### 3. Run test on https://twitter.com/marcelduran from San Jose on IE9
+#### 3. Run test on http://marcelduran.com/webpagetest-api from San Jose on IE9
 ```javascript
-wpt.runTest('https://twitter.com/marcelduran', {location: 'SanJose_IE9'}, (err, data) => {
+wpt.runTest('http://marcelduran.com/webpagetest-api', {location: 'SanJose_IE9'}, (err, data) => {
   console.log(err || data);
 });
 ```
@@ -575,16 +575,16 @@ wpt.getWaterfallImage('121025_PT_N8K', {
 });
 ```
 
-#### Run test on https://twitter.com/marcelduran and poll results every 5 seconds timing out in 60 seconds
+#### Run test on http://marcelduran.com/webpagetest-api and poll results every 5 seconds timing out in 60 seconds
 ```javascript
-wpt.runTest('https://twitter.com/marcelduran', {pollResults: 5, timeout: 60}, (err, data) => {
+wpt.runTest('http://marcelduran.com/webpagetest-api', {pollResults: 5, timeout: 60}, (err, data) => {
   console.log(err || data);
 });
 ```
 
-#### Or run test on https://twitter.com/marcelduran and wait results listening on localhost\* port 8000\*\*
+#### Or run test on http://marcelduran.com/webpagetest-api and wait results listening on localhost\* port 8000\*\*
 ```javascript
-wpt.runTest('https://twitter.com/marcelduran', {waitResults: 'localhost:8000'}, (err, data) => {
+wpt.runTest('http://marcelduran.com/webpagetest-api', {waitResults: 'localhost:8000'}, (err, data) => {
   console.log(err || data);
 });
 ```
@@ -605,7 +605,7 @@ http://localhost:8080
 ```
 ```bash
 $ curl http://localhost:8080/help
-$ curl http://localhost:8080/test/twitter.com/?location=SanJose_IE9
+$ curl http://localhost:8080/test/marcelduran.com/?location=SanJose_IE9
 ```
 ```bash
 $ webpagetest listen 8443 --key key.pem --cert cert.pem --server wpt.foo.com
@@ -643,8 +643,8 @@ $ webpagetest batch commands.txt
 ```
 where `commands.txt` contains:
 ```
-test twitter.com/marcelduran --first --location foo
-test twitter.com/marcelduran --first --location bar
+test marcelduran.com --first --location foo
+test marcelduran.com --first --location bar
 ```
 It schedules the 2 tests above returning an array of size 2 in the same order as in `commands.txt` file:
 ```javascript
@@ -675,8 +675,8 @@ By running multiple sync tests, i.e. with either `--poll` or `--wait`, all tests
 
 `commands.txt`:
 ```
-test twitter.com/marcelduran --first --location foo --poll --timeout 60
-test twitter.com/marcelduran --first --location bar --poll --timeout 60
+test marcelduran.com --first --location foo --poll --timeout 60
+test marcelduran.com --first --location bar --poll --timeout 60
 ```
 
 ## Test Specs (Continuous Integration)
@@ -705,7 +705,7 @@ https://github.com/marcelduran/webpagetest-api/issues
 ## License
 
 Copyright 2013 Twitter Inc.
-Copyright 2017 Google Inc.
-Copyright 2017 Marcel Duran and other contributors
+Copyright 2020 Google Inc.
+Copyright 2020 Marcel Duran and other contributors
 
 Licensed under the [MIT License](https://github.com/marcelduran/webpagetest-api/raw/master/LICENSE)

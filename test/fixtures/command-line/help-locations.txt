@@ -1,10 +1,7 @@
+Usage: webpagetest locations [options]
 
-  Usage: locations [options]
+list locations and the number of pending tests
 
-  list locations and the number of pending tests
-
-  Options:
-
-    -h, --help          output usage information
-    -e, --request <id>  echo request ID, useful to track asynchronous requests
-
+Options:
+  -e, --request <id>  echo request ID, useful to track asynchronous requests
+  -h, --help          display help for command

@@ -1,10 +1,7 @@
+Usage: webpagetest status [options] <id>
 
-  Usage: status [options] <id>
+check test status
 
-  check test status
-
-  Options:
-
-    -h, --help          output usage information
-    -e, --request <id>  echo request ID, useful to track asynchronous requests
-
+Options:
+  -e, --request <id>  echo request ID, useful to track asynchronous requests
+  -h, --help          display help for command

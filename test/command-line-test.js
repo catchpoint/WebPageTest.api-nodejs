@@ -1,7 +1,7 @@
 /**
  * Copyright (c) 2013, Twitter Inc.
- * Copyright (c) 2015, Google Inc.
- * Copyright (c) 2015, Marcel Duran and other contributors
+ * Copyright (c) 2020, Google Inc.
+ * Copyright (c) 2020, Marcel Duran and other contributors
  * Released under the MIT License
  */
 

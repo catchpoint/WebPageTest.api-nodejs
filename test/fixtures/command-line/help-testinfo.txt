@@ -1,9 +1,6 @@
+Usage: webpagetest testinfo [options] <id>
 
-  Usage: testinfo [options] <id>
+get test request info/details
 
-  get test request info/details
-
-  Options:
-
-    -h, --help  output usage information
-
+Options:
+  -h, --help  display help for command

@@ -1,12 +1,10 @@
+Usage: webpagetest response [options] <id>
 
-  Usage: response [options] <id>
+get response body for text resources
 
-  get response body for text resources
-
-  Options:
-
-    -h, --help              output usage information
-    -r, --run <number>      which run number on a multiple runs test [1]
-    -c, --cached            get the Repeat View (cached view) instead of default First View (primed cache)
-    -R, --request <number>  the request number [1]
-
+Options:
+  -r, --run <number>      which run number on a multiple runs test [1]
+  -c, --cached            get the Repeat View (cached view) instead of default
+                          First View (primed cache)
+  -R, --request <number>  the request number [1]
+  -h, --help              display help for command

@@ -1,9 +1,6 @@
+Usage: webpagetest player [options] <id>
 
-  Usage: player [options] <id>
+get a html5 player for a video <id>
 
-  get a html5 player for a video <id>
-
-  Options:
-
-    -h, --help  output usage information
-
+Options:
+  -h, --help  display help for command

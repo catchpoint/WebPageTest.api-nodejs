@@ -1,11 +1,8 @@
+Usage: webpagetest listen [options] [hostname:port]
 
-  Usage: listen [options] [hostname:port]
+start webpagetest-api proxy server on <hostname>:<port> [hostname:7791]
 
-  start webpagetest-api proxy server on <hostname>:<port> [hostname:7791]
-
-  Options:
-
-    -h, --help         output usage information
-    -k, --key <file>   private key file to use for SSL
-    -c, --cert <file>  public x509 certificate file to use for SSL
-
+Options:
+  -k, --key <file>   private key file to use for SSL
+  -c, --cert <file>  public x509 certificate file to use for SSL
+  -h, --help         display help for command

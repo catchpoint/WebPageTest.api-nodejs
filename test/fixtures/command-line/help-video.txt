@@ -1,10 +1,9 @@
+Usage: webpagetest video [options] <tests>
 
-  Usage: video [options] <tests>
+create a video from <tests> (comma separated test ids)
 
-  create a video from <tests> (comma separated test ids)
-
-  Options:
-
-    -h, --help             output usage information
-    -e, --end <end_point>  frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded
-
+Options:
+  -e, --end <end_point>  frame comparison end point: [visual]=visually complete
+                         | all=last change | doc=document complete | full=fully
+                         loaded
+  -h, --help             display help for command
