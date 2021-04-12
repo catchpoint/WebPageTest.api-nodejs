@@ -40,7 +40,7 @@ var formatData = function(err, data, info) {
   } else if (info) {
     encoding = info.encoding;
     if (encoding === 'binary') {
-      data = new Buffer(data, 'binary');
+      data = new Buffer.from(data, 'binary');
       type = info.type;
     } else {
       data = {type: info.type, data: data};
