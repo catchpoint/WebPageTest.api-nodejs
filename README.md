@@ -148,7 +148,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 * **--lighthouse**: perform lighthouse test (Chrome only, Linux agent only)
 
-#### API Key (works for **test**, **restart** and **cancel** commands)
+#### API Key (works for **test**, **restart**,**locations** and **cancel** commands)
 * **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](https://www.webpagetest.org/getkey.php)
 
 #### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
@@ -200,7 +200,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 
 
 ### Examples
-#### 1. Get available locations
+#### 1. Get all available locations
 ```bash
 $ webpagetest locations
 ```
@@ -228,8 +228,36 @@ $ webpagetest locations
   }
 }
 ```
+#### 2. Get API available locations
+```bash
+$ webpagetest locations --key 1F2A3K4E5
+```
+```javascript
+{
+  "response": {
+    "statusCode": 200, "statusText": "Ok",
+    "data": {
+      "location": [
+        ...
+        {
+          "id": "SanJose_IE9",
+          "Label": "San Jose, CA USA (IE 9,Chrome,Firefox)",
+          "location": "SanJose_IE9",
+          "Browser": "IE 9",
+          "PendingTests": {
+            "p1": 0, "p2": 0, "p3": 0, "p4": 0, "p5": 2, "p6": 2, "p7": 0,
+            "p8": 0, "p9": 0, "Total": 7, "HighPriority": 2, "LowPriority": 4,
+            "Testing": 1, "Idle": 0
+          }
+        },
+        ...
+      ]
+    }
+  }
+}
+```
 
-#### 2. Run test on http://marcelduran.com/webpagetest-api from San Jose on IE9
+#### 3. Run test on http://marcelduran.com/webpagetest-api from San Jose on IE9
 ```bash
 $ webpagetest test http://marcelduran.com/webpagetest-api --key 1F2A3K4E5 --location SanJose_IE9
 ```
@@ -249,7 +277,7 @@ $ webpagetest test http://marcelduran.com/webpagetest-api --key 1F2A3K4E5 --loca
 }
 ```
 
-#### 3. Check current test status
+#### 4. Check current test status
 ```bash
 $ webpagetest status 121025_PT_N8K
 ```
@@ -268,7 +296,7 @@ $ webpagetest status 121025_PT_N8K
 }
 ```
 
-#### 4. Get test results
+#### 5. Get test results
 ```bash
 $ webpagetest results 121025_PT_N8K
 ```
@@ -301,7 +329,7 @@ $ webpagetest results 121025_PT_N8K
 }
 ```
 
-#### 5. Get test waterfall thumbnail from repeat view as data URI
+#### 6. Get test waterfall thumbnail from repeat view as data URI
 ```bash
 $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 ```
@@ -525,6 +553,9 @@ wpt.runTest(script, (err, data) => {
 #### Listen (works for `listen` method only)
 * **key** _String_: private key file path to use for SSL
 * **cert** _String_: public x509 certificate file path to use for SSL
+
+#### Location (works for `getLocations` method only)
+* **allLocations** _Boolean_: if true, returns all available locations irrespective of API availability
 
 ### Examples
 
