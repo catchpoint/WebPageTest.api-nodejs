@@ -128,6 +128,18 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-B, --pingback** _\<url\>_: URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
 * **-D, --bwdown** _\<bandwidth\>_: download bandwidth in Kbps (used when specifying a custom connectivity profile)
 * **-U, --bwup** _\<bandwidth\>_: upload bandwidth in Kbps (used when specifying a custom connectivity profile)
+* **-bw, --browserwidth** _\<pixels\>_: Browser window width (in display pixels)
+* **-bh, --browserheight** _\<pixels\>_: Browser window height (in display pixels)
+* **-vh, --viewportheight** _\<pixels\>_: Viewport Height in css pixels
+* **-vw, --viewportwidth** _\<pixels\>_: Viewport Width in css pixels
+* **-dpr, --dpr** _\<ratio\>_: Device To Pixel Ratio
+* **-au, --appendua** _\<string\>_: String to append to the user agent string. This is in addition to the default PTST/ver string
+* **-tt, --testtype** _\<type\>_: For running alternative test types, can specify traceroute or lighthouse
+* **-pr, --profiler** _\<number\>_: Set to 1 to enable the V8 sampling profiler (Chromium only)
+* **-avif, --disableAVIF** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
+* **-webp, --disableWEBP** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
+* **-jxl, --disableJXL** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
+* **-dts, --dtShaper** _\<number\>_: Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
 * **-Y, --latency** _\<time\>_: first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
 * **-P, --plr** _\<percentage\>_: packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
 * **-z, --noopt**: disable optimization checks (for faster testing)
