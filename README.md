@@ -129,13 +129,13 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-bh, --browserheight** _\<pixels\>_: Browser window height (in display pixels)
 * **-vh, --viewportheight** _\<pixels\>_: Viewport Height in css pixels
 * **-vw, --viewportwidth** _\<pixels\>_: Viewport Width in css pixels
-* **-dpr, --dpr** _\<ratio\>_: Device To Pixel Ratio
+* **-dpr, --devicetopixelratio** _\<ratio\>_: Device To Pixel Ratio
 * **-au, --appendua** _\<string\>_: String to append to the user agent string. This is in addition to the default PTST/ver string
-* **-tt, --testtype** _\<type\>_: For running alternative test types, can specify traceroute or lighthouse
+* **-tt, --testtype** _\<string\>_: For running alternative test types, can specify traceroute or lighthouse
 * **-pr, --profiler** _\<number\>_: Set to 1 to enable the V8 sampling profiler (Chromium only)
 * **-avif, --disableAVIF** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
-* **-webp, --disableWEBP** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
-* **-jxl, --disableJXL** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
+* **-webp, --disableWEBP** _\<number\>_: Set to 1 to disable WEBP support (Chromium 88+)
+* **-jxl, --disableJXL** _\<number\>_: Set to 1 to disable JXL support (Chromium 88+)
 * **-dts, --dtShaper** _\<number\>_: Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
 * **-Y, --latency** _\<time\>_: first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
 * **-P, --plr** _\<percentage\>_: packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
@@ -497,7 +497,7 @@ wpt.runTest(script, (err, data) => {
 * **browserheight**: _String_, Browser window height (in display pixels)
 * **viewportheight**: _String_, Viewport Height in css pixels
 * **viewportwidth**: _String_, Viewport Width in css pixels
-* **dpr**: _String_, Device To Pixel Ratio
+* **devicetopixelratio**: _String_, Device To Pixel Ratio
 * **appendua**: _String_, String to append to the user agent string. This is in addition to the default PTST/ver string
 * **testtype**: _String_, For running alternative test types, can specify traceroute or lighthouse
 * **profiler**: _Number_, Set to 1 to enable the V8 sampling profiler (Chromium only)
