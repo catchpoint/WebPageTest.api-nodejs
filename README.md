@@ -496,6 +496,18 @@ wpt.runTest(script, (err, data) => {
 * **pingback**: _String_, URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
 * **bandwidthDown**: _String_, download bandwidth in Kbps (used when specifying a custom connectivity profile)
 * **bandwidthUp**: _String_, upload bandwidth in Kbps (used when specifying a custom connectivity profile)
+* **browserwidth**: _String_, Browser window width (in display pixels)
+* **browserheight**: _String_, Browser window height (in display pixels)
+* **viewportheight**: _String_, Viewport Height in css pixels
+* **viewportwidth**: _String_, Viewport Width in css pixels
+* **dpr**: _String_, Device To Pixel Ratio
+* **appendua**: _String_, String to append to the user agent string. This is in addition to the default PTST/ver string
+* **testtype**: _String_, For running alternative test types, can specify traceroute or lighthouse
+* **profiler**: _Number_, Set to 1 to enable the V8 sampling profiler (Chromium only)
+* **disableAVIF**: _Number_, Set to 1 to disable AVIF support (Chromium 88+)
+* **disableWEBP**: _Number_, Set to 1 to disable WEBP support (Chromium 88+)
+* **disableJXL**: _Number_, Set to 1 to disable JpegXL support (Chromium 88+)
+* **dtShaper**: _Number_, Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
 * **latency**: _String_, first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
 * **packetLossRate**: _Number_, packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
 * **disableOptimization**: _Boolean_, disable optimization checks (for faster testing)
