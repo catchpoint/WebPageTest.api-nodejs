@@ -1,11 +1,12 @@
 ## WebPageTest API Wrapper for NodeJS
 
-[![Build Status](https://secure.travis-ci.org/marcelduran/webpagetest-api.svg?branch=master)](https://travis-ci.org/marcelduran/webpagetest-api)
+[![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api)
 [![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
-[![Dependencies Status](https://david-dm.org/marcelduran/webpagetest-api.svg)](https://david-dm.org/marcelduran/webpagetest-api)
+[![Dependencies Status](https://david-dm.org/WebPageTest/webpagetest-api.svg)](https://david-dm.org/WebPageTest/webpagetest-api)
 
-[WebPageTest API Wrapper](https://marcelduran.com/webpagetest-api) is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
+WebPageTest API Wrapper is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
+
 
 ## Getting started
 
@@ -17,7 +18,7 @@ $ npm install webpagetest -g
 
 ### Command line
 ```bash
-$ webpagetest test http://marcelduran.com/webpagetest-api
+$ webpagetest test https://docs.webpagetest.org/api/integrations/
 ```
 
 ### Docker
@@ -27,7 +28,7 @@ $ docker build -t webpagetest-api .
 ```
 #### Run
 ```bash
-$ docker run -it --rm webpagetest-api -k YOURAPIKEY test http://marcelduran.com/webpagetest-api
+$ docker run -it --rm webpagetest-api -k YOURAPIKEY test https://docs.webpagetest.org/api/integrations/
 ```
 
 ### Module
@@ -35,14 +36,10 @@ $ docker run -it --rm webpagetest-api -k YOURAPIKEY test http://marcelduran.com/
 const WebPageTest = require('webpagetest');
 const wpt = new WebPageTest('www.webpagetest.org');
 
-wpt.runTest('http://marcelduran.com/webpagetest-api', (err, data) => {
+wpt.runTest('https://docs.webpagetest.org/api/integrations/', (err, data) => {
   console.log(err || data);
 });
 ```
-
-## API Console Demo
-
-[marcelduran.com/webpagetest-api](http://marcelduran.com/webpagetest-api/console/)
 
 ## Command Line
 
@@ -128,6 +125,18 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-B, --pingback** _\<url\>_: URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
 * **-D, --bwdown** _\<bandwidth\>_: download bandwidth in Kbps (used when specifying a custom connectivity profile)
 * **-U, --bwup** _\<bandwidth\>_: upload bandwidth in Kbps (used when specifying a custom connectivity profile)
+* **-bw, --browserwidth** _\<pixels\>_: Browser window width (in display pixels)
+* **-bh, --browserheight** _\<pixels\>_: Browser window height (in display pixels)
+* **-vh, --viewportheight** _\<pixels\>_: Viewport Height in css pixels
+* **-vw, --viewportwidth** _\<pixels\>_: Viewport Width in css pixels
+* **-dpr, --devicetopixelratio** _\<ratio\>_: Device To Pixel Ratio
+* **-au, --appendua** _\<string\>_: String to append to the user agent string. This is in addition to the default PTST/ver string
+* **-tt, --testtype** _\<string\>_: For running alternative test types, can specify traceroute or lighthouse
+* **-pr, --profiler** _\<number\>_: Set to 1 to enable the V8 sampling profiler (Chromium only)
+* **-avif, --disableAVIF** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
+* **-webp, --disableWEBP** _\<number\>_: Set to 1 to disable WEBP support (Chromium 88+)
+* **-jxl, --disableJXL** _\<number\>_: Set to 1 to disable JXL support (Chromium 88+)
+* **-dts, --dtShaper** _\<number\>_: Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
 * **-Y, --latency** _\<time\>_: first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
 * **-P, --plr** _\<percentage\>_: packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
 * **-z, --noopt**: disable optimization checks (for faster testing)
@@ -257,9 +266,9 @@ $ webpagetest locations --key 1F2A3K4E5
 }
 ```
 
-#### 3. Run test on http://marcelduran.com/webpagetest-api from San Jose on IE9
+#### 3. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
 ```bash
-$ webpagetest test http://marcelduran.com/webpagetest-api --key 1F2A3K4E5 --location SanJose_IE9
+$ webpagetest test https://docs.webpagetest.org/api/integrations/ --key 1F2A3K4E5 --location SanJose_IE9
 ```
 ```javascript
 {
@@ -307,7 +316,7 @@ $ webpagetest results 121025_PT_N8K
     "data": {
       "testId": "121025_PT_N8K",
       "summary": "https://www.webpagetest.org/result/121025_PT_N8K/",
-      "testUrl": "http://marcelduran.com/webpagetest-api",
+      "testUrl": "https://docs.webpagetest.org/api/integrations/",
       "location": "SanJose_IE9",
       "connectivity": "DSL",
       "bwDown": 1500, "bwUp": 384, "latency": 50, "plr": 0,
@@ -340,13 +349,13 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 }
 ```
 
-#### Run test on http://marcelduran.com/webpagetest-api and poll results every 5 seconds timing out in 60 seconds
+#### Run test on https://docs.webpagetest.org/api/integrations/ and poll results every 5 seconds timing out in 60 seconds
 ```bash
-$ webpagetest test http://marcelduran.com/webpagetest-api --poll 5 --timeout 60
+$ webpagetest test https://docs.webpagetest.org/api/integrations/ --poll 5 --timeout 60
 ```
-#### Or run test on http://marcelduran.com/webpagetest-api and wait for results listening on localhost\* port 8000\**
+#### Or run test on https://docs.webpagetest.org/api/integrations/ and wait for results listening on localhost\* port 8000\**
 ```bash
-$ webpagetest test http://marcelduran.com/webpagetest-api --wait 8000
+$ webpagetest test https://docs.webpagetest.org/api/integrations/ --wait 8000
 ```
 ```javascript
 {
@@ -354,7 +363,7 @@ $ webpagetest test http://marcelduran.com/webpagetest-api --wait 8000
     "statusCode": 200, "statusText": "Ok",
     "data": {
       "testId": "121025_PT_N8K",
-      "testUrl": "http://marcelduran.com/webpagetest-api",
+      "testUrl": "https://docs.webpagetest.org/api/integrations/",
       ...
       "median": {
         "firstView": {
@@ -484,6 +493,18 @@ wpt.runTest(script, (err, data) => {
 * **pingback**: _String_, URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
 * **bandwidthDown**: _String_, download bandwidth in Kbps (used when specifying a custom connectivity profile)
 * **bandwidthUp**: _String_, upload bandwidth in Kbps (used when specifying a custom connectivity profile)
+* **browserwidth**: _String_, Browser window width (in display pixels)
+* **browserheight**: _String_, Browser window height (in display pixels)
+* **viewportheight**: _String_, Viewport Height in css pixels
+* **viewportwidth**: _String_, Viewport Width in css pixels
+* **devicetopixelratio**: _String_, Device To Pixel Ratio
+* **appendua**: _String_, String to append to the user agent string. This is in addition to the default PTST/ver string
+* **testtype**: _String_, For running alternative test types, can specify traceroute or lighthouse
+* **profiler**: _Number_, Set to 1 to enable the V8 sampling profiler (Chromium only)
+* **disableAVIF**: _Number_, Set to 1 to disable AVIF support (Chromium 88+)
+* **disableWEBP**: _Number_, Set to 1 to disable WEBP support (Chromium 88+)
+* **disableJXL**: _Number_, Set to 1 to disable JpegXL support (Chromium 88+)
+* **dtShaper**: _Number_, Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
 * **latency**: _String_, first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
 * **packetLossRate**: _Number_, packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
 * **disableOptimization**: _Boolean_, disable optimization checks (for faster testing)
@@ -574,9 +595,9 @@ wpt.getLocations((err, data) => {
 });
 ```
 
-#### 3. Run test on http://marcelduran.com/webpagetest-api from San Jose on IE9
+#### 3. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
 ```javascript
-wpt.runTest('http://marcelduran.com/webpagetest-api', {location: 'SanJose_IE9'}, (err, data) => {
+wpt.runTest('https://docs.webpagetest.org/api/integrations/', {location: 'SanJose_IE9'}, (err, data) => {
   console.log(err || data);
 });
 ```
@@ -606,16 +627,16 @@ wpt.getWaterfallImage('121025_PT_N8K', {
 });
 ```
 
-#### Run test on http://marcelduran.com/webpagetest-api and poll results every 5 seconds timing out in 60 seconds
+#### Run test on https://docs.webpagetest.org/api/integrations/ and poll results every 5 seconds timing out in 60 seconds
 ```javascript
-wpt.runTest('http://marcelduran.com/webpagetest-api', {pollResults: 5, timeout: 60}, (err, data) => {
+wpt.runTest('https://docs.webpagetest.org/api/integrations/', {pollResults: 5, timeout: 60}, (err, data) => {
   console.log(err || data);
 });
 ```
 
-#### Or run test on http://marcelduran.com/webpagetest-api and wait results listening on localhost\* port 8000\*\*
+#### Or run test on https://docs.webpagetest.org/api/integrations/ and wait results listening on localhost\* port 8000\*\*
 ```javascript
-wpt.runTest('http://marcelduran.com/webpagetest-api', {waitResults: 'localhost:8000'}, (err, data) => {
+wpt.runTest('https://docs.webpagetest.org/api/integrations/', {waitResults: 'localhost:8000'}, (err, data) => {
   console.log(err || data);
 });
 ```
@@ -636,7 +657,7 @@ http://localhost:8080
 ```
 ```bash
 $ curl http://localhost:8080/help
-$ curl http://localhost:8080/test/marcelduran.com/?location=SanJose_IE9
+$ curl http://localhost:8080/test/webpagetest.org/?location=SanJose_IE9
 ```
 ```bash
 $ webpagetest listen 8443 --key key.pem --cert cert.pem --server wpt.foo.com
@@ -674,8 +695,8 @@ $ webpagetest batch commands.txt
 ```
 where `commands.txt` contains:
 ```
-test marcelduran.com --first --location foo
-test marcelduran.com --first --location bar
+test https://docs.webpagetest.org/api/integrations/ --first --location foo
+test https://docs.webpagetest.org/api/integrations/ --first --location bar
 ```
 It schedules the 2 tests above returning an array of size 2 in the same order as in `commands.txt` file:
 ```javascript
@@ -706,15 +727,15 @@ By running multiple sync tests, i.e. with either `--poll` or `--wait`, all tests
 
 `commands.txt`:
 ```
-test marcelduran.com --first --location foo --poll --timeout 60
-test marcelduran.com --first --location bar --poll --timeout 60
+test https://docs.webpagetest.org/api/integrations/ --first --location foo --poll --timeout 60
+test https://docs.webpagetest.org/api/integrations/ --first --location bar --poll --timeout 60
 ```
 
 ## Test Specs (Continuous Integration)
 
 WebPageTest API Wrapper provides a simple seamless way to integrate WebPageTest with Continuous Integration tools.
 
-[See dedicated page](https://github.com/marcelduran/webpagetest-api/wiki/Test-Specs)
+[See dedicated page](https://github.com/WebPageTest/webpagetest-api/wiki/Test-Specs)
 
 ## Tests
 ```bash
@@ -725,13 +746,13 @@ $ npm test
 
 Have a bug/feature request? Please create an issue here on GitHub!
 
-https://github.com/marcelduran/webpagetest-api/issues
+https://github.com/WebPageTest/webpagetest-api/issues
 
 ## Author
 
-**Marcel Duran**
+**WebPageTest**
 
-+ https://github.com/marcelduran
++ https://github.com/WebPageTest
 
 ## License
 
@@ -739,4 +760,4 @@ Copyright 2013 Twitter Inc.
 Copyright 2020 Google Inc.
 Copyright 2020 Marcel Duran and other contributors
 
-Licensed under the [MIT License](https://github.com/marcelduran/webpagetest-api/raw/master/LICENSE)
+Licensed under the [MIT License](https://github.com/WebPageTest/webpagetest-api/raw/master/LICENSE)
