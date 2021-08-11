@@ -2,8 +2,8 @@
   "name": "webpagetest",
   "version": "0.4.0",
   "description": "WebPageTest API wrapper for NodeJS",
-  "author": "Marcel Duran <github@marcelduran.com> (http://github.com/marcelduran)",
-  "homepage": "http://github.com/marcelduran/webpagetest-api",
+  "author": "WebPageTest <github@WebPageTest.com> (http://github.com/WebPageTest)",
+  "homepage": "http://github.com/WebPageTest/webpagetest-api",
   "keywords": [
     "webpagetest",
     "api",
@@ -14,10 +14,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/marcelduran/webpagetest-api.git"
+    "url": "git://github.com/WebPageTest/webpagetest-api.git"
   },
   "bugs": {
-    "url": "http://github.com/marcelduran/webpagetest-api/issues"
+    "url": "http://github.com/WebPageTest/webpagetest-api/issues"
   },
   "main": "lib/webpagetest.js",
   "bin": "bin/webpagetest",
