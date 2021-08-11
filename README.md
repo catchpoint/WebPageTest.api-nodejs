@@ -1,6 +1,6 @@
 ## WebPageTest API Wrapper for NodeJS
 
-[![Build Status](https://secure.travis-ci.org/marcelduran/webpagetest-api.svg?branch=master)](https://travis-ci.org/marcelduran/webpagetest-api)
+[![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api)
 [![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![Dependencies Status](https://david-dm.org/WebPageTest/webpagetest-api.svg)](https://david-dm.org/WebPageTest/webpagetest-api)

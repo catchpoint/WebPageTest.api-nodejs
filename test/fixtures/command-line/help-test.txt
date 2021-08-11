@@ -90,7 +90,7 @@ Options:
   -bh, --browserheight <pixels>       Browser window height (in display pixels)
   -vh, --viewportheight <pixels>      Viewport Height in css pixels
   -vw, --viewportwidth <pixels>       Viewport Width in css pixels
-  -dpr, --devicetopixelratio <dpr>    Device To Pixel Ratio
+  -dpr, --devicetopixelratio <ratio>    Device To Pixel Ratio
   -au, --appendua <string>            String to append to the user agent string. This is in addition to the default PTST/ver string
   -tt, --testtype <string>            For running alternative test types, can specify traceroute or lighthouse
   -pr, --profiler <number>            Set to 1 to enable the V8 sampling profiler (Chromium only)
