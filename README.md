@@ -3,9 +3,9 @@
 [![Build Status](https://secure.travis-ci.org/marcelduran/webpagetest-api.svg?branch=master)](https://travis-ci.org/marcelduran/webpagetest-api)
 [![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
-[![Dependencies Status](https://david-dm.org/marcelduran/webpagetest-api.svg)](https://david-dm.org/marcelduran/webpagetest-api)
+[![Dependencies Status](https://david-dm.org/WebPageTest/webpagetest-api.svg)](https://david-dm.org/WebPageTest/webpagetest-api)
 
-[WebPageTest API Wrapper](https://marcelduran.com/webpagetest-api) is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
+WebPageTest API Wrapper is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
 
 ## Getting started
 
