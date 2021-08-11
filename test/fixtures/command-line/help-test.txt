@@ -96,7 +96,7 @@ Options:
   -pr, --profiler <number>            Set to 1 to enable the V8 sampling profiler (Chromium only)
   -avif, --disableAVIF <number>       Set to 1 to disable AVIF support (Chromium 88+)
   -webp, --disableWEBP <number>       Set to 1 to disable WEBP support (Chromium 88+)
-  -jxl, --disableJXL <number>         Set to 1 to disable JXL support (Chromium 88+)
+  -jxl, --disableJXL <number>         Set to 1 to disable JpegXL support (Chromium 88+)
   -dts, --dtShaper <number>           Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
   -Y, --latency <time>                first-hop Round Trip Time in ms (used
                                       when specifying a custom connectivity
