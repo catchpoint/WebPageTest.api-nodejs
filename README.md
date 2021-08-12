@@ -1,9 +1,11 @@
-## WebPageTest API Wrapper for NodeJS
+<p align="center"><img src="https://docs.webpagetest.org/img/wpt-navy-logo.png" alt="WebPageTest Logo" /></p>
+<p align="center"><a href="https://docs.webpagetest.org/api/integrations/#officially-supported-integrations">Learn about more WebPageTest API Integrations in our docs</a></p>
+
+# WebPageTest API Wrapper for NodeJS
 
 [![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api)
 [![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
-[![Dependencies Status](https://david-dm.org/WebPageTest/webpagetest-api.svg)](https://david-dm.org/WebPageTest/webpagetest-api)
 
 WebPageTest API Wrapper is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
 
@@ -761,3 +763,6 @@ Copyright 2020 Google Inc.
 Copyright 2020 Marcel Duran and other contributors
 
 Licensed under the [MIT License](https://github.com/WebPageTest/webpagetest-api/raw/master/LICENSE)
+
+---
+<p align="center"><a href="https://docs.webpagetest.org/api/integrations/#officially-supported-integrations">Learn about more WebPageTest API Integrations in our docs</a></p>
