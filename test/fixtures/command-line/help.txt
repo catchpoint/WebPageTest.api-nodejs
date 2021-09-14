@@ -14,6 +14,7 @@ Commands:
   results [options] <id>            get test results
   locations [options]               list locations and the number of pending
                                     tests
+  testBalance [options]             get remaining tests for the account
   testers [options]                 list testers status and details
   test [options] <url_or_script>    run test
   restart [options] <id>            restart test
