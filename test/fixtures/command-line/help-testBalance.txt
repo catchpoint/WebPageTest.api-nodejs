@@ -1,0 +1,9 @@
+Usage: webpagetest testBalance [options]
+
+get remaining tests for the account
+
+Options:
+  -k, --key <api_key>                 API key (if assigned). Contact the
+                                      WebPageTest server administrator for a
+                                      key if required
+  -h, --help          display help for command

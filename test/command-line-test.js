@@ -327,7 +327,7 @@ describe('WebPageTest Command Line', function() {
     '', 'status', 'results', 'locations', 'testers', 'test', 'restart', 'cancel', 'har',
     'pagespeed', 'utilization', 'request', 'timeline', 'netlog', 'chrometrace',
     'console', 'testinfo', 'history', 'googlecsi', 'response', 'waterfall',
-    'screenshot', 'video', 'player', 'listen', 'batch'
+    'screenshot', 'video', 'player', 'listen', 'batch','testBalance'
   ].forEach(function eachCmd(command) {
       it('gets a ' + command + ' help input and returns the help text', function(done) {
         exec(mock(command + ' --help'), function(err, data) {
