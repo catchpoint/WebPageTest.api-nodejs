@@ -56,6 +56,7 @@ $ webpagetest --help
 * **locations** _[options]_: list locations and the number of pending tests
 * **testers** _[options]_: list testers status and details
 * **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
+* **testBalance** _[options]_: get remaining tests for the account
 * **restart** _\<id\>_: restart test
 * **cancel** _\<id\>_: cancel running/pending test
 * **har** _\<id\>_: get the HTTP Archive (HAR) from test
@@ -159,7 +160,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 * **--lighthouse**: perform lighthouse test (Chrome only, Linux agent only)
 
-#### API Key (works for **test**, **restart**,**locations** and **cancel** commands)
+#### API Key (works for **test**, **restart**,**locations**, **testBalance** and **cancel** commands)
 * **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](https://www.webpagetest.org/getkey.php)
 
 #### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
@@ -351,6 +352,18 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 }
 ```
 
+#### 7. Get remaining tests count for the account
+```bash
+$ webpagetest testBalance --key 1F2A3K4E5
+```
+```javascript
+{
+    "data": {
+        "remaining": 1175
+    }
+}
+```
+
 #### Run test on https://docs.webpagetest.org/api/integrations/ and poll results every 5 seconds timing out in 60 seconds
 ```bash
 $ webpagetest test https://docs.webpagetest.org/api/integrations/ --poll 5 --timeout 60
@@ -390,6 +403,7 @@ Methods and options (including the one letter shorthands) are the same when usin
 * `getTestResults(id, options, callback)`
 * `getLocations(options, callback)`
 * `getTesters(options, callback)`
+* `getTestBalance(options, callback)`
 * `runTest(url_or_script, options, callback)`
 * `restartTest(id, options, callback)`
 * `cancelTest(id, options, callback)`
