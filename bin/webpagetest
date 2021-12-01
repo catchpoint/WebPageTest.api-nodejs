@@ -22,6 +22,8 @@ var command, file, ret,
 // replace default values on descriptons
 mapping.commands.listen.info =
   mapping.commands.listen.info.replace('%s', WebPageTest.defaultListenPort);
+// ensure that all stdout is received on tests
+process.stdout._handle.setBlocking(true);
 
 var output = function(data, exitStatus, preExit) {
   process.stdout.write(data);
