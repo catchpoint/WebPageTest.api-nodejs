@@ -49,17 +49,25 @@ describe('Example WebPageTest', function() {
       });
     });
 
-    it('gets a test results with extra data request then returns the test results object', function(done) {
-      wpt.getTestResults('141106_8N_ZRC', {
-        breakDown: true,
-        domains: true,
-        pageSpeed: true,
-        requests: true
-      }, function (err, data) {
-        if (err) return done(err);
-        assert.deepEqual(data, ResponseObjects.testResultsExtraData);
-        done();
-      });
+    it("gets a test results with extra data request then returns the test results object", function (done) {
+      wpt.getTestResults(
+        "141106_8N_ZRC",
+        {
+          nomedian: true,
+          noaverage: true,
+          nostandard: true,
+          noruns: true,
+          noconsole: true,
+          nolighthouse: true,
+          norepeatview: true,
+          norequests: true,
+        },
+        function (err, data) {
+          if (err) return done(err);
+          assert.deepEqual(data, ResponseObjects.testResultsExtraData);
+          done();
+        }
+      );
     });
 
     it('gets the locations list request then returns the locations list object', function(done) {

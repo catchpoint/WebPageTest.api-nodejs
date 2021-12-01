@@ -64,19 +64,30 @@ describe('Dry Run', function() {
       });
     });
 
-    it('gets a test results with extra data request', function(done) {
-      wpt.getTestResults('141106_8N_ZRC', {
-        breakDown: true,
-        domains: true,
-        pageSpeed: true,
-        requests: true,
-        dryRun: true
-      }, function (err, data) {
-        if (err) return done(err);
-        assert.equal(data.url, wptServer +
-          'jsonResult.php?test=141106_8N_ZRC&breakdown=1&domains=1&pagespeed=1&requests=1');
-        done();
-      });
+    it("gets a test results with extra data request", function (done) {
+      wpt.getTestResults(
+        "141106_8N_ZRC",
+        {
+          nomedian: true,
+          noaverage: true,
+          nostandard: true,
+          noruns: true,
+          noconsole: true,
+          nolighthouse: true,
+          norepeatview: true,
+          norequests: true,
+          dryRun: true,
+        },
+        function (err, data) {
+          if (err) return done(err);
+          assert.equal(
+            data.url,
+            wptServer +
+              "jsonResult.php?test=141106_8N_ZRC&median=0&average=0&standard=0&runs=0&console=0&lighthouse=0&rv=0&requests=0"
+          );
+          done();
+        }
+      );
     });
 
     it('gets the locations list request', function(done) {

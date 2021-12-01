@@ -46,7 +46,8 @@ var reqResMap = {
   '/jsonResult.php?test=141106_TM_ZFM&medianMetric=TTFB': 'testResultsMultiRunsTTFBMedianMetric.json',
 
   // test results with extra data
-  '/jsonResult.php?test=141106_8N_ZRC&breakdown=1&domains=1&pagespeed=1&requests=1': 'testResultsExtraData.json',
+  "/jsonResult.php?test=141106_8N_ZRC&median=0&average=0&standard=0&runs=0&console=0&lighthouse=0&rv=0&requests=0":
+    "testResultsExtraData.json",
 
   // sync
   '/runtest.php?url=http%3A%2F%2Ftwitter.com%2Fmarcelduran&f=json&pingback=http%3A%2F%2F127.0.0.1%3A8000%2Ftestdone': 'runTest.json',

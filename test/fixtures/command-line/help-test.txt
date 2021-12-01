@@ -143,19 +143,17 @@ Options:
                                       [no timeout]
   -e, --request <id>                  echo request ID, useful to track
                                       asynchronous requests
-      --breakdown                     include the breakdown of requests and
-                                      bytes by mime type
-      --domains                       include the breakdown of requests and
-                                      bytes by domain
-      --pagespeed                     include the PageSpeed score in the
-                                      response (may be slower)
-      --requests                      include the request data in the response
-                                      (slower and results in much larger
-                                      responses)
-      --median <metric>               set the metric used to calculate median
-                                      for multiple runs tests [loadTime]
-      --medianrun <metric>            set the run used for median for multiple
-                                      runs tests [median]
+      --nomedian                      remove the median run
+      --noaverage                     remove the average run
+      --nostandard                    remove the standard deviation run
+      --noruns                         remove the different runs
+      --noconsole                     remove the console message
+      --nolighthouse                  remove the lighthouse report
+      --norepeatview                  remove the repeat view in the response
+      --norequests                    remove the request data in the response
+      --basiconly                     include only basic report in the response
+      --median <metric>               set the metric used to calculate median for multiple runs tests [loadTime]
+      --medianrun <metric>            set the run used for median for multiple runs tests [median]
       --specs <json_or_file>          set the specs for performance test suite
       --reporter <name>               set performance test suite reporter
                                       output:

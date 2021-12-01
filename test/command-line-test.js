@@ -57,13 +57,21 @@ describe('WebPageTest Command Line', function() {
   });
 
   it('gets a test results with extra data input returns the API url', function(done) {
-    exec(mock('results 141106_8N_ZRC -bDpR'), function(err, data) {
-      if (err) return done(err);
-      data = JSON.parse(data);
-        assert.equal(data.url, wptServer +
-          'jsonResult.php?test=141106_8N_ZRC&breakdown=1&domains=1&pagespeed=1&requests=1');
-      done();
-    });
+    exec(
+      mock(
+        'results 141106_8N_ZRC --norequests --nomedian --noaverage --nostandard --noruns --noconsole --nolighthouse --norepeatview'
+      ),
+      function(err, data) {
+        if (err) return done(err);
+        data = JSON.parse(data);
+        assert.equal(
+          data.url,
+          wptServer +
+            'jsonResult.php?test=141106_8N_ZRC&median=0&average=0&standard=0&runs=0&console=0&lighthouse=0&rv=0&requests=0'
+        );
+        done();
+      }
+    );
   });
 
   it('gets the locations list input returns the API url', function(done) {

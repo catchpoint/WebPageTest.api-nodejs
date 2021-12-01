@@ -167,14 +167,20 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
 
 #### Results (works for **results** and **test** commands)
-* **-b, --breakdown**: include the breakdown of requests and bytes by mime type
-* **-D, --domains**: include the breakdown of requests and bytes by domain
-* **-p, --pagespeed**: include the PageSpeed score in the response (may be slower)
-* **-R, --requests**: include the request data in the response (slower and results in much larger responses)
-* **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
-* **--medianrun** _\<metric>_: set the run used for median for multiple runs tests [median]
-* **-S, --specs** _\<json_or_file\>_: set the specs for performance test suite
-* **-r, --reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
+
+* ****noaverage**: remove the average run in the response
+* ****nostandard**: remove the standard deviation run in the response
+* ****nomedian**: remove the median run in the response
+* ****noruns**: remove the different runs in the response (slower and results in much larger responses)
+* ****noconsole**: remove the console message in the response
+* ****nolighthouse**: remove the lighthouse report in the response
+* ****norepeatview**: remove the repeat view in the response
+* ****basiconly**: include only basic report in the response
+* ****norequests**: remove the request data in the response (slower and results in much larger responses)
+* ***m, **median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
+* ****medianrun** _\<metric>_: set the run used for median for multiple runs tests [median]
+* ***S, **specs** _\<json_or_file\>_: set the specs for performance test suite
+* ***r, **reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
 
 #### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **chrometrace**, **console**, **googlecsi**, **response**, **waterfall** and **screenshot** commands)
 * **-r, --run** _\<number\>_: which run number on a multiple runs test [1]
@@ -549,10 +555,16 @@ wpt.runTest(script, (err, data) => {
 * **requestId**: _String_, echo request ID, useful to track asynchronous requests
 
 #### Results (works for `getResults` and `runTest` methods)
-* **breakDown**: _Boolean_, include the breakdown of requests and bytes by mime type
-* **domains**: _Boolean_, include the breakdown of requests and bytes by domain
-* **pageSpeed**: _Boolean_, include the PageSpeed score in the response (may be slower)
-* **requests**: _Boolean_, include the request data in the response (slower and results in much larger responses)
+
+* **noaverage**: remove the average run in the response
+* **nostandard**: remove the standard deviation run in the response
+* **nomedian**: remove the median run in the response
+* **noruns**: remove the different runs in the response (slower and results in much larger responses)
+* **noconsole**: remove the console message in the response
+* **nolighthouse**: remove the lighthouse report in the response
+* **norepeatview**: remove the repeat view in the response
+* **basiconly**: include only basic report in the response
+* **norequests**: remove the request data in the response (slower and results in much larger responses)
 * **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
 * **specs**: _String_, set the specs for performance test suite
 * **reporter**: _String_, set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
