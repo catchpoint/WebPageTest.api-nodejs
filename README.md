@@ -105,6 +105,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 * **-K, --keepua**: do not add PTST to the original browser User Agent string
 * **-m, --dom** _\<element\>_: DOM element to record for sub-measurement
 * **-N, --duration** _\<seconds\>_: minimum test duration in seconds
+* **--injectScript** _\<string\>_: JavaScript to run on the page as soon as the document exists
 * **-E, --tester** _\<name\>_: run the test on a specific PC (name must match exactly or the test will not run)
 * **-W, --mobile**: (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
 * **--device** _\<string\>_: device name from mobile_devices.ini to use for mobile emulation (only when mobile=1 is specified to enable emulation and only for Chrome)
