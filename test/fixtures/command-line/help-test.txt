@@ -32,7 +32,7 @@ Options:
   -N, --duration <seconds>            minimum test duration in seconds
   -E, --tester <name>                 run the test on a specific PC (name must
                                       match exactly or the test will not run)
-      --injectScript <script>         JavaScript to run after the document has
+      --injectScript <injectScript>   JavaScript to run after the document has
                                       started loading
   -W, --mobile                        (experimental) emulate mobile browser:
                                       Chrome mobile user agent, 640x960 screen,
