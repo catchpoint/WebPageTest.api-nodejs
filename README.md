@@ -169,7 +169,6 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 - **--wait** _\<hostname:port\>_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 - **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
 - **--lighthouse**: perform lighthouse test (Chrome only, Linux agent only)
-- **-x, --useragent** _\<string\>_: custom user agent string (Chrome only)
 - **-thc, --throttleCPU** _\<number\>_: custom cpu throttle
 
 #### API Key (works for **test**, **restart**,**locations**, **testBalance** and **cancel** commands)
