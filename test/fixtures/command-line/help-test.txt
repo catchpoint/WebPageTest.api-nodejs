@@ -88,6 +88,7 @@ Options:
                                       specifying a custom connectivity profile)
   -U, --bwup <bandwidth>              upload bandwidth in Kbps (used when
                                       specifying a custom connectivity profile)
+  -thc, --cputhrottle <number>        Custom cpu throttling                                   
   -bw, --browserwidth <pixels>        Browser window width (in display pixels)
   -bh, --browserheight <pixels>       Browser window height (in display pixels)
   -vh, --viewportheight <pixels>      Viewport Height in css pixels
