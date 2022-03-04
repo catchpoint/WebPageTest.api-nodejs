@@ -1,9 +1,9 @@
 {
-  "name": "webpagetest-siddhant",
+  "name": "webpagetest",
   "version": "0.5.1",
   "description": "WebPageTest API wrapper for NodeJS",
-  "author": "Siddhantshukla814 <github@Siddhantshukla814.com> (http://github.com/Siddhantshukla814)",
-  "homepage": "http://github.com/Siddhantshukla814/webpagetest-api",
+  "author": "WebPageTest <github@WebPageTest.com> (http://github.com/WebPageTest)",
+  "homepage": "http://github.com/WebPageTest/webpagetest-api",
   "keywords": [
     "webpagetest",
     "api",
@@ -14,12 +14,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/WebPageTest/webpagetest-api.git",
-    "url": "http://github.com/Siddhantshukla814/webpagetest-api"
+    "url": "git://github.com/WebPageTest/webpagetest-api.git"
   },
   "bugs": {
-    "url": "http://github.com/WebPageTest/webpagetest-api/issues",
-    "url": "http://github.com/Siddhantshukla814/webpagetest-api/issues"
+    "url": "http://github.com/WebPageTest/webpagetest-api/issues"
   },
   "main": "lib/webpagetest.js",
   "bin": "bin/webpagetest",
