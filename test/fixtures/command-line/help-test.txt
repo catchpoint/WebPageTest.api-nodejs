@@ -60,6 +60,7 @@ Options:
                                       switches (Chrome only)
       --lighthouse                    perform lighthouse test (Chrome only,
                                       Linux agent only)
+  -thc, --throttleCPU <number>        custom cpu throttling    
   -g, --login <username>              username for authenticating tests (http
                                       authentication)
   -w, --password <password>           password for authenticating tests (http
@@ -87,8 +88,7 @@ Options:
   -D, --bwdown <bandwidth>            download bandwidth in Kbps (used when
                                       specifying a custom connectivity profile)
   -U, --bwup <bandwidth>              upload bandwidth in Kbps (used when
-                                      specifying a custom connectivity profile)
-  -thc, --throttleCPU <number>        custom cpu throttling                   
+                                      specifying a custom connectivity profile)               
   -bw, --browserwidth <pixels>        Browser window width (in display pixels)
   -bh, --browserheight <pixels>       Browser window height (in display pixels)
   -vh, --viewportheight <pixels>      Viewport Height in css pixels

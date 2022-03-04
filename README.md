@@ -588,7 +588,7 @@ wpt.runTest(script, (err, data) => {
 - **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
 - **timeout**: _String_, timeout for polling and waiting results [no timeout]
 - **lighthouse**: _Boolean_, perform lighthouse test (Chrome only, Linux agent only)
-- **throttleCPU**: _Number_, custom cpu throttle
+- **throttleCPU**: _Number_, custom cpu throttling
 
 #### API Key (works for `runTest`, `restartTest` and `cancelTest` methods)
 
