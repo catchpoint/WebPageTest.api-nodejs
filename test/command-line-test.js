@@ -324,7 +324,7 @@ describe('WebPageTest Command Line', function() {
 
   // loop all commands help
   [
-    '', 'status', 'results', 'locations', 'testers', 'test', 'restart', 'cancel', 'har',
+    '', 'status', 'results', 'locations', 'testers', 'test', 'testAndWait', 'restart', 'cancel', 'har',
     'pagespeed', 'utilization', 'request', 'timeline', 'netlog', 'chrometrace',
     'console', 'testinfo', 'history', 'googlecsi', 'response', 'waterfall',
     'screenshot', 'video', 'player', 'listen', 'batch','testBalance'
