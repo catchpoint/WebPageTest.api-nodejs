@@ -18,6 +18,7 @@ Options:
   -S, --specs <json_or_file>  set the specs for performance test suite
   -r, --reporter <name>       set performance test suite reporter output:
                               [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
+      --proxy                 set the proxy used to fetch results
   -e, --request <id>          echo request ID, useful to track asynchronous
                               requests
   -h, --help                  display help for command
