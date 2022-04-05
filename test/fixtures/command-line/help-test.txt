@@ -173,4 +173,5 @@ Options:
       --reporter <name>               set performance test suite reporter
                                       output:
                                       [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
+      --proxy                 set the proxy used to fetch results
   -h, --help                          display help for command
