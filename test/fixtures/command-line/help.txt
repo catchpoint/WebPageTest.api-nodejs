@@ -17,6 +17,7 @@ Commands:
   testBalance [options]             get remaining tests for the account
   testers [options]                 list testers status and details
   test [options] <url_or_script>    run test
+  testAndWait [options] <url_or_script>    run test and waits for the result
   restart [options] <id>            restart test
   cancel [options] <id>             cancel running/pending test
   har <id>                          get the HTTP Archive (HAR) from test

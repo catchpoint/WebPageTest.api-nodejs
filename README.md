@@ -63,6 +63,7 @@ $ webpagetest --help
 - **locations** _[options]_: list locations and the number of pending tests
 - **testers** _[options]_: list testers status and details
 - **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
+- **testAndWait** _[options] \<url_or_script\>_: run test and waits for the result, _\<url_or_script\>_ can also be a path to a script file
 - **testBalance** _[options]_: get remaining tests for the account
 - **restart** _\<id\>_: restart test
 - **cancel** _\<id\>_: cancel running/pending test
@@ -448,6 +449,7 @@ Methods and options (including the one letter shorthands) are the same when usin
 - `getTesters(options, callback)`
 - `getTestBalance(options, callback)`
 - `runTest(url_or_script, options, callback)`
+- `runTestAndWait(url_or_script, options, callback)`
 - `restartTest(id, options, callback)`
 - `cancelTest(id, options, callback)`
 - `getHARData(id, options, callback)`
@@ -516,7 +518,7 @@ wpt.runTest(script, (err, data) => {
 - **dryRun**: _Boolean_, if `true`, method does not make an actual request to the API Server but rather returns an object with `url` which contains the actual URL to make the GET request to WebPageTest API Server
 - **server**: _String_, if specified, overrides the WebPageTest server informed in the constructor only for that method call
 
-#### Test (works for `runTest` method only)
+#### Test (works with `runTest` and `runTestAndWait`)
 
 - **location**: _String_, location to test from
 - **connectivity**: _String_, connectivity profile -- requires location to be specified -- (Cable|DSL|3GSlow|3G|3GFast|4G|LTE|Edge|2G|Dial|FIOS|Native|custom) [Cable]
@@ -590,15 +592,15 @@ wpt.runTest(script, (err, data) => {
 - **lighthouse**: _Boolean_, perform lighthouse test (Chrome only, Linux agent only)
 - **throttleCPU**: _Number_, custom cpu throttling
 
-#### API Key (works for `runTest`, `restartTest` and `cancelTest` methods)
+#### API Key (works for `runTest`, `runTestAndWait`, `restartTest` and `cancelTest` methods)
 
 - **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
 
-#### Request (works for `getTestStatus` `getResults` `getLocations` `getTesters` and `runTest` methods)
+#### Request (works for `getTestStatus` `getResults` `getLocations` `getTesters` `runTest` and `runTestAndWait` methods)
 
 - **requestId**: _String_, echo request ID, useful to track asynchronous requests
 
-#### Results (works for `getResults` and `runTest` methods)
+#### Results (works for `getResults` `runTest` and `runTestAndWait` methods)
 
 - **breakDown**: _Boolean_, include the breakdown of requests and bytes by mime type
 - **domains**: _Boolean_, include the breakdown of requests and bytes by domain
