@@ -82,7 +82,7 @@ describe('Dry Run', function() {
     it('gets the locations list request', function(done) {
       wpt.getLocations({dryRun: true}, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'getLocations.php');
+        assert.equal(data.url, wptServer + 'getLocations.php?k=a');
         done();
       });
     });
@@ -90,7 +90,7 @@ describe('Dry Run', function() {
     it('gets the locations list request with requestId', function(done) {
       wpt.getLocations({dryRun: true, request: '12345'}, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'getLocations.php?r=12345');
+        assert.equal(data.url, wptServer + 'getLocations.php?r=12345?k=a');
         done();
       });
     });
