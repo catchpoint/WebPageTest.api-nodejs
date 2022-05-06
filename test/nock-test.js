@@ -64,8 +64,8 @@ describe('Example WebPageTest', function() {
 
     it('gets the locations list request then returns the locations list object', function(done) {
       wpt.getLocations(function (err, data) {
-        // if (err) return done(err);
-        // assert.deepEqual(data, ResponseObjects.locations);
+        if (err) return done(err);
+        assert.deepEqual(data, ResponseObjects.locations);
         done();
       });
     });

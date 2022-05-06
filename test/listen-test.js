@@ -99,9 +99,9 @@ describe('Local WebPageTest-API Proxy', function() {
 
     it('gets the locations list GET request then returns the locations list JSON', function(done) {
       get('/locations', server, function (err, data) {
-        // if (err) return done(err);
-        // data = JSON.parse(data);
-        // assert.deepEqual(data, ResponseObjects.locations);
+        if (err) return done(err);
+        data = JSON.parse(data);
+        assert.deepEqual(data, ResponseObjects.locations);
         done();
       });
     });
