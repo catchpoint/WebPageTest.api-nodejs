@@ -70,7 +70,7 @@ describe('WebPageTest Command Line', function() {
     exec(mock('locations'), function(err, data) {
       if (err) return done(err);
       data = JSON.parse(data);
-      assert.equal(data.url, wptServer + 'getLocations.php');
+      assert.equal(data.url, wptServer + 'getLocations.php?k=A');
       done();
     });
   });
