@@ -8,6 +8,8 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 
 WebPageTest API Wrapper is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
+ 
+For a better understanding of WebPageTest API Wrapper, here are some sample [Node Recipies](https://github.com/WebPageTest/WebPageTest-API-Recipes)
 
 ## Getting started
 
