@@ -12,7 +12,7 @@ WebPageTest API Wrapper is a [NPM](https://npmjs.org) package that wraps [WebPag
 ## Getting started
 
 ```bash
-$ npm install webpagetest -g
+npm install webpagetest -g
 ```
 
 ## Basics
@@ -20,7 +20,7 @@ $ npm install webpagetest -g
 ### Command line
 
 ```bash
-$ webpagetest test https://docs.webpagetest.org/api/integrations/
+webpagetest test https://docs.webpagetest.org/api/integrations/
 ```
 
 ### Docker
@@ -28,13 +28,13 @@ $ webpagetest test https://docs.webpagetest.org/api/integrations/
 #### Build
 
 ```bash
-$ docker build -t webpagetest-api .
+docker build -t webpagetest-api .
 ```
 
 #### Run
 
 ```bash
-$ docker run -it --rm webpagetest-api -k YOURAPIKEY test https://docs.webpagetest.org/api/integrations/
+docker run -it --rm webpagetest-api -k YOURAPIKEY test https://docs.webpagetest.org/api/integrations/
 ```
 
 ### Module
@@ -53,7 +53,7 @@ wpt.runTest("https://docs.webpagetest.org/api/integrations/", (err, data) => {
 ### Help
 
 ```bash
-$ webpagetest --help
+webpagetest --help
 ```
 
 ### Commands
@@ -268,7 +268,7 @@ $ webpagetest locations
 #### 2. Get API available locations
 
 ```bash
-$ webpagetest locations --key 1F2A3K4E5
+webpagetest locations --key 1F2A3K4E5
 ```
 
 ```javascript
@@ -299,7 +299,7 @@ $ webpagetest locations --key 1F2A3K4E5
 #### 3. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
 
 ```bash
-$ webpagetest test https://docs.webpagetest.org/api/integrations/ --key 1F2A3K4E5 --location SanJose_IE9
+webpagetest test https://docs.webpagetest.org/api/integrations/ --key 1F2A3K4E5 --location SanJose_IE9
 ```
 
 ```javascript
@@ -321,7 +321,7 @@ $ webpagetest test https://docs.webpagetest.org/api/integrations/ --key 1F2A3K4E
 #### 4. Check current test status
 
 ```bash
-$ webpagetest status 121025_PT_N8K
+webpagetest status 121025_PT_N8K
 ```
 
 ```javascript
@@ -342,7 +342,7 @@ $ webpagetest status 121025_PT_N8K
 #### 5. Get test results
 
 ```bash
-$ webpagetest results 121025_PT_N8K
+webpagetest results 121025_PT_N8K
 ```
 
 ```javascript
@@ -377,7 +377,7 @@ $ webpagetest results 121025_PT_N8K
 #### 6. Get test waterfall thumbnail from repeat view as data URI
 
 ```bash
-$ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
+webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 ```
 
 ```javascript
@@ -390,7 +390,7 @@ $ webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
 #### 7. Get remaining tests count for the account
 
 ```bash
-$ webpagetest testBalance --key 1F2A3K4E5
+webpagetest testBalance --key 1F2A3K4E5
 ```
 
 ```javascript
@@ -404,13 +404,13 @@ $ webpagetest testBalance --key 1F2A3K4E5
 #### Run test on https://docs.webpagetest.org/api/integrations/ and poll results every 5 seconds timing out in 60 seconds
 
 ```bash
-$ webpagetest test https://docs.webpagetest.org/api/integrations/ --poll 5 --timeout 60
+webpagetest test https://docs.webpagetest.org/api/integrations/ --poll 5 --timeout 60
 ```
 
 #### Or run test on https://docs.webpagetest.org/api/integrations/ and wait for results listening on localhost\* port 8000\*\*
 
 ```bash
-$ webpagetest test https://docs.webpagetest.org/api/integrations/ --wait 8000
+webpagetest test https://docs.webpagetest.org/api/integrations/ --wait 8000
 ```
 
 ```javascript
@@ -753,7 +753,7 @@ WebPageTest API Wrapper comes with a handy RESTful API proxy
 ### Command Line
 
 ```bash
-$ webpagetest listen 8080 --server wpt.foo.com
+webpagetest listen 8080 --server wpt.foo.com
 ```
 
 ```bash
@@ -762,12 +762,12 @@ http://localhost:8080
 ```
 
 ```bash
-$ curl http://localhost:8080/help
-$ curl http://localhost:8080/test/webpagetest.org/?location=SanJose_IE9
+curl http://localhost:8080/help
+curl http://localhost:8080/test/webpagetest.org/?location=SanJose_IE9
 ```
 
 ```bash
-$ webpagetest listen 8443 --key key.pem --cert cert.pem --server wpt.foo.com
+webpagetest listen 8443 --key key.pem --cert cert.pem --server wpt.foo.com
 ```
 
 ```bash
@@ -803,12 +803,12 @@ Batch command is available as command line only and loads a batch file containin
 By running
 
 ```bash
-$ webpagetest batch commands.txt
+webpagetest batch commands.txt
 ```
 
 where `commands.txt` contains:
 
-```
+```bash
 test https://docs.webpagetest.org/api/integrations/ --first --location foo
 test https://docs.webpagetest.org/api/integrations/ --first --location bar
 ```
@@ -837,7 +837,7 @@ It schedules the 2 tests above returning an array of size 2 in the same order as
 With exit status 0 in case none of commands returns an error:
 
 ```bash
-$ echo $?
+echo $?
 0
 ```
 
@@ -845,7 +845,7 @@ By running multiple sync tests, i.e. with either `--poll` or `--wait`, all tests
 
 `commands.txt`:
 
-```
+```bash
 test https://docs.webpagetest.org/api/integrations/ --first --location foo --poll --timeout 60
 test https://docs.webpagetest.org/api/integrations/ --first --location bar --poll --timeout 60
 ```
@@ -859,7 +859,7 @@ WebPageTest API Wrapper provides a simple seamless way to integrate WebPageTest 
 ## Tests
 
 ```bash
-$ npm test
+npm test
 ```
 
 ## Issues
