@@ -24,7 +24,7 @@
     "webpagetest": "bin/webpagetest"
   },
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha -R spec test/*-test.js"
+    "test": "./node_modules/mocha/bin/mocha.js -R spec test/*-test.js"
   },
   "engines": {
     "node": ">=10.18.1"
