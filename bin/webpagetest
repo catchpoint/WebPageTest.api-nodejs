@@ -7,12 +7,10 @@
  * Released under the MIT License
  */
 
-var commander     = require('commander'),
+var program     = require('commander'),
     fs          = require('fs'),
     WebPageTest = require('../lib/webpagetest'),
     mapping     = require('../lib/mapping');
-
-const program = new commander.Command();
 
 var command, file, ret,
     options = {},
