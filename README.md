@@ -120,7 +120,7 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 - **--injectScript** _\<string\>_: JavaScript to run after the document has started loading
 - **-E, --tester** _\<name\>_: run the test on a specific PC (name must match exactly or the test will not run)
 - **-W, --mobile**: (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
-- **--device** _\<string\>_: device name from mobile_devices.ini to use for mobile emulation (only when mobile=1 is specified to enable emulation and only for Chrome)
+- **--device** _\<string\>_: device name from [mobile_devices.ini](https://github.com/WPO-Foundation/webpagetest/blob/master/www/settings/mobile_devices.ini) to use for mobile emulation (only when --mobile is specified to enable emulation and only for Chrome)
 - **-M, --timeline**: capture Developer Tools Timeline (Chrome only)
 - **-J, --callstack**: set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
 - **-q, --chrometrace**: capture chrome trace (about://tracing) (Chrome only)
@@ -541,6 +541,7 @@ wpt.runTest(script, (err, data) => {
 - **minimumDuration**: _Number_, minimum test duration in seconds
 - **tester**: _String_, run the test on a specific PC (name must match exactly or the test will not run)
 - **emulateMobile**: _Boolean_, (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
+- **device**: _String_, device name from [mobile_devices.ini](https://github.com/WPO-Foundation/webpagetest/blob/master/www/settings/mobile_devices.ini) to use for mobile emulation (only when emulateMobile=true is specified to enable emulation and only for Chrome)
 - **timeline**: _Boolean_, capture Developer Tools Timeline (Chrome only)
 - **timelineCallStack**: _Boolean_, set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
 - **chromeTrace**: _Boolean_, capture chrome trace (about://tracing) (Chrome only)
