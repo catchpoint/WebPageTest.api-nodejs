@@ -30,7 +30,7 @@
     "node": ">=10.18.1"
   },
   "dependencies": {
-    "commander": "^5.1.0",
+    "commander": "^9.4.1",
     "csv": "^6.2.2",
     "entities": "^4.4.0",
     "mocha": "^5.2.0",
