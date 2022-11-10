@@ -174,7 +174,7 @@ Object.keys(mapping.commands).forEach(function eachCommand(name) {
 
   addOptions(
     program
-      .addCommand(param)
+      .command(param)
       .description(cmd.info)
       .action(customActions[name] || defaultAction),
     cmd.options,
