@@ -7,10 +7,12 @@
  * Released under the MIT License
  */
 
-var program     = require('commander'),
+var commander     = require('commander'),
     fs          = require('fs'),
     WebPageTest = require('../lib/webpagetest'),
     mapping     = require('../lib/mapping');
+
+const program = new commander.Command();
 
 var command, file, ret,
     options = {},
@@ -290,7 +292,9 @@ function execCommand() {
   wpt[command].apply(wpt, args);
 }
 
-program
+const brew = program.command('brew');
+
+brew
   .command('batch <file>')
   .description(
     'run commands in batch, i.e. one command per line from <file> in parallel')
