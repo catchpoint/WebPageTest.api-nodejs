@@ -292,9 +292,7 @@ function execCommand() {
   wpt[command].apply(wpt, args);
 }
 
-const brew = program.command('brew');
-
-brew
+program
   .command('batch <file>')
   .description(
     'run commands in batch, i.e. one command per line from <file> in parallel')
