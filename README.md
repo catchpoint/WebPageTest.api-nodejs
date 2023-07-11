@@ -45,7 +45,7 @@ docker run -it --rm webpagetest-api -k YOURAPIKEY test https://docs.webpagetest.
 const WebPageTest = require("webpagetest");
 
 const wptServer = "www.webpagetest.org";
-const wpt = new WebPageTest(wptServer);
+const wpt = new WebPageTest(wptServer, "YOUR_API_KEY");
 
 const siteToTest = "https://docs.webpagetest.org/api/integrations/";
 wpt.runTest(siteToTest, (err, data) => {
