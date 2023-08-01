@@ -85,6 +85,18 @@ describe('Edge Cases of', function() {
       });
     });
 
+    it('gets a test with custom metrics then returns API url and payload with custom metrics data present', function (done) {
+      wpt.runTest('http://foobar.com', {
+        dryRun: true,
+        custom: '[example]\nreturn 1;'
+      }, function (err, data) {
+        if (err) return done(err);
+        assert.equal(data.url, wptServer + 'runtest.php');
+        assert.equal(data.form.custom, '[example]\nreturn 1;');
+        done();
+      });
+    });
+
   });
 
   describe('WebPageTest localhost helper', function() {
