@@ -34,7 +34,7 @@
     "csv": "^6.2.2",
     "entities": "^4.4.0",
     "mocha": "^10.1.0",
-    "xml2js": "^0.4.23"
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "nock": "^13.2.9"
