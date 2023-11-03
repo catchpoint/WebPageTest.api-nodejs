@@ -89,6 +89,7 @@ describe('Edge Cases of', function() {
       wpt.runTest('http://foobar.com', {
         dryRun: true,
         mobile: 1,
+        http_method: 'POST',
         custom: '[example]\n\\\\' + 'X'.repeat(6 * 1024) + '\nreturn 1;'
       }, function (err, data) {
         if (err) return done(err);
