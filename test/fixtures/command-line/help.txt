@@ -5,6 +5,8 @@ Options:
   -s, --server <server>             the WPT server URL
                                     [https://www.webpagetest.org]
   -d, --dryrun                      just return the RESTful API URL
+  --http_method <string>            HTTP method to use for submitting the test
+                                    (GET or POST) [GET]
   -o, --out <file>                  place the output into <file>. Defaults to
                                     stdout
   -h, --help                        display help for command
