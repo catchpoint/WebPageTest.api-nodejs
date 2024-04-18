@@ -13,14 +13,15 @@ var assert          = require('assert'),
     ResponseObjects = require('./helpers/response-objects');
 
 var wptNockServer = new NockServer('http://wpt.com'),
-    wpt = new WebPageTest('wpt.com');
+    wpt = new WebPageTest('wpt.com', 'YOURAPIKEY');
 
 // GET helper function
 function get(pathname, server, callback) {
   var options = {
         path: pathname,
         host: server.hostname,
-        port: server.port
+        port: server.port,
+        key: "YOURAPIKEY"
       };
 
   http.get(options, function getResponse(res) {
@@ -102,15 +103,6 @@ describe('Local WebPageTest-API Proxy', function() {
         if (err) return done(err);
         data = JSON.parse(data);
         assert.deepEqual(data, ResponseObjects.locations);
-        done();
-      });
-    });
-
-    it('gets the testers list GET request then returns the testers list JSON', function(done) {
-      get('/testers', server, function (err, data) {
-        if (err) return done(err);
-        data = JSON.parse(data);
-        assert.deepEqual(data, ResponseObjects.testers);
         done();
       });
     });

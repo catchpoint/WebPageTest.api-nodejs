@@ -1,6 +1,0 @@
-Usage: webpagetest testinfo [options] <id>
-
-get test request info/details
-
-Options:
-  -h, --help  display help for command

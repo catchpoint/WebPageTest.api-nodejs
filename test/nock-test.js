@@ -12,7 +12,7 @@ var WebPageTest = require('../lib/webpagetest'),
     ResponseObjects = require('./helpers/response-objects');
 
 var wptNockServer = new NockServer('http://example.com'),
-    wpt = new WebPageTest('example.com');
+    wpt = new WebPageTest('example.com', 'YOURAPIKEY');
 
 describe('Example WebPageTest', function() {
   describe('Hits a Nock Server', function() {
@@ -66,14 +66,6 @@ describe('Example WebPageTest', function() {
       wpt.getLocations(function (err, data) {
         if (err) return done(err);
         assert.deepEqual(data, ResponseObjects.locations);
-        done();
-      });
-    });
-
-    it('gets the testers list request then returns the testers list object', function(done) {
-      wpt.getTesters(function (err, data) {
-        if (err) return done(err);
-        assert.deepEqual(data, ResponseObjects.testers);
         done();
       });
     });

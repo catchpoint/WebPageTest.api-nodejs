@@ -95,21 +95,6 @@ describe('Dry Run', function() {
       });
     });
 
-    it('gets the testers list request', function(done) {
-      wpt.getTesters({dryRun: true}, function (err, data) {
-        if (err) return done(err);
-        assert.equal(data.url, wptServer + 'getTesters.php');
-        done();
-      });
-    });
-
-    it('gets the testers list request with requestId', function(done) {
-      wpt.getTesters({dryRun: true, request: '12345'}, function (err, data) {
-        if (err) return done(err);
-        assert.equal(data.url, wptServer + 'getTesters.php?r=12345');
-        done();
-      });
-    });
 
     it('gets a simple test request', function(done) {
       wpt.runTest('http://foobar.com', {dryRun: true}, function (err, data) {

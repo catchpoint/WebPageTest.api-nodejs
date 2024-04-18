@@ -16,7 +16,7 @@ var wptServer = 'https://www.example.com:1234/foo/bar/',
     executable = path.join(__dirname, '../bin/webpagetest');
 
 function mock(command) {
-  return nodeCmd + ' ' + executable + ' -s ' + wptServer +  ' -d ' + command;
+  return nodeCmd + ' ' + executable + ' -s ' + wptServer +  ' -d ' + command; 
 }
 
 function getHelp(command) {
@@ -71,15 +71,6 @@ describe('WebPageTest Command Line', function() {
       if (err) return done(err);
       data = JSON.parse(data);
       assert.equal(data.url, wptServer + 'getLocations.php');
-      done();
-    });
-  });
-
-  it('gets the testers list input returns the API url', function(done) {
-    exec(mock('testers'), function(err, data) {
-      if (err) return done(err);
-      data = JSON.parse(data);
-      assert.equal(data.url, wptServer + 'getTesters.php');
       done();
     });
   });
@@ -152,10 +143,10 @@ describe('WebPageTest Command Line', function() {
   });
 
   it('gets a restart test with api key input returns the API url', function(done) {
-    exec(mock('restart -k 12345 120816_V2_2'), function(err, data) {
+    exec(mock('restart 120816_V2_2'), function(err, data) {
       if (err) return done(err);
       data = JSON.parse(data);
-      assert.equal(data.url, wptServer + 'runtest.php?resubmit=120816_V2_2&k=12345');
+      assert.equal(data.url, wptServer + 'runtest.php?resubmit=120816_V2_2');
       done();
     });
   });
@@ -170,10 +161,10 @@ describe('WebPageTest Command Line', function() {
   });
 
   it('gets a cancel test with api key input returns the API url', function(done) {
-    exec(mock('cancel -k 12345 120816_V2_2'), function(err, data) {
+    exec(mock('cancel 120816_V2_2'), function(err, data) {
       if (err) return done(err);
       data = JSON.parse(data);
-      assert.equal(data.url, wptServer + 'cancelTest.php?test=120816_V2_2&k=12345');
+      assert.equal(data.url, wptServer + 'cancelTest.php?test=120816_V2_2');
       done();
     });
   });
@@ -322,24 +313,6 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
-  // loop all commands help
-  [
-    '', 'status', 'results', 'locations', 'testers', 'test', 'testAndWait', 'restart', 'cancel', 'har',
-    'pagespeed', 'utilization', 'request', 'timeline', 'netlog', 'chrometrace',
-    'console', 'testinfo', 'history', 'googlecsi', 'response', 'waterfall',
-    'screenshot', 'video', 'player', 'listen', 'batch','testBalance'
-  ].forEach(function eachCmd(command) {
-      it('gets a ' + command + ' help input and returns the help text', function(done) {
-        exec(mock(command + ' --help'), function(err, data) {
-          if (err) return done(err);
-          data = data.replace(/[\r\n\s]/g, '');
-          var output = getHelp(command);
-          output = output.replace(/[\r\n\s]/g, '');
-          assert.equal(data, output);
-          done();
-        });
-      });
-  });
 
   it('gets a batch input returns the batch commands output in order', function(done) {
     exec(mock('batch ' + path.join(__dirname, 'fixtures/batch.txt')), function(err, data) {

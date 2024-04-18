@@ -409,7 +409,6 @@ Methods and options (including the one letter shorthands) are the same when usin
 - `getTestStatus(id, options, callback)`
 - `getTestResults(id, options, callback)`
 - `getLocations(options, callback)`
-- `getTesters(options, callback)`
 - `getTestBalance(options, callback)`
 - `runTest(url_or_script, options, callback)`
 - `runTestAndWait(url_or_script, options, callback)`
@@ -560,7 +559,7 @@ wpt.runTest(script, (err, data) => {
 
 - **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
 
-#### Request (works for `getTestStatus` `getResults` `getLocations` `getTesters` `runTest` and `runTestAndWait` methods)
+#### Request (works for `getTestStatus` `getResults` `getLocations` `runTest` and `runTestAndWait` methods)
 
 - **requestId**: _String_, echo request ID, useful to track asynchronous requests
 

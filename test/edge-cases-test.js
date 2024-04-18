@@ -12,6 +12,7 @@ var assert      = require('assert'),
     packageJson = require('../package.json');
 
 var wptServer = 'https://www.example.com:1234/foo/bar/';
+var MOCK_KEY = '0987654321';
 
 describe('Edge Cases of', function() {
   describe('An HTTPS WebPageTest Server with API key', function() {
@@ -20,7 +21,7 @@ describe('Edge Cases of', function() {
     it('gets a simple test request with another HTTP server and API key then returns API url', function(done) {
       wpt.runTest('http://foobar.com', {
         server: 'http://wpt.com',
-        key: '0987654321',
+        key: MOCK_KEY,
         dryRun: true
       }, function (err, data) {
         if (err) return done(err);
@@ -36,7 +37,7 @@ describe('Edge Cases of', function() {
     it('gets a simple test request with another HTTPS server and API key then returns API url', function(done) {
       wpt.runTest('http://foobar.com', {
         server: 'https://wpt.com:4321/baz/',
-        key: '0987654321',
+        key: MOCK_KEY,
         dryRun: true
       }, function (err, data) {
         if (err) return done(err);
@@ -52,11 +53,12 @@ describe('Edge Cases of', function() {
     it('gets a test with blocking urls and spof array request then returns API url', function(done) {
       wpt.runTest('http://foobar.com', {
         dryRun: true,
+        key: MOCK_KEY,
         block: ['foo.com', 'bar.com'],
         spof: ['baz.com', 'qux.com']
       }, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&block=foo.com%20bar.com&spof=baz.com%20qux.com&f=json');
+        assert.equal(data.url, wptServer + `runtest.php?url=http%3A%2F%2Ffoobar.com&k=${MOCK_KEY}&block=foo.com%20bar.com&spof=baz.com%20qux.com&f=json`);
         done();
       });
     });
@@ -64,11 +66,12 @@ describe('Edge Cases of', function() {
     it('gets a test with blocking urls and spof strings request then returns API url', function(done) {
       wpt.runTest('http://foobar.com', {
         dryRun: true,
+        key: MOCK_KEY,
         block: 'foo.com bar.com',
         spof: ['baz.com qux.com']
       }, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&block=foo.com%20bar.com&spof=baz.com%20qux.com&f=json');
+        assert.equal(data.url, wptServer + `runtest.php?url=http%3A%2F%2Ffoobar.com&k=${MOCK_KEY}&block=foo.com%20bar.com&spof=baz.com%20qux.com&f=json`);
         done();
       });
     });
@@ -76,11 +79,12 @@ describe('Edge Cases of', function() {
     it('gets a test with dial up connectivity and location then returns API url with connectivity appended to location', function(done) {
       wpt.runTest('http://foobar.com', {
         dryRun: true,
+        key: MOCK_KEY,
         connectivity: 'Dial',
         location: 'somelocation'
       }, function (err, data) {
         if (err) return done(err);
-        assert.equal(data.url, wptServer + 'runtest.php?url=http%3A%2F%2Ffoobar.com&location=somelocation.Dial&connectivity=Dial&f=json');
+        assert.equal(data.url, wptServer +  `runtest.php?url=http%3A%2F%2Ffoobar.com&k=${MOCK_KEY}&location=somelocation.Dial&connectivity=Dial&f=json`);
         done();
       });
     });
