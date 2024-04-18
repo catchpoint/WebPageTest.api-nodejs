@@ -3,7 +3,7 @@
 
 # WebPageTest API Wrapper for NodeJS
 
-[![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api)
+<!-- [![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api) -->
 [![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 
@@ -22,7 +22,7 @@ npm install webpagetest -g
 ### Command line
 
 ```bash
-webpagetest test https://docs.webpagetest.org/api/integrations/
+webpagetest test https://docs.webpagetest.org/api/integrations/ -k YOURAPIKEY
 ```
 
 ### Docker

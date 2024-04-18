@@ -272,7 +272,7 @@ function cleanupProgram() {
 }
 
 function execCommand() {
-  var wpt = new WebPageTest(program.server || defaultServer);
+  var wpt = new WebPageTest(program.server || defaultServer, options.key);
 
   // options
   if (options) {
