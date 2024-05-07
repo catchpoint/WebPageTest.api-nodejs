@@ -3,7 +3,7 @@
 
 # WebPageTest API Wrapper for NodeJS
 
-[![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api)
+<!-- [![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api) -->
 [![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 
@@ -22,7 +22,7 @@ npm install webpagetest -g
 ### Command line
 
 ```bash
-webpagetest test https://docs.webpagetest.org/api/integrations/
+webpagetest test https://docs.webpagetest.org/api/integrations/ -k YOURAPIKEY
 ```
 
 ### Docker
@@ -240,10 +240,10 @@ _The default WPT server can also be specified via environment variable `WEBPAGET
 
 ### Examples
 
-#### 1. Get all available locations
+#### 1. Get API available locations
 
 ```bash
-$ webpagetest locations
+$ webpagetest locations -k YOURAPIKEY
 ```
 
 ```javascript
@@ -271,41 +271,10 @@ $ webpagetest locations
 }
 ```
 
-#### 2. Get API available locations
+#### 2. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
 
 ```bash
-webpagetest locations --key 1F2A3K4E5
-```
-
-```javascript
-{
-  "response": {
-    "statusCode": 200, "statusText": "Ok",
-    "data": {
-      "location": [
-        ...
-        {
-          "id": "SanJose_IE9",
-          "Label": "San Jose, CA USA (IE 9,Chrome,Firefox)",
-          "location": "SanJose_IE9",
-          "Browser": "IE 9",
-          "PendingTests": {
-            "p1": 0, "p2": 0, "p3": 0, "p4": 0, "p5": 2, "p6": 2, "p7": 0,
-            "p8": 0, "p9": 0, "Total": 7, "HighPriority": 2, "LowPriority": 4,
-            "Testing": 1, "Idle": 0
-          }
-        },
-        ...
-      ]
-    }
-  }
-}
-```
-
-#### 3. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
-
-```bash
-webpagetest test https://docs.webpagetest.org/api/integrations/ --key 1F2A3K4E5 --location SanJose_IE9
+webpagetest test https://docs.webpagetest.org/api/integrations/ -k YOURAPIKEY --location SanJose_IE9
 ```
 
 ```javascript
@@ -324,10 +293,10 @@ webpagetest test https://docs.webpagetest.org/api/integrations/ --key 1F2A3K4E5 
 }
 ```
 
-#### 4. Check current test status
+#### 3. Check current test status
 
 ```bash
-webpagetest status 121025_PT_N8K
+webpagetest status 121025_PT_N8K -k YOURAPIKEY
 ```
 
 ```javascript
@@ -345,10 +314,10 @@ webpagetest status 121025_PT_N8K
 }
 ```
 
-#### 5. Get test results
+#### 4. Get test results
 
 ```bash
-webpagetest results 121025_PT_N8K
+webpagetest results 121025_PT_N8K -k YOURAPIKEY 
 ```
 
 ```javascript
@@ -380,23 +349,12 @@ webpagetest results 121025_PT_N8K
 }
 ```
 
-#### 6. Get test waterfall thumbnail from repeat view as data URI
+
+
+#### 5. Get remaining tests count for the account
 
 ```bash
-webpagetest waterfall 121025_PT_N8K --thumbnail --cached --uri
-```
-
-```javascript
-{
-  "type": "image/png",
-  "data": "iVBORw0KGgoAAAANSUhEUgA...RK5CYII="
-}
-```
-
-#### 7. Get remaining tests count for the account
-
-```bash
-webpagetest testBalance --key 1F2A3K4E5
+webpagetest testBalance -k YOURAPIKEY
 ```
 
 ```javascript
