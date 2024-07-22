@@ -9,7 +9,7 @@ var assert      = require('assert'),
     WebPageTest = require('../lib/webpagetest');
 
 var wptServer = 'https://www.example.com:1234/foo/bar/',
-    wpt = new WebPageTest(wptServer);
+    wpt = new WebPageTest(wptServer, 'YOURAPIKEY');
 
 describe('Dry Run', function() {
   describe('An Example WebPageTest Server', function() {

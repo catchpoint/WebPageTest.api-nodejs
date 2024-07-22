@@ -14,7 +14,7 @@ var assert          = require('assert'),
     ResponseObjects = require('./helpers/response-objects');
 
 var wptNockServer = new NockServer('https://wpt.com'),
-    wpt = new WebPageTest('https://wpt.com');
+    wpt = new WebPageTest('https://wpt.com', 'YOURAPIKEY');
 
 var server;
 

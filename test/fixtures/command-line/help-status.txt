@@ -1,7 +1,0 @@
-Usage: webpagetest status [options] <id>
-
-check test status
-
-Options:
-  -e, --request <id>  echo request ID, useful to track asynchronous requests
-  -h, --help          display help for command

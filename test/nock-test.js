@@ -12,7 +12,7 @@ var WebPageTest = require('../lib/webpagetest'),
     ResponseObjects = require('./helpers/response-objects');
 
 var wptNockServer = new NockServer('http://example.com'),
-    wpt = new WebPageTest('example.com');
+    wpt = new WebPageTest('example.com', 'YOURAPIKEY');
 
 describe('Example WebPageTest', function() {
   describe('Hits a Nock Server', function() {

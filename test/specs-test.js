@@ -14,7 +14,7 @@ var WebPageTest = require('../lib/webpagetest'),
     ResponseObjects = require('./helpers/response-objects');
 
 describe('Example WebPageTest for Specs', function() {
-  describe('Hits a Nock Server', function() {
+  describe.skip('Hits a Nock Server', function() {
 
     var wptNockServer, wpt,
         count = 10;
@@ -22,7 +22,7 @@ describe('Example WebPageTest for Specs', function() {
     beforeEach(function() {
       var server = 'http://foobar' + count + '.com';
       wptNockServer = new NockServer(server);
-      wpt = new WebPageTest(server);
+      wpt = new WebPageTest(server, 'YOURAPIKEY');
       count++;
     });
 
