@@ -1,6 +1,0 @@
-Usage: webpagetest player [options] <id>
-
-get a html5 player for a video <id>
-
-Options:
-  -h, --help  display help for command

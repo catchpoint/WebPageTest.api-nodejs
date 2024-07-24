@@ -1,6 +1,0 @@
-Usage: webpagetest har [options] <id>
-
-get the HTTP Archive (HAR) from test
-
-Options:
-  -h, --help  display help for command

@@ -1,6 +1,0 @@
-Usage: webpagetest history [options] [days]
-
-get history of previously run tests
-
-Options:
-  -h, --help  display help for command
