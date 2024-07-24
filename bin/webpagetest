@@ -59,13 +59,13 @@ var formatData = function(err, data, info) {
   }
 
   if (file) {
-    fs.writeFile(file, dataStr, encoding, function writeFile(err) {
+    fs.writeFile(file, (dataStr || data), encoding, function writeFile(err) {
       if (err) {
         output(err.message, 1);
       }
     });
   } else {
-    output(dataStr, err ? 1 : 0);
+    output((dataStr || data), err ? 1 : 0);
   }
 
   return data;
