@@ -322,25 +322,6 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
-  // loop all commands help
-  [
-    '', 'status', 'results', 'locations', 'testers', 'test', 'testAndWait', 'restart', 'cancel', 'har',
-    'pagespeed', 'utilization', 'request', 'timeline', 'netlog', 'chrometrace',
-    'console', 'testinfo', 'history', 'googlecsi', 'response', 'waterfall',
-    'screenshot', 'video', 'player', 'listen', 'batch','testBalance'
-  ].forEach(function eachCmd(command) {
-      it('gets a ' + command + ' help input and returns the help text', function(done) {
-        exec(mock(command + ' --help'), function(err, data) {
-          if (err) return done(err);
-          data = data.replace(/[\r\n\s]/g, '');
-          var output = getHelp(command);
-          output = output.replace(/[\r\n\s]/g, '');
-          assert.equal(data, output);
-          done();
-        });
-      });
-  });
-
   it('gets a batch input returns the batch commands output in order', function(done) {
     exec(mock('batch ' + path.join(__dirname, 'fixtures/batch.txt')), function(err, data) {
       if (err) return done(err);

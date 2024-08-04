@@ -13,7 +13,7 @@ var assert          = require('assert'),
     ResponseObjects = require('./helpers/response-objects');
 
 var wptNockServer = new NockServer('http://wpt.com'),
-    wpt = new WebPageTest('wpt.com');
+    wpt = new WebPageTest('wpt.com', 'YOURAPIKEY');
 
 // GET helper function
 function get(pathname, server, callback) {

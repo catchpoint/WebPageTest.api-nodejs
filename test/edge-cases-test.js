@@ -8,10 +8,10 @@
 var assert      = require('assert'),
     os          = require('os'),
     WebPageTest = require('../lib/webpagetest'),
-    helper      = require('../lib/helper'),
-    packageJson = require('../package.json');
+    helper      = require('../lib/helper')
 
 var wptServer = 'https://www.example.com:1234/foo/bar/';
+var MOCK_KEY = '0987654321';
 
 describe('Edge Cases of', function() {
   describe('An HTTPS WebPageTest Server with API key', function() {
@@ -20,7 +20,7 @@ describe('Edge Cases of', function() {
     it('gets a simple test request with another HTTP server and API key then returns API url', function(done) {
       wpt.runTest('http://foobar.com', {
         server: 'http://wpt.com',
-        key: '0987654321',
+        key: MOCK_KEY,
         dryRun: true
       }, function (err, data) {
         if (err) return done(err);
@@ -36,7 +36,7 @@ describe('Edge Cases of', function() {
     it('gets a simple test request with another HTTPS server and API key then returns API url', function(done) {
       wpt.runTest('http://foobar.com', {
         server: 'https://wpt.com:4321/baz/',
-        key: '0987654321',
+        key: MOCK_KEY,
         dryRun: true
       }, function (err, data) {
         if (err) return done(err);
