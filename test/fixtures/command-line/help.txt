@@ -1,0 +1,54 @@
+Usage: webpagetest [options] [command]
+
+Options:
+  -V, --version                     output the version number
+  -s, --server <server>             the WPT server URL
+                                    [https://www.webpagetest.org]
+  -d, --dryrun                      just return the RESTful API URL
+  --http_method <string>            HTTP method to use for submitting the test
+                                    (GET or POST) [GET]
+  -o, --out <file>                  place the output into <file>. Defaults to
+                                    stdout
+  -h, --help                        display help for command
+
+Commands:
+  status [options] <id>             check test status
+  results [options] <id>            get test results
+  locations [options]               list locations and the number of pending
+                                    tests
+  testBalance [options]             get remaining tests for the account
+  testers [options]                 list testers status and details
+  test [options] <url_or_script>    run test
+  testAndWait [options] <url_or_script>    run test and waits for the result
+  restart [options] <id>            restart test
+  cancel [options] <id>             cancel running/pending test
+  har <id>                          get the HTTP Archive (HAR) from test
+  pagespeed [options] <id>          get the Google Page Speed results (if
+                                    available) from test
+  utilization [options] <id>        get the CPU, bandwidth and memory
+                                    utilization data from test
+  request [options] <id>            get the request data from test
+  timeline [options] <id>           get the Chrome Developer Tools Timeline
+                                    data (if available) from test
+  netlog [options] <id>             get the Chrome Developer Tools Net log
+                                    data (if available) from test
+  chrometrace [options] <id>        get the Chrome Trace data (if available)
+                                    from test
+  console [options] <id>            get the browser console log data (if
+                                    available) from test
+  testinfo <id>                     get test request info/details
+  history [days]                    get history of previously run tests
+  googlecsi [options] <id>          get Google CSI data (Client Side
+                                    Instrumentation)
+  response [options] <id>           get response body for text resources
+  waterfall [options] <id>          get the waterfall PNG image
+  screenshot [options] <id>         get the fully loaded page screenshot in
+                                    JPG format (PNG if in full resolution)
+  video [options] <tests>           create a video from <tests> (comma
+                                    separated test ids)
+  player <id>                       get a html5 player for a video <id>
+  listen [options] [hostname:port]  start webpagetest-api proxy server on
+                                    <hostname>:<port> [hostname:7791]
+  batch <file>                      run commands in batch, i.e. one command
+                                    per line from <file> in parallel
+  help [command]                    display help for command

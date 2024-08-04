@@ -333,4 +333,16 @@ describe('WebPageTest Command Line', function() {
     });
   });
 
+  it('gets a test with long custom metrics script then returns API url and payload with custom metrics data', function (done) {
+    let script = '"[example]\n\\\\' + 'X'.repeat(6000) + '\nreturn 1;"'
+
+    exec(mock('test http://foobar.com --http_method POST --custom ' + script), function (err, data) {
+      if (err) return done(err);
+      data = JSON.parse(data);
+      assert.equal(data.url, wptServer + 'runtest.php');
+      assert.equal(data.form.length, 6077);
+      done();
+    });
+  });
+
 });

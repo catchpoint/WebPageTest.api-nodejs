@@ -98,6 +98,7 @@ webpagetest --help
 - **-s, --server** _\<server\>_: the WPT server URL [https://www.webpagetest.org]
 - **-d, --dryrun**: just return the RESTful API URL
 - **-o, --out** _\<file\>_: place the output into \<file\>. Defaults to stdout
+- **--http_method** _\<method\>_: the HTTP method to use (GET, POST) [GET]
 
 _The default WPT server can also be specified via environment variable `WEBPAGETEST_SERVER`_
 
@@ -480,6 +481,7 @@ wpt.runTest(script, (err, data) => {
 
 - **dryRun**: _Boolean_, if `true`, method does not make an actual request to the API Server but rather returns an object with `url` which contains the actual URL to make the GET request to WebPageTest API Server
 - **server**: _String_, if specified, overrides the WebPageTest server informed in the constructor only for that method call
+- **http_method**: _String_, if specified, overrides the HTTP method in the constructor only for that method call (GET, POST) [GET]
 
 #### Test (works with `runTest` and `runTestAndWait`)
 
