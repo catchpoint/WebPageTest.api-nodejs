@@ -269,6 +269,7 @@ function cleanupProgram() {
   delete program.server;
   delete program.dryrun;
   delete program.out;
+  delete program.http_method;
 }
 
 function execCommand() {
@@ -277,6 +278,7 @@ function execCommand() {
   // options
   if (options) {
     options.dryRun = program.dryrun;
+    options.http_method = program.http_method;
     args.push(options);
   }
 
