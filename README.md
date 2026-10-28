@@ -4,11 +4,12 @@
 # WebPageTest API Wrapper for NodeJS
 
 <!-- [![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api) -->
+
 [![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 [![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
 
 WebPageTest API Wrapper is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
- 
+
 For a better understanding of WebPageTest API Wrapper, here are some sample [Node Recipies](https://github.com/WebPageTest/WebPageTest-API-Recipes)
 
 ## Getting started
@@ -317,7 +318,7 @@ webpagetest status 121025_PT_N8K -k YOURAPIKEY
 #### 4. Get test results
 
 ```bash
-webpagetest results 121025_PT_N8K -k YOURAPIKEY 
+webpagetest results 121025_PT_N8K -k YOURAPIKEY
 ```
 
 ```javascript
@@ -348,8 +349,6 @@ webpagetest results 121025_PT_N8K -k YOURAPIKEY
   }
 }
 ```
-
-
 
 #### 5. Get remaining tests count for the account
 
@@ -643,13 +642,9 @@ wpt.getLocations((err, data) => {
 #### 3. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
 
 ```javascript
-wpt.runTest(
-  "https://docs.webpagetest.org/api/integrations/",
-  { location: "SanJose_IE9" },
-  (err, data) => {
-    console.log(err || data);
-  }
-);
+wpt.runTest("https://docs.webpagetest.org/api/integrations/", { location: "SanJose_IE9" }, (err, data) => {
+  console.log(err || data);
+});
 ```
 
 #### 4. Check current test status
@@ -680,32 +675,24 @@ wpt.getWaterfallImage(
   },
   (err, data, info) => {
     console.log(err || data, info);
-  }
+  },
 );
 ```
 
 #### Run test on https://docs.webpagetest.org/api/integrations/ and poll results every 5 seconds timing out in 60 seconds
 
 ```javascript
-wpt.runTest(
-  "https://docs.webpagetest.org/api/integrations/",
-  { pollResults: 5, timeout: 60 },
-  (err, data) => {
-    console.log(err || data);
-  }
-);
+wpt.runTest("https://docs.webpagetest.org/api/integrations/", { pollResults: 5, timeout: 60 }, (err, data) => {
+  console.log(err || data);
+});
 ```
 
 #### Or run test on https://docs.webpagetest.org/api/integrations/ and wait results listening on localhost\* port 8000\*\*
 
 ```javascript
-wpt.runTest(
-  "https://docs.webpagetest.org/api/integrations/",
-  { waitResults: "localhost:8000" },
-  (err, data) => {
-    console.log(err || data);
-  }
-);
+wpt.runTest("https://docs.webpagetest.org/api/integrations/", { waitResults: "localhost:8000" }, (err, data) => {
+  console.log(err || data);
+});
 ```
 
 _\* hostname and port are optional, defaults to \<system hostname\>:\<8000\>_
