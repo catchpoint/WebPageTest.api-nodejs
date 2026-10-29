@@ -1,8 +1,0 @@
-logData	0
-navigate	http://foo.com/login
-// log some data
-logData	1
-setValue	name=username	johndoe
-setValue	name=password	12345
-submitForm	action=http://foo.com/main
-waitForComplete

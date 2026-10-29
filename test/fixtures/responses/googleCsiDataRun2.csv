@@ -1,4 +1,0 @@
-"id","run","cached","service","action","variable","value"
-"140101_AB_12","2","false","myservice","var1,var2","foo","234"
-"140101_AB_12","2","false","myservice","var1,var2","bar","567"
-"140101_AB_12","2","false","myservice","var1,var2","baz","890"

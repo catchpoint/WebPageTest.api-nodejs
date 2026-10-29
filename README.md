@@ -1,853 +1,534 @@
-<p align="center"><img width="80%" src="assets/images/recipe-banner.png" alt="WebPageTest Logo" /></p>
-<p align="center"><a href="https://docs.webpagetest.org/api/integrations/#officially-supported-integrations">Learn about more WebPageTest API Integrations in our docs</a></p>
+# WebPageTest Node.js Client
 
-# WebPageTest API Wrapper for NodeJS
+TypeScript client for the Catchpoint WebPageTest REST API v4, with ESM exports, native `fetch`, and TypeScript request/response types.
 
-<!-- [![Build Status](https://travis-ci.com/WebPageTest/webpagetest-api.svg?branch=master)](https://travis-ci.com/WebPageTest/webpagetest-api) -->
-[![NPM Version](https://img.shields.io/npm/v/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
-[![NPM Downloads](https://img.shields.io/npm/dm/webpagetest.svg?style=flat)](https://www.npmjs.org/package/webpagetest)
+## Requirements
 
-WebPageTest API Wrapper is a [NPM](https://npmjs.org) package that wraps [WebPageTest](https://github.com/WPO-Foundation/webpagetest) API for [NodeJS](https://nodejs.org) as a module and a command-line tool.
- 
-For a better understanding of WebPageTest API Wrapper, here are some sample [Node Recipies](https://github.com/WebPageTest/WebPageTest-API-Recipes)
+- Node.js **20.11.0 or newer** and npm.
+- A Catchpoint WebPageTest REST API key to call the API.
+- An ESM application: use `.mjs` files or set `"type": "module"` in your application's `package.json`.
 
-## Getting started
+## Quick start
 
-```bash
-npm install webpagetest -g
+Install the package in your application and set `WPT_API_KEY` in the environment. The client uses the native `fetch` available in supported Node.js versions.
+
+```sh
+npm install webpagetest-node
 ```
 
-## Basics
+```js
+import { WebPageTest } from 'webpagetest-node';
 
-### Command line
-
-```bash
-webpagetest test https://docs.webpagetest.org/api/integrations/ -k YOURAPIKEY
+const client = new WebPageTest({ apiKey: process.env.WPT_API_KEY });
+console.log('Client ready:', Boolean(client));
 ```
 
-### Docker
+For credential setup and complete runnable examples, see [Set up the repository](#set-up-the-repository). For detailed client usage, see [Use the client in your application](#use-the-client-in-your-application).
 
-#### Build
+## Available features
 
-```bash
-docker build -t webpagetest-api .
+### Utilities
+
+| Feature | Method | Description |
+| --- | --- | --- |
+| Browse test history | `client.history.list(query?)` | Retrieve test history, filter by search text or date range, and request a specific page. |
+| Check remaining runs | `client.balance.get()` | Retrieve the remaining run balance for a Pro API account. |
+| Retrieve enumerations | `client.enumerations.list(query?)` | Obtain the numeric IDs to use when creating a test, including device types, connection types, and screen resolutions. |
+| List test locations | `client.nodes.list(query?)` | Retrieve available nodes, optionally filter by status, and identify locations enabled for instant tests. |
+
+### Instant tests
+
+| Feature | Method | Description |
+| --- | --- | --- |
+| Create instant tests | `client.instantTests.create(request)` | Submit a URL with IDs selected from enumerations and test locations, configure runs and optional advanced settings, and receive the created test identifier. |
+| Rerun instant tests | `client.instantTests.rerun(testId)` | Rerun an existing instant test and receive the new test identifier. |
+| Check instant test status | `client.instantTests.status(testId)` | Retrieve the current status identifier and queue position. |
+| Retrieve instant test results | `client.instantTests.result(testId, query?, resultOptions?, settings?)` | Retrieve run metrics, optionally waiting for completion and including waterfall, filmstrip, and Lighthouse data. |
+| Retrieve a screenshot | `client.instantTests.screenshot(testId)` | Retrieve the first available screenshot as a base64 image with its format. |
+| Download a response body | `client.instantTests.downloadResponseBody(testId, requestId, query?)` | Download the raw body and content type for a request in the test waterfall. |
+| Download a static artifact | `client.instantTests.downloadArtifact(testId, artifactType, query?)` | Download raw artifact bytes and the response content type for an existing test. |
+
+## Set up the repository
+
+From the repository root, install the locked dependencies and build the package:
+
+```sh
+npm ci
+npm run build
 ```
 
-#### Run
+The build clears `dist/` before writing JavaScript and TypeScript declarations, so removed or renamed modules do not remain in the output. The included examples import this local build, so you can try the client directly from the repository.
 
-```bash
-docker run -it --rm webpagetest-api -k YOURAPIKEY test https://docs.webpagetest.org/api/integrations/
+### Configure credentials
+
+Set `WPT_API_KEY` in the terminal where you will run the examples, or inject it through your secrets manager. Keep API keys out of source control.
+
+All examples use a shared environment check and stop before making API calls if `WPT_API_KEY` is missing, empty, or contains only whitespace. Error messages identify the variable without printing its value. The scripts read the current process environment; they do not automatically load a `.env` file.
+
+PowerShell:
+
+```powershell
+$env:WPT_API_KEY = 'replace-with-your-api-key'
 ```
 
-### Module
+Bash / zsh:
 
-```javascript
-const WebPageTest = require("webpagetest");
+```sh
+export WPT_API_KEY='replace-with-your-api-key'
+```
 
-const wptServer = "www.webpagetest.org";
-const wpt = new WebPageTest(wptServer, "YOUR_API_KEY");
+### Run the examples
 
-const siteToTest = "https://docs.webpagetest.org/api/integrations/";
-wpt.runTest(siteToTest, (err, data) => {
-  console.log(err || data);
+#### Utilities
+
+Browse the first page of test history, optionally passing search text after `--`:
+
+```sh
+npm run example:history
+npm run example:history -- "example.com"
+```
+
+The history example displays test identifiers, statuses, run times, and run counts. Edit `pageNumber` and `pageSize` in [list-history.mjs](examples/list-history.mjs) to browse the history; `pageNumber` is a zero-based index, so the first page is index `0`. Add `startTimeUtc` or `endTimeUtc` to the query when needed.
+
+Check the remaining run balance for a Pro API account:
+
+```sh
+npm run example:balance
+```
+
+The balance example prints the remaining run count, or `unavailable` when the response has no balance value. It makes one request and does not create a test.
+
+Retrieve the enumeration IDs needed to configure a new test:
+
+```sh
+npm run example:enumerations
+```
+
+Use the returned IDs for fields such as `deviceType`, `connectionType`, and `deviceResolution` when creating a test.
+
+Find available test locations and choose a node ID for test creation:
+
+```sh
+npm run example:nodes
+```
+
+#### Instant tests
+
+Then edit [`examples/create-instant-test.mjs`](examples/create-instant-test.mjs) to set your target URL and compatible identifiers from those responses. Get the IDs by running [`example:enumerations`](#retrieve-enumerations) and use entries from the `DeviceType` and `ConnectionType` sections for `<deviceTypeId>` and `<connectionTypeId>`. If you specify a `nodeId`, select a node with `enabledForInstantTest: true` from [`example:nodes`](#run-the-examples).
+
+Run the creation example when ready to start a real test:
+
+```sh
+npm run example:instant-test
+```
+
+To create a real test and wait for its results:
+
+```sh
+npm run example:create-and-wait
+```
+
+Edit the URL and configuration in [create-and-wait.mjs](examples/create-and-wait.mjs). It creates a test, prints its identifier immediately, then waits for results and prints selected run metrics.
+
+To rerun a test, pass its identifier from creation or history. Replace `12345` with an existing test ID:
+
+```sh
+npm run example:rerun -- 12345
+```
+
+The rerun example starts a new test and prints its new identifier. It requires an explicit positive integer ID and stops before calling the service if the argument is missing or invalid.
+
+Check the current status of an existing test ID:
+
+```sh
+npm run example:status -- 12345
+```
+
+The status example requires a positive integer test ID and prints its status identifier and queue position. It makes one request without creating a test or polling.
+
+Retrieve results for an existing test ID:
+
+```sh
+npm run example:result -- 12345
+```
+
+The result example prints a table of run metrics and does not create a test. Edit its query options to select a run or request additional details. It makes one request without polling for completion.
+
+Retrieve the first available screenshot for an existing test:
+
+```sh
+npm run example:screenshot -- 12345
+```
+
+The screenshot example prints the image format and base64 character count. It makes one request and does not create a test.
+
+Download the body of a request from the test waterfall. Replace `request-123` with a request ID from results retrieved with waterfall details:
+
+```sh
+npm run example:response-body -- 12345 request-123 wpt-response-body.bin
+```
+
+The response-body example saves raw bytes to a file and prints the byte count and content type. It makes one request and does not create a test. Edit the run, cached-view, and step values in [download-response-body.mjs](examples/download-response-body.mjs) as needed. Response bodies may contain sensitive data.
+
+Download a static artifact for an existing test. Run [`example:enumerations`](#retrieve-enumerations), which requests `WptTestArtifactType`, and replace `<artifactTypeId>` with an ID from that section:
+
+```sh
+npm run example:artifact -- 12345 <artifactTypeId> wpt-artifact.bin
+```
+
+The artifact example saves the raw response to the specified file and prints its byte count and content type. It makes one request and does not create a test. Edit the run, cached-view, and step values in [download-static-artifact.mjs](examples/download-static-artifact.mjs) as needed.
+
+#### Example scripts
+
+| Scope | Script | Source | Output |
+| --- | --- | --- | --- |
+| Utilities | `example:history` | [list-history.mjs](examples/list-history.mjs) | A page of test history and an indication of more available records. |
+| Utilities | `example:balance` | [get-balance.mjs](examples/get-balance.mjs) | Remaining run balance for a Pro API account. |
+| Utilities | `example:enumerations` | [list-enumerations.mjs](examples/list-enumerations.mjs) | Enumeration sections and their values. |
+| Utilities | `example:nodes` | [list-nodes.mjs](examples/list-nodes.mjs) | Available nodes. |
+| Instant tests | `example:instant-test` | [create-instant-test.mjs](examples/create-instant-test.mjs) | The created test identifier. |
+| Instant tests | `example:create-and-wait` | [create-and-wait.mjs](examples/create-and-wait.mjs) | Creates a real test and waits for its final run metrics. |
+| Instant tests | `example:rerun` | [rerun-instant-test.mjs](examples/rerun-instant-test.mjs) | The new identifier of the rerun test. |
+| Instant tests | `example:status` | [get-instant-test-status.mjs](examples/get-instant-test-status.mjs) | Current status identifier and queue position. |
+| Instant tests | `example:result` | [get-instant-test-result.mjs](examples/get-instant-test-result.mjs) | Run metrics for an existing instant test. |
+| Instant tests | `example:screenshot` | [get-instant-test-screenshot.mjs](examples/get-instant-test-screenshot.mjs) | Screenshot format and base64 character count. |
+| Instant tests | `example:response-body` | [download-response-body.mjs](examples/download-response-body.mjs) | Raw response-body bytes saved to a file, with byte count and content type printed. |
+| Instant tests | `example:artifact` | [download-static-artifact.mjs](examples/download-static-artifact.mjs) | Raw artifact bytes saved to a file, with byte count and content type printed. |
+
+Each script rebuilds `dist/` before running. The examples make live API calls; the automated tests do not require an API key.
+
+## Use the client in your application
+
+To install from a local checkout, build it first as shown above, then run this command from your application's directory, replacing the path with the checkout location:
+
+```sh
+npm install /path/to/webpagetest-node
+```
+
+The following examples use the installed package. For a script saved in the repository root, use `import { WebPageTest } from './dist/index.js'` instead.
+
+### Create a client
+
+```js
+import { WebPageTest } from 'webpagetest-node';
+
+const apiKey = process.env.WPT_API_KEY;
+if (!apiKey?.trim()) {
+  throw new Error('Set WPT_API_KEY before running this script.');
+}
+
+const client = new WebPageTest({ apiKey });
+```
+
+Save this setup and any of the snippets below in an `.mjs` file and run it with `node your-script.mjs`. TypeScript applications can use the same API with the included type declarations.
+
+### Application logging
+
+Configure logging once for all client operations, including utility requests and instant-test polling. To print progress to the console, specify only a level:
+
+```js
+const client = new WebPageTest({ apiKey, logging: { level: 'info' } });
+```
+
+`logging.level` accepts `silent` (default), `error`, `warn`, `info`, and `debug`. Each level includes more severe messages: `info` prints info, warnings, and errors. `silent` disables all logging, even with a custom logger.
+
+For a custom destination, pass `logging: { level: 'info', logger: customLogger }`. The logger must provide `debug`, `info`, `warn`, and `error` methods accepting a message string; an existing Winston logger can be used directly. The client filters messages before forwarding them; the custom logger may apply additional filtering. Configure formatting and destinations on your custom logger. No logging dependency is required. Public types are `LoggingOptions`, `LogLevel`, and `Logger`.
+
+The shared logger receives request lifecycle messages at `debug`, waiting progress at `info`, server scheduling expiration at `warn`, and HTTP/network failures at `error`. Every emitted message is prefixed with an ISO 8601 UTC timestamp, for example `[2026-10-06T12:30:35.347Z] Checking status of test 42...`. Logs omit URLs, headers, credentials, and request/response payloads. Logger methods run synchronously and should not throw; exceptions propagate to the caller. Each client retains its own logging configuration.
+
+### Utilities
+
+#### Browse test history
+
+Call `client.history.list()` without arguments to use the service's default filters and pagination. To narrow the results:
+
+```js
+const history = await client.history.list({
+  search: 'example.com',
+  startTimeUtc: '2026-10-01T00:00:00Z',
+  endTimeUtc: '2026-10-02T00:00:00Z',
+  pageNumber: 0,
+  pageSize: 20,
 });
-```
 
-## Command Line
-
-### Help
-
-```bash
-webpagetest --help
-```
-
-### Commands
-
-- **status** _[options] \<id\>_: check test status
-- **results** _[options] \<id\>_: get test results
-- **locations** _[options]_: list locations and the number of pending tests
-- **testers** _[options]_: list testers status and details
-- **test** _[options] \<url_or_script\>_: run test, _\<url_or_script\>_ can also be a path to a script file
-- **testAndWait** _[options] \<url_or_script\>_: run test and waits for the result, _\<url_or_script\>_ can also be a path to a script file
-- **testBalance** _[options]_: get remaining tests for the account
-- **restart** _\<id\>_: restart test
-- **cancel** _\<id\>_: cancel running/pending test
-- **har** _\<id\>_: get the HTTP Archive (HAR) from test
-- **pagespeed** _[options] \<id\>_: get the Google Page Speed results (if available) from test
-- **utilization** _[options] \<id\>_: get the CPU, bandwidth and memory utilization data from test
-- **request** _[options] <\id\>_: get the request data from test
-- **timeline** _[options] \<id\>_: get the Chrome Developer Tools Timeline data (if available) from test
-- **netlog** _[options] \<id\>_: get the Chrome Developer Tools Net log data (if available) from test
-- **chrometrace** _[options] \<id\>_: get the Chrome Trace data (if available) from test
-- **console** _[options] \<id\>_: get the browser console log data (if available) from test
-- **testinfo** _\<id\>_: get test request info/details
-- **history** _[days]_: get history of previously run tests
-- **googlecsi** _[options] \<id\>_: get Google CSI data (Client Side Instrumentation)
-- **response** _[options] \<id\>_: get response body for text resources
-- **waterfall** _[options] \<id\>_: get the waterfall PNG image
-- **screenshot** _[options] \<id\>_: get the fully loaded page screenshot in JPG format (PNG if in full resolution)
-- **video** _[options] \<tests\>_: create a video from _\<tests\>_ (comma separated test ids)
-- **player** _\<id\>_: get a html5 player for a video _\<id\>_
-- **listen** _[options]_ _[port]_: start webpagetest-api server on port _[7791_]
-- **batch** _\<file\>_: run commands in batch, i.e. one command per line from _\<file\>_ in parallel
-
-### Options
-
-#### Common (works for all commands)
-
-- **-s, --server** _\<server\>_: the WPT server URL [https://www.webpagetest.org]
-- **-d, --dryrun**: just return the RESTful API URL
-- **-o, --out** _\<file\>_: place the output into \<file\>. Defaults to stdout
-- **--http_method** _\<method\>_: the HTTP method to use (GET, POST) [GET]
-
-_The default WPT server can also be specified via environment variable `WEBPAGETEST_SERVER`_
-
-#### Test (works for **test** command only)
-
-- **-l, --location** _\<location\>_: location to test from
-- **-y, --connectivity** _\<profile\>_: connectivity profile -- requires location to be specified -- (Cable|DSL|3GSlow|3G|3GFast|4G|LTE|Edge|2G|Dial|FIOS|Native|custom) [Cable]
-- **-r, --runs** _\<number\>_: number of test runs [1]
-- **-f, --first**: skip the Repeat View test
-- **-v, --video**: capture video
-- **-p, --private**: keep the test hidden from the test log
-- **-L, --label** _\<label\>_: label for the test
-- **-i, --onload**: stop test at document complete. typically, tests run until all activity stops
-- **-S, --noscript**: disable javascript (IE, Chrome, Firefox)
-- **-C, --clearcerts**: clear SSL certificate caches
-- **-R, --ignoressl**: ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
-- **-T, --standards**: forces all pages to load in standards mode (IE only)
-- **-u, --tcpdump**: capture network packet trace (tcpdump)
-- **-O, --bodies**: save response bodies for text resources
-- **-K, --keepua**: do not add PTST to the original browser User Agent string
-- **-m, --dom** _\<element\>_: DOM element to record for sub-measurement
-- **-N, --duration** _\<seconds\>_: minimum test duration in seconds
-- **--injectScript** _\<string\>_: JavaScript to run after the document has started loading
-- **-E, --tester** _\<name\>_: run the test on a specific PC (name must match exactly or the test will not run)
-- **-W, --mobile**: (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
-- **--device** _\<string\>_: device name from [mobile_devices.ini](https://github.com/WPO-Foundation/webpagetest/blob/master/www/settings/mobile_devices.ini) to use for mobile emulation (only when --mobile is specified to enable emulation and only for Chrome)
-- **-M, --timeline**: capture Developer Tools Timeline (Chrome only)
-- **-J, --callstack**: set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
-- **-q, --chrometrace**: capture chrome trace (about://tracing) (Chrome only)
-- **--tracecategories** _\<categories>\>_: trace categories (when chrometrace enabled) (Chrome only)
-- **-G, --netlog**: capture Network Log (Chrome only)
-- **-Q, --datareduction**: enable data reduction on Chrome 34+ Android (Chrome only)
-- **-x, --useragent** _\<string\>_: custom user agent string (Chrome only)
-- **-X, --cmdline** _\<switches\>_: use a list of custom command line switches (Chrome only)
-- **-g, --login** _\<username\>_: username for authenticating tests (http authentication)
-- **-w, --password** _\<password\>_: password for authenticating tests (http authentication)
-- **-t, --sensitive**: discard script and http headers in the result
-- **-H, --noheaders**: disable saving of the http headers (as well as browser status messages and CPU utilization)
-- **-b, --block** _\<urls\>_: space-delimited list of urls to block (substring match)
-- **-Z, --spof** _\<domains\>_: space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
-- **-c, --custom** _\<script\>_: execute arbitrary javascript at the end of a test to collect custom metrics
-- **-a, --authtype** _\<type\>_: type of authentication: 0 = Basic, 1 = SNS [0]
-- **-n, --notify** _\<e-mail\>_: e-mail address to notify with the test results
-- **-B, --pingback** _\<url\>_: URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
-- **-D, --bwdown** _\<bandwidth\>_: download bandwidth in Kbps (used when specifying a custom connectivity profile)
-- **-U, --bwup** _\<bandwidth\>_: upload bandwidth in Kbps (used when specifying a custom connectivity profile)
-- **-bw, --browserwidth** _\<pixels\>_: Browser window width (in display pixels)
-- **-bh, --browserheight** _\<pixels\>_: Browser window height (in display pixels)
-- **-vh, --viewportheight** _\<pixels\>_: Viewport Height in css pixels
-- **-vw, --viewportwidth** _\<pixels\>_: Viewport Width in css pixels
-- **-dpr, --devicetopixelratio** _\<ratio\>_: Device To Pixel Ratio
-- **-au, --appendua** _\<string\>_: String to append to the user agent string. This is in addition to the default PTST/ver string
-- **-tt, --testtype** _\<string\>_: For running alternative test types, can specify traceroute or lighthouse
-- **-pr, --profiler** _\<number\>_: Set to 1 to enable the V8 sampling profiler (Chromium only)
-- **-avif, --disableAVIF** _\<number\>_: Set to 1 to disable AVIF support (Chromium 88+)
-- **-webp, --disableWEBP** _\<number\>_: Set to 1 to disable WEBP support (Chromium 88+)
-- **-jxl, --disableJXL** _\<number\>_: Set to 1 to disable JXL support (Chromium 88+)
-- **-dts, --dtShaper** _\<number\>_: Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
-- **-Y, --latency** _\<time\>_: first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
-- **-P, --plr** _\<percentage\>_: packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
-- **-z, --noopt**: disable optimization checks (for faster testing)
-- **-I, --noimages**: disable screen shot capturing
-- **-F, --full**: save a full-resolution version of the fully loaded screen shot as a PNG
-- **-j, --jpeg** _\<level\>_: jpeg compression level (30-100) for the screen shots and video capture
-- **-A, --medianvideo**: store the video from the median run when capturing video is enabled
-- **--htmlbody**: save the content of only the base HTML response
-- **--tsview** _\<id\>_: test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
-- **--tsviewconfigs** _\<string\>_: configs to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
-- **--affinity** _\<string\>_: string to hash test to a specific test agent. tester will be picked by index among available testers
-- **--priority** _\<number\>_: change test priority (0-9) [enforced by API key, otherwise 5]
-- **--continuous**: capture video continuously (unstable/experimental, may cause tests to fail)
-- **--spdy3**: force SPDY version 3 (Chrome only)
-- **--swrender**: force software rendering, disable GPU acceleration (Chrome only)
-- **--poll** _\<interval\>_: poll for results after test is scheduled at every <interval> seconds [5]
-- **--wait** _\<hostname:port\>_: wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
-- **--timeout** _\<seconds\>_: timeout for polling and waiting results [no timeout]
-- **--lighthouse**: perform lighthouse test (Chrome only, Linux agent only)
-- **-thc, --throttleCPU** _\<number\>_: custom cpu throttle
-
-#### API Key (works for **test**, **restart**,**locations**, **testBalance** and **cancel** commands)
-
-- **-k, --key** _\<api_key\>_:API key (if assigned). Contact the WebPageTest server administrator for a key if required or request an API key for limited testing at [webpagetest.org/getkey.php](https://www.webpagetest.org/getkey.php)
-
-#### Request (works for **status**, **results**, **locations**, **testers** and **test** commands)
-
-- **-e, --request** _\<id\>_: echo request ID, useful to track asynchronous requests
-
-#### Results (works for **results** and **test** commands)
-
-- **-b, --breakdown**: include the breakdown of requests and bytes by mime type
-- **-D, --domains**: include the breakdown of requests and bytes by domain
-- **-p, --pagespeed**: include the PageSpeed score in the response (may be slower)
-- **-R, --requests**: include the request data in the response (slower and results in much larger responses)
-- **-m, --median** _\<metric\>_: set the metric used to calculate median for multiple runs tests [loadTime]
-- **--medianrun** _\<metric>_: set the run used for median for multiple runs tests [median]
-- **-S, --specs** _\<json_or_file\>_: set the specs for performance test suite
-- **-r, --reporter** _\<name\>_: set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
-
-#### Run (works for **pagespeed**, **utilization**, **request**, **timeline**, **netlog**, **chrometrace**, **console**, **googlecsi**, **response**, **waterfall** and **screenshot** commands)
-
-- **-r, --run** _\<number\>_: which run number on a multiple runs test [1]
-- **-c, --cached**: get the Repeat View (cached view) instead of default First View (primed cache)
-
-#### Image (works for **waterfall** and **screenshot** commands)
-
-- **-t, --thumbnail**: get the thumbnail of actual image
-- **-u, --uri**: return the base64 string representation (inline) of actual image
-
-#### Screenshot (works for **screenshot** command only)
-
-- **-f, --full**: get full resolution screenshot in PNG format if available
-- **-n, --render**: get the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)
-- **-p, --complete**: get the page screenshot at the Document Complete point (i.e.: when window.onload was fired)
-
-#### Waterfall (works for **waterfall** command only)
-
-- **-T, --type** _\<chart\>_: set the chart type: waterfall or connection [waterfall]
-- **-M, --mime**: set chart coloring by MIME type [false]
-- **-w, --width** _\<px\>_: chart image width in px (300-2000) [930]
-- **-m, --max** _\<seconds\>_: set maximum time in seconds [automatic]
-- **-R, --requests** _\<items\>_: filter requests (e.g.:1,2,3,4-9,8) [all]
-- **-C, --nocpu**: hide CPU utilization [false]
-- **-b, --nobandwidth**: hide bandwidth utilization [false]
-- **-e, --noellipsis**: hide ellipsis (...) for missing items [false]
-- **-l, --nolabels**: hide labels for requests (URL) [false]
-
-#### Video (works for **video** command only)
-
-- **-e, --end** _\<end_point\>_: frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded
-
-#### Response (works for **response** command only)
-
-- **-R, --request** _\<number\>_: the request number [1]
-
-#### Listen (works for **listen** command only)
-
-- **-k, --key** _\<file\>_: private key file to use for SSL
-- **-c, --cert** _\<file\>_: public x509 certificate file to use for SSL
-
-### Examples
-
-#### 1. Get API available locations
-
-```bash
-$ webpagetest locations -k YOURAPIKEY
-```
-
-```javascript
-{
-  "response": {
-    "statusCode": 200, "statusText": "Ok",
-    "data": {
-      "location": [
-        ...
-        {
-          "id": "SanJose_IE9",
-          "Label": "San Jose, CA USA (IE 9,Chrome,Firefox)",
-          "location": "SanJose_IE9",
-          "Browser": "IE 9",
-          "PendingTests": {
-            "p1": 0, "p2": 0, "p3": 0, "p4": 0, "p5": 2, "p6": 2, "p7": 0,
-            "p8": 0, "p9": 0, "Total": 7, "HighPriority": 2, "LowPriority": 4,
-            "Testing": 1, "Idle": 0
-          }
-        },
-        ...
-      ]
-    }
-  }
+for (const test of history.data.webpageTestHistory ?? []) {
+  console.log(test.id, test.url, test.runTime, test.status?.name);
 }
 ```
 
-#### 2. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
+All filters are optional. Date filters accept ISO 8601 timestamps with `Z` or a timezone offset. History records may include node details, run counts, labels, parent/control identifiers, and applied experiments.
 
-```bash
-webpagetest test https://docs.webpagetest.org/api/integrations/ -k YOURAPIKEY --location SanJose_IE9
-```
+History `runTime` values can include or omit a timezone, for example `2026-10-01T21:34:41.553`. The client preserves the returned string without assigning a timezone or converting it to a `Date`.
 
-```javascript
-{
-  "statusCode": 200,
-  "statusText": "Ok",
-  "data": {
-    "testId": "121025_PT_N8K",
-    "ownerKey": "868cb2813a0f376a977dd1a24ab041b4f12361b3",
-    "jsonUrl": "https://www.webpagetest.org/results.php?test=121025_PT_N8K&f=json",
-    "xmlUrl": "https://www.webpagetest.org/xmlResult.php?test=121025_PT_N8K",
-    "userUrl": "https://www.webpagetest.org/results.php?test=121025_PT_N8K",
-    "summaryCSV": "https://www.webpagetest.org/csv.php?test=121025_PT_N8K",
-    "detailCSV": "https://www.webpagetest.org/csv.php?test=121025_PT_N8K&amp;requests=1"
-  }
-}
-```
+Pagination metadata is available through `history.data.hasMore`, `next`, and `previous`. `pageNumber` is the zero-based page index (the first page is `0`); increment it to request the next page. The client returns one page per call.
 
-#### 3. Check current test status
+#### Retrieve enumerations
 
-```bash
-webpagetest status 121025_PT_N8K -k YOURAPIKEY
-```
+Enumerations provide the numeric IDs accepted by test creation. Request the categories you need, choose compatible entries from the response, and pass their `id` values to `client.instantTests.create()`:
 
-```javascript
-{
-  "statusCode": 101,
-  "statusText": "Test Pending",
-  "data": {
-    "statusCode": 101,
-    "statusText": "Test Pending",
-    "testId": "121025_PT_N8K",
-    "runs": 1,
-    "fvonly": 0,
-    "location": "SanJose_IE9"
-  }
-}
-```
-
-#### 4. Get test results
-
-```bash
-webpagetest results 121025_PT_N8K -k YOURAPIKEY 
-```
-
-```javascript
-{
-  "response": {
-    "statusCode": 200, "statusText": "Ok",
-    "data": {
-      "testId": "121025_PT_N8K",
-      "summary": "https://www.webpagetest.org/result/121025_PT_N8K/",
-      "testUrl": "https://docs.webpagetest.org/api/integrations/",
-      "location": "SanJose_IE9",
-      "connectivity": "DSL",
-      "bwDown": 1500, "bwUp": 384, "latency": 50, "plr": 0,
-      "completed": "Thu, 25 Oct 2012 23:42:11 +0000",
-      "runs": 1, "successfulFVRuns": 1,
-      "average": {
-        "firstView": {
-          "loadTime": 3942, "TTFB": 1518,
-          "bytesIn": 963405, "bytesInDoc": 431612,
-          "requests": 32, "requestsDoc": 19,
-          "render": 2509, "fullyLoaded": 7765,
-          "docTime": 3942, "domTime": 0,
-          "titleTime": 1641, "avgRun": 1
-        }
-      },
-      ...
-    }
-  }
-}
-```
-
-
-
-#### 5. Get remaining tests count for the account
-
-```bash
-webpagetest testBalance -k YOURAPIKEY
-```
-
-```javascript
-{
-    "data": {
-        "remaining": 1175
-    }
-}
-```
-
-#### Run test on https://docs.webpagetest.org/api/integrations/ and poll results every 5 seconds timing out in 60 seconds
-
-```bash
-webpagetest test https://docs.webpagetest.org/api/integrations/ --poll 5 --timeout 60
-```
-
-#### Or run test on https://docs.webpagetest.org/api/integrations/ and wait for results listening on localhost\* port 8000\*\*
-
-```bash
-webpagetest test https://docs.webpagetest.org/api/integrations/ --wait 8000
-```
-
-```javascript
-{
-  "response": {
-    "statusCode": 200, "statusText": "Ok",
-    "data": {
-      "testId": "121025_PT_N8K",
-      "testUrl": "https://docs.webpagetest.org/api/integrations/",
-      ...
-      "median": {
-        "firstView": {
-          "loadTime": 3942, "TTFB": 1518,
-          "render": 2509, "fullyLoaded": 7765,
-          ...
-        }
-      },
-      ...
-    }
-  }
-}
-```
-
-_\* hostname and port are optional, defaults to \<system hostname\>:\<8000\>_
-_\*\* localhost and port must be reacheable from WebPageTest server_
-
-## Module
-
-Methods and options (including the one letter shorthands) are the same when using as a Node module, however a more verbose version of both commands (methods) and options (parameters) are available and encouraged to use for code clarity.
-
-### Methods
-
-- `getTestStatus(id, options, callback)`
-- `getTestResults(id, options, callback)`
-- `getLocations(options, callback)`
-- `getTesters(options, callback)`
-- `getTestBalance(options, callback)`
-- `runTest(url_or_script, options, callback)`
-- `runTestAndWait(url_or_script, options, callback)`
-- `restartTest(id, options, callback)`
-- `cancelTest(id, options, callback)`
-- `getHARData(id, options, callback)`
-- `getPageSpeedData(id, options, callback)`
-- `getUtilizationData(id, options, callback)`
-- `getRequestData(id, options, callback)`
-- `getTimelineData(id, options, callback)`
-- `getNetLogData(id, options, callback)`
-- `getChromeTraceData(id, options, callback)`
-- `getConsoleLogData(id, options, callback)`
-- `getTestInfo(id, options, callback)`
-- `getHistory(days, options, callback)`
-- `getGoogleCsiData(id, options, callback)`
-- `getResponseBody(id, options, callback)`
-- `getWaterfallImage(id, options, callback)`
-- `getScreenshotImage(id, options, callback)`
-- `createVideo(tests, options, callback)`
-- `getEmbedVideoPlayer(id, options, callback)`
-- `listen(port, options, callback)`
-- `scriptToString(script)`
-
-### Parameters
-
-- **id**: test ID string _required_
-- **options**: parameters object _optional_, see below
-- **callback**: the callback `(error, data)` _optional=> _
-- **url_or_script**: decoded url or script string _required_
-- **port**: port number _optional_ \[default: 7791\]
-- **script**: script array in the format:
-
-```javascript
-[
-  {command1: 'value1'},
-  {command2: 123},
-  {command3: ['value1', 'value2', ... , 'valueN']},
-  ...
-  'commandN'}
-]
-```
-
-#### Notes
-
-- `getWaterfallImage` and `getScreenshotImage` callback function has a third parameter `info` which is an object with `{type: 'image/jpeg or png', encoding: 'utf8 or binary'}`
-- `scriptToString` script array values 1-N are optional. e.g:
-
-```javascript
-const script = wpt.scriptToString([
-  { logData: 0 },
-  { navigate: "http://foo.com/login" },
-  { logData: 1 },
-  { setValue: ["name=username", "johndoe"] },
-  { setValue: ["name=password", "12345"] },
-  { submitForm: "action=http://foo.com/main" },
-  "waitForComplete",
-]);
-
-wpt.runTest(script, (err, data) => {
-  console.log(err || data);
+```js
+const response = await client.enumerations.list({
+  includeDeviceType: true,
+  includeConnectionType: true,
+  includeDeviceResolution: true,
 });
+
+for (const section of response.data.sections ?? []) {
+  console.log(section.section, section.enumeration ?? []);
+}
 ```
 
-### Options
+| Enumeration query option | Field in the creation request |
+| --- | --- |
+| `includeDeviceType` | `deviceType` |
+| `includeConnectionType` | `connectionType` |
+| `includeDeviceResolution` | `deviceResolution` |
 
-#### Common (works for all methods with `options` parameter)
+Use the selected entry's numeric `id`, rather than its display name. Location IDs come from `client.nodes.list()` and are passed as `nodeId`.
 
-- **dryRun**: _Boolean_, if `true`, method does not make an actual request to the API Server but rather returns an object with `url` which contains the actual URL to make the GET request to WebPageTest API Server
-- **server**: _String_, if specified, overrides the WebPageTest server informed in the constructor only for that method call
-- **http_method**: _String_, if specified, overrides the HTTP method in the constructor only for that method call (GET, POST) [GET]
+Other available categories include authentication methods and browser types. Set `includeWptTestArtifactType: true` to request WebPageTest artifact types.
 
-#### Test (works with `runTest` and `runTestAndWait`)
+#### Find a test location
 
-- **location**: _String_, location to test from
-- **connectivity**: _String_, connectivity profile -- requires location to be specified -- (Cable|DSL|3GSlow|3G|3GFast|4G|LTE|Edge|2G|Dial|FIOS|Native|custom) [Cable]
-- **runs**: _Number_, number of test runs [1]
-- **firstViewOnly**: _Boolean_, skip the Repeat View test
-- **video**: _Boolean_, capture video
-- **private**: _Boolean_, keep the test hidden from the test log
-- **label**: _String_, label for the test
-- **stopAtDocumentComplete**: _Boolean_, stop test at document complete. typically, tests run until all activity stops
-- **disableJavaScript**: _Boolean_, disable JavaScript (IE, Chrome, Firefox)
-- **clearCerts**: _Boolean_, clear SSL certificate caches
-- **ignoreSSL**: _Boolean_, ignore SSL certificate errors, e.g. name mismatch, self-signed certificates, etc
-- **disableCompatibilityView**: _Boolean_, forces all pages to load in standards mode (IE only)
-- **tcpDump**: _Boolean_, capture network packet trace (tcpdump)
-- **saveResponseBodies**: _Boolean_, save response bodies for text resources
-- **keepOriginalUserAgent**: _Boolean_, do not add PTST to the original browser User Agent string
-- **domElement**: _String_, DOM element to record for sub-measurement
-- **minimumDuration**: _Number_, minimum test duration in seconds
-- **tester**: _String_, run the test on a specific PC (name must match exactly or the test will not run)
-- **emulateMobile**: _Boolean_, (experimental) emulate mobile browser: Chrome mobile user agent, 640x960 screen, 2x scaling and fixed viewport (Chrome only)
-- **device**: _String_, device name from [mobile_devices.ini](https://github.com/WPO-Foundation/webpagetest/blob/master/www/settings/mobile_devices.ini) to use for mobile emulation (only when emulateMobile=true is specified to enable emulation and only for Chrome)
-- **timeline**: _Boolean_, capture Developer Tools Timeline (Chrome only)
-- **timelineCallStack**: _Boolean_, set between 1-5 to include the JS call stack. must be used in conjunction with timeline (increases overhead) (Chrome only)
-- **chromeTrace**: _Boolean_, capture chrome trace (about://tracing) (Chrome only)
-- **netLog**: _Boolean_, capture Network Log (Chrome only)
-- **dataReduction**: _Boolean_, enable data reduction on Chrome 34+ Android (Chrome only)
-- **userAgent**: _String_, custom user agent string (Chrome only)
-- **commandLine**: _String_, use a list of custom command line switches (Chrome only)
-- **login**: _String_, username for authenticating tests (http authentication)
-- **password**: _String_, password for authenticating tests (http authentication)
-- **sensitive**: _Boolean_, discard script and http headers in the result
-- **disableHTTPHeaders**: _Boolean_, disable saving of the http headers (as well as browser status messages and CPU utilization)
-- **block**: _String_, space-delimited list of urls to block (substring match)
-- **spof**: _String_, space-delimited list of domains to simulate failure by re-routing to blackhole.webpagetest.org to silently drop all requests
-- **customMetrics**: _String_, execute arbitrary JavaScript at the end of a test to collect custom metrics
-- **authenticationType**: _Number_, type of authentication: 0 = Basic, 1 = SNS [0]
-- **notifyEmail**: _String_, e-mail address to notify with the test results
-- **pingback**: _String_, URL to ping when the test is complete (the test ID will be passed as an "id" parameter)
-- **bandwidthDown**: _String_, download bandwidth in Kbps (used when specifying a custom connectivity profile)
-- **bandwidthUp**: _String_, upload bandwidth in Kbps (used when specifying a custom connectivity profile)
-- **browserwidth**: _String_, Browser window width (in display pixels)
-- **browserheight**: _String_, Browser window height (in display pixels)
-- **viewportheight**: _String_, Viewport Height in css pixels
-- **viewportwidth**: _String_, Viewport Width in css pixels
-- **devicetopixelratio**: _String_, Device To Pixel Ratio
-- **appendua**: _String_, String to append to the user agent string. This is in addition to the default PTST/ver string
-- **testtype**: _String_, For running alternative test types, can specify traceroute or lighthouse
-- **profiler**: _Number_, Set to 1 to enable the V8 sampling profiler (Chromium only)
-- **disableAVIF**: _Number_, Set to 1 to disable AVIF support (Chromium 88+)
-- **disableWEBP**: _Number_, Set to 1 to disable WEBP support (Chromium 88+)
-- **disableJXL**: _Number_, Set to 1 to disable JpegXL support (Chromium 88+)
-- **dtShaper**: _Number_, Set to 1 to use Chrome's built-in traffic-shaping instead of the packet-level netem shaping usually used by the test agents
-- **latency**: _String_, first-hop Round Trip Time in ms (used when specifying a custom connectivity profile)
-- **packetLossRate**: _Number_, packet loss rate - percent of packets to drop (used when specifying a custom connectivity profile)
-- **disableOptimization**: _Boolean_, disable optimization checks (for faster testing)
-- **disableScreenshot**: _Boolean_, disable screen shot capturing
-- **fullResolutionScreenshot**: _Boolean_, save a full-resolution version of the fully loaded screen shot as a PNG
-- **jpegQuality**: _Number_, jpeg compression level (30-100) for the screen shots and video capture
-- **medianVideo**: _Boolean_, store the video from the median run when capturing video is enabled
-- **htmlBody**: _Boolean_, save the content of only the base HTML response
-- **tsView**: _String_, test name to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
-- **tsViewConfigs**: _String_, configs to use when submitting results to tsviewdb (for private instances that have integrated with tsviewdb)
-- **affinity**: _String_, string to hash test to a specific test agent. tester will be picked by index among available testers
-- **priority**: _Number_, change test priority (0-9) [enforced by API key, otherwise 5]
-- **blockAds**: _Boolean_, block ads defined by http://adblockplus.org
-- **continuousVideoCapture**: _Boolean_, capture video continuously (unstable/experimental, may cause tests to fail)
-- **forceSpdy3**: _Boolean_, force SPDY version 3 (Chrome only)
-- **forceSoftwareRendering**: _Boolean_, force software rendering, disable GPU acceleration (Chrome only)
-- **pollResults**: _Number_, poll for results after test is scheduled at every <interval> seconds [5]
-- **waitResults**: _String_, wait for test results informed by agent once complete listening on <hostname>:<port> [hostname:first port available above 8000]
-- **timeout**: _String_, timeout for polling and waiting results [no timeout]
-- **lighthouse**: _Boolean_, perform lighthouse test (Chrome only, Linux agent only)
-- **throttleCPU**: _Number_, custom cpu throttling
-
-#### API Key (works for `runTest`, `runTestAndWait`, `restartTest` and `cancelTest` methods)
-
-- **key**: _String_, API key (if assigned). Contact the WebPageTest server administrator for a key if required
-
-#### Request (works for `getTestStatus` `getResults` `getLocations` `getTesters` `runTest` and `runTestAndWait` methods)
-
-- **requestId**: _String_, echo request ID, useful to track asynchronous requests
-
-#### Results (works for `getResults` `runTest` and `runTestAndWait` methods)
-
-- **breakDown**: _Boolean_, include the breakdown of requests and bytes by mime type
-- **domains**: _Boolean_, include the breakdown of requests and bytes by domain
-- **pageSpeed**: _Boolean_, include the PageSpeed score in the response (may be slower)
-- **requests**: _Boolean_, include the request data in the response (slower and results in much larger responses)
-- **medianMetric**: _String_, set the metric used to calculate median for multiple runs tests (default: loadTime)
-- **specs**: _String_, set the specs for performance test suite
-- **reporter**: _String_, set performance test suite reporter output: [dot]|spec|tap|xunit|list|progress|min|nyan|landing|json|doc|markdown|teamcity
-
-#### Run (works for `getPageSpeedData`, `getUtilizationData`, `getRequestData`, `getTimelineData`, `getNetLogData`, `getChromeTraceData`, `getConsoleLogData`, `getGoogleCsiData`, `getResponseBody`, `getWaterfallImage` and `getScreenshotImage` methods)
-
-- **run**: _Number_, the test run number for multiple runs tests (default: 1, first test)
-- **repeatView**: _Boolean_, if `true` returns the repeat view (cached) data
-
-#### Image (works for `getWaterfallImage` and `getScreenshotImage` methods)
-
-- **thumbnail**: _Boolean_, returns the thumbnail of actual image
-- **dataURI**: _Boolean_, returns the base64 string representation (inline) of actual image
-
-#### Screenshot (works for `getScreenshotImage` method only)
-
-- **fullResolution**: _Boolean_, returns the full resolution screenshot in PNG format if available
-- **startRender**: _Boolean_, returns the page screenshot at the Start Render point (i.e.: when something was first displayed on screen)
-- **documentComplete**: _Boolean_, returns the page screenshot at the Document Complete point (i.e.: when `window.onload` was fired)
-
-#### Waterfall (works for `getWaterfallImage` method only)
-
-- **chartType**: _String_, set the chart type: waterfall or connection [waterfall]
-- **colorByMime**: _Boolean_, set chart coloring by MIME type [false]
-- **chartWidth** _Number_: chart image width in px (300-2000) [930]
-- **maxTime** _Number_: set maximum time in seconds [automatic]
-- **requests** _String_: filter requests (e.g.:1,2,3,4-9,8) [all]
-- **noCPU**: _Boolean_, hide CPU utilization [false]
-- **noBandwidth**: _Boolean_, hide bandwidth utilization [false]
-- **noEllipsis**: _Boolean_, hide ellipsis (...) for missing items [false]
-- **noLabels**: _Boolean_, hide labels for requests (URL) [false]
-
-#### Video (works for `createVideo` method only)
-
-- **comparisonEndPoint** _String_: frame comparison end point: [visual]=visually complete | all=last change | doc=document complete | full=fully loaded
-
-#### Response (works for `getResponseBody` method only)
-
-- **request** _Number_: the request number [1]
-
-#### Listen (works for `listen` method only)
-
-- **key** _String_: private key file path to use for SSL
-- **cert** _String_: public x509 certificate file path to use for SSL
-
-#### Location (works for `getLocations` method only)
-
-- **allLocations** _Boolean_: if true, returns all available locations irrespective of API availability
-
-### Examples
-
-#### 1. Instantiating
-
-```javascript
-const WebPageTest = require("webpagetest");
-
-const wpt = new WebPageTest("my-wpt.foo.com"); // default: www.webpagetest.org
-const wptPublic = new WebPageTest("www.webpagetest.org", "MY_API_KEY");
-```
-
-#### 2. Get available locations
-
-```javascript
-wpt.getLocations((err, data) => {
-  console.log(err || data);
-});
-```
-
-#### 3. Run test on https://docs.webpagetest.org/api/integrations/ from San Jose on IE9
-
-```javascript
-wpt.runTest(
-  "https://docs.webpagetest.org/api/integrations/",
-  { location: "SanJose_IE9" },
-  (err, data) => {
-    console.log(err || data);
-  }
+```js
+const response = await client.nodes.list();
+const instantTestNodes = (response.data.nodes ?? []).filter(
+  (node) => node.enabledForInstantTest === true,
 );
+
+for (const node of instantTestNodes) {
+  console.log(node.id, node.name);
+}
 ```
 
-#### 4. Check current test status
+Call `client.nodes.list({ statusId })` to filter by a known status identifier. Omitting the filter requests all available nodes.
 
-```javascript
-wpt.getTestStatus("121025_PT_N8K", (err, data) => {
-  console.log(err || data);
+### Instant tests
+
+Before creating a test, use the enumerations utility to retrieve configuration IDs and the locations utility to select a node if needed.
+
+#### Create an instant test
+
+The minimum payload requires `url` and `deviceType`. First run [`example:enumerations`](#retrieve-enumerations) and select compatible IDs from the `DeviceType` and `ConnectionType` sections. Use those IDs for the placeholders below:
+
+```js
+const deviceTypeId = Number('<deviceTypeId>');
+const connectionTypeId = Number('<connectionTypeId>');
+const response = await client.instantTests.create({
+  url: 'https://example.com',
+  deviceType: deviceTypeId,
+  connectionType: connectionTypeId,
+  runs: 1,
+  firstViewOnly: true,
+  performance: true,
 });
+
+console.log(`Created instant test: ${response.data.id}`);
 ```
 
-#### 5. Get test results
+Replace the placeholders with compatible IDs from the corresponding enumeration sections. You can also pass a `nodeId` selected from the available instant-test locations. `runs` accepts integers from 1 to 6. Optional settings include connection type, device resolution, authentication, scripts, and advanced browser settings; see [the request type](src/api/v4/types/instant-test.ts) for the complete shape.
 
-```javascript
-wpt.getTestResults("121025_PT_N8K", (err, data) => {
-  console.log(err || data);
+Creation returns a test identifier, not the test results.
+
+#### Create a test and wait for results
+
+As above, retrieve a `deviceType` ID from [`example:enumerations`](#retrieve-enumerations) before creating the test. Then pass its ID to `result` with `wait: true`. You can also wait for an existing test from history or a rerun:
+
+```js
+const testRequest = {
+  url: 'https://example.com',
+  deviceType: Number('<deviceTypeId>'),
+  runs: 1,
+};
+
+const resultQuery = { includeWaterfall: true };
+const resultOptions = {
+  wait: true,
+};
+
+const created = await client.instantTests.create(testRequest);
+console.log('Created test:', created.data.id);
+const result = await client.instantTests.result(created.data.id, resultQuery, resultOptions);
+console.log(result.data.id);
+```
+
+With `wait: true`, `result` checks status immediately and then polls sequentially. Status `1` means running, `0` means completed, and `4` means the test was not executed within approximately two hours. It retrieves results once after completion. Missing or unknown status IDs stop the operation with an error; shared `completed` metadata does not determine test completion. Waiting never creates a test. If it times out, call `result` again with the same ID to resume waiting.
+
+| Option | Default | Purpose |
+| --- | --- | --- |
+| `wait` | `false` | Poll status before retrieving results. When false or omitted, fetch results once. |
+
+Configure `settings: { pollIntervalMs, timeoutMs }` on the client for global result defaults. A single call can override those settings with a fourth `settings` argument: `result(testId, query, { wait: true }, { timeoutMs: 120_000 })`. The third argument is `resultOptions` and controls whether to wait. To see progress, configure the application logger as shown above.
+
+| Setting | Default | Scope |
+| --- | --- | --- |
+| `pollIntervalMs` | `60_000` (1 minute) | Delay between sequential status checks when waiting. |
+| `timeoutMs` | `600_000` (10 minutes) | Total waiting deadline, including status checks and final result retrieval. |
+
+Global settings are validated when the client is created. Per-call overrides are validated before waiting and do not change the client's defaults. Timer values must be positive integers up to `2_147_483_647` milliseconds. With `wait: false`, the per-call timer settings are ignored. These settings do not change the separate 30-second HTTP request timeout. HTTP, network, and individual request timeout errors are returned immediately without retrying.
+
+`TestWaitError` extends `WebPageTestError` and exposes `code` and `testId`. Import `TestWaitErrorCode` to compare codes using named constants, for example `error.code === TestWaitErrorCode.Timeout`. Codes are `TIMEOUT` for the waiting deadline, `TEST_TIMEOUT` for status 4 (the server scheduling window expired), and `UNKNOWN_STATUS` for an unrecognized status. A waiting deadline stops local polling and any request in progress; it does not cancel the remote test.
+
+#### Rerun an instant test
+
+Pass an existing instant test identifier, such as the one returned by creation or history:
+
+```js
+const rerunResponse = await client.instantTests.rerun(response.data.id);
+console.log('Created rerun:', rerunResponse.data.id);
+```
+
+Each call starts a new test. The client does not retry a failed rerun automatically.
+
+#### Check instant test status
+
+`client.instantTests.status(testId)` returns the current `statusTypeId` and `queuePosition` without polling. `statusTypeId` is a numeric identifier. Import `InstantTestStatus` to compare it with `InstantTestStatus.Completed` (0), `InstantTestStatus.Running` (1), or `InstantTestStatus.Timeout` (4). Timeout means the test was not executed within approximately two hours; it is separate from the client waiting deadline. `queuePosition` is an integer or `null`; both fields may be omitted. Do not infer test completion from the shared response metadata field `completed`.
+
+#### Retrieve instant test results
+
+Pass a test ID returned by creation, rerun, or history to `client.instantTests.result(testId, query?)`. The query options are optional:
+
+```js
+const result = await client.instantTests.result(response.data.id, {
+  run: 1,
+  includeWaterfall: true,
+  includeFilmstrip: false,
+  includeLighthouse: true,
 });
+
+for (const run of result.data.runs ?? []) {
+  console.log(run.run, run.timeToFirstByte, run.largestContentfulPaint);
+}
 ```
 
-#### 6. Get test waterfall thumbnail from repeat view as data URI
+All query options are optional. Omit the second argument to use the service defaults.
 
-```javascript
-wpt.getWaterfallImage(
-  "121025_PT_N8K",
-  {
-    thumbnail: true,
-    repeatView: true,
-    dataURI: true,
-  },
-  (err, data, info) => {
-    console.log(err || data, info);
+| Option | Purpose |
+| --- | --- |
+| `run` | Select a run by its numeric identifier. |
+| `includeWaterfall` | Request waterfall details in each run's `requests` array. |
+| `includeFilmstrip` | Request filmstrip frames in each run's `videoFrames` array, including base64 image data. |
+| `includeLighthouse` | Request Lighthouse data in `result.data.lighthouse`. |
+
+Results can include test metadata, run metrics, custom metrics, and CrUX data. Optional fields and collections may be absent or null. The client preserves timestamp strings, including those without a timezone.
+
+Result enumerations (`viewType`, page-event `metricType`, median `type`, and waterfall `contentType` / `status`) are objects with a numeric `id` and an optional, nullable `name`. Node `networkType` and creation label `changeLogObjectType` use the same object shape. 
+
+By default this method makes one request. Pass `{ wait: true }` as the third argument to wait for completion, as shown in the previous section. An empty `runs` array alone does not establish the test status. Avoid logging entire results, which can contain authentication details, URLs, page content, and console messages.
+
+#### Retrieve a screenshot
+
+`client.instantTests.screenshot(testId)` returns the first available screenshot in `data.screenshot`. Its `image` is base64 text and `format` may be absent or null. The method makes one request and does not create or wait for a test.
+
+```js
+import { writeFile } from 'node:fs/promises';
+
+const response = await client.instantTests.screenshot(testId);
+if (response.data.screenshot) {
+  await writeFile('wpt-screenshot.bin', Buffer.from(response.data.screenshot.image, 'base64'));
+}
+```
+
+#### Download a request response body
+
+Request IDs are in the `id` fields of run `requests` returned by `client.instantTests.result(testId, { includeWaterfall: true })`. The `requestId` argument is required. Optional `run`, `cached`, and `step` query values select the request instance; the service defaults to run 1, first view, and step 1.
+
+```js
+import { writeFile } from 'node:fs/promises';
+
+const body = await client.instantTests.downloadResponseBody(testId, requestId, {
+  run: 1,
+  cached: false,
+  step: 1,
+});
+await writeFile('wpt-response-body.bin', body.data);
+console.log(body.contentType, body.data.byteLength);
+```
+
+The result has raw bytes in `data` and the response's `contentType` string, or `null` if the header is absent. The method downloads once and does not create or wait for a test. Response bodies may contain sensitive data; avoid printing their contents.
+
+#### Download a static test artifact
+
+Run [`example:enumerations`](#retrieve-enumerations), which calls `client.enumerations.list({ includeWptTestArtifactType: true })`, and take the numeric artifact type ID from the `WptTestArtifactType` section. The service can return JSON, text, HTML, or binary content depending on the type.
+
+```js
+import { writeFile } from 'node:fs/promises';
+
+const artifact = await client.instantTests.downloadArtifact(testId, artifactTypeId, {
+  run: 1,
+  cached: false,
+  step: 1,
+});
+await writeFile('wpt-artifact.bin', artifact.data);
+console.log(artifact.contentType, artifact.data.byteLength);
+```
+
+The result contains a `Uint8Array` in `data` and the response's `contentType` string (or `null` if absent). All query fields are optional; the service defaults to run 1, first view (`cached: false`), and step 1. The method downloads once and does not create or wait for a test. Choose an output extension appropriate for the artifact type, and avoid printing raw artifact contents because they may contain sensitive data.
+
+## Configuration and responses
+
+Pass a non-empty `apiKey` when creating the client. The client handles authentication for each operation.
+
+The client uses API v4 and an internal 30-second request timeout. Each request is attempted once; HTTP, network, and timeout failures are returned without automatic retries.
+
+JSON operations return an object with operation-specific `data` and optional shared metadata:
+
+- `messages`, `errors`, `completed`, and `traceId`.
+- `usageLimits`, including `configCallLimit` and per-consumer `maxConfigCallsPerday` when provided by the API.
+- `data.hasMore`, `data.next`, and `data.previous` when provided by the API.
+
+Requests and responses have TypeScript types for compile-time checking; the client does not validate their shapes at runtime. JSON responses are returned as received, including additional fields. Artifact downloads return bytes and a content type as described above. Shared response fields are defined in [response.ts](src/api/v4/types/response.ts).
+
+### Handle errors
+
+HTTP, network, timeout, and response-body decoding failures throw `WebPageTestError`. Body-reading errors preserve the HTTP status, trace ID when available, and original cause. Invalid API-key or base-URL configuration throws `TypeError`; invalid timer settings throw `RangeError`. Request and response payload shapes are not validated at runtime.
+
+```js
+import { WebPageTestError } from 'webpagetest-node';
+
+try {
+  await client.nodes.list();
+} catch (error) {
+  if (error instanceof WebPageTestError) {
+    console.error(error.message, error.status, error.traceId);
   }
-);
+  throw error;
+}
 ```
 
-#### Run test on https://docs.webpagetest.org/api/integrations/ and poll results every 5 seconds timing out in 60 seconds
+`status` is available for HTTP failures and may be absent for network or timeout failures. Avoid logging the error's `cause`, which can contain response data.
 
-```javascript
-wpt.runTest(
-  "https://docs.webpagetest.org/api/integrations/",
-  { pollResults: 5, timeout: 60 },
-  (err, data) => {
-    console.log(err || data);
-  }
-);
+## Development
+
+Run all required checks from the repository root. ESLint checks JavaScript and TypeScript using recommended rules. All TypeScript source and test files are type-checked before the mocked HTTP tests run. The test configuration skips checking dependency declaration files because of a Vite/Rollup type incompatibility; project code remains checked with strict settings:
+
+```sh
+npm run check
 ```
 
-#### Or run test on https://docs.webpagetest.org/api/integrations/ and wait results listening on localhost\* port 8000\*\*
+Or run them separately:
 
-```javascript
-wpt.runTest(
-  "https://docs.webpagetest.org/api/integrations/",
-  { waitResults: "localhost:8000" },
-  (err, data) => {
-    console.log(err || data);
-  }
-);
-```
-
-_\* hostname and port are optional, defaults to \<system hostname\>:\<8000\>_
-
-_\*\* localhost:8000 must be reacheable from WebPageTest server_
-
-## Server mode
-
-WebPageTest API Wrapper comes with a handy RESTful API proxy
-
-### Command Line
-
-```bash
-webpagetest listen 8080 --server wpt.foo.com
-```
-
-```bash
-server listening on port 8080
-http://localhost:8080
-```
-
-```bash
-curl http://localhost:8080/help
-curl http://localhost:8080/test/webpagetest.org/?location=SanJose_IE9
-```
-
-```bash
-webpagetest listen 8443 --key key.pem --cert cert.pem --server wpt.foo.com
-```
-
-```bash
-server listening on port 8443
-https://localhost:8443
-```
-
-#### Notes
-
-- port _8080_ is optional, default port is _7791_
-- `wpt.foo.com` is overriding the default `www.webpagetest.org` server but can still be overridden with `server` option
-- when _--key_ and _--cert_ are provided, HTTPS is used instead of default HTTP server
-
-### Module
-
-```javascript
-const server = wpt.listen(8080, (err, data) => {
-  if (err) throw err;
-  console.log("listening on " + data.url);
-}); // listen on port 8080 (optional), default port is 7791
-
-setTimeout(() => {
-  server.close(() => {
-    console.log("server closed");
-  });
-}, 10000); // wait for 10s before stop listening
-```
-
-## Batch
-
-Batch command is available as command line only and loads a batch file containing one WebPageTest CLI command with options per line. It runs all commands in parallel, but returns an array of results in order as they appear in the batch file once all results are ready. The exit status code is the sum of all individual commands' exit status code.
-
-By running
-
-```bash
-webpagetest batch commands.txt
-```
-
-where `commands.txt` contains:
-
-```bash
-test https://docs.webpagetest.org/api/integrations/ --first --location foo
-test https://docs.webpagetest.org/api/integrations/ --first --location bar
-```
-
-It schedules the 2 tests above returning an array of size 2 in the same order as in `commands.txt` file:
-
-```javascript
-[
-  {
-    "statusCode": 200, "statusText": "Ok",
-    "data": {
-      "testId": "130715_AB_C1D",
-      ...
-    }
-  },
-  {
-    "statusCode": 200, "statusText": "Ok",
-    "data": {
-      "testId": "130715_CD_E2F",
-      ...
-    }
-  }
-]
-```
-
-With exit status 0 in case none of commands returns an error:
-
-```bash
-echo $?
-0
-```
-
-By running multiple sync tests, i.e. with either `--poll` or `--wait`, all tests are scheduled and results are polled or wait in parallel; meaning, if tests are set to run in different locations or same location with multiple agents, the final result might come together, but the result array will only return once _all_ tests are done. e.g.:
-
-`commands.txt`:
-
-```bash
-test https://docs.webpagetest.org/api/integrations/ --first --location foo --poll --timeout 60
-test https://docs.webpagetest.org/api/integrations/ --first --location bar --poll --timeout 60
-```
-
-## Test Specs (Continuous Integration)
-
-WebPageTest API Wrapper provides a simple seamless way to integrate WebPageTest with Continuous Integration tools.
-
-[See dedicated page](https://github.com/WebPageTest/webpagetest-api/wiki/Test-Specs)
-
-## Tests
-
-```bash
+```sh
+npm run lint
+npm run build
 npm test
 ```
 
-## Issues
+The implementation is organized as follows:
 
-Have a bug/feature request? Please create an issue here on GitHub!
+| Location | Responsibility |
+| --- | --- |
+| `src/api/v4/contract.ts` | Paths grouped by instant and scheduled tests; scheduled operations are not implemented yet. |
+| `src/api/v4/types/` | TypeScript request, response, and shared data types. |
+| `src/api/v4/endpoints/` | Public operations and HTTP request construction. |
+| `src/api/v4/enums.ts` | Shared API enumeration values. |
+| `src/core/config/defaults.ts` | Shared request timeout, polling, and waiting defaults. |
+| `src/core/` | Configuration, errors, and HTTP transport. |
 
-https://github.com/WebPageTest/webpagetest-api/issues
+The exported `HttpClient` provides `request<T>()` for JSON responses and `download()` for complete response bytes with their content type.
 
-## Author
-
-**WebPageTest**
-
-- https://github.com/WebPageTest
+See [AGENTS.md](AGENTS.md) for project conventions.
 
 ## License
 
-Copyright 2013 Twitter Inc.
-Copyright 2020 Google Inc.
-Copyright 2020 Marcel Duran and other contributors
-
-Licensed under the [MIT License](https://github.com/WebPageTest/webpagetest-api/raw/master/LICENSE)
-
----
-
-<p align="center"><a href="https://docs.webpagetest.org/api/integrations/#officially-supported-integrations">Learn about more WebPageTest API Integrations in our docs</a></p>
+This project is licensed under the [Mozilla Public License 2.0](LICENSE). See the [official license text](https://www.mozilla.org/en-US/MPL/2.0/).

@@ -1,4 +1,7 @@
-*.swp
-npm-debug.log
 node_modules/
-package-lock.json
+dist/
+.env
+coverage/
+test/*.d.ts
+test/*.js
+test/*.js.map

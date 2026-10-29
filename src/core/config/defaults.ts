@@ -1,0 +1,4 @@
+export const DEFAULT_REQUEST_TIMEOUT_MS = 30_000;
+export const DEFAULT_POLL_INTERVAL_MS = 60_000;
+export const DEFAULT_WAIT_TIMEOUT_MS = 600_000;
+export const MAX_TIMER_MS = 2_147_483_647;

@@ -1,0 +1,63 @@
+import type { ApiResponse, ResponseData } from './response.js';
+import type { ResultBrowser, ResultCrux, ResultInstantTestAuthentication, ResultLabel, ResultMedianMetric, ResultTestRunItem } from './result-details.js';
+import type { ResultLighthouse } from './result-lighthouse.js';
+
+export type InstantTestResultData = ResponseData & {
+  authentication?: ResultInstantTestAuthentication | undefined;
+  divisionId?: number | null | undefined;
+  hasTcpdump?: boolean | undefined;
+  web10?: boolean | null | undefined;
+  includeBodies?: boolean | null | undefined;
+  hasNetLog?: boolean | null | undefined;
+  hasTrace?: boolean | null | undefined;
+  traceCategories?: string | null | undefined;
+  profiler?: boolean | null | undefined;
+  v8Rcs?: boolean | null | undefined;
+  runs?: Array<ResultTestRunItem> | null | undefined;
+  videoFrameFormat?: string | null | undefined;
+  speedUp?: number | null | undefined;
+  speedDown?: number | null | undefined;
+  roundTripTime?: number | null | undefined;
+  packetLoss?: number | null | undefined;
+  noimages?: boolean | null | undefined;
+  noopt?: boolean | null | undefined;
+  pngss?: boolean | null | undefined;
+  customMetrics?: string | null | undefined;
+  notes?: string | null | undefined;
+  parentId?: number | null | undefined;
+  controlRunId?: number | null | undefined;
+  isExperiment?: boolean | undefined;
+  isControlRun?: boolean | undefined;
+  isCarbonControl?: boolean | undefined;
+  browser?: ResultBrowser | undefined;
+  id?: string | null | undefined;
+  testUrl?: string | null | undefined;
+  latency?: number | null | undefined;
+  testRuns?: number | undefined;
+  numSteps?: number | undefined;
+  hasScript?: boolean | undefined;
+  createDate?: string | undefined;
+  isFvOnly?: boolean | undefined;
+  isLighthouse?: boolean | undefined;
+  isPerformance?: boolean | undefined;
+  deviceName?: string | null | undefined;
+  locationName?: string | null | undefined;
+  connectionName?: string | null | undefined;
+  screenWidth?: number | undefined;
+  screenHeight?: number | undefined;
+  platformTypeId?: number | undefined;
+  labels?: Array<ResultLabel> | null | undefined;
+  medians?: Array<ResultMedianMetric> | null | undefined;
+  crux?: ResultCrux | undefined;
+  lighthouse?: ResultLighthouse | undefined;
+  error?: string | null | undefined;
+};
+
+export type InstantTestResultQuery = {
+  run?: number | undefined;
+  includeWaterfall?: boolean | undefined;
+  includeFilmstrip?: boolean | undefined;
+  includeLighthouse?: boolean | undefined;
+};
+
+export type InstantTestResultResponse = ApiResponse<InstantTestResultData>;

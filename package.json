@@ -1,7 +1,8 @@
 {
   "name": "webpagetest",
-  "version": "0.7.6",
+  "version": "2.0.0",
   "description": "WebPageTest API wrapper for NodeJS",
+  "license": "MPL-2.0",
   "author": "WebPageTest <github@WebPageTest.com> (http://github.com/WebPageTest)",
   "homepage": "http://github.com/WebPageTest/webpagetest-api",
   "keywords": [
@@ -11,7 +12,6 @@
     "test",
     "browser"
   ],
-  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git://github.com/WebPageTest/webpagetest-api.git"
@@ -19,24 +19,48 @@
   "bugs": {
     "url": "http://github.com/WebPageTest/webpagetest-api/issues"
   },
-  "main": "lib/webpagetest.js",
-  "bin": {
-    "webpagetest": "bin/webpagetest"
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.11.0"
   },
   "scripts": {
-    "test": "mocha -R spec test/*-test.js"
-  },
-  "engines": {
-    "node": ">=10.18.1"
-  },
-  "dependencies": {
-    "commander": "^5.1.0",
-    "csv": "^6.2.2",
-    "entities": "^4.4.0",
-    "mocha": "^10.1.0",
-    "xml2js": "^0.6.2"
+    "clean": "node scripts/clean.mjs",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "test": "tsc -p tsconfig.test.json && vitest run",
+    "lint": "eslint .",
+    "check": "npm run lint && npm run build && npm test",
+    "prepublishOnly": "npm run check",
+    "example:enumerations": "npm run build && node examples/list-enumerations.mjs",
+    "example:balance": "npm run build && node examples/get-balance.mjs",
+    "example:nodes": "npm run build && node examples/list-nodes.mjs",
+    "example:instant-test": "npm run build && node examples/create-instant-test.mjs",
+    "example:history": "npm run build && node examples/list-history.mjs",
+    "example:rerun": "npm run build && node examples/rerun-instant-test.mjs",
+    "example:result": "npm run build && node examples/get-instant-test-result.mjs",
+    "example:screenshot": "npm run build && node examples/get-instant-test-screenshot.mjs",
+    "example:response-body": "npm run build && node examples/download-response-body.mjs",
+    "example:artifact": "npm run build && node examples/download-static-artifact.mjs",
+    "example:status": "npm run build && node examples/get-instant-test-status.mjs",
+    "example:create-and-wait": "npm run build && node examples/create-and-wait.mjs"
   },
   "devDependencies": {
-    "nock": "^13.2.9"
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^22.20.5",
+    "eslint": "^9.17.0",
+    "globals": "^16.5.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.71.1",
+    "vitest": "^2.1.8"
   }
 }

@@ -1,0 +1,33 @@
+import { V4WebPageTestClient } from './api/v4/client.js';
+
+export { V4WebPageTestClient };
+export { V4WebPageTestClient as WebPageTestClient };
+export { V4WebPageTestClient as WebPageTest };
+
+export { HttpClient } from './core/http/client.js';
+export { WebPageTestError } from './core/errors/errors.js';
+export type { WebPageTestClientConfig } from './core/config/config.js';
+export type { Settings } from './core/config/config.js';
+export type { Logger, LogLevel, LoggingOptions } from './core/logger.js';
+export type { BalanceData, BalanceResponse } from './api/v4/types/balance.js';
+export type { InstantTestCreateRequest, InstantTestCreateResponse } from './api/v4/types/instant-test.js';
+export type { NodesQuery, NodesResponse } from './api/v4/types/nodes.js';
+export type { EnumerationsQuery, EnumerationsResponse } from './api/v4/types/enumerations.js';
+export type { HistoryQuery, HistoryRecord, HistoryResponse } from './api/v4/types/history.js';
+export type { RerunRequest, RerunResponse } from './api/v4/types/rerun.js';
+export type { InstantTestResultData, InstantTestResultQuery, InstantTestResultResponse } from './api/v4/types/instant-test-result.js';
+export type { ResultTestRunItem, ResultRunRequestItem } from './api/v4/types/result-details.js';
+export type { ResultLighthouse } from './api/v4/types/result-lighthouse.js';
+export type { ResultEnumeration } from './api/v4/types/result-enumeration.js';
+export type { InstantTestStatusData, InstantTestStatusResponse } from './api/v4/types/instant-test-status.js';
+export { BalanceEndpoint } from './api/v4/endpoints/balance.js';
+export { EnumerationsEndpoint } from './api/v4/endpoints/enumerations.js';
+export { HistoryEndpoint } from './api/v4/endpoints/history.js';
+export { InstantTestEndpoint } from './api/v4/endpoints/instant-test.js';
+export { NodesEndpoint } from './api/v4/endpoints/nodes.js';
+export type { InstantTestResultOptions } from './api/v4/types/instant-test-result-options.js';
+export type { InstantTestScreenshot, InstantTestScreenshotData, InstantTestScreenshotResponse } from './api/v4/types/instant-test-screenshot.js';
+export type { ResponseBodyDownload, ResponseBodyQuery } from './api/v4/types/response-body.js';
+export type { StaticArtifactDownload, StaticArtifactQuery } from './api/v4/types/static-artifact.js';
+export { TestWaitError } from './api/v4/errors/test-wait-error.js';
+export { InstantTestStatus, TestWaitErrorCode } from './api/v4/enums.js';
