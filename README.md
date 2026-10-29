@@ -527,8 +527,6 @@ The implementation is organized as follows:
 
 The exported `HttpClient` provides `request<T>()` for JSON responses and `download()` for complete response bytes with their content type.
 
-See [AGENTS.md](AGENTS.md) for project conventions.
-
 ## License
 
 This project is licensed under the [Mozilla Public License 2.0](LICENSE). See the [official license text](https://www.mozilla.org/en-US/MPL/2.0/).
