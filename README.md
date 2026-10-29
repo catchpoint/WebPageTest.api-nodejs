@@ -1,3 +1,13 @@
+<div align="center">
+
+## 🚨 Version 2.0 is now available
+
+**The new version will replace the current version on March 1, 2027. After that date, the previous version will stop working.**
+
+We recommend reviewing the [new API](https://github.com/catchpoint/WebPageTest.api-nodejs/tree/version-2.0) and generating new API keys.
+
+</div>
+
 <p align="center"><img width="80%" src="assets/images/recipe-banner.png" alt="WebPageTest Logo" /></p>
 <p align="center"><a href="https://docs.webpagetest.org/api/integrations/#officially-supported-integrations">Learn about more WebPageTest API Integrations in our docs</a></p>
 
